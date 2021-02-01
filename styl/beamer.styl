@@ -1,0 +1,119 @@
+// functions
+pos(x, y)
+  position absolute
+  left x * 1rem
+  top y * 1rem
+  
+pp(x, y)
+  position absolute
+  left x
+  top y
+  
+center()
+  position absolute
+  text-align center
+  width 100%
+
+// gen styles
+.rp-canvas
+  background #202020
+  background-image url(MEDIA_URL + "/img/grid.png")
+
+.block
+  border-radius .2rem
+  box-shadow 0em .1em .3em #000
+  color #000
+  fill #000
+  stroke #000
+  margin 1em auto .5em
+  width 80%
+  
+  > header
+    background $blue
+    border-radius .2rem .2rem 0 0
+    color #FFF
+    font-family "Alegreya"
+    font-weight bold
+    padding .3rem 1rem
+
+  > .content
+    background #FFF
+    padding .3rem 1rem
+
+.corollary
+  > header
+    &::before
+      content "Corollary. "
+
+.definition
+  > header
+    background $wine
+    &::before
+      content "Definition. "
+
+.example
+  > header
+    background green
+    
+    &::before
+      content "Example. "
+
+.lemma
+  > header
+    &::before
+      content "Lemma. "
+
+.remark
+  > header
+    &::before
+      content "Remark. "
+
+.proof
+  > header
+    &::before
+      content "Proof. "
+
+.proposition
+  > header
+    &::before
+      content "Proposition. "
+      
+.exercise
+  > header
+    background $orange
+    
+    &::before
+      content "Exercise. "
+
+.theorem
+  > header
+    &::before
+      content "Theorem. "
+
+// text styles
+dfn
+  font-weight bold
+
+// table of contents
+.toc
+  font-family "KaTeX_Main"
+  font-size 2em
+  margin 1em auto
+  width 65%
+  
+  > caption
+    font-weight bold
+    padding-bottom 1em
+  
+  > tbody > tr
+    cursor pointer
+    
+    > th
+      text-align left
+      padding-right .5em
+      
+    > td
+      padding .25em 0
+      
+    > .name
+      padding-right 5em

@@ -1,0 +1,74 @@
+#three-d
+  background #333
+  background-image url("./img/grid.png")
+  height 100%
+  width 100%
+
+  > figcaption
+    background #0005
+    border-radius .5rem .5rem 0 0
+    font-size 2rem
+    height 3rem
+    color #FF7000
+    vertical-align middle
+    line-height 3rem
+    position absolute
+    text-align center
+    top 0
+    width 100%
+    z-index 1000
+
+#three-explain
+  background #FFFFFFE0
+  width 100%
+  font-size 1.5em
+  padding .5em
+  position absolute
+  left 0
+  top 0
+  z-index 1000
+  
+  > p
+    margin .5em 0
+    
+.rp-3d-help-wrap
+  position relative
+  z-index 10000
+  
+  &:not(.relevant)
+    opacity 0
+    pointer-events none
+    
+  &.open
+    background #3f3f3f
+  
+  &.open > .rp-3d-help
+    display block
+
+.rp-3d-help
+  background #404040
+  border-radius .2em .2em 0 0
+  box-shadow .9px -1.2px 2px #0002
+  display none
+  position absolute
+  bottom calc(var(--rp-controls-height) - var(--rp-scrub-height))
+  font-size 1.2em
+  right 0
+  width 15em
+  padding .5em
+  z-index 1000
+  
+  > table
+    border-collapse separate
+    border-spacing 1em .5em
+    margin 0 auto
+    vertical-align top
+  
+    > caption
+      color $green
+      font-size 1.2em
+      font-weight bold
+      
+    > tbody > tr > th
+      color $tan
+      text-align left

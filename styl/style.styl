@@ -1,0 +1,105 @@
+@import "rp-prompt/style.css"
+
+$blue = #1A69B5
+$purple = #AE81FF
+$wine = #AF1866
+$teal = #138684
+$green = #1BBB68
+$red = #A52117
+$orange = #FF7000
+$tan = #E6DB74
+
+@import "lib/fat-fingers"
+@import "lib/help-control"
+@import "lib/loading-screen"
+
+.rp-thumbnail-time
+  color #222
+
+@import "beamer"
+@import "intro"
+@import "ktx"
+@import "mjx"
+@import "2d"
+@import "3d"
+@import "5d"
+
+h2
+  color $blue
+  font-family "Alegreya"
+  font-size 4rem
+  margin-top .5em
+  text-align center
+
+.rp-canvas
+  background #EEE
+  
+body
+  font-family sans-serif
+  
+.draggable
+  cursor grab
+  cursor -webkit-grab
+
+body.dragging .rp-canvas, body.dragging .draggable, .dragging
+  cursor grabbing
+  cursor -webkit-grabbing
+  
+section
+  font-size 1.5rem
+  height 100%
+  left 0
+  position absolute
+  top 0
+  width 100%
+  
+.rp-prompt
+  color #FFF
+  font-size 1rem
+  
+:link, :visited
+  color $blue
+
+.rp-cursor
+  width 3rem
+
+/* XyJax slide */
+
+#xyjax-demos
+  font-size 2em
+  text-align center
+  position relative
+  top 1em
+
+  > *
+    left 0
+    top 0
+    position absolute
+    text-align center
+    width 100%
+
+.contradiction *
+  color red
+  fill red
+  stroke red
+
+/* general styles */
+.katex
+  color inherit !important
+  font-size 100% !important
+
+section
+  color #000
+  stroke #000
+  fill none
+
+// .MathJax *[fill] *
+//   fill inherit
+//   stroke inherit
+
+.MathJax svg > g
+  fill inherit
+  stroke inherit
+
+.block > .content > p
+  margin .5em 0

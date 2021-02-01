@@ -1,0 +1,90 @@
+#sec-2d
+  // this should probably be in ractive-player
+  --usable-height calc(var(--rp-height) - var(--rp-controls-height))
+
+#tangent-demo
+  background #DBDBDB
+  border-radius .2em
+  position absolute
+  left calc(0.05 * var(--usable-height))
+  top calc(0.1 * var(--usable-height))
+  height calc(0.8 * var(--usable-height))
+  
+.glow
+  stroke #FF7000
+  stroke-width 0.035
+
+.plot
+  color $blue
+  fill none
+  stroke $blue
+  stroke-width 0.05
+
+.point-A {
+  cursor: grab;
+  fill: $wine
+  stroke-width: 0;
+}
+
+/* PreviewHTML doesn't output class names */
+#defn .MJXp-mtable > span > span:first-child {
+  color: #AE81FF;
+}
+
+#defn .MJXp-mtable > span > span {
+  color: orange;
+}
+
+span.tangent-line
+  color orange
+
+.tangent-line
+  stroke orange
+  stroke-width 0.05
+
+#explain
+  background #DBDBDB
+  border-radius .2em
+  right calc(0.05 * var(--usable-height))
+  top calc(0.1 * var(--usable-height))
+  padding .5em
+  width calc(0.75 * var(--usable-height))
+  position absolute
+  
+  > table
+    margin -1em auto 2em
+    
+  > h3
+    margin 2em 0 0
+    
+  > ul
+    margin-left 2em
+
+  > ul > li
+    margin .5em 0
+
+.pt1
+  color $wine
+
+/* grid */
+.gridline {
+  stroke: #666;
+  stroke-width: 0.01;
+}
+
+.major-axis {
+  stroke: #000;
+  stroke-width: 0.08;
+}
+
+.axis-label
+  fill #000
+  font-size 0.04ex
+  text-anchor middle
+  dominant-baseline middle
+  stroke none
+
+.axis-tick {
+  stroke: #777;
+  stroke-width: 0.05;
+}
