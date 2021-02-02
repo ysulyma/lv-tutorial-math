@@ -12,3 +12,5 @@ node_modules
 
 # certificate
 /ssl
+
+# other

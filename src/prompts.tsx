@@ -1,5 +1,8 @@
 /*
   Do not confuse this file with the Script class in ractive-player!
+
+  This provides a teleprompt to be used when recording. For the "production" build,
+  it is commented out. You could choose to leave it in though, e.g. for accessibility.
 */
 
 import * as React from "react";
@@ -7,13 +10,14 @@ import {Prompt, Cue} from "rp-prompt";
 
 type P = typeof Prompt extends (props: infer T) => JSX.Element ? T : never;
 
-export const IntroScript = (props: P) => (
+// development
+/*export const IntroScript = (props: P) => (
   <Prompt {...props}>
     <Cue on="intro/toc">
-      Ractive-Player is a tool for creating interactive videos. In this video, I'm going to demonstrate how to achieve various effects that you might want when using this tool for mathematical content.
+      Ractive-Player is a tool for creating interactive videos out of HTML. In this video, I'm going to demonstrate how to achieve various effects that you might want when using this tool for mathematical content.
     </Cue>
     <Cue on="intro/main">
-      This supplements the general-purpose tutorial; you might want to watch that first. So you can click on that link within the video. That'll
+      This supplements the general-purpose tutorial; you might want to watch that first. That's a link that you can click on. That'll
     </Cue>
     <Cue on="intro/explain">
       explain what this library is, the main concepts behind ractives and how to record them. In particular, if you want to
@@ -59,7 +63,7 @@ export const KaTeXScript = (props: P) => (
       successively reveal parts of an equation, you can use ractive-player's built-in show/hiding functionality, but you'll see in the source that you kind of have to attach it by hand.
     </Cue>
     <Cue on="ktx/macros">
-      The library also provides a way to load macro definitions from a file; this is intended to make it easy to reuse macros across a lot of diferent videos. So look at index.html and symbols.tex for that.
+      The library also provides a way to load macro definitions from a file; this is intended to make it easy to reuse macros across a lot of diferent videos. So here THH was a macro defined in the file symbols.tex.
     </Cue>
     <Cue on="ktx/docs">
       Finally, here's the KaTeX documentation.
@@ -95,7 +99,7 @@ export const XyJaxScript = (props: P) => (
       So there's an amazing MathJax package called XyJax that lets you use xymatrix in MathJax. Here's
     </Cue>
     <Cue on="xyjx/diagram">
-      a basic commutative diagram. Now, interfacing with XyJax, and especially animating diagrams, is really hard. It's much harder than the 2d / 3d animation that we'll cover next. But it can be done.
+      a basic commutative diagram. Now, doing effects with XyJax, even some things that would be easy to do in normal xymatrix, is really hard. It's much harder than the 2d / 3d animation that we'll cover next. But it can be done.
     </Cue>
     <Cue on="xyjx/pullback">
       So here are some diagrams using macros for pullback and pushout decorations.
@@ -179,4 +183,19 @@ export const FiveDScript = (props: P) => (
       So hopefully that's helpful for getting up and running; I look forward to seeing what you create with this tool.
     </Cue>
   </Prompt>
-);
+);*/
+
+// production
+export const IntroScript = (props: P) => null;
+
+export const KaTeXScript = (props: P) => null;
+
+export const MathJaxScript = (props: P) => null;
+
+export const XyJaxScript = (props: P) => null;
+
+export const TwoDScript = (props: P) => null;
+
+export const ThreeDScript = (props: P) => null;
+
+export const FiveDScript = (props: P) => null;

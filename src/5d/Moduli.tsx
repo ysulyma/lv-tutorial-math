@@ -14,7 +14,7 @@ const {during, from} = Utils.authoring,
       {anyHover} = Utils.mobile;
 
 // @lib
-import {marchingCubes} from "@lib/graphics";
+import {marchingCubes, marchingSquares} from "@lib/graphics";
 import Link from "@lib/Link";
 import {R3FContext, ThreeScene} from "@lib/ThreeFiber";
 
@@ -59,31 +59,34 @@ interface Props {
 export default function Moduli(props: Props) {
   const {script} = usePlayer();
 
-  const geometry = useMemo(() => 
-    marchingCubes((x, y, z) => y ** 2 - x ** 3 - z * x - props.b, -5, 5, 64)
+  /*
+  The marchingCubes algorithm we use relies on THREE.Geometry, which is deprecated,
+  and removed in r125. I haven't had time to figure out how to update it.
+  */
+  const moduliGeometry = useMemo(() => 
+    marchingCubes((x, y, z) => y ** 2 - x ** 3 - z * x - props.b, -5, 5, 32)
   , [props.b]);
 
-  /*
-  const edges = marchingSquares(
-    -5, 5, -5, 5,
-    (x, y) => y ** 2 - x ** 3 - this.props.a * x - this.props.b + this.props.a,
-    this.props.a,
-    64
-  ) as [number, number, number][];
+  const section = useMemo(() => {
+    const edges = marchingSquares(
+      -5, 5, -5, 5,
+      (x, y) => y ** 2 - x ** 3 - props.a * x - props.b + props.a,
+      props.a,
+      64
+    ) as number[][];
 
-  var lineGeometry = new THREE.LineSegmentsGeometry().setPositions( edges.reduce((a,b)=> a.concat(b)) );
+    const lineGeometry = new THREE.LineSegmentsGeometry().setPositions( edges.reduce((a,b)=> a.concat(b)) );
 
-  var lineMaterial = new THREE.LineMaterial( { color: 0xAF1866, linewidth: 6 } );
+    const lineMaterial = new THREE.LineMaterial({ color: 0xFF0070, linewidth: 6});
 
-  lineMaterial.resolution.set( window.innerWidth, window.innerHeight ); // important, for now...
+    lineMaterial.resolution.set(window.innerWidth, window.innerHeight); // important, for now...
 
-  var linePavement = new THREE.LineSegments2( lineGeometry, lineMaterial );
-
-  scene.add( linePavement );
-  this.fiber = linePavement;*/
+    const linePavement = new THREE.LineSegments2(lineGeometry, lineMaterial );
+    return linePavement;
+  }, [props.a, props.b]);
 
   return (
-    <ThreeScene id="moduli">
+    <ThreeScene>
       {/* lights */}
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
@@ -91,9 +94,10 @@ export default function Moduli(props: Props) {
       {/* camera */}
       {<CameraControls/>}
 
-      <mesh geometry={geometry}>
-        <meshPhongMaterial color={0x1BBB68e} side={THREE.DoubleSide}/>
+      <mesh geometry={moduliGeometry}>
+        <meshPhongMaterial color={0x1BBB68} side={THREE.DoubleSide}/>
       </mesh>
+      <primitive object={section}/>
     </ThreeScene>
   );
 }

@@ -46,17 +46,20 @@
   <script
     crossorigin integrity="sha384-4yv6tMhhEp8SERais0iq4KceWF8168DXbTKHBWb81AhOltBmb+/y+digyHf43zT/"
     src="https://unpkg.com/ractive-player@2.0.1/dist/ractive-player.min.js"></script>
-<!--   <script
-    crossorigin integrity="sha384-i8lb1Og1wx2OCaaoHZZg4kt/60pIfv7dAF4S7mlj9MJ8EEkFkATCilSFD11Pcm5J"
-    src="https://unpkg.com/rp-recording@2.0.0/dist/rp-recording.min.js"></script>
- -->
 
   <script crossorigin integrity="sha384-ImWMbbJ1rSn1mn+2vsKm/wN6Vc7hPNB2VKN0lX3FAzGK+c7M2mD6ZZcwknuKlP7K" src="https://cdn.rangetouch.com/2.0.1/rangetouch.js"></script>
 
-  <script crossorigin integrity="sha512-bzjaf85dHTL4H0BvkAJ/Jbvxqf1rDj+jVpCNe3oxQj/RXSnkx1HnKhqIcmMWghxEAbXsYgddrc38saWpltlkug==" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r122/three.min.js"></script>
-  <script src="./three/examples/js/controls/OrbitControls.js"></script>
-  <script src="./three/examples/js/loaders/SVGLoader.js"></script>
-  <script src="./three/react-three-fiber.min.js"></script>
+  <!-- three -->
+  <!-- our marchingCubes algorithm uses THREE.Geometry, which is removed in THREE.js v125, which is why we use an older version -->
+  <script crossorigin src="https://unpkg.com/three@0.124.0/build/three.min.js"></script>
+  <script crossorigin src="https://unpkg.com/three@0.124.0/examples/js/controls/OrbitControls.js"></script>
+  <script crossorigin src="https://unpkg.com/three@0.124.0/examples/js/loaders/SVGLoader.js"></script>
+
+  <script src="https://unpkg.com/three@0.124.0/examples/js/lines/LineMaterial.js"></script>
+  <script src="https://unpkg.com/three@0.124.0/examples/js/lines/LineSegmentsGeometry.js"></script>
+  <script src="https://unpkg.com/three@0.124.0/examples/js/lines/LineSegments2.js"></script>
+
+  <script src="./react-three-fiber.min.js"></script>
   
   <script src="./bundle.js"></script>
   

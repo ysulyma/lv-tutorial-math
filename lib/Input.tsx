@@ -1,5 +1,5 @@
 import * as React from "react";
-import {useCallback, useMemo, useRef, useState} from "react";
+import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 
 import {Player, Utils, usePlayer} from "ractive-player";
 const {onClick} = Utils.mobile;
@@ -9,43 +9,56 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   value: string;
 }
 
+import RangeTouch from "rangetouch";
+
+const NON_TEXT_TYPES = ["button", "checkbox", "file", "hidden", "image", "radio", "range", "reset", "submit"];
+
 export default React.forwardRef((props: Props, ref: React.Ref<HTMLInputElement>) => {
   const player = usePlayer();
-  const [value, setValue] = useState(props.value);
   const innerRef = useRef<HTMLInputElement>();
   const combinedRef = useCombinedRefs(ref, innerRef);
 
-  const onBlur = useCallback((e: React.FormEvent<HTMLInputElement>) => {
-    player.resumeKeyCapture();
-    props.onChange(e);
-  }, []);
-  const onChange = useCallback((e: React.FormEvent<HTMLInputElement>) => {
-    setValue(e.currentTarget.value);
+  /* general shenanigans */
+  const onBlur = useCallback((e: React.FocusEvent<HTMLInputElement>) => {
+    if (!NON_TEXT_TYPES.includes(props.type)) {
+      player.resumeKeyCapture();
+    }
+    props.onBlur?.(e);
   }, []);
   const onKeyPress = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       innerRef.current.blur();
     }
+    props.onKeyPress?.(e);
+  }, []);
+  const onFocus = useCallback((e: React.FocusEvent<HTMLInputElement>) => {
+    if (!NON_TEXT_TYPES.includes(props.type)) {
+      player.suspendKeyCapture();
+    }
+    props.onFocus?.(e);
   }, []);
 
-  /* I have no idea why this is necessary... */
+  /* mobile shenanigans */
   const focus = useMemo(
     () => onClick((e: React.SyntheticEvent<HTMLInputElement>) => {
-      if (e.nativeEvent instanceof MouseEvent) {
-        Player.preventCanvasClick(e.nativeEvent);
+      if (!NON_TEXT_TYPES.includes(props.type)) {
+        e.currentTarget.focus();
       }
-      player.suspendKeyCapture();
-      e.currentTarget.focus();
     }), []);
+
+  useEffect(() => {
+    if (props.type === "range")
+      new RangeTouch(innerRef.current);
+  }, []);
 
   return (
     <input
-      key={props.value}
       {...props}
-      {...{onBlur, onChange, onKeyPress}}
+      {...{onBlur, onFocus, onKeyPress}}
+      onMouseUp={Player.preventCanvasClick}
       {...focus}
       ref={combinedRef}
-      value={value}
+      value={props.value}
     />
   );
 });

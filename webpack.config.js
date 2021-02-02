@@ -22,6 +22,7 @@ module.exports = {
     "three/examples/jsm/lines/LineGeometry": "THREE.LineGeometry",
     "three/examples/jsm/lines/LineMaterial": "THREE.LineMaterial",
     "three/examples/jsm/loaders/SVGLoader": "THREE.SVGLoader",
+    "three/examples/jsm/objects/MarchingCubes": "THREE.MarchingCubes",
     "three/examples/jsm/utils/GeometryUtils": "THREE.GeometryUtils"
   },
 

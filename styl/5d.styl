@@ -1,23 +1,37 @@
 #elliptic
-  background #333
-  width 30%
+  background #CCC
+  border-radius .2em
+  width 35%
+  height calc(0.35 * var(--rp-width))
   position absolute
+  left 5%
+  top 5%
+  
+  line
+    stroke #000
 
 #moduli
-  background #333
-  width 20%
-  height calc(0.5 * var(--rp-height))
+  background #CCC
+  border-radius .2em
+  width 35%
+  height calc(0.35 * var(--rp-width))
   position absolute
-  right 0
-  top 0
+  right 5%
+  top 5%
   
-#sec-5d > table
-  background #DDD
+#fived-controls
+  background #CCC
+  border-radius .2em
+  bottom calc(var(--rp-controls-height) + 2.5%)
   font-size 1.5em
-  top 20%
-  left calc((100% - 25%) / 2)
-  width 25%
+  padding .5em
   position absolute
+  left calc((100% - 30%) / 2)
+  width 30%
   
-  > caption
-    background #DDD
+  > table
+    margin 0 auto
+
+  input[type="number"]
+    font-size 1em
+    width 6ch

@@ -9,6 +9,7 @@ const {during, from} = Utils.authoring,
 import {KTX} from "rp-katex";
 
 // @lib
+import Input from "@lib/Input";
 import Link from "@lib/Link";
 import {R3FContext, ThreeScene} from "@lib/ThreeFiber";
 
@@ -33,23 +34,43 @@ export default function FiveD() {
 
   return (
     <section id="sec-5d" {...during("5d/")}>
-      <figure id="elliptic">
+      <figure id="elliptic" onMouseUp={Player.preventCanvasClick}>
         <Elliptic {...{a,b}}/>
       </figure>
 
-      <table>
-        <caption><KTX>y^2 = x^3 + ax + b</KTX></caption>
-        <tbody>
-          <tr>
-            <td><KTX>a</KTX></td>
-            <td><input onChange={onChangeA} type="number" value={a}/></td>
-          </tr>
-          <tr>
-            <td><KTX>b</KTX></td>
-            <td><input onChange={onChangeB} type="number" value={b}/></td>
-          </tr>
-        </tbody>
-      </table>
+      <div id="fived-controls" onMouseUp={Player.preventCanvasClick}>
+        <table>
+          <caption><KTX>y^2 = x^3 + ax + b</KTX></caption>
+          <tbody>
+            <tr>
+              <td><KTX>a</KTX></td>
+              <td>
+                <input
+                  min={-5} max={5} step="0.01" type="range"
+                  onChange={onChangeA} value={a.toString()}/>
+              </td>
+              <td>
+                <Input
+                  min={-5} max={5} step="0.01" type="number"
+                  onChange={onChangeA} value={a.toString()}/>
+              </td>
+            </tr>
+            <tr>
+              <td><KTX>b</KTX></td>
+              <td>
+                <Input
+                  min={-5} max={5} step="0.01" type="range"
+                  onChange={onChangeB} value={b.toString()}/>
+              </td>
+              <td>
+                <Input
+                  min={-5} max={5} step="0.01" type="number"
+                  onChange={onChangeB} value={b.toString()}/>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <figure id="moduli">
         <Moduli {...{a,b}}/>

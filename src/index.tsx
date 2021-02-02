@@ -3,12 +3,12 @@ import * as ReactDOM from "react-dom";
 
 import {Audio, Controls, Script, Player} from "ractive-player";
 // import {RecordingControl} from "rp-recording";
-// import ThumbCapture from "rp-thumb-capture";
+import ThumbCapture from "rp-thumb-capture";
 
 // @lib
 // import HelpControl from "@lib/HelpControl";
 import LoadingScreen from "@lib/LoadingScreen";
-import ShowMarkerName from "@lib/ShowMarkerName";
+// import ShowMarkerName from "@lib/ShowMarkerName";
 import rebindArrowKeys from "@lib/rebind-arrow-keys";
 //import rememberVolumeSettings from "@lib/remember-volume";
 import seekOnLoad from "@lib/seekonload";
@@ -32,7 +32,7 @@ const controls = (<>
   {Player.defaultControlsLeft}
 
   <div className="rp-controls-right">
-    {<ShowMarkerName/>}
+    {/*<ShowMarkerName/>*/}
 
     {/* generate thumbnails */}
     {/*<ThumbCapture/>*/}
@@ -56,7 +56,7 @@ function Ractive() {
 
     player.canPlay.then(() => {
       // use this when working on a particular section
-      player.playback.seek(player.script.parseStart("5d/"));
+      // player.playback.seek(player.script.parseStart("5d/"));
 
       // seek to time if URL includes e.g. ?t=1:11
       seekOnLoad(player.playback);
@@ -88,15 +88,15 @@ function Ractive() {
   return (
     <Player controls={controls} ref={playerRef} script={script} thumbs={thumbData}>
       {<LoadingScreen/>}
-      {/*<Audio start={0}>
+      {<Audio start={0}>
         <source src={`${MEDIA_URL}/audio/audio.webm`} type="audio/webm"/>
         <source src={`${MEDIA_URL}/audio/audio.mp4`} type="audio/mp4"/>
-      </Audio>*/}
-      {/*<Intro/>
+      </Audio>}
+      <Intro/>
       <KaTeXSlide/>
       <MathJaxSlide/>
       <XyJaxSlide/>
-      <TwoD/>*/}
+      <TwoD/>
       {<ThreeD/>}
       {<FiveD/>}
     </Player>

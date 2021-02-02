@@ -20,7 +20,10 @@ export default function Intro() {
   const {playback, script} = usePlayer();
 
   const seek = useMemo(() => onClick<HTMLTableRowElement>((e) => {
-    playback.seek(parseFloat(e.currentTarget.dataset.time));
+    e.preventDefault();
+    
+    // this is not great lol
+    playback.seek(e.currentTarget.getAttribute("href").slice(3));
   }), []);
 
   const contents = useMemo(() => [
@@ -34,15 +37,19 @@ export default function Intro() {
 
   return (
     <section id="sec-intro" {...during("intro/")}>
+      <h1>Ractive-Player math tutorial</h1>
       {/* table of contents */}
       <table className="toc" {...during("intro/toc")}>
-        <caption {...during("intro/toc")}>Ractive-Player math tutorial</caption>
         <tbody>
           {contents.map((row, i) => (
-            <tr key={row[0]} {...seek} data-time={row[1]} onMouseUp={Player.preventCanvasClick}>
+            <tr key={row[0]} onMouseUp={Player.preventCanvasClick}>
               <th>{i+1}.</th>
-              <td className="name">{row[0]}</td>
-              <td className="time">{formatTime(row[1])}</td>
+              <td className="name">
+                <a href={`?t=${formatTime(row[1])}`} {...seek}>{row[0]}</a>
+              </td>
+              <td className="time">
+                <a href={`?t=${formatTime(row[1])}`} {...seek}>{formatTime(row[1])}</a>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -74,7 +81,7 @@ export default function Intro() {
         </ul>
       </section>
 
-      <IntroScript/>
+      {/*<IntroScript/>*/}
     </section>
   );
 }
