@@ -23,7 +23,7 @@
 
 (() => {
 
-MathJax.Extension.brutalnewcommand = {version: "1.0"};
+MathJax.Extension.brutalnewcommand = {version: "1.1"};
 
 const beginGroupReady = new Promise((resolve, reject) => {
   MathJax.Hub.Register.StartupHook("TeX begingroup Ready", resolve);
@@ -37,7 +37,7 @@ MathJax.Hub.Register.StartupHook("TeX Jax Ready", async () => {
 
   TEX.prefilterHooks.Add((data) => {
     for (const cmd in brutalMap) {
-      data.math = data.math.replaceAll(cmd, brutalMap[cmd]);
+      data.math = data.math.replace(new RegExp(cmd.replace(/\\/g, "\\\\"), "g"), brutalMap[cmd]);
     }
   });
   
