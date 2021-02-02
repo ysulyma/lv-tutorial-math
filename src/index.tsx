@@ -97,8 +97,8 @@ function Ractive() {
       <MathJaxSlide/>
       <XyJaxSlide/>
       <TwoD/>
-      {<ThreeD/>}
-      {<FiveD/>}
+      <ThreeD/>
+      <FiveD/>
     </Player>
   );
 }

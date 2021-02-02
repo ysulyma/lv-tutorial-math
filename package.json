@@ -1,7 +1,7 @@
 {
-  "name": "rp-tutorial",
+  "name": "rp-tutorial-math",
   "version": "1.0.0",
-  "description": "Tutorial for ractive-player",
+  "description": "Math-specific tutorial for ractive-player",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,6 +9,7 @@
   "author": "Yuri Sulyma <yuri@ractive-player.org>",
   "license": "MIT",
   "dependencies": {
+    "@juggle/resize-observer": "^3.2.0",
     "@types/node": "^14.14.21",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
@@ -26,9 +27,6 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-three-fiber": "^5.3.17",
-    "rp-codebooth": "^1.0.0",
-    "rp-codemirror": "^1.0.0",
-    "rp-cursor": "^2.0.0",
     "rp-katex": "^1.0.0",
     "rp-mathjax": "^1.0.0",
     "rp-prompt": "^1.0.1",
