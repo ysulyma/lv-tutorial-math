@@ -1531,29 +1531,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! three */ "three");
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_three_fiber__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-three-fiber */ "react-three-fiber");
-/* harmony import */ var react_three_fiber__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_three_fiber__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var ractive_player__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ractive-player */ "ractive-player");
-/* harmony import */ var ractive_player__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(ractive_player__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _lib_ThreeFiber__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @lib/ThreeFiber */ "./lib/ThreeFiber.tsx");
+/* harmony import */ var ractive_player__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ractive-player */ "ractive-player");
+/* harmony import */ var ractive_player__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(ractive_player__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _lib_ThreeFiber__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @lib/ThreeFiber */ "./lib/ThreeFiber.tsx");
 
 
 
 
 
-
-const { during, from } = ractive_player__WEBPACK_IMPORTED_MODULE_3__.Utils.authoring, { between, constrain, range } = ractive_player__WEBPACK_IMPORTED_MODULE_3__.Utils.misc, { anyHover } = ractive_player__WEBPACK_IMPORTED_MODULE_3__.Utils.mobile;
+const { constrain } = ractive_player__WEBPACK_IMPORTED_MODULE_2__.Utils.misc, { anyHover } = ractive_player__WEBPACK_IMPORTED_MODULE_2__.Utils.mobile;
 
 const TWOPI = 2 * Math.PI;
 function Cylinder() {
-    const { script } = (0,ractive_player__WEBPACK_IMPORTED_MODULE_3__.usePlayer)();
+    const { script } = (0,ractive_player__WEBPACK_IMPORTED_MODULE_2__.usePlayer)();
     const radius = 3;
     const height = 8;
     const cylinder = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
     const slider = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
     const fat = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
-    const { camera, raycaster, scene } = (0,react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.useThree)();
-    const api = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_lib_ThreeFiber__WEBPACK_IMPORTED_MODULE_4__.R3FContext);
+    const api = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_lib_ThreeFiber__WEBPACK_IMPORTED_MODULE_3__.R3FContext);
     const plane = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(new three__WEBPACK_IMPORTED_MODULE_1__.Plane());
     const move = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((e) => {
         const pos = api.screenToScene(e.clientX, e.clientY, plane.current);
@@ -1571,16 +1567,16 @@ function Cylinder() {
         normal.applyMatrix3(normalMatrix).normalize();
         plane.current.setFromNormalAndCoplanarPoint(normal, int.point).normalize();
     }, []);
-    const events = (0,_lib_ThreeFiber__WEBPACK_IMPORTED_MODULE_4__.useDraggable)(move, down);
+    const events = (0,_lib_ThreeFiber__WEBPACK_IMPORTED_MODULE_3__.useDraggable)(move, down);
     const index = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => script.markerNumberOf("3d/drag"), []);
-    (0,ractive_player__WEBPACK_IMPORTED_MODULE_3__.useMarkerUpdate)(() => {
+    (0,ractive_player__WEBPACK_IMPORTED_MODULE_2__.useMarkerUpdate)(() => {
         slider.current.visible = script.markerIndex >= index;
         if (fat.current) {
             fat.current.visible = script.markerIndex >= index;
         }
     }, []);
     return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("mesh", Object.assign({ name: "cylinder", ref: cylinder, position: [-6, 0, 0], rotation: [TWOPI / 4, 0, 0] }, _lib_ThreeFiber__WEBPACK_IMPORTED_MODULE_4__.intercept),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("mesh", Object.assign({ name: "cylinder", ref: cylinder, position: [-6, 0, 0], rotation: [TWOPI / 4, 0, 0] }, _lib_ThreeFiber__WEBPACK_IMPORTED_MODULE_3__.intercept),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("cylinderBufferGeometry", { args: [radius, radius, height, 32, 1, true] }),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("meshPhongMaterial", { color: 0xAE81FF, side: three__WEBPACK_IMPORTED_MODULE_1__.DoubleSide, clipShadows: true })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("mesh", Object.assign({ name: "slider", position: [-6, 0, 0], ref: slider }, events, { visible: script.markerIndex >= index }),
@@ -1647,7 +1643,6 @@ function HelpControl() {
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", { d: "m 10.896484,3.8652344 c -1.2309996,0 -1.7499996,0.8536094 -1.7499996,1.4746094 -0.026,0.737 0.39525,1.1816406 1.2812496,1.1816406 1.059,0 1.679688,-0.7171875 1.679688,-1.4921875 0,-0.621 -0.274938,-1.1640625 -1.210938,-1.1640625 z", fill: "#FFF", stroke: "none" }),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", { d: "m 10.847656,8.0332031 c -0.765,0 -2.5524216,0.7615469 -4.1074216,2.0605469 l 0.3183594,0.523438 c 0.49,-0.33 1.3207187,-0.664063 1.5117187,-0.664063 0.148,0 0.127,0.193734 0,0.677734 L 7.8378906,13.65625 c -0.447,1.705 0.020156,2.09375 0.6601563,2.09375 0.639,0 2.2877811,-0.58175 3.8007811,-2.09375 L 11.9375,13.169922 c -0.618,0.487 -1.247453,0.71875 -1.439453,0.71875 -0.149,0 -0.2115,-0.19386 -0.0625,-0.75586 l 0.839844,-3.179687 c 0.319,-1.164 0.212265,-1.9199219 -0.427735,-1.9199219 z", fill: "#FFF", stroke: "none" }))));
 }
-;
 
 
 /***/ }),
@@ -1723,10 +1718,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const { animate } = ractive_player__WEBPACK_IMPORTED_MODULE_2__.Utils.animation, { during, from } = ractive_player__WEBPACK_IMPORTED_MODULE_2__.Utils.authoring, { between, constrain, range } = ractive_player__WEBPACK_IMPORTED_MODULE_2__.Utils.misc, { anyHover } = ractive_player__WEBPACK_IMPORTED_MODULE_2__.Utils.mobile;
+const { animate } = ractive_player__WEBPACK_IMPORTED_MODULE_2__.Utils.animation;
 
 
-const TWOPI = 2 * Math.PI;
 function Sphere() {
     const { script } = (0,ractive_player__WEBPACK_IMPORTED_MODULE_2__.usePlayer)();
     const ref = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
@@ -1806,26 +1800,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_three_fiber__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-three-fiber */ "react-three-fiber");
 /* harmony import */ var react_three_fiber__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_three_fiber__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var ractive_player__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ractive-player */ "ractive-player");
-/* harmony import */ var ractive_player__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(ractive_player__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _lib_graphics__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @lib/graphics */ "./lib/graphics.ts");
-/* harmony import */ var _lib_ThreeFiber__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @lib/ThreeFiber */ "./lib/ThreeFiber.tsx");
+/* harmony import */ var _lib_graphics__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @lib/graphics */ "./lib/graphics.ts");
+/* harmony import */ var _lib_ThreeFiber__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @lib/ThreeFiber */ "./lib/ThreeFiber.tsx");
 
 
 
 
-
-const { during, from } = ractive_player__WEBPACK_IMPORTED_MODULE_3__.Utils.authoring, { anyHover } = ractive_player__WEBPACK_IMPORTED_MODULE_3__.Utils.mobile;
 
 
 function CameraControls() {
     const $three = (0,react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.useThree)();
-    const context = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_lib_ThreeFiber__WEBPACK_IMPORTED_MODULE_5__.R3FContext);
+    const context = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_lib_ThreeFiber__WEBPACK_IMPORTED_MODULE_4__.R3FContext);
     const { camera, gl: { domElement } } = $three;
     domElement.$three = $three;
     camera.up.set(0, 0, 1);
     const controls = (0,react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.useResource)();
-    (0,react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.useFrame)((state) => controls.current.update());
+    (0,react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.useFrame)(() => controls.current.update());
     (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
         context.controls = controls.current;
     }, [controls.current]);
@@ -1835,17 +1825,16 @@ function CameraControls() {
     return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("orbitControls", { ref: controls, args: [camera, domElement] }));
 }
 function Moduli(props) {
-    const { script } = (0,ractive_player__WEBPACK_IMPORTED_MODULE_3__.usePlayer)();
-    const moduliGeometry = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => (0,_lib_graphics__WEBPACK_IMPORTED_MODULE_4__.marchingCubes)((x, y, z) => y ** 2 - x ** 3 - z * x - props.b, -5, 5, 32), [props.b]);
+    const moduliGeometry = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => (0,_lib_graphics__WEBPACK_IMPORTED_MODULE_3__.marchingCubes)((x, y, z) => y ** 2 - x ** 3 - z * x - props.b, -5, 5, 32), [props.b]);
     const section = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
-        const edges = (0,_lib_graphics__WEBPACK_IMPORTED_MODULE_4__.marchingSquares)(-5, 5, -5, 5, (x, y) => y ** 2 - x ** 3 - props.a * x - props.b + props.a, props.a, 64);
+        const edges = (0,_lib_graphics__WEBPACK_IMPORTED_MODULE_3__.marchingSquares)(-5, 5, -5, 5, (x, y) => y ** 2 - x ** 3 - props.a * x - props.b + props.a, props.a, 64);
         const lineGeometry = new three__WEBPACK_IMPORTED_MODULE_1__.LineSegmentsGeometry().setPositions(edges.reduce((a, b) => a.concat(b)));
         const lineMaterial = new three__WEBPACK_IMPORTED_MODULE_1__.LineMaterial({ color: 0xFF0070, linewidth: 6 });
         lineMaterial.resolution.set(window.innerWidth, window.innerHeight);
         const linePavement = new three__WEBPACK_IMPORTED_MODULE_1__.LineSegments2(lineGeometry, lineMaterial);
         return linePavement;
     }, [props.a, props.b]);
-    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(_lib_ThreeFiber__WEBPACK_IMPORTED_MODULE_5__.ThreeScene, null,
+    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(_lib_ThreeFiber__WEBPACK_IMPORTED_MODULE_4__.ThreeScene, null,
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("ambientLight", null),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("pointLight", { position: [10, 10, 10] }),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement(CameraControls, null),
@@ -1880,7 +1869,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const { during, from } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.authoring, { anyHover, onClick } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.mobile;
+const { during } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.authoring;
 
 
 
@@ -1940,12 +1929,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ractive_player__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ractive-player */ "ractive-player");
 /* harmony import */ var ractive_player__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(ractive_player__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _lib_Link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @lib/Link */ "./lib/Link.tsx");
+/* harmony import */ var _prompts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./prompts */ "./src/prompts.tsx");
 
 
 
-const { during, from } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.authoring, { between } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.misc, { onClick } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.mobile, { formatTime } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.time;
+const { during, from } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.authoring, { onClick } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.mobile, { formatTime } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.time;
 
-const { raw } = String;
+
 function Intro() {
     const { playback, script } = (0,ractive_player__WEBPACK_IMPORTED_MODULE_1__.usePlayer)();
     const seek = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => onClick((e) => {
@@ -1993,7 +1983,8 @@ function Intro() {
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement(_lib_Link__WEBPACK_IMPORTED_MODULE_2__.default, { href: "https://nodejs.org/en/" }, "Node.js")),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", Object.assign({}, from("intro/lmqm")),
                     "Inspiration: ",
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_lib_Link__WEBPACK_IMPORTED_MODULE_2__.default, { href: "https://lmqm.xyz/" }, "La mer qui monte"))))));
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(_lib_Link__WEBPACK_IMPORTED_MODULE_2__.default, { href: "https://lmqm.xyz/" }, "La mer qui monte")))),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_prompts__WEBPACK_IMPORTED_MODULE_3__.IntroScript, null)));
 }
 
 
@@ -2020,14 +2011,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rp_katex__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(rp_katex__WEBPACK_IMPORTED_MODULE_5__);
 
 
-const { during, from } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.authoring, { between } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.misc;
+const { during, from } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.authoring;
 
 
 
 
 const { raw } = String;
 function KaTeXSlide() {
-    const player = (0,ractive_player__WEBPACK_IMPORTED_MODULE_1__.usePlayer)();
     const m1 = raw `\htmlData{from-first=ktx/align-1}`;
     const m2 = raw `\htmlData{from-first=ktx/align-2}`;
     const m3 = raw `\htmlData{from-first=ktx/align-3}`;
@@ -2086,15 +2076,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rp_mathjax__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(rp_mathjax__WEBPACK_IMPORTED_MODULE_5__);
 
 
-const { animate } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.animation, { from, during } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.authoring, { between } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.misc;
+const { from, during } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.authoring;
 
 
 
 
 const { raw } = String;
 function MathJaxSlide() {
-    const player = (0,ractive_player__WEBPACK_IMPORTED_MODULE_1__.usePlayer)();
-    const { script } = player;
     const m1 = raw `\data{"fromFirst":"mjx/align-1"}`;
     const m2 = raw `\data{"fromFirst":"mjx/align-2"}`;
     const m3 = raw `\data{"fromFirst":"mjx/align-3"}`;
@@ -2165,7 +2153,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const { during, from } = ractive_player__WEBPACK_IMPORTED_MODULE_3__.Utils.authoring, { between } = ractive_player__WEBPACK_IMPORTED_MODULE_3__.Utils.misc, { anyHover } = ractive_player__WEBPACK_IMPORTED_MODULE_3__.Utils.mobile;
+const { during, from } = ractive_player__WEBPACK_IMPORTED_MODULE_3__.Utils.authoring, { between } = ractive_player__WEBPACK_IMPORTED_MODULE_3__.Utils.misc;
 
 
 
@@ -2180,7 +2168,7 @@ function CameraControls() {
     domElement.$three = $three;
     camera.up.set(0, 0, 1);
     const controls = (0,react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.useResource)();
-    (0,react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.useFrame)((state) => controls.current.update());
+    (0,react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.useFrame)(() => controls.current.update());
     (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
         context.controls = controls.current;
     }, [controls.current]);
@@ -2254,7 +2242,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const { during, from } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.authoring, { dragHelperReact } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.interactivity, { between, constrain, range } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.misc, { anyHover } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.mobile;
+const { during, from } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.authoring, { dragHelperReact } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.interactivity, { constrain, range } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.misc, { anyHover } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.mobile;
 
 
 
@@ -2267,10 +2255,7 @@ const minX = -5, maxX = 5;
 const negF = (x) => [x, 2 - x * x];
 const f = (x) => [x, x * x - 2];
 const df = (x) => 2 * x;
-const numIterations = 10;
-const iterationTime = 1000;
 function TwoD() {
-    const player = (0,ractive_player__WEBPACK_IMPORTED_MODULE_1__.usePlayer)();
     const [x, setX] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1);
     const svgRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
     const [showOrb, setShowOrb] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
@@ -2408,7 +2393,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const { animate } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.animation, { from, during } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.authoring, { between } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.misc;
+const { animate } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.animation, { from, during } = ractive_player__WEBPACK_IMPORTED_MODULE_1__.Utils.authoring;
 
 
 
@@ -2473,7 +2458,7 @@ function AnimatedArrows() {
         tailFn: fadeTail,
         labelFn: fadeHead
     });
-    const line = `"anim":true`;
+    const line = "\"anim\":true";
     return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(rp_mathjax__WEBPACK_IMPORTED_MODULE_3__.MJX, Object.assign({ resize: true, ref: ref }, during("xyjx/arrows")), raw `
       ${"\\"}xymatrix{
         {*} \ar[d]_-0 \ar[r]^-{t_0} & \mathbb R \ar[d]^- p\\
@@ -2750,13 +2735,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ThreeDScript": () => /* binding */ ThreeDScript,
 /* harmony export */   "FiveDScript": () => /* binding */ FiveDScript
 /* harmony export */ });
-const IntroScript = (props) => null;
-const KaTeXScript = (props) => null;
-const MathJaxScript = (props) => null;
-const XyJaxScript = (props) => null;
-const TwoDScript = (props) => null;
-const ThreeDScript = (props) => null;
-const FiveDScript = (props) => null;
+const IntroScript = () => null;
+const KaTeXScript = () => null;
+const MathJaxScript = () => null;
+const XyJaxScript = () => null;
+const TwoDScript = () => null;
+const ThreeDScript = () => null;
+const FiveDScript = () => null;
 
 
 /***/ }),

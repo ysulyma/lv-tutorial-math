@@ -1,20 +1,17 @@
 import * as React from "react";
-import {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 
-import {Player, Utils, usePlayer, useTimeUpdate} from "ractive-player";
+import {Player, Utils} from "ractive-player";
 const {during, from} = Utils.authoring,
       {dragHelperReact} = Utils.interactivity,
-      {between, constrain, range} = Utils.misc,
+      {constrain, range} = Utils.misc,
       {anyHover} = Utils.mobile;
 
-import {Definition} from "@lib/Block";
 import FatFingers from "@lib/FatFingers";
 import GlowOrb from "@lib/GlowOrb";
 import Input from "@lib/Input";
-import Link from "@lib/Link";
 import {graph, screenToSVG} from "@lib/svg-utils";
 
-import {MEDIA_URL} from "./media-url";
 import {TwoDScript} from "./prompts";
 
 import {KTX} from "rp-katex";
@@ -29,14 +26,9 @@ const negF = (x: number) => [x, 2-x*x] as [number, number];
 const f = (x: number) => [x, x*x-2] as [number, number];
 const df = (x: number) => 2 * x;
 
-const numIterations = 10;
-const iterationTime = 1000;
-
 type MoveArgs = Parameters<Parameters<typeof dragHelperReact>[0]>;
 
 export default function TwoD() {
-  const player = usePlayer();
-
   const [x, setX] = useState(1);
 
   const svgRef = useRef<SVGSVGElement>();

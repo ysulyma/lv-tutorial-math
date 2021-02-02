@@ -1,13 +1,10 @@
 import * as React from "react";
-import {useCallback, useState} from "react";
 
-import {IdMap, Player, Utils, usePlayer, useTimeUpdate} from "ractive-player";
-const {during, from} = Utils.authoring,
-      {between} = Utils.misc;
+import {Utils} from "ractive-player";
+const {during, from} = Utils.authoring;
 
 import Link from "@lib/Link";
 
-import {MEDIA_URL} from "./media-url";
 import {KaTeXScript} from "./prompts";
 import {Definition, Example} from "@lib/Block";
 
@@ -16,8 +13,6 @@ import {KTX} from "rp-katex";
 const {raw} = String;
 
 export default function KaTeXSlide() {
-  const player = usePlayer();
-
   const m1 = raw`\htmlData{from-first=ktx/align-1}`;
   const m2 = raw`\htmlData{from-first=ktx/align-2}`;
   const m3 = raw`\htmlData{from-first=ktx/align-3}`;

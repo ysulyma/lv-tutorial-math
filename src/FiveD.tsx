@@ -1,17 +1,14 @@
 import * as React from "react";
-import {useCallback, useContext, useEffect, useMemo, useRef, useState} from "react";
+import {useCallback, useState} from "react";
 
 // our imports
-import {Player, Utils, usePlayer, useMarkerUpdate, useTimeUpdate} from "ractive-player";
-const {during, from} = Utils.authoring,
-      {anyHover, onClick} = Utils.mobile;
+import {Player, Utils} from "ractive-player";
+const {during} = Utils.authoring;
 
 import {KTX} from "rp-katex";
 
 // @lib
 import Input from "@lib/Input";
-import Link from "@lib/Link";
-import {R3FContext, ThreeScene} from "@lib/ThreeFiber";
 
 // resources
 import {FiveDScript} from "./prompts";

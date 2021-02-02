@@ -1,5 +1,5 @@
 import * as React from "react";
-import {useCallback, useContext, useEffect, useMemo, useRef} from "react";
+import {useContext, useEffect, useMemo, useRef} from "react";
 
 // it's better to call this in index.tsx
 import "@lib/r3f";
@@ -8,13 +8,12 @@ import "@lib/r3f";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 
 // R3F
-import {useFrame, useResource, useThree, useUpdate} from "react-three-fiber";
+import {useFrame, useResource, useThree} from "react-three-fiber";
 
 // our imports
-import {Player, Utils, usePlayer, useMarkerUpdate, useTimeUpdate} from "ractive-player";
+import {Utils, usePlayer, useMarkerUpdate, useTimeUpdate} from "ractive-player";
 const {during, from} = Utils.authoring,
-      {between} = Utils.misc,
-      {anyHover} = Utils.mobile;
+      {between} = Utils.misc;
 
 // @lib
 import Link from "@lib/Link";
@@ -45,7 +44,7 @@ function CameraControls() {
 
   // controls
   const controls = useResource<OrbitControls>();
-  useFrame((state) => controls.current.update());
+  useFrame(() => controls.current.update());
   useEffect(() => {
     context.controls = controls.current;
   }, [controls.current]);

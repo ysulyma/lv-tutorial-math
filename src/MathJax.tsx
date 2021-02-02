@@ -1,28 +1,18 @@
 import * as React from "react";
-import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 
-import {IdMap, Player, Utils, usePlayer, useTimeUpdate} from "ractive-player";
-const {animate} = Utils.animation,
-      {from, during} = Utils.authoring,
-      {between} = Utils.misc;
+import {Utils} from "ractive-player";
+const {from, during} = Utils.authoring;
 
 import Link from "@lib/Link";
 
-import {MEDIA_URL} from "./media-url";
 import {MathJaxScript} from "./prompts";
 import {Definition, Example} from "@lib/Block";
 
 import {MJX} from "rp-mathjax";
 
-import * as easings from "@lib/easings";
-import * as BezierEasing from "bezier-easing";
-
 const {raw} = String;
 
 export default function MathJaxSlide() {
-  const player = usePlayer();
-  const {script} = player;
-
   const m1 = raw`\data{"fromFirst":"mjx/align-1"}`;
   const m2 = raw`\data{"fromFirst":"mjx/align-2"}`;
   const m3 = raw`\data{"fromFirst":"mjx/align-3"}`;
@@ -42,7 +32,7 @@ export default function MathJaxSlide() {
         &${m3}{= 2x.}
       \end{aligned}`}</MJX>
 
-      <p {...from("mjx/extn")}><code>\data</code> command provided by MathJax extension <Link href="https://github.com/ysulyma/mathjax-annotations">annotations.js</Link></p>
+        <p {...from("mjx/extn")}><code>\data</code> command provided by MathJax extension <Link href="https://github.com/ysulyma/mathjax-annotations">annotations.js</Link></p>
       </Example>
 
       <Example {...from("mjx/macros")}>

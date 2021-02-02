@@ -20,7 +20,7 @@ export default function Arrow() {
       const box = new THREE.Box3().setFromObject(group);
       const size = new THREE.Vector3();
       box.getSize(size);
-      group.position.set(-size.x/2,0,size.z)
+      group.position.set(-size.x/2,0,size.z);
 
       ref.current = group;
       group.visible = (script.markerIndex >= arrowIndex);

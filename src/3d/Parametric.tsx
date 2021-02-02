@@ -1,11 +1,10 @@
 import * as React from "react";
-import {useCallback, useContext, useEffect, useMemo, useRef} from "react";
+import {useCallback, useMemo, useRef} from "react";
 
 // THREE
-import * as THREE from "three";
-import {DoubleSide, Mesh, Plane} from "three";
+import {DoubleSide, Mesh} from "three";
 
-import {Player, Utils, usePlayer, useMarkerUpdate, useTimeUpdate} from "ractive-player";
+import {usePlayer, useMarkerUpdate} from "ractive-player";
 
 const {cos, sin} = Math;
 const r = 2;

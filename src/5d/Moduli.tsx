@@ -1,21 +1,15 @@
 import * as React from "react";
-import {useCallback, useContext, useEffect, useMemo, useRef} from "react";
+import {useContext, useEffect, useMemo} from "react";
 
 // THREE
 import * as THREE from "three";
 import type {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 
 // R3F
-import {useFrame, useResource, useThree, useUpdate} from "react-three-fiber";
-
-// our imports
-import {Player, Utils, usePlayer, useMarkerUpdate, useTimeUpdate} from "ractive-player";
-const {during, from} = Utils.authoring,
-      {anyHover} = Utils.mobile;
+import {useFrame, useResource, useThree} from "react-three-fiber";
 
 // @lib
 import {marchingCubes, marchingSquares} from "@lib/graphics";
-import Link from "@lib/Link";
 import {R3FContext, ThreeScene} from "@lib/ThreeFiber";
 
 /* camera */
@@ -34,7 +28,7 @@ function CameraControls() {
 
   // controls
   const controls = useResource<OrbitControls>();
-  useFrame((state) => controls.current.update());
+  useFrame(() => controls.current.update());
   useEffect(() => {
     context.controls = controls.current;
   }, [controls.current]);
@@ -57,8 +51,6 @@ interface Props {
 }
 
 export default function Moduli(props: Props) {
-  const {script} = usePlayer();
-
   /*
   The marchingCubes algorithm we use relies on THREE.Geometry, which is deprecated,
   and removed in r125. I haven't had time to figure out how to update it.

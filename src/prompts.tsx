@@ -186,16 +186,16 @@ export const FiveDScript = (props: P) => (
 );*/
 
 // production
-export const IntroScript = (props: P) => null;
+export const IntroScript = () => null;
 
-export const KaTeXScript = (props: P) => null;
+export const KaTeXScript = () => null;
 
-export const MathJaxScript = (props: P) => null;
+export const MathJaxScript = () => null;
 
-export const XyJaxScript = (props: P) => null;
+export const XyJaxScript = () => null;
 
-export const TwoDScript = (props: P) => null;
+export const TwoDScript = () => null;
 
-export const ThreeDScript = (props: P) => null;
+export const ThreeDScript = () => null;
 
-export const FiveDScript = (props: P) => null;
+export const FiveDScript = () => null;

@@ -1,9 +1,9 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import {Audio, Controls, Script, Player} from "ractive-player";
+import {Audio, Script, Player} from "ractive-player";
 // import {RecordingControl} from "rp-recording";
-import ThumbCapture from "rp-thumb-capture";
+// import ThumbCapture from "rp-thumb-capture";
 
 // @lib
 // import HelpControl from "@lib/HelpControl";

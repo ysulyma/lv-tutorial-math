@@ -1,10 +1,9 @@
 import * as React from "react";
-import {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import {useMemo, useRef} from "react";
 
-import {Player, Utils, usePlayer, useTimeUpdate} from "ractive-player";
+import {Utils, usePlayer, useTimeUpdate} from "ractive-player";
 const {animate} = Utils.animation,
-      {from, during} = Utils.authoring,
-      {between} = Utils.misc;
+      {from, during} = Utils.authoring;
 
 import * as BezierEasing from "bezier-easing";
 import {MJX} from "rp-mathjax";
@@ -19,7 +18,6 @@ import * as easings from "@lib/easings";
 import Link from "@lib/Link";
 
 // resources
-import {MEDIA_URL} from "./media-url";
 import {XyJaxScript} from "./prompts";
 
 const {raw} = String;
@@ -96,7 +94,7 @@ function AnimatedArrows() {
     labelFn: fadeHead
   });
 
-  const line = `"anim":true`;
+  const line = "\"anim\":true";
 
   return (
     <MJX resize ref={ref} {...during("xyjx/arrows")}>{raw`

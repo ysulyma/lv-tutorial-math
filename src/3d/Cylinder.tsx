@@ -1,20 +1,18 @@
 import * as React from "react";
-import {useCallback, useContext, useEffect, useMemo, useRef} from "react";
+import {useCallback, useContext, useMemo, useRef} from "react";
 
 // THREE
 import * as THREE from "three";
 import {DoubleSide, Mesh, Plane} from "three";
 
 // R3F
-import {useFrame, useResource, useThree, useUpdate, ReactThreeFiber} from "react-three-fiber";
 import type * as R3F from "react-three-fiber";
 
-import {Utils, usePlayer, useMarkerUpdate, useTimeUpdate} from "ractive-player";
-const {during, from} = Utils.authoring,
-      {between, constrain, range} = Utils.misc,
+import {Utils, usePlayer, useMarkerUpdate} from "ractive-player";
+const {constrain} = Utils.misc,
       {anyHover} = Utils.mobile;
 
-import {R3FContext, ThreeScene, useDraggable, intercept} from "@lib/ThreeFiber";
+import {R3FContext, useDraggable, intercept} from "@lib/ThreeFiber";
 
 const TWOPI = 2 * Math.PI;
 
@@ -27,11 +25,6 @@ export default function Cylinder() {
   const slider = useRef<Mesh>();
   const fat = useRef<Mesh>();
 
-  const {
-    camera,
-    raycaster,
-    scene
-  } = useThree();
   const api = useContext(R3FContext);
 
   /* dragging */

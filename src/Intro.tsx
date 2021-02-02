@@ -1,20 +1,14 @@
 import * as React from "react";
-import {useCallback, useMemo, useRef, useState} from "react";
+import {useMemo} from "react";
 
 import {Player, Utils, usePlayer} from "ractive-player";
 const {during, from} = Utils.authoring,
-      {between} = Utils.misc,
       {onClick} = Utils.mobile,
       {formatTime} = Utils.time;
 
 import Link from "@lib/Link";
 
-import {MEDIA_URL} from "./media-url";
 import {IntroScript} from "./prompts";
-
-import {KTX} from "rp-katex";
-
-const {raw} = String;
 
 export default function Intro() {
   const {playback, script} = usePlayer();
@@ -81,7 +75,7 @@ export default function Intro() {
         </ul>
       </section>
 
-      {/*<IntroScript/>*/}
+      {<IntroScript/>}
     </section>
   );
 }

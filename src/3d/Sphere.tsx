@@ -1,26 +1,15 @@
 import * as React from "react";
-import {useCallback, useContext, useEffect, useMemo, useRef} from "react";
+import {useMemo, useRef} from "react";
 
 // THREE
 import * as THREE from "three";
-import {DoubleSide, Mesh, Plane} from "three";
+import {DoubleSide, Mesh} from "three";
 
-// R3F
-import {useFrame, useResource, useThree, useUpdate, ReactThreeFiber} from "react-three-fiber";
-import type * as R3F from "react-three-fiber";
-
-import {Player, Utils, usePlayer, useTimeUpdate} from "ractive-player";
-const {animate} = Utils.animation,
-      {during, from} = Utils.authoring,
-      {between, constrain, range} = Utils.misc,
-      {anyHover} = Utils.mobile;
-
-import {R3FContext, ThreeScene, useDraggable, intercept} from "@lib/ThreeFiber";
+import {Utils, usePlayer, useTimeUpdate} from "ractive-player";
+const {animate} = Utils.animation;
 
 import * as BezierEasing from "bezier-easing";
 import {easeInCubic} from "@lib/easings";
-
-const TWOPI = 2 * Math.PI;
 
 export default function Sphere() {
   const {script} = usePlayer();
@@ -52,9 +41,9 @@ export default function Sphere() {
   }, []);
 
   return (
-      <mesh name="sphere" position={[0, 8, 0]} ref={ref} visible={false}>
-        <sphereBufferGeometry args={[0, 64, 64]}/>
-        <meshPhongMaterial color={0x1BBB68} side={DoubleSide}/>
-      </mesh>
+    <mesh name="sphere" position={[0, 8, 0]} ref={ref} visible={false}>
+      <sphereBufferGeometry args={[0, 64, 64]}/>
+      <meshPhongMaterial color={0x1BBB68} side={DoubleSide}/>
+    </mesh>
   );
 }
