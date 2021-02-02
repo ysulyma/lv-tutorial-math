@@ -52,15 +52,15 @@ export default function Intro() {
       <section {...from("intro/main")}>
         <p>
           <Link href="https://ractive-player.org/">General-purpose tutorial</Link>
-
-          <ul>
-            <li {...from("intro/explain")}>explains what ractives are, how to write and record them</li>
-
-            <li {...from("intro/codebooth")}>coding plugin</li>
-
-            <li {...from("intro/paint")}>freehand drawing plugin</li>
-          </ul>
         </p>
+        <ul>
+          <li {...from("intro/explain")}>explains what ractives are, how to write and record them</li>
+
+          <li {...from("intro/codebooth")}>coding plugin</li>
+
+          <li {...from("intro/paint")}>freehand drawing plugin</li>
+        </ul>
+        
         <p {...from("intro/clone")}>
           Clone this tutorial: <Link href="https://github.com/ysulyma/rp-tutorial-math">https://github.com/ysulyma/rp-tutorial-math</Link>
         </p>
