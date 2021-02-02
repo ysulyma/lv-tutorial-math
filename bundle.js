@@ -997,29 +997,6 @@ if (!("ResizeObserver" in window)) {
 
 /***/ }),
 
-/***/ "./lib/rebind-arrow-keys.ts":
-/*!**********************************!*\
-  !*** ./lib/rebind-arrow-keys.ts ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((player) => {
-    const { keymap, script } = player;
-    for (const h of keymap.getHandlers("ArrowLeft"))
-        keymap.unbind("ArrowLeft", h);
-    for (const h of keymap.getHandlers("ArrowRight"))
-        keymap.unbind("ArrowRight", h);
-    keymap.bind("ArrowLeft", script.back);
-    keymap.bind("ArrowRight", script.forward);
-});
-
-
-/***/ }),
-
 /***/ "./lib/seekonload.ts":
 /*!***************************!*\
   !*** ./lib/seekonload.ts ***!
@@ -3442,19 +3419,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ractive_player__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ractive-player */ "ractive-player");
 /* harmony import */ var ractive_player__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(ractive_player__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _lib_LoadingScreen__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @lib/LoadingScreen */ "./lib/LoadingScreen.tsx");
-/* harmony import */ var _lib_rebind_arrow_keys__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @lib/rebind-arrow-keys */ "./lib/rebind-arrow-keys.ts");
-/* harmony import */ var _lib_seekonload__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @lib/seekonload */ "./lib/seekonload.ts");
-/* harmony import */ var _media_url__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./media-url */ "./src/media-url.ts");
-/* harmony import */ var _markers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./markers */ "./src/markers.ts");
-/* harmony import */ var _Intro__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Intro */ "./src/Intro.tsx");
-/* harmony import */ var _KaTeX__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./KaTeX */ "./src/KaTeX.tsx");
-/* harmony import */ var _MathJax__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./MathJax */ "./src/MathJax.tsx");
-/* harmony import */ var _XyJax__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./XyJax */ "./src/XyJax.tsx");
-/* harmony import */ var _TwoD__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./TwoD */ "./src/TwoD.tsx");
-/* harmony import */ var _ThreeD__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./ThreeD */ "./src/ThreeD.tsx");
-/* harmony import */ var _FiveD__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./FiveD */ "./src/FiveD.tsx");
-/* harmony import */ var _3d_HelpControl__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./3d/HelpControl */ "./src/3d/HelpControl.tsx");
-
+/* harmony import */ var _lib_seekonload__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @lib/seekonload */ "./lib/seekonload.ts");
+/* harmony import */ var _media_url__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./media-url */ "./src/media-url.ts");
+/* harmony import */ var _markers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./markers */ "./src/markers.ts");
+/* harmony import */ var _Intro__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Intro */ "./src/Intro.tsx");
+/* harmony import */ var _KaTeX__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./KaTeX */ "./src/KaTeX.tsx");
+/* harmony import */ var _MathJax__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./MathJax */ "./src/MathJax.tsx");
+/* harmony import */ var _XyJax__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./XyJax */ "./src/XyJax.tsx");
+/* harmony import */ var _TwoD__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./TwoD */ "./src/TwoD.tsx");
+/* harmony import */ var _ThreeD__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./ThreeD */ "./src/ThreeD.tsx");
+/* harmony import */ var _FiveD__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./FiveD */ "./src/FiveD.tsx");
+/* harmony import */ var _3d_HelpControl__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./3d/HelpControl */ "./src/3d/HelpControl.tsx");
 
 
 
@@ -3473,19 +3448,18 @@ __webpack_require__.r(__webpack_exports__);
 const controls = (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,
     ractive_player__WEBPACK_IMPORTED_MODULE_2__.Player.defaultControlsLeft,
     react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: "rp-controls-right" },
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_3d_HelpControl__WEBPACK_IMPORTED_MODULE_15__.default, null),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_3d_HelpControl__WEBPACK_IMPORTED_MODULE_14__.default, null),
         ractive_player__WEBPACK_IMPORTED_MODULE_2__.Player.defaultControlsRight)));
 function Ractive() {
     const playerRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef();
     react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
         const player = playerRef.current;
-        (0,_lib_rebind_arrow_keys__WEBPACK_IMPORTED_MODULE_4__.default)(player);
         player.canPlay.then(() => {
-            (0,_lib_seekonload__WEBPACK_IMPORTED_MODULE_5__.default)(player.playback);
+            (0,_lib_seekonload__WEBPACK_IMPORTED_MODULE_4__.default)(player.playback);
             player.ready();
         });
     }, []);
-    const script = new ractive_player__WEBPACK_IMPORTED_MODULE_2__.Script(_markers__WEBPACK_IMPORTED_MODULE_7__.default);
+    const script = new ractive_player__WEBPACK_IMPORTED_MODULE_2__.Script(_markers__WEBPACK_IMPORTED_MODULE_6__.default);
     const ps = script.parseStart;
     const highlights = [
         { title: "KaTeX", time: ps("ktx/") },
@@ -3500,21 +3474,21 @@ function Ractive() {
         height: 100,
         width: 160,
         frequency: 4,
-        path: `${_media_url__WEBPACK_IMPORTED_MODULE_6__.MEDIA_URL}/thumbs/%s.png`,
+        path: `${_media_url__WEBPACK_IMPORTED_MODULE_5__.MEDIA_URL}/thumbs/%s.png`,
         highlights
     };
     return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(ractive_player__WEBPACK_IMPORTED_MODULE_2__.Player, { controls: controls, ref: playerRef, script: script, thumbs: thumbData },
         react__WEBPACK_IMPORTED_MODULE_0__.createElement(_lib_LoadingScreen__WEBPACK_IMPORTED_MODULE_3__.default, null),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement(ractive_player__WEBPACK_IMPORTED_MODULE_2__.Audio, { start: 0 },
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("source", { src: `${_media_url__WEBPACK_IMPORTED_MODULE_6__.MEDIA_URL}/audio/audio.webm`, type: "audio/webm" }),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("source", { src: `${_media_url__WEBPACK_IMPORTED_MODULE_6__.MEDIA_URL}/audio/audio.mp4`, type: "audio/mp4" })),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Intro__WEBPACK_IMPORTED_MODULE_8__.default, null),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_KaTeX__WEBPACK_IMPORTED_MODULE_9__.default, null),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MathJax__WEBPACK_IMPORTED_MODULE_10__.default, null),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_XyJax__WEBPACK_IMPORTED_MODULE_11__.default, null),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_TwoD__WEBPACK_IMPORTED_MODULE_12__.default, null),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ThreeD__WEBPACK_IMPORTED_MODULE_13__.default, null),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FiveD__WEBPACK_IMPORTED_MODULE_14__.default, null)));
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("source", { src: `${_media_url__WEBPACK_IMPORTED_MODULE_5__.MEDIA_URL}/audio/audio.webm`, type: "audio/webm" }),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("source", { src: `${_media_url__WEBPACK_IMPORTED_MODULE_5__.MEDIA_URL}/audio/audio.mp4`, type: "audio/mp4" })),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Intro__WEBPACK_IMPORTED_MODULE_7__.default, null),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_KaTeX__WEBPACK_IMPORTED_MODULE_8__.default, null),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MathJax__WEBPACK_IMPORTED_MODULE_9__.default, null),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_XyJax__WEBPACK_IMPORTED_MODULE_10__.default, null),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_TwoD__WEBPACK_IMPORTED_MODULE_11__.default, null),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ThreeD__WEBPACK_IMPORTED_MODULE_12__.default, null),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FiveD__WEBPACK_IMPORTED_MODULE_13__.default, null)));
 }
 react_dom__WEBPACK_IMPORTED_MODULE_1__.render(react__WEBPACK_IMPORTED_MODULE_0__.createElement(Ractive, null), document.querySelector("main"));
 
