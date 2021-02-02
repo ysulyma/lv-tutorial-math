@@ -9,7 +9,7 @@ import {Audio, Script, Player} from "ractive-player";
 // import HelpControl from "@lib/HelpControl";
 import LoadingScreen from "@lib/LoadingScreen";
 // import ShowMarkerName from "@lib/ShowMarkerName";
-import rebindArrowKeys from "@lib/rebind-arrow-keys";
+// import rebindArrowKeys from "@lib/rebind-arrow-keys";
 //import rememberVolumeSettings from "@lib/remember-volume";
 import seekOnLoad from "@lib/seekonload";
 
@@ -51,7 +51,7 @@ function Ractive() {
   React.useEffect(() => {
     const player = playerRef.current;
 
-    rebindArrowKeys(player);
+    // rebindArrowKeys(player);
     // rememberVolumeSettings(player.playback);
 
     player.canPlay.then(() => {
