@@ -15,4 +15,10 @@ To compile TSX:
 
 To compile CSS:
 
-`stylus -I ./node_modules -o . -c -w styl/style.styl`
+`stylus \
+  --compress \
+  --include-css \
+  --include ./node_modules \
+  --out . \
+  --watch styl/style.styl
+`
