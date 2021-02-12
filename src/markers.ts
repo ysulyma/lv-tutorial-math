@@ -16,7 +16,7 @@ export default [
   ["intro/ts", "0:04.530"],
   ["intro/react", "0:07.922"],
   ["intro/node", "0:12.258"],
-  ["intro/lmqm", "0:05.510"],
+  ["intro/epiplexis", "0:05.510"],
   ["ktx/", "0:05.211"],
   ["ktx/display", "0:02.478"],
   ["ktx/ex", "0:01.233"],

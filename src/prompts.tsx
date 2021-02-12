@@ -45,7 +45,7 @@ type P = typeof Prompt extends (props: infer T) => JSX.Element ? T : never;
       <br/>
       These tools are all pretty standard in web development, but not as familiar to mathematicians.
     </Cue>
-    <Cue on="intro/lmqm">
+    <Cue on="intro/epiplexis">
       Finally, you can see examples of this used for actual math lessons on my website.
     </Cue>
   </Prompt>

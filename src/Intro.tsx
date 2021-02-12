@@ -4,7 +4,7 @@ import {useMemo} from "react";
 import {Player, Utils, usePlayer} from "ractive-player";
 const {during, from} = Utils.authoring,
       {onClick} = Utils.mobile,
-      {formatTime} = Utils.time;
+      {formatTime, formatTimeMs} = Utils.time;
 
 import Link from "@lib/Link";
 
@@ -39,10 +39,10 @@ export default function Intro() {
             <tr key={row[0]} onMouseUp={Player.preventCanvasClick}>
               <th>{i+1}.</th>
               <td className="name">
-                <a href={`?t=${formatTime(row[1])}`} {...seek}>{row[0]}</a>
+                <a href={`?t=${formatTimeMs(row[1])}`} {...seek}>{row[0]}</a>
               </td>
               <td className="time">
-                <a href={`?t=${formatTime(row[1])}`} {...seek}>{formatTime(row[1])}</a>
+                <a href={`?t=${formatTimeMs(row[1])}`} {...seek}>{formatTime(row[1])}</a>
               </td>
             </tr>
           ))}
@@ -71,7 +71,7 @@ export default function Intro() {
           <li {...from("intro/ts")}><Link href="https://www.typescriptlang.org/">TypeScript documentation</Link></li>
           <li {...from("intro/react")}><Link href="https://reactjs.org/">React documentation</Link></li>
           <li {...from("intro/node")}><Link href="https://nodejs.org/en/">Node.js</Link></li>
-          <li {...from("intro/lmqm")}>Inspiration: <Link href="https://lmqm.xyz/">La mer qui monte</Link></li>
+          <li {...from("intro/epiplexis")}>Inspiration: <Link href="https://epiplexis.xyz/">Epiplexis</Link></li>
         </ul>
       </section>
 
