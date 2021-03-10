@@ -251,9 +251,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var ractive_player__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ractive-player */ "ractive-player");
+/* harmony import */ var ractive_player__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(ractive_player__WEBPACK_IMPORTED_MODULE_1__);
+
 
 function LoadingScreen() {
-    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: "rp-loading-screen" },
+    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: "rp-loading-screen", onMouseUp: ractive_player__WEBPACK_IMPORTED_MODULE_1__.Player.preventCanvasClick },
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: "rp-loading-spinner" })));
 }
 
