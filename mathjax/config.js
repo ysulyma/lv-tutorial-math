@@ -2,7 +2,7 @@
 
 (() => {
 
-MathJax.Ajax.config.path["Extra"] = "/r/rp-tutorial-math/mathjax";
+MathJax.Ajax.config.path["Extra"] = "/mathjax";
 MathJax.Ajax.config.path["img"] = "https://cdn.rawgit.com/pkra/mathjax-img/1.0.0/";
 
 MathJax.Hub.Config({
