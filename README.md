@@ -1,46 +1,35 @@
-# Getting Started
+This demo shows the various math features of [Liqvid](https://liqvidjs.org).
 
-To start server:
+# Installation
 
-```
+Clone this repository, then do:
+
+```bash
 npm install
-node server.js
+liqvid serve
 ```
 
-Then go to http://localhost:8080 in your browser.
+# Commands
 
-**Note** You must access the page over HTTPS in order to record audio. Here is a tutorial on how to get HTTPS working in a development environment: https://www.freecodecamp.org/news/how-to-get-https-working-on-your-local-development-environment-in-5-minutes-7af615770eec/
+For developing/recording:
 
-**Note** `npm` may give you a scary warning about a security vulnerability in three.js. You can ignore this; *do not upgrade three.js* or the implicit graphing example won't work.
-
-# Development
-
-To compile TSX to JS:
-
-`webpack --watch`
-
-This will produce a lot of TypeScript error messages; don't worry, you can ignore these.
-
-To compile Stylus to CSS:
-```
-stylus \
-  --compress \
-  --include-css \
-  --include ./node_modules \
-  --out . \
-  --watch styl/style.styl
+```bash
+liqvid serve
 ```
 
-Thus, you will want **three** terminal windows open when developing: one to run the server, one to compile TSX, and one to compile stylus.
+Then visit http://localhost:3000/.
 
-# MathJax
-
-MathJax requires an absolute path for its configuration file. When you upload your ractive to a server, you will need to replace `/mathjax` with the path to the MathJax config file on your server.
-
-```html
-<script defer id="js-async-mathjax" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML,/mathjax/config.js"></script>
+For viewing the production bundle:
+```bash
+NODE_ENV=production liqvid serve
 ```
 
-```js
-MathJax.Ajax.config.path["Extra"] = "/mathjax";
+Then visit http://localhost:3000/.
+
+To generate a production bundle:
+
+```bash
+liqvid build
 ```
+
+Then visit http://localhost:3000/dist/.
