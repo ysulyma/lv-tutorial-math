@@ -1,9 +1,6 @@
-import * as React from "react";
 import {useCallback, useState} from "react";
 
 // our imports
-import {Utils} from "liqvid";
-const {during} = Utils.authoring;
 
 import {KTX} from "@liqvid/katex";
 
@@ -30,7 +27,7 @@ export default function FiveD() {
   }, []);
 
   return (
-    <section id="sec-5d" {...during("5d/")}>
+    <section id="sec-5d" data-during="5d/">
       <figure id="elliptic" data-affords="click">
         <Elliptic {...{a,b}}/>
       </figure>

@@ -2,1219 +2,6 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "../../liqvid/node_modules/.pnpm/object-assign@4.1.1/node_modules/object-assign/index.js":
-/*!***********************************************************************************************!*\
-  !*** ../../liqvid/node_modules/.pnpm/object-assign@4.1.1/node_modules/object-assign/index.js ***!
-  \***********************************************************************************************/
-/***/ ((module) => {
-
-
-var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-function toObject(val) {
-    if (val === null || val === undefined) {
-        throw new TypeError('Object.assign cannot be called with null or undefined');
-    }
-    return Object(val);
-}
-function shouldUseNative() {
-    try {
-        if (!Object.assign) {
-            return false;
-        }
-        var test1 = new String('abc');
-        test1[5] = 'de';
-        if (Object.getOwnPropertyNames(test1)[0] === '5') {
-            return false;
-        }
-        var test2 = {};
-        for (var i = 0; i < 10; i++) {
-            test2['_' + String.fromCharCode(i)] = i;
-        }
-        var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
-            return test2[n];
-        });
-        if (order2.join('') !== '0123456789') {
-            return false;
-        }
-        var test3 = {};
-        'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
-            test3[letter] = letter;
-        });
-        if (Object.keys(Object.assign({}, test3)).join('') !==
-            'abcdefghijklmnopqrst') {
-            return false;
-        }
-        return true;
-    }
-    catch (err) {
-        return false;
-    }
-}
-module.exports = shouldUseNative() ? Object.assign : function (target, source) {
-    var from;
-    var to = toObject(target);
-    var symbols;
-    for (var s = 1; s < arguments.length; s++) {
-        from = Object(arguments[s]);
-        for (var key in from) {
-            if (hasOwnProperty.call(from, key)) {
-                to[key] = from[key];
-            }
-        }
-        if (getOwnPropertySymbols) {
-            symbols = getOwnPropertySymbols(from);
-            for (var i = 0; i < symbols.length; i++) {
-                if (propIsEnumerable.call(from, symbols[i])) {
-                    to[symbols[i]] = from[symbols[i]];
-                }
-            }
-        }
-    }
-    return to;
-};
-
-
-/***/ }),
-
-/***/ "../../liqvid/node_modules/.pnpm/react@17.0.2/node_modules/react/cjs/react-jsx-runtime.development.js":
-/*!************************************************************************************************************!*\
-  !*** ../../liqvid/node_modules/.pnpm/react@17.0.2/node_modules/react/cjs/react-jsx-runtime.development.js ***!
-  \************************************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-if (true) {
-    (function () {
-        'use strict';
-        var React = __webpack_require__(/*! react */ "react");
-        var _assign = __webpack_require__(/*! object-assign */ "../../liqvid/node_modules/.pnpm/object-assign@4.1.1/node_modules/object-assign/index.js");
-        var REACT_ELEMENT_TYPE = 0xeac7;
-        var REACT_PORTAL_TYPE = 0xeaca;
-        exports.Fragment = 0xeacb;
-        var REACT_STRICT_MODE_TYPE = 0xeacc;
-        var REACT_PROFILER_TYPE = 0xead2;
-        var REACT_PROVIDER_TYPE = 0xeacd;
-        var REACT_CONTEXT_TYPE = 0xeace;
-        var REACT_FORWARD_REF_TYPE = 0xead0;
-        var REACT_SUSPENSE_TYPE = 0xead1;
-        var REACT_SUSPENSE_LIST_TYPE = 0xead8;
-        var REACT_MEMO_TYPE = 0xead3;
-        var REACT_LAZY_TYPE = 0xead4;
-        var REACT_BLOCK_TYPE = 0xead9;
-        var REACT_SERVER_BLOCK_TYPE = 0xeada;
-        var REACT_FUNDAMENTAL_TYPE = 0xead5;
-        var REACT_SCOPE_TYPE = 0xead7;
-        var REACT_OPAQUE_ID_TYPE = 0xeae0;
-        var REACT_DEBUG_TRACING_MODE_TYPE = 0xeae1;
-        var REACT_OFFSCREEN_TYPE = 0xeae2;
-        var REACT_LEGACY_HIDDEN_TYPE = 0xeae3;
-        if (typeof Symbol === 'function' && Symbol.for) {
-            var symbolFor = Symbol.for;
-            REACT_ELEMENT_TYPE = symbolFor('react.element');
-            REACT_PORTAL_TYPE = symbolFor('react.portal');
-            exports.Fragment = symbolFor('react.fragment');
-            REACT_STRICT_MODE_TYPE = symbolFor('react.strict_mode');
-            REACT_PROFILER_TYPE = symbolFor('react.profiler');
-            REACT_PROVIDER_TYPE = symbolFor('react.provider');
-            REACT_CONTEXT_TYPE = symbolFor('react.context');
-            REACT_FORWARD_REF_TYPE = symbolFor('react.forward_ref');
-            REACT_SUSPENSE_TYPE = symbolFor('react.suspense');
-            REACT_SUSPENSE_LIST_TYPE = symbolFor('react.suspense_list');
-            REACT_MEMO_TYPE = symbolFor('react.memo');
-            REACT_LAZY_TYPE = symbolFor('react.lazy');
-            REACT_BLOCK_TYPE = symbolFor('react.block');
-            REACT_SERVER_BLOCK_TYPE = symbolFor('react.server.block');
-            REACT_FUNDAMENTAL_TYPE = symbolFor('react.fundamental');
-            REACT_SCOPE_TYPE = symbolFor('react.scope');
-            REACT_OPAQUE_ID_TYPE = symbolFor('react.opaque.id');
-            REACT_DEBUG_TRACING_MODE_TYPE = symbolFor('react.debug_trace_mode');
-            REACT_OFFSCREEN_TYPE = symbolFor('react.offscreen');
-            REACT_LEGACY_HIDDEN_TYPE = symbolFor('react.legacy_hidden');
-        }
-        var MAYBE_ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
-        var FAUX_ITERATOR_SYMBOL = '@@iterator';
-        function getIteratorFn(maybeIterable) {
-            if (maybeIterable === null || typeof maybeIterable !== 'object') {
-                return null;
-            }
-            var maybeIterator = MAYBE_ITERATOR_SYMBOL && maybeIterable[MAYBE_ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL];
-            if (typeof maybeIterator === 'function') {
-                return maybeIterator;
-            }
-            return null;
-        }
-        var ReactSharedInternals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-        function error(format) {
-            {
-                for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
-                    args[_key2 - 1] = arguments[_key2];
-                }
-                printWarning('error', format, args);
-            }
-        }
-        function printWarning(level, format, args) {
-            {
-                var ReactDebugCurrentFrame = ReactSharedInternals.ReactDebugCurrentFrame;
-                var stack = ReactDebugCurrentFrame.getStackAddendum();
-                if (stack !== '') {
-                    format += '%s';
-                    args = args.concat([stack]);
-                }
-                var argsWithFormat = args.map(function (item) {
-                    return '' + item;
-                });
-                argsWithFormat.unshift('Warning: ' + format);
-                Function.prototype.apply.call(console[level], console, argsWithFormat);
-            }
-        }
-        var enableScopeAPI = false;
-        function isValidElementType(type) {
-            if (typeof type === 'string' || typeof type === 'function') {
-                return true;
-            }
-            if (type === exports.Fragment || type === REACT_PROFILER_TYPE || type === REACT_DEBUG_TRACING_MODE_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || type === REACT_LEGACY_HIDDEN_TYPE || enableScopeAPI) {
-                return true;
-            }
-            if (typeof type === 'object' && type !== null) {
-                if (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_BLOCK_TYPE || type[0] === REACT_SERVER_BLOCK_TYPE) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        function getWrappedName(outerType, innerType, wrapperName) {
-            var functionName = innerType.displayName || innerType.name || '';
-            return outerType.displayName || (functionName !== '' ? wrapperName + "(" + functionName + ")" : wrapperName);
-        }
-        function getContextName(type) {
-            return type.displayName || 'Context';
-        }
-        function getComponentName(type) {
-            if (type == null) {
-                return null;
-            }
-            {
-                if (typeof type.tag === 'number') {
-                    error('Received an unexpected object in getComponentName(). ' + 'This is likely a bug in React. Please file an issue.');
-                }
-            }
-            if (typeof type === 'function') {
-                return type.displayName || type.name || null;
-            }
-            if (typeof type === 'string') {
-                return type;
-            }
-            switch (type) {
-                case exports.Fragment:
-                    return 'Fragment';
-                case REACT_PORTAL_TYPE:
-                    return 'Portal';
-                case REACT_PROFILER_TYPE:
-                    return 'Profiler';
-                case REACT_STRICT_MODE_TYPE:
-                    return 'StrictMode';
-                case REACT_SUSPENSE_TYPE:
-                    return 'Suspense';
-                case REACT_SUSPENSE_LIST_TYPE:
-                    return 'SuspenseList';
-            }
-            if (typeof type === 'object') {
-                switch (type.$$typeof) {
-                    case REACT_CONTEXT_TYPE:
-                        var context = type;
-                        return getContextName(context) + '.Consumer';
-                    case REACT_PROVIDER_TYPE:
-                        var provider = type;
-                        return getContextName(provider._context) + '.Provider';
-                    case REACT_FORWARD_REF_TYPE:
-                        return getWrappedName(type, type.render, 'ForwardRef');
-                    case REACT_MEMO_TYPE:
-                        return getComponentName(type.type);
-                    case REACT_BLOCK_TYPE:
-                        return getComponentName(type._render);
-                    case REACT_LAZY_TYPE:
-                        {
-                            var lazyComponent = type;
-                            var payload = lazyComponent._payload;
-                            var init = lazyComponent._init;
-                            try {
-                                return getComponentName(init(payload));
-                            }
-                            catch (x) {
-                                return null;
-                            }
-                        }
-                }
-            }
-            return null;
-        }
-        var disabledDepth = 0;
-        var prevLog;
-        var prevInfo;
-        var prevWarn;
-        var prevError;
-        var prevGroup;
-        var prevGroupCollapsed;
-        var prevGroupEnd;
-        function disabledLog() { }
-        disabledLog.__reactDisabledLog = true;
-        function disableLogs() {
-            {
-                if (disabledDepth === 0) {
-                    prevLog = console.log;
-                    prevInfo = console.info;
-                    prevWarn = console.warn;
-                    prevError = console.error;
-                    prevGroup = console.group;
-                    prevGroupCollapsed = console.groupCollapsed;
-                    prevGroupEnd = console.groupEnd;
-                    var props = {
-                        configurable: true,
-                        enumerable: true,
-                        value: disabledLog,
-                        writable: true
-                    };
-                    Object.defineProperties(console, {
-                        info: props,
-                        log: props,
-                        warn: props,
-                        error: props,
-                        group: props,
-                        groupCollapsed: props,
-                        groupEnd: props
-                    });
-                }
-                disabledDepth++;
-            }
-        }
-        function reenableLogs() {
-            {
-                disabledDepth--;
-                if (disabledDepth === 0) {
-                    var props = {
-                        configurable: true,
-                        enumerable: true,
-                        writable: true
-                    };
-                    Object.defineProperties(console, {
-                        log: _assign({}, props, {
-                            value: prevLog
-                        }),
-                        info: _assign({}, props, {
-                            value: prevInfo
-                        }),
-                        warn: _assign({}, props, {
-                            value: prevWarn
-                        }),
-                        error: _assign({}, props, {
-                            value: prevError
-                        }),
-                        group: _assign({}, props, {
-                            value: prevGroup
-                        }),
-                        groupCollapsed: _assign({}, props, {
-                            value: prevGroupCollapsed
-                        }),
-                        groupEnd: _assign({}, props, {
-                            value: prevGroupEnd
-                        })
-                    });
-                }
-                if (disabledDepth < 0) {
-                    error('disabledDepth fell below zero. ' + 'This is a bug in React. Please file an issue.');
-                }
-            }
-        }
-        var ReactCurrentDispatcher = ReactSharedInternals.ReactCurrentDispatcher;
-        var prefix;
-        function describeBuiltInComponentFrame(name, source, ownerFn) {
-            {
-                if (prefix === undefined) {
-                    try {
-                        throw Error();
-                    }
-                    catch (x) {
-                        var match = x.stack.trim().match(/\n( *(at )?)/);
-                        prefix = match && match[1] || '';
-                    }
-                }
-                return '\n' + prefix + name;
-            }
-        }
-        var reentry = false;
-        var componentFrameCache;
-        {
-            var PossiblyWeakMap = typeof WeakMap === 'function' ? WeakMap : Map;
-            componentFrameCache = new PossiblyWeakMap();
-        }
-        function describeNativeComponentFrame(fn, construct) {
-            if (!fn || reentry) {
-                return '';
-            }
-            {
-                var frame = componentFrameCache.get(fn);
-                if (frame !== undefined) {
-                    return frame;
-                }
-            }
-            var control;
-            reentry = true;
-            var previousPrepareStackTrace = Error.prepareStackTrace;
-            Error.prepareStackTrace = undefined;
-            var previousDispatcher;
-            {
-                previousDispatcher = ReactCurrentDispatcher.current;
-                ReactCurrentDispatcher.current = null;
-                disableLogs();
-            }
-            try {
-                if (construct) {
-                    var Fake = function () {
-                        throw Error();
-                    };
-                    Object.defineProperty(Fake.prototype, 'props', {
-                        set: function () {
-                            throw Error();
-                        }
-                    });
-                    if (typeof Reflect === 'object' && Reflect.construct) {
-                        try {
-                            Reflect.construct(Fake, []);
-                        }
-                        catch (x) {
-                            control = x;
-                        }
-                        Reflect.construct(fn, [], Fake);
-                    }
-                    else {
-                        try {
-                            Fake.call();
-                        }
-                        catch (x) {
-                            control = x;
-                        }
-                        fn.call(Fake.prototype);
-                    }
-                }
-                else {
-                    try {
-                        throw Error();
-                    }
-                    catch (x) {
-                        control = x;
-                    }
-                    fn();
-                }
-            }
-            catch (sample) {
-                if (sample && control && typeof sample.stack === 'string') {
-                    var sampleLines = sample.stack.split('\n');
-                    var controlLines = control.stack.split('\n');
-                    var s = sampleLines.length - 1;
-                    var c = controlLines.length - 1;
-                    while (s >= 1 && c >= 0 && sampleLines[s] !== controlLines[c]) {
-                        c--;
-                    }
-                    for (; s >= 1 && c >= 0; s--, c--) {
-                        if (sampleLines[s] !== controlLines[c]) {
-                            if (s !== 1 || c !== 1) {
-                                do {
-                                    s--;
-                                    c--;
-                                    if (c < 0 || sampleLines[s] !== controlLines[c]) {
-                                        var _frame = '\n' + sampleLines[s].replace(' at new ', ' at ');
-                                        {
-                                            if (typeof fn === 'function') {
-                                                componentFrameCache.set(fn, _frame);
-                                            }
-                                        }
-                                        return _frame;
-                                    }
-                                } while (s >= 1 && c >= 0);
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
-            finally {
-                reentry = false;
-                {
-                    ReactCurrentDispatcher.current = previousDispatcher;
-                    reenableLogs();
-                }
-                Error.prepareStackTrace = previousPrepareStackTrace;
-            }
-            var name = fn ? fn.displayName || fn.name : '';
-            var syntheticFrame = name ? describeBuiltInComponentFrame(name) : '';
-            {
-                if (typeof fn === 'function') {
-                    componentFrameCache.set(fn, syntheticFrame);
-                }
-            }
-            return syntheticFrame;
-        }
-        function describeFunctionComponentFrame(fn, source, ownerFn) {
-            {
-                return describeNativeComponentFrame(fn, false);
-            }
-        }
-        function shouldConstruct(Component) {
-            var prototype = Component.prototype;
-            return !!(prototype && prototype.isReactComponent);
-        }
-        function describeUnknownElementTypeFrameInDEV(type, source, ownerFn) {
-            if (type == null) {
-                return '';
-            }
-            if (typeof type === 'function') {
-                {
-                    return describeNativeComponentFrame(type, shouldConstruct(type));
-                }
-            }
-            if (typeof type === 'string') {
-                return describeBuiltInComponentFrame(type);
-            }
-            switch (type) {
-                case REACT_SUSPENSE_TYPE:
-                    return describeBuiltInComponentFrame('Suspense');
-                case REACT_SUSPENSE_LIST_TYPE:
-                    return describeBuiltInComponentFrame('SuspenseList');
-            }
-            if (typeof type === 'object') {
-                switch (type.$$typeof) {
-                    case REACT_FORWARD_REF_TYPE:
-                        return describeFunctionComponentFrame(type.render);
-                    case REACT_MEMO_TYPE:
-                        return describeUnknownElementTypeFrameInDEV(type.type, source, ownerFn);
-                    case REACT_BLOCK_TYPE:
-                        return describeFunctionComponentFrame(type._render);
-                    case REACT_LAZY_TYPE:
-                        {
-                            var lazyComponent = type;
-                            var payload = lazyComponent._payload;
-                            var init = lazyComponent._init;
-                            try {
-                                return describeUnknownElementTypeFrameInDEV(init(payload), source, ownerFn);
-                            }
-                            catch (x) { }
-                        }
-                }
-            }
-            return '';
-        }
-        var loggedTypeFailures = {};
-        var ReactDebugCurrentFrame = ReactSharedInternals.ReactDebugCurrentFrame;
-        function setCurrentlyValidatingElement(element) {
-            {
-                if (element) {
-                    var owner = element._owner;
-                    var stack = describeUnknownElementTypeFrameInDEV(element.type, element._source, owner ? owner.type : null);
-                    ReactDebugCurrentFrame.setExtraStackFrame(stack);
-                }
-                else {
-                    ReactDebugCurrentFrame.setExtraStackFrame(null);
-                }
-            }
-        }
-        function checkPropTypes(typeSpecs, values, location, componentName, element) {
-            {
-                var has = Function.call.bind(Object.prototype.hasOwnProperty);
-                for (var typeSpecName in typeSpecs) {
-                    if (has(typeSpecs, typeSpecName)) {
-                        var error$1 = void 0;
-                        try {
-                            if (typeof typeSpecs[typeSpecName] !== 'function') {
-                                var err = Error((componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' + 'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.' + 'This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.');
-                                err.name = 'Invariant Violation';
-                                throw err;
-                            }
-                            error$1 = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED');
-                        }
-                        catch (ex) {
-                            error$1 = ex;
-                        }
-                        if (error$1 && !(error$1 instanceof Error)) {
-                            setCurrentlyValidatingElement(element);
-                            error('%s: type specification of %s' + ' `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error$1);
-                            setCurrentlyValidatingElement(null);
-                        }
-                        if (error$1 instanceof Error && !(error$1.message in loggedTypeFailures)) {
-                            loggedTypeFailures[error$1.message] = true;
-                            setCurrentlyValidatingElement(element);
-                            error('Failed %s type: %s', location, error$1.message);
-                            setCurrentlyValidatingElement(null);
-                        }
-                    }
-                }
-            }
-        }
-        var ReactCurrentOwner = ReactSharedInternals.ReactCurrentOwner;
-        var hasOwnProperty = Object.prototype.hasOwnProperty;
-        var RESERVED_PROPS = {
-            key: true,
-            ref: true,
-            __self: true,
-            __source: true
-        };
-        var specialPropKeyWarningShown;
-        var specialPropRefWarningShown;
-        var didWarnAboutStringRefs;
-        {
-            didWarnAboutStringRefs = {};
-        }
-        function hasValidRef(config) {
-            {
-                if (hasOwnProperty.call(config, 'ref')) {
-                    var getter = Object.getOwnPropertyDescriptor(config, 'ref').get;
-                    if (getter && getter.isReactWarning) {
-                        return false;
-                    }
-                }
-            }
-            return config.ref !== undefined;
-        }
-        function hasValidKey(config) {
-            {
-                if (hasOwnProperty.call(config, 'key')) {
-                    var getter = Object.getOwnPropertyDescriptor(config, 'key').get;
-                    if (getter && getter.isReactWarning) {
-                        return false;
-                    }
-                }
-            }
-            return config.key !== undefined;
-        }
-        function warnIfStringRefCannotBeAutoConverted(config, self) {
-            {
-                if (typeof config.ref === 'string' && ReactCurrentOwner.current && self && ReactCurrentOwner.current.stateNode !== self) {
-                    var componentName = getComponentName(ReactCurrentOwner.current.type);
-                    if (!didWarnAboutStringRefs[componentName]) {
-                        error('Component "%s" contains the string ref "%s". ' + 'Support for string refs will be removed in a future major release. ' + 'This case cannot be automatically converted to an arrow function. ' + 'We ask you to manually fix this case by using useRef() or createRef() instead. ' + 'Learn more about using refs safely here: ' + 'https://reactjs.org/link/strict-mode-string-ref', getComponentName(ReactCurrentOwner.current.type), config.ref);
-                        didWarnAboutStringRefs[componentName] = true;
-                    }
-                }
-            }
-        }
-        function defineKeyPropWarningGetter(props, displayName) {
-            {
-                var warnAboutAccessingKey = function () {
-                    if (!specialPropKeyWarningShown) {
-                        specialPropKeyWarningShown = true;
-                        error('%s: `key` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://reactjs.org/link/special-props)', displayName);
-                    }
-                };
-                warnAboutAccessingKey.isReactWarning = true;
-                Object.defineProperty(props, 'key', {
-                    get: warnAboutAccessingKey,
-                    configurable: true
-                });
-            }
-        }
-        function defineRefPropWarningGetter(props, displayName) {
-            {
-                var warnAboutAccessingRef = function () {
-                    if (!specialPropRefWarningShown) {
-                        specialPropRefWarningShown = true;
-                        error('%s: `ref` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://reactjs.org/link/special-props)', displayName);
-                    }
-                };
-                warnAboutAccessingRef.isReactWarning = true;
-                Object.defineProperty(props, 'ref', {
-                    get: warnAboutAccessingRef,
-                    configurable: true
-                });
-            }
-        }
-        var ReactElement = function (type, key, ref, self, source, owner, props) {
-            var element = {
-                $$typeof: REACT_ELEMENT_TYPE,
-                type: type,
-                key: key,
-                ref: ref,
-                props: props,
-                _owner: owner
-            };
-            {
-                element._store = {};
-                Object.defineProperty(element._store, 'validated', {
-                    configurable: false,
-                    enumerable: false,
-                    writable: true,
-                    value: false
-                });
-                Object.defineProperty(element, '_self', {
-                    configurable: false,
-                    enumerable: false,
-                    writable: false,
-                    value: self
-                });
-                Object.defineProperty(element, '_source', {
-                    configurable: false,
-                    enumerable: false,
-                    writable: false,
-                    value: source
-                });
-                if (Object.freeze) {
-                    Object.freeze(element.props);
-                    Object.freeze(element);
-                }
-            }
-            return element;
-        };
-        function jsxDEV(type, config, maybeKey, source, self) {
-            {
-                var propName;
-                var props = {};
-                var key = null;
-                var ref = null;
-                if (maybeKey !== undefined) {
-                    key = '' + maybeKey;
-                }
-                if (hasValidKey(config)) {
-                    key = '' + config.key;
-                }
-                if (hasValidRef(config)) {
-                    ref = config.ref;
-                    warnIfStringRefCannotBeAutoConverted(config, self);
-                }
-                for (propName in config) {
-                    if (hasOwnProperty.call(config, propName) && !RESERVED_PROPS.hasOwnProperty(propName)) {
-                        props[propName] = config[propName];
-                    }
-                }
-                if (type && type.defaultProps) {
-                    var defaultProps = type.defaultProps;
-                    for (propName in defaultProps) {
-                        if (props[propName] === undefined) {
-                            props[propName] = defaultProps[propName];
-                        }
-                    }
-                }
-                if (key || ref) {
-                    var displayName = typeof type === 'function' ? type.displayName || type.name || 'Unknown' : type;
-                    if (key) {
-                        defineKeyPropWarningGetter(props, displayName);
-                    }
-                    if (ref) {
-                        defineRefPropWarningGetter(props, displayName);
-                    }
-                }
-                return ReactElement(type, key, ref, self, source, ReactCurrentOwner.current, props);
-            }
-        }
-        var ReactCurrentOwner$1 = ReactSharedInternals.ReactCurrentOwner;
-        var ReactDebugCurrentFrame$1 = ReactSharedInternals.ReactDebugCurrentFrame;
-        function setCurrentlyValidatingElement$1(element) {
-            {
-                if (element) {
-                    var owner = element._owner;
-                    var stack = describeUnknownElementTypeFrameInDEV(element.type, element._source, owner ? owner.type : null);
-                    ReactDebugCurrentFrame$1.setExtraStackFrame(stack);
-                }
-                else {
-                    ReactDebugCurrentFrame$1.setExtraStackFrame(null);
-                }
-            }
-        }
-        var propTypesMisspellWarningShown;
-        {
-            propTypesMisspellWarningShown = false;
-        }
-        function isValidElement(object) {
-            {
-                return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
-            }
-        }
-        function getDeclarationErrorAddendum() {
-            {
-                if (ReactCurrentOwner$1.current) {
-                    var name = getComponentName(ReactCurrentOwner$1.current.type);
-                    if (name) {
-                        return '\n\nCheck the render method of `' + name + '`.';
-                    }
-                }
-                return '';
-            }
-        }
-        function getSourceInfoErrorAddendum(source) {
-            {
-                if (source !== undefined) {
-                    var fileName = source.fileName.replace(/^.*[\\\/]/, '');
-                    var lineNumber = source.lineNumber;
-                    return '\n\nCheck your code at ' + fileName + ':' + lineNumber + '.';
-                }
-                return '';
-            }
-        }
-        var ownerHasKeyUseWarning = {};
-        function getCurrentComponentErrorInfo(parentType) {
-            {
-                var info = getDeclarationErrorAddendum();
-                if (!info) {
-                    var parentName = typeof parentType === 'string' ? parentType : parentType.displayName || parentType.name;
-                    if (parentName) {
-                        info = "\n\nCheck the top-level render call using <" + parentName + ">.";
-                    }
-                }
-                return info;
-            }
-        }
-        function validateExplicitKey(element, parentType) {
-            {
-                if (!element._store || element._store.validated || element.key != null) {
-                    return;
-                }
-                element._store.validated = true;
-                var currentComponentErrorInfo = getCurrentComponentErrorInfo(parentType);
-                if (ownerHasKeyUseWarning[currentComponentErrorInfo]) {
-                    return;
-                }
-                ownerHasKeyUseWarning[currentComponentErrorInfo] = true;
-                var childOwner = '';
-                if (element && element._owner && element._owner !== ReactCurrentOwner$1.current) {
-                    childOwner = " It was passed a child from " + getComponentName(element._owner.type) + ".";
-                }
-                setCurrentlyValidatingElement$1(element);
-                error('Each child in a list should have a unique "key" prop.' + '%s%s See https://reactjs.org/link/warning-keys for more information.', currentComponentErrorInfo, childOwner);
-                setCurrentlyValidatingElement$1(null);
-            }
-        }
-        function validateChildKeys(node, parentType) {
-            {
-                if (typeof node !== 'object') {
-                    return;
-                }
-                if (Array.isArray(node)) {
-                    for (var i = 0; i < node.length; i++) {
-                        var child = node[i];
-                        if (isValidElement(child)) {
-                            validateExplicitKey(child, parentType);
-                        }
-                    }
-                }
-                else if (isValidElement(node)) {
-                    if (node._store) {
-                        node._store.validated = true;
-                    }
-                }
-                else if (node) {
-                    var iteratorFn = getIteratorFn(node);
-                    if (typeof iteratorFn === 'function') {
-                        if (iteratorFn !== node.entries) {
-                            var iterator = iteratorFn.call(node);
-                            var step;
-                            while (!(step = iterator.next()).done) {
-                                if (isValidElement(step.value)) {
-                                    validateExplicitKey(step.value, parentType);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        function validatePropTypes(element) {
-            {
-                var type = element.type;
-                if (type === null || type === undefined || typeof type === 'string') {
-                    return;
-                }
-                var propTypes;
-                if (typeof type === 'function') {
-                    propTypes = type.propTypes;
-                }
-                else if (typeof type === 'object' && (type.$$typeof === REACT_FORWARD_REF_TYPE ||
-                    type.$$typeof === REACT_MEMO_TYPE)) {
-                    propTypes = type.propTypes;
-                }
-                else {
-                    return;
-                }
-                if (propTypes) {
-                    var name = getComponentName(type);
-                    checkPropTypes(propTypes, element.props, 'prop', name, element);
-                }
-                else if (type.PropTypes !== undefined && !propTypesMisspellWarningShown) {
-                    propTypesMisspellWarningShown = true;
-                    var _name = getComponentName(type);
-                    error('Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?', _name || 'Unknown');
-                }
-                if (typeof type.getDefaultProps === 'function' && !type.getDefaultProps.isReactClassApproved) {
-                    error('getDefaultProps is only used on classic React.createClass ' + 'definitions. Use a static property named `defaultProps` instead.');
-                }
-            }
-        }
-        function validateFragmentProps(fragment) {
-            {
-                var keys = Object.keys(fragment.props);
-                for (var i = 0; i < keys.length; i++) {
-                    var key = keys[i];
-                    if (key !== 'children' && key !== 'key') {
-                        setCurrentlyValidatingElement$1(fragment);
-                        error('Invalid prop `%s` supplied to `React.Fragment`. ' + 'React.Fragment can only have `key` and `children` props.', key);
-                        setCurrentlyValidatingElement$1(null);
-                        break;
-                    }
-                }
-                if (fragment.ref !== null) {
-                    setCurrentlyValidatingElement$1(fragment);
-                    error('Invalid attribute `ref` supplied to `React.Fragment`.');
-                    setCurrentlyValidatingElement$1(null);
-                }
-            }
-        }
-        function jsxWithValidation(type, props, key, isStaticChildren, source, self) {
-            {
-                var validType = isValidElementType(type);
-                if (!validType) {
-                    var info = '';
-                    if (type === undefined || typeof type === 'object' && type !== null && Object.keys(type).length === 0) {
-                        info += ' You likely forgot to export your component from the file ' + "it's defined in, or you might have mixed up default and named imports.";
-                    }
-                    var sourceInfo = getSourceInfoErrorAddendum(source);
-                    if (sourceInfo) {
-                        info += sourceInfo;
-                    }
-                    else {
-                        info += getDeclarationErrorAddendum();
-                    }
-                    var typeString;
-                    if (type === null) {
-                        typeString = 'null';
-                    }
-                    else if (Array.isArray(type)) {
-                        typeString = 'array';
-                    }
-                    else if (type !== undefined && type.$$typeof === REACT_ELEMENT_TYPE) {
-                        typeString = "<" + (getComponentName(type.type) || 'Unknown') + " />";
-                        info = ' Did you accidentally export a JSX literal instead of a component?';
-                    }
-                    else {
-                        typeString = typeof type;
-                    }
-                    error('React.jsx: type is invalid -- expected a string (for ' + 'built-in components) or a class/function (for composite ' + 'components) but got: %s.%s', typeString, info);
-                }
-                var element = jsxDEV(type, props, key, source, self);
-                if (element == null) {
-                    return element;
-                }
-                if (validType) {
-                    var children = props.children;
-                    if (children !== undefined) {
-                        if (isStaticChildren) {
-                            if (Array.isArray(children)) {
-                                for (var i = 0; i < children.length; i++) {
-                                    validateChildKeys(children[i], type);
-                                }
-                                if (Object.freeze) {
-                                    Object.freeze(children);
-                                }
-                            }
-                            else {
-                                error('React.jsx: Static children should always be an array. ' + 'You are likely explicitly calling React.jsxs or React.jsxDEV. ' + 'Use the Babel transform instead.');
-                            }
-                        }
-                        else {
-                            validateChildKeys(children, type);
-                        }
-                    }
-                }
-                if (type === exports.Fragment) {
-                    validateFragmentProps(element);
-                }
-                else {
-                    validatePropTypes(element);
-                }
-                return element;
-            }
-        }
-        function jsxWithValidationStatic(type, props, key) {
-            {
-                return jsxWithValidation(type, props, key, true);
-            }
-        }
-        function jsxWithValidationDynamic(type, props, key) {
-            {
-                return jsxWithValidation(type, props, key, false);
-            }
-        }
-        var jsx = jsxWithValidationDynamic;
-        var jsxs = jsxWithValidationStatic;
-        exports.jsx = jsx;
-        exports.jsxs = jsxs;
-    })();
-}
-
-
-/***/ }),
-
-/***/ "../../liqvid/node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js":
-/*!**************************************************************************************!*\
-  !*** ../../liqvid/node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js ***!
-  \**************************************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-
-if (false) {}
-else {
-    module.exports = __webpack_require__(/*! ./cjs/react-jsx-runtime.development.js */ "../../liqvid/node_modules/.pnpm/react@17.0.2/node_modules/react/cjs/react-jsx-runtime.development.js");
-}
-
-
-/***/ }),
-
-/***/ "../../liqvid/packages/xyjax/dist/index.js":
-/*!*************************************************!*\
-  !*** ../../liqvid/packages/xyjax/dist/index.js ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "a$opacity": () => (/* binding */ a$opacity),
-/* harmony export */   "extendXY": () => (/* binding */ extendXY),
-/* harmony export */   "fromb52": () => (/* binding */ fromb52),
-/* harmony export */   "tob52": () => (/* binding */ tob52),
-/* harmony export */   "useAnimateArrows": () => (/* binding */ useAnimateArrows),
-/* harmony export */   "useMathAnimation": () => (/* binding */ useMathAnimation),
-/* harmony export */   "xyDecodeColor": () => (/* binding */ xyDecodeColor),
-/* harmony export */   "xyEncodeColor": () => (/* binding */ xyEncodeColor)
-/* harmony export */ });
-/* harmony import */ var _liqvid_utils_misc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @liqvid/utils/misc */ "../../liqvid/packages/utils/dist/esm/misc.js");
-/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! liqvid */ "liqvid");
-/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-
-
-
-function a$opacity(u, nodes) {
-    for (const node of nodes) {
-        node.style.opacity = u.toString();
-    }
-}
-function useAnimateArrows(o, deps) {
-    const { playback } = (0,liqvid__WEBPACK_IMPORTED_MODULE_1__.usePlayer)();
-    const tail = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)();
-    const init = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)({});
-    const fadeTail = (0,react__WEBPACK_IMPORTED_MODULE_2__.useCallback)((u) => {
-        if (!tail.current)
-            return;
-        const { x1, x2, y1, y2 } = init.current;
-        if (u === 0) {
-            tail.current.style.opacity = "0";
-        }
-        else {
-            tail.current.style.opacity = "1";
-            tail.current.setAttribute("x2", (0,_liqvid_utils_misc__WEBPACK_IMPORTED_MODULE_0__.lerp)(x1, x2, u).toString());
-            tail.current.setAttribute("y2", (0,_liqvid_utils_misc__WEBPACK_IMPORTED_MODULE_0__.lerp)(y1, y2, u).toString());
-        }
-    }, []);
-    (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
-        const getNodes = () => {
-            if (!o.ref.current) {
-                return;
-            }
-            const reAnimate = init.current.hasOwnProperty("y2");
-            tail.current = o.ref.current.domElement.querySelector(o.tail);
-            const x1 = parseFloat(tail.current.getAttribute("x1"));
-            const y1 = parseFloat(tail.current.getAttribute("y1"));
-            if (reAnimate) {
-                init.current.x2 *= parseFloat(tail.current.getAttribute("x1")) / init.current.x1;
-                init.current.y2 *= parseFloat(tail.current.getAttribute("y1")) / init.current.y1;
-            }
-            else {
-                for (const key of ["x2", "y2"]) {
-                    init.current[key] = parseFloat(tail.current.getAttribute(key));
-                }
-            }
-            init.current.x1 = x1;
-            init.current.y1 = y1;
-            if (reAnimate) {
-                fadeTail(o.tailFn(playback.currentTime));
-            }
-        };
-        o.ref.current.ready.then(getNodes);
-        return () => {
-        };
-    }, deps);
-    (0,liqvid__WEBPACK_IMPORTED_MODULE_1__.useTime)(fadeTail, o.tailFn, deps);
-    useMathAnimation({
-        ref: o.ref,
-        selector: o.head,
-        fn: o.headFn,
-        cb: a$opacity
-    }, deps);
-    useMathAnimation({
-        ref: o.ref,
-        selector: o.label,
-        fn: o.labelFn,
-        cb: a$opacity
-    }, deps);
-}
-function useMathAnimation(o, deps) {
-    const { playback } = (0,liqvid__WEBPACK_IMPORTED_MODULE_1__.usePlayer)();
-    const nodes = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)([]);
-    (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
-        let rerender = false;
-        const getNodes = () => {
-            if (!o.ref.current) {
-                return;
-            }
-            nodes.current = Array.from(o.ref.current.domElement.querySelectorAll(o.selector));
-            if (rerender) {
-                o.cb(o.fn(playback.currentTime), nodes.current);
-            }
-            else {
-                rerender = true;
-            }
-        };
-        o.ref.current.ready.then(getNodes);
-        return () => {
-        };
-    }, deps);
-    (0,liqvid__WEBPACK_IMPORTED_MODULE_1__.useTime)(u => o.cb(u, nodes.current), o.fn, deps);
-}
-let extended = false;
-Object.defineProperty(MathJax, "AST", {
-    get() {
-        return this.__xypic;
-    },
-    set(value) {
-        this.__xypic = value;
-        if (!extended) {
-            extendXY();
-            extended = true;
-        }
-        return this.__xypic = value;
-    }
-});
-function extendXY() {
-    const AST = MathJax.AST;
-    const xypic = MathJax.xypicGlobalContext;
-    const { modifierRepository } = xypic.repositories;
-    const prototype = AST.Modifier.Shape.Alphabets.prototype;
-    const preprocess = prototype.preprocess.bind(prototype);
-    prototype.preprocess = function (...args) {
-        if (this.alphabets.startsWith("color")) {
-            return modifierRepository.get("color").preprocess(...args);
-        }
-        else if (this.alphabets.startsWith("data")) {
-            return modifierRepository.get("data").preprocess(...args);
-        }
-        return preprocess(...args);
-    };
-    const modifyShape = prototype.modifyShape.bind(prototype);
-    prototype.modifyShape = function (...args) {
-        if (this.alphabets.startsWith("color")) {
-            const color = this.alphabets.substr("color".length);
-            return modifierRepository.get("color").modifyShape(...args, color);
-        }
-        else if (this.alphabets.startsWith("data")) {
-            const data = this.alphabets.substr("data".length);
-            return modifierRepository.get("data").modifyShape(...args, data);
-        }
-        return modifyShape(...args);
-    };
-    modifierRepository.put("color", new class extends AST.Modifier.Shape.ChangeColor {
-        modifyShape(context, objectShape, restModifiers, color) {
-            this.colorName = xyDecodeColor(color);
-            return super.modifyShape(context, objectShape, restModifiers);
-        }
-    });
-    class ChangeDataShape {
-        constructor(data, shape) {
-            this.data = data;
-            this.shape = shape;
-        }
-        draw(svg) {
-            const g = svg.createGroup();
-            Object.assign(g.drawArea.dataset, JSON.parse("{" + fromb52(this.data) + "}"));
-            this.shape.draw(g);
-        }
-        getBoundingBox() {
-            return this.shape.getBoundingBox();
-        }
-    }
-    modifierRepository.put("data", new class extends AST.Modifier {
-        preprocess() { }
-        modifyShape(context, objectShape, restModifiers, data) {
-            objectShape = this.proceedModifyShape(context, objectShape, restModifiers);
-            return new ChangeDataShape(data, objectShape);
-        }
-    });
-}
-const MAP = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const to_b58 = function (B, A) {
-    let d = [], s = "", i, j, c, n;
-    for (i in B) {
-        j = 0, c = B[i];
-        s += c || s.length ^ i ? "" : 1;
-        while (j in d || c) {
-            n = d[j];
-            n = n ? n * 256 + c : c;
-            c = n / A.length | 0;
-            d[j] = n % A.length;
-            j++;
-        }
-    }
-    while (j--)
-        s += A[d[j]];
-    return s;
-};
-const from_b58 = function (S, A) {
-    let d = [], b = [], i, j, c, n;
-    for (i in S) {
-        j = 0, c = A.indexOf(S[i]);
-        if (c < 0)
-            return undefined;
-        c || b.length ^ i ? i : b.push(0);
-        while (j in d || c) {
-            n = d[j];
-            n = n ? n * A.length + c : c;
-            c = n >> 8;
-            d[j] = n % 256;
-            j++;
-        }
-    }
-    while (j--)
-        b.push(d[j]);
-    return new Uint8Array(b);
-};
-function xyEncodeColor(color) {
-    return color.toUpperCase().replace(/[#0-9]/g, (char) => {
-        if (char === "#")
-            return "";
-        return String.fromCharCode("G".charCodeAt(0) + parseInt(char));
-    });
-}
-function xyDecodeColor(color) {
-    return "#" + color.replace(/[G-P]/g, (digit) => {
-        return (digit.charCodeAt(0) - "G".charCodeAt(0)).toString();
-    });
-}
-function tob52(str) {
-    const arr = [];
-    for (let i = 0; i < str.length; ++i) {
-        arr[i] = str.charCodeAt(i);
-    }
-    return to_b58(new Uint8Array(arr), MAP);
-}
-function fromb52(str) {
-    const arr = from_b58(str, MAP);
-    let ret = "";
-    for (let i = 0; i < arr.length; ++i) {
-        ret += String.fromCharCode(arr[i]);
-    }
-    return ret;
-}
-
-
-/***/ }),
-
 /***/ "./lib/Block.tsx":
 /*!***********************!*\
   !*** ./lib/Block.tsx ***!
@@ -1234,7 +21,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Remark": () => (/* binding */ Remark),
 /* harmony export */   "Theorem": () => (/* binding */ Theorem)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 var __rest = (undefined && undefined.__rest) || function (s, e) {
     var t = {};
     for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
@@ -1275,7 +62,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 var __rest = (undefined && undefined.__rest) || function (s, e) {
@@ -1291,7 +78,7 @@ var __rest = (undefined && undefined.__rest) || function (s, e) {
 };
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (react__WEBPACK_IMPORTED_MODULE_1__.forwardRef((props, ref) => {
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react__WEBPACK_IMPORTED_MODULE_1__.forwardRef)((props, ref) => {
     const { className, fatR, fatRef } = props, attrs = __rest(props, ["className", "fatR", "fatRef"]);
     return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("circle", Object.assign({ ref: ref, className: className }, attrs)), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("circle", Object.assign({ className: className ? className + " fat-fingers" : "fat-fingers", ref: fatRef }, attrs, { r: fatR !== null && fatR !== void 0 ? fatR : attrs.r }))] }));
 }));
@@ -1309,7 +96,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ GlowOrb)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 var __rest = (undefined && undefined.__rest) || function (s, e) {
     var t = {};
     for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
@@ -1340,7 +127,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! liqvid */ "liqvid");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var rangetouch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rangetouch */ "rangetouch");
@@ -1351,11 +138,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 const { onClick } = liqvid__WEBPACK_IMPORTED_MODULE_1__.Utils.mobile;
 const { combineRefs } = liqvid__WEBPACK_IMPORTED_MODULE_1__.Utils.react;
 const NON_TEXT_TYPES = ["button", "checkbox", "file", "hidden", "image", "radio", "range", "reset", "submit"];
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (react__WEBPACK_IMPORTED_MODULE_3__.forwardRef((props, ref) => {
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react__WEBPACK_IMPORTED_MODULE_3__.forwardRef)((props, ref) => {
     const player = (0,liqvid__WEBPACK_IMPORTED_MODULE_1__.usePlayer)();
     const innerRef = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)();
     const combinedRef = combineRefs(ref, innerRef);
@@ -1391,7 +177,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Link)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 var __rest = (undefined && undefined.__rest) || function (s, e) {
     var t = {};
     for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
@@ -1422,10 +208,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LoadingScreen": () => (/* binding */ LoadingScreen)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 function LoadingScreen() {
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "rp-loading-screen", "data-affords": "click" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "rp-loading-spinner" }) })));
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "lv-loading-screen", "data-affords": "click" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "lv-loading-spinner" }) })));
 }
 
 
@@ -1443,17 +229,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "R3FContext": () => (/* binding */ R3FContext),
 /* harmony export */   "ThreeScene": () => (/* binding */ ThreeScene),
 /* harmony export */   "intercept": () => (/* binding */ intercept),
+/* harmony export */   "useApi": () => (/* binding */ useApi),
 /* harmony export */   "useDraggable": () => (/* binding */ useDraggable)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
-/* harmony import */ var _liqvid_react_three__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @liqvid/react-three */ "./node_modules/.pnpm/@liqvid+react-three@1.0.2_c057bb8d808f2fe73d479b0ea7a5f353/node_modules/@liqvid/react-three/dist/index.mjs");
-/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/.pnpm/@react-three+fiber@7.0.26_fd377fdf312df1f300847b85f25960c5/node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _liqvid_react_three__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @liqvid/react-three */ "./node_modules/@liqvid/react-three/dist/index.mjs");
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! liqvid */ "liqvid");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! three */ "three");
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_3__);
 var __rest = (undefined && undefined.__rest) || function (s, e) {
     var t = {};
     for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
@@ -1470,16 +255,17 @@ var __rest = (undefined && undefined.__rest) || function (s, e) {
 
 
 
-
-
-const R3FContext = react__WEBPACK_IMPORTED_MODULE_2__.createContext(undefined);
+const R3FContext = (0,react__WEBPACK_IMPORTED_MODULE_2__.createContext)(undefined);
+function useApi() {
+    return (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(R3FContext);
+}
 function ThreeScene(props) {
     const { children } = props, attrs = __rest(props, ["children"]);
     const player = (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(liqvid__WEBPACK_IMPORTED_MODULE_1__.Player.Context);
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_react_three__WEBPACK_IMPORTED_MODULE_4__.Canvas, Object.assign({}, attrs, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(APIHelper, { children: children }) })));
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_react_three__WEBPACK_IMPORTED_MODULE_3__.Canvas, Object.assign({}, attrs, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(APIHelper, { children: children }) })));
 }
 function APIHelper(props) {
-    const $three = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_5__.useThree)();
+    const $three = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_4__.useThree)();
     $three.gl.localClippingEnabled = true;
     const api = (0,react__WEBPACK_IMPORTED_MODULE_2__.useMemo)(() => ({
         activeListener: null,
@@ -1489,11 +275,11 @@ function APIHelper(props) {
         $three,
         screenToNDC(x, y) {
             const rect = $three.gl.domElement.getBoundingClientRect();
-            return new three__WEBPACK_IMPORTED_MODULE_3__.Vector2((x - rect.left) / rect.width * 2 - 1, -(y - rect.top) / rect.height * 2 + 1);
+            return new THREE.Vector2((x - rect.left) / rect.width * 2 - 1, -(y - rect.top) / rect.height * 2 + 1);
         },
         screenToScene(x, y, plane) {
             const rect = $three.gl.domElement.getBoundingClientRect();
-            const ndc = api.screenToNDC(x, y), mouse = new three__WEBPACK_IMPORTED_MODULE_3__.Vector3(ndc.x, ndc.y, 0);
+            const ndc = api.screenToNDC(x, y), mouse = new THREE.Vector3(ndc.x, ndc.y, 0);
             mouse.unproject($three.camera);
             const dir = mouse.sub($three.camera.position).normalize();
             const distance = -plane.distanceToPoint($three.camera.position) / Math.cos(dir.angleTo(plane.normal));
@@ -1518,7 +304,7 @@ function APIHelper(props) {
     return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(R3FContext.Provider, Object.assign({ value: api }, { children: props.children })));
 }
 function useDraggable(move, down, up) {
-    const { gl: { domElement } } = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_5__.useThree)();
+    const { gl: { domElement } } = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_4__.useThree)();
     const state = (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(R3FContext);
     const events = (0,react__WEBPACK_IMPORTED_MODULE_2__.useMemo)(() => {
         return {
@@ -2080,50 +866,47 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ extrudeSvg)
 /* harmony export */ });
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ "three");
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var three_examples_jsm_loaders_SVGLoader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! three/examples/jsm/loaders/SVGLoader */ "three/examples/jsm/loaders/SVGLoader");
-/* harmony import */ var three_examples_jsm_loaders_SVGLoader__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(three_examples_jsm_loaders_SVGLoader__WEBPACK_IMPORTED_MODULE_1__);
-
+/* harmony import */ var three_examples_jsm_loaders_SVGLoader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three/examples/jsm/loaders/SVGLoader */ "three");
+/* harmony import */ var three_examples_jsm_loaders_SVGLoader__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(three_examples_jsm_loaders_SVGLoader__WEBPACK_IMPORTED_MODULE_0__);
 
 function extrudeSvg(path) {
     return new Promise((resolve, reject) => {
-        const loader = new (three_examples_jsm_loaders_SVGLoader__WEBPACK_IMPORTED_MODULE_1___default())();
+        const loader = new three_examples_jsm_loaders_SVGLoader__WEBPACK_IMPORTED_MODULE_0__.SVGLoader();
         loader.load(path, data => {
             const paths = data.paths;
-            const group = new three__WEBPACK_IMPORTED_MODULE_0__.Group();
+            const group = new THREE.Group();
             group.scale.multiplyScalar(0.02);
             group.scale.y *= -1;
             for (const path of paths) {
                 const fillColor = path.userData.style.fill;
                 if (fillColor !== undefined && fillColor !== "none") {
-                    const material = new three__WEBPACK_IMPORTED_MODULE_0__.MeshBasicMaterial({
-                        color: new three__WEBPACK_IMPORTED_MODULE_0__.Color().setStyle(fillColor),
+                    const material = new THREE.MeshBasicMaterial({
+                        color: new THREE.Color().setStyle(fillColor),
                         opacity: path.userData.style.fillOpacity,
                         transparent: path.userData.style.fillOpacity < 1,
-                        side: three__WEBPACK_IMPORTED_MODULE_0__.DoubleSide,
+                        side: THREE.DoubleSide,
                         depthWrite: false
                     });
                     const shapes = path.toShapes(true);
                     for (const shape of shapes) {
-                        const geometry = new three__WEBPACK_IMPORTED_MODULE_0__.ExtrudeBufferGeometry(shape, { depth: 0.2, bevelEnabled: false });
-                        const mesh = new three__WEBPACK_IMPORTED_MODULE_0__.Mesh(geometry, material);
+                        const geometry = new THREE.ExtrudeBufferGeometry(shape, { depth: 0.2, bevelEnabled: false });
+                        const mesh = new THREE.Mesh(geometry, material);
                         group.add(mesh);
                     }
                 }
                 const strokeColor = path.userData.style.stroke;
                 if (strokeColor !== undefined && strokeColor !== "none") {
-                    const material = new three__WEBPACK_IMPORTED_MODULE_0__.MeshBasicMaterial({
-                        color: new three__WEBPACK_IMPORTED_MODULE_0__.Color().setStyle(strokeColor),
+                    const material = new THREE.MeshBasicMaterial({
+                        color: new THREE.Color().setStyle(strokeColor),
                         opacity: path.userData.style.strokeOpacity,
                         transparent: path.userData.style.strokeOpacity < 1,
-                        side: three__WEBPACK_IMPORTED_MODULE_0__.DoubleSide,
+                        side: THREE.DoubleSide,
                         depthWrite: false
                     });
                     for (const subPath of path.subPaths) {
-                        const geometry = three_examples_jsm_loaders_SVGLoader__WEBPACK_IMPORTED_MODULE_1___default().pointsToStroke(subPath.getPoints(), path.userData.style);
+                        const geometry = three_examples_jsm_loaders_SVGLoader__WEBPACK_IMPORTED_MODULE_0__.SVGLoader.pointsToStroke(subPath.getPoints(), path.userData.style);
                         if (geometry) {
-                            const mesh = new three__WEBPACK_IMPORTED_MODULE_0__.Mesh(geometry, material);
+                            const mesh = new THREE.Mesh(geometry, material);
                             group.add(mesh);
                         }
                     }
@@ -2137,17 +920,17 @@ function extrudeSvg(path) {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/DOMRectReadOnly.js":
-/*!**********************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/DOMRectReadOnly.js ***!
-  \**********************************************************************************************************************/
+/***/ "./node_modules/@juggle/resize-observer/lib/DOMRectReadOnly.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@juggle/resize-observer/lib/DOMRectReadOnly.js ***!
+  \*********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "DOMRectReadOnly": () => (/* binding */ DOMRectReadOnly)
 /* harmony export */ });
-/* harmony import */ var _utils_freeze__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/freeze */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/freeze.js");
+/* harmony import */ var _utils_freeze__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/freeze */ "./node_modules/@juggle/resize-observer/lib/utils/freeze.js");
 
 var DOMRectReadOnly = (function () {
     function DOMRectReadOnly(x, y, width, height) {
@@ -2175,19 +958,19 @@ var DOMRectReadOnly = (function () {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/ResizeObservation.js":
-/*!************************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/ResizeObservation.js ***!
-  \************************************************************************************************************************/
+/***/ "./node_modules/@juggle/resize-observer/lib/ResizeObservation.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@juggle/resize-observer/lib/ResizeObservation.js ***!
+  \***********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ResizeObservation": () => (/* binding */ ResizeObservation)
 /* harmony export */ });
-/* harmony import */ var _ResizeObserverBoxOptions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ResizeObserverBoxOptions */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/ResizeObserverBoxOptions.js");
-/* harmony import */ var _algorithms_calculateBoxSize__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./algorithms/calculateBoxSize */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/algorithms/calculateBoxSize.js");
-/* harmony import */ var _utils_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils/element */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/element.js");
+/* harmony import */ var _ResizeObserverBoxOptions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ResizeObserverBoxOptions */ "./node_modules/@juggle/resize-observer/lib/ResizeObserverBoxOptions.js");
+/* harmony import */ var _algorithms_calculateBoxSize__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./algorithms/calculateBoxSize */ "./node_modules/@juggle/resize-observer/lib/algorithms/calculateBoxSize.js");
+/* harmony import */ var _utils_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils/element */ "./node_modules/@juggle/resize-observer/lib/utils/element.js");
 
 
 
@@ -2223,18 +1006,18 @@ var ResizeObservation = (function () {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/ResizeObserver.js":
-/*!*********************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/ResizeObserver.js ***!
-  \*********************************************************************************************************************/
+/***/ "./node_modules/@juggle/resize-observer/lib/ResizeObserver.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@juggle/resize-observer/lib/ResizeObserver.js ***!
+  \********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ResizeObserver": () => (/* binding */ ResizeObserver)
 /* harmony export */ });
-/* harmony import */ var _ResizeObserverController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ResizeObserverController */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/ResizeObserverController.js");
-/* harmony import */ var _utils_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/element */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/element.js");
+/* harmony import */ var _ResizeObserverController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ResizeObserverController */ "./node_modules/@juggle/resize-observer/lib/ResizeObserverController.js");
+/* harmony import */ var _utils_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/element */ "./node_modules/@juggle/resize-observer/lib/utils/element.js");
 
 
 var ResizeObserver = (function () {
@@ -2278,10 +1061,10 @@ var ResizeObserver = (function () {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/ResizeObserverBoxOptions.js":
-/*!*******************************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/ResizeObserverBoxOptions.js ***!
-  \*******************************************************************************************************************************/
+/***/ "./node_modules/@juggle/resize-observer/lib/ResizeObserverBoxOptions.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/@juggle/resize-observer/lib/ResizeObserverBoxOptions.js ***!
+  \******************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2299,20 +1082,20 @@ var ResizeObserverBoxOptions;
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/ResizeObserverController.js":
-/*!*******************************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/ResizeObserverController.js ***!
-  \*******************************************************************************************************************************/
+/***/ "./node_modules/@juggle/resize-observer/lib/ResizeObserverController.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/@juggle/resize-observer/lib/ResizeObserverController.js ***!
+  \******************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ResizeObserverController": () => (/* binding */ ResizeObserverController)
 /* harmony export */ });
-/* harmony import */ var _utils_scheduler__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/scheduler */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/scheduler.js");
-/* harmony import */ var _ResizeObservation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ResizeObservation */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/ResizeObservation.js");
-/* harmony import */ var _ResizeObserverDetail__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ResizeObserverDetail */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/ResizeObserverDetail.js");
-/* harmony import */ var _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/resizeObservers */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js");
+/* harmony import */ var _utils_scheduler__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/scheduler */ "./node_modules/@juggle/resize-observer/lib/utils/scheduler.js");
+/* harmony import */ var _ResizeObservation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ResizeObservation */ "./node_modules/@juggle/resize-observer/lib/ResizeObservation.js");
+/* harmony import */ var _ResizeObserverDetail__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ResizeObserverDetail */ "./node_modules/@juggle/resize-observer/lib/ResizeObserverDetail.js");
+/* harmony import */ var _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/resizeObservers */ "./node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js");
 
 
 
@@ -2366,10 +1149,10 @@ var ResizeObserverController = (function () {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/ResizeObserverDetail.js":
-/*!***************************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/ResizeObserverDetail.js ***!
-  \***************************************************************************************************************************/
+/***/ "./node_modules/@juggle/resize-observer/lib/ResizeObserverDetail.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@juggle/resize-observer/lib/ResizeObserverDetail.js ***!
+  \**************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2391,18 +1174,18 @@ var ResizeObserverDetail = (function () {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/ResizeObserverEntry.js":
-/*!**************************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/ResizeObserverEntry.js ***!
-  \**************************************************************************************************************************/
+/***/ "./node_modules/@juggle/resize-observer/lib/ResizeObserverEntry.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@juggle/resize-observer/lib/ResizeObserverEntry.js ***!
+  \*************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ResizeObserverEntry": () => (/* binding */ ResizeObserverEntry)
 /* harmony export */ });
-/* harmony import */ var _algorithms_calculateBoxSize__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./algorithms/calculateBoxSize */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/algorithms/calculateBoxSize.js");
-/* harmony import */ var _utils_freeze__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/freeze */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/freeze.js");
+/* harmony import */ var _algorithms_calculateBoxSize__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./algorithms/calculateBoxSize */ "./node_modules/@juggle/resize-observer/lib/algorithms/calculateBoxSize.js");
+/* harmony import */ var _utils_freeze__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/freeze */ "./node_modules/@juggle/resize-observer/lib/utils/freeze.js");
 
 
 var ResizeObserverEntry = (function () {
@@ -2421,17 +1204,17 @@ var ResizeObserverEntry = (function () {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/ResizeObserverSize.js":
-/*!*************************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/ResizeObserverSize.js ***!
-  \*************************************************************************************************************************/
+/***/ "./node_modules/@juggle/resize-observer/lib/ResizeObserverSize.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/@juggle/resize-observer/lib/ResizeObserverSize.js ***!
+  \************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ResizeObserverSize": () => (/* binding */ ResizeObserverSize)
 /* harmony export */ });
-/* harmony import */ var _utils_freeze__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/freeze */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/freeze.js");
+/* harmony import */ var _utils_freeze__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/freeze */ "./node_modules/@juggle/resize-observer/lib/utils/freeze.js");
 
 var ResizeObserverSize = (function () {
     function ResizeObserverSize(inlineSize, blockSize) {
@@ -2446,20 +1229,20 @@ var ResizeObserverSize = (function () {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/algorithms/broadcastActiveObservations.js":
-/*!*********************************************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/algorithms/broadcastActiveObservations.js ***!
-  \*********************************************************************************************************************************************/
+/***/ "./node_modules/@juggle/resize-observer/lib/algorithms/broadcastActiveObservations.js":
+/*!********************************************************************************************!*\
+  !*** ./node_modules/@juggle/resize-observer/lib/algorithms/broadcastActiveObservations.js ***!
+  \********************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "broadcastActiveObservations": () => (/* binding */ broadcastActiveObservations)
 /* harmony export */ });
-/* harmony import */ var _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/resizeObservers */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js");
-/* harmony import */ var _ResizeObserverEntry__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ResizeObserverEntry */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/ResizeObserverEntry.js");
-/* harmony import */ var _calculateDepthForNode__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./calculateDepthForNode */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/algorithms/calculateDepthForNode.js");
-/* harmony import */ var _calculateBoxSize__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./calculateBoxSize */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/algorithms/calculateBoxSize.js");
+/* harmony import */ var _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/resizeObservers */ "./node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js");
+/* harmony import */ var _ResizeObserverEntry__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ResizeObserverEntry */ "./node_modules/@juggle/resize-observer/lib/ResizeObserverEntry.js");
+/* harmony import */ var _calculateDepthForNode__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./calculateDepthForNode */ "./node_modules/@juggle/resize-observer/lib/algorithms/calculateDepthForNode.js");
+/* harmony import */ var _calculateBoxSize__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./calculateBoxSize */ "./node_modules/@juggle/resize-observer/lib/algorithms/calculateBoxSize.js");
 
 
 
@@ -2497,10 +1280,10 @@ var broadcastActiveObservations = function () {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/algorithms/calculateBoxSize.js":
-/*!**********************************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/algorithms/calculateBoxSize.js ***!
-  \**********************************************************************************************************************************/
+/***/ "./node_modules/@juggle/resize-observer/lib/algorithms/calculateBoxSize.js":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/@juggle/resize-observer/lib/algorithms/calculateBoxSize.js ***!
+  \*********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2508,12 +1291,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "calculateBoxSize": () => (/* binding */ calculateBoxSize),
 /* harmony export */   "calculateBoxSizes": () => (/* binding */ calculateBoxSizes)
 /* harmony export */ });
-/* harmony import */ var _ResizeObserverBoxOptions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ResizeObserverBoxOptions */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/ResizeObserverBoxOptions.js");
-/* harmony import */ var _ResizeObserverSize__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ResizeObserverSize */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/ResizeObserverSize.js");
-/* harmony import */ var _DOMRectReadOnly__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../DOMRectReadOnly */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/DOMRectReadOnly.js");
-/* harmony import */ var _utils_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/element */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/element.js");
-/* harmony import */ var _utils_freeze__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/freeze */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/freeze.js");
-/* harmony import */ var _utils_global__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/global */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/global.js");
+/* harmony import */ var _ResizeObserverBoxOptions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ResizeObserverBoxOptions */ "./node_modules/@juggle/resize-observer/lib/ResizeObserverBoxOptions.js");
+/* harmony import */ var _ResizeObserverSize__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ResizeObserverSize */ "./node_modules/@juggle/resize-observer/lib/ResizeObserverSize.js");
+/* harmony import */ var _DOMRectReadOnly__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../DOMRectReadOnly */ "./node_modules/@juggle/resize-observer/lib/DOMRectReadOnly.js");
+/* harmony import */ var _utils_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/element */ "./node_modules/@juggle/resize-observer/lib/utils/element.js");
+/* harmony import */ var _utils_freeze__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/freeze */ "./node_modules/@juggle/resize-observer/lib/utils/freeze.js");
+/* harmony import */ var _utils_global__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/global */ "./node_modules/@juggle/resize-observer/lib/utils/global.js");
 
 
 
@@ -2605,17 +1388,17 @@ var calculateBoxSize = function (target, observedBox, forceRecalculation) {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/algorithms/calculateDepthForNode.js":
-/*!***************************************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/algorithms/calculateDepthForNode.js ***!
-  \***************************************************************************************************************************************/
+/***/ "./node_modules/@juggle/resize-observer/lib/algorithms/calculateDepthForNode.js":
+/*!**************************************************************************************!*\
+  !*** ./node_modules/@juggle/resize-observer/lib/algorithms/calculateDepthForNode.js ***!
+  \**************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "calculateDepthForNode": () => (/* binding */ calculateDepthForNode)
 /* harmony export */ });
-/* harmony import */ var _utils_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/element */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/element.js");
+/* harmony import */ var _utils_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/element */ "./node_modules/@juggle/resize-observer/lib/utils/element.js");
 
 var calculateDepthForNode = function (node) {
     if ((0,_utils_element__WEBPACK_IMPORTED_MODULE_0__.isHidden)(node)) {
@@ -2634,10 +1417,10 @@ var calculateDepthForNode = function (node) {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/algorithms/deliverResizeLoopError.js":
-/*!****************************************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/algorithms/deliverResizeLoopError.js ***!
-  \****************************************************************************************************************************************/
+/***/ "./node_modules/@juggle/resize-observer/lib/algorithms/deliverResizeLoopError.js":
+/*!***************************************************************************************!*\
+  !*** ./node_modules/@juggle/resize-observer/lib/algorithms/deliverResizeLoopError.js ***!
+  \***************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2664,18 +1447,18 @@ var deliverResizeLoopError = function () {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/algorithms/gatherActiveObservationsAtDepth.js":
-/*!*************************************************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/algorithms/gatherActiveObservationsAtDepth.js ***!
-  \*************************************************************************************************************************************************/
+/***/ "./node_modules/@juggle/resize-observer/lib/algorithms/gatherActiveObservationsAtDepth.js":
+/*!************************************************************************************************!*\
+  !*** ./node_modules/@juggle/resize-observer/lib/algorithms/gatherActiveObservationsAtDepth.js ***!
+  \************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "gatherActiveObservationsAtDepth": () => (/* binding */ gatherActiveObservationsAtDepth)
 /* harmony export */ });
-/* harmony import */ var _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/resizeObservers */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js");
-/* harmony import */ var _calculateDepthForNode__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./calculateDepthForNode */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/algorithms/calculateDepthForNode.js");
+/* harmony import */ var _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/resizeObservers */ "./node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js");
+/* harmony import */ var _calculateDepthForNode__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./calculateDepthForNode */ "./node_modules/@juggle/resize-observer/lib/algorithms/calculateDepthForNode.js");
 
 
 var gatherActiveObservationsAtDepth = function (depth) {
@@ -2699,17 +1482,17 @@ var gatherActiveObservationsAtDepth = function (depth) {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/algorithms/hasActiveObservations.js":
-/*!***************************************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/algorithms/hasActiveObservations.js ***!
-  \***************************************************************************************************************************************/
+/***/ "./node_modules/@juggle/resize-observer/lib/algorithms/hasActiveObservations.js":
+/*!**************************************************************************************!*\
+  !*** ./node_modules/@juggle/resize-observer/lib/algorithms/hasActiveObservations.js ***!
+  \**************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "hasActiveObservations": () => (/* binding */ hasActiveObservations)
 /* harmony export */ });
-/* harmony import */ var _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/resizeObservers */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js");
+/* harmony import */ var _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/resizeObservers */ "./node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js");
 
 var hasActiveObservations = function () {
     return _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_0__.resizeObservers.some(function (ro) { return ro.activeTargets.length > 0; });
@@ -2719,17 +1502,17 @@ var hasActiveObservations = function () {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/algorithms/hasSkippedObservations.js":
-/*!****************************************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/algorithms/hasSkippedObservations.js ***!
-  \****************************************************************************************************************************************/
+/***/ "./node_modules/@juggle/resize-observer/lib/algorithms/hasSkippedObservations.js":
+/*!***************************************************************************************!*\
+  !*** ./node_modules/@juggle/resize-observer/lib/algorithms/hasSkippedObservations.js ***!
+  \***************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "hasSkippedObservations": () => (/* binding */ hasSkippedObservations)
 /* harmony export */ });
-/* harmony import */ var _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/resizeObservers */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js");
+/* harmony import */ var _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/resizeObservers */ "./node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js");
 
 var hasSkippedObservations = function () {
     return _utils_resizeObservers__WEBPACK_IMPORTED_MODULE_0__.resizeObservers.some(function (ro) { return ro.skippedTargets.length > 0; });
@@ -2739,10 +1522,10 @@ var hasSkippedObservations = function () {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/exports/resize-observer.js":
-/*!******************************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/exports/resize-observer.js ***!
-  \******************************************************************************************************************************/
+/***/ "./node_modules/@juggle/resize-observer/lib/exports/resize-observer.js":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/@juggle/resize-observer/lib/exports/resize-observer.js ***!
+  \*****************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2751,9 +1534,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ResizeObserverEntry": () => (/* reexport safe */ _ResizeObserverEntry__WEBPACK_IMPORTED_MODULE_1__.ResizeObserverEntry),
 /* harmony export */   "ResizeObserverSize": () => (/* reexport safe */ _ResizeObserverSize__WEBPACK_IMPORTED_MODULE_2__.ResizeObserverSize)
 /* harmony export */ });
-/* harmony import */ var _ResizeObserver__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ResizeObserver */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/ResizeObserver.js");
-/* harmony import */ var _ResizeObserverEntry__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ResizeObserverEntry */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/ResizeObserverEntry.js");
-/* harmony import */ var _ResizeObserverSize__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ResizeObserverSize */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/ResizeObserverSize.js");
+/* harmony import */ var _ResizeObserver__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ResizeObserver */ "./node_modules/@juggle/resize-observer/lib/ResizeObserver.js");
+/* harmony import */ var _ResizeObserverEntry__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ResizeObserverEntry */ "./node_modules/@juggle/resize-observer/lib/ResizeObserverEntry.js");
+/* harmony import */ var _ResizeObserverSize__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ResizeObserverSize */ "./node_modules/@juggle/resize-observer/lib/ResizeObserverSize.js");
 
 
 
@@ -2761,10 +1544,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/element.js":
-/*!********************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/element.js ***!
-  \********************************************************************************************************************/
+/***/ "./node_modules/@juggle/resize-observer/lib/utils/element.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@juggle/resize-observer/lib/utils/element.js ***!
+  \*******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2813,10 +1596,10 @@ var isReplacedElement = function (target) {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/freeze.js":
-/*!*******************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/freeze.js ***!
-  \*******************************************************************************************************************/
+/***/ "./node_modules/@juggle/resize-observer/lib/utils/freeze.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@juggle/resize-observer/lib/utils/freeze.js ***!
+  \******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2828,10 +1611,10 @@ var freeze = function (obj) { return Object.freeze(obj); };
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/global.js":
-/*!*******************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/global.js ***!
-  \*******************************************************************************************************************/
+/***/ "./node_modules/@juggle/resize-observer/lib/utils/global.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@juggle/resize-observer/lib/utils/global.js ***!
+  \******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2843,21 +1626,21 @@ var global = typeof window !== 'undefined' ? window : {};
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/process.js":
-/*!********************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/process.js ***!
-  \********************************************************************************************************************/
+/***/ "./node_modules/@juggle/resize-observer/lib/utils/process.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@juggle/resize-observer/lib/utils/process.js ***!
+  \*******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "process": () => (/* binding */ process)
 /* harmony export */ });
-/* harmony import */ var _algorithms_hasActiveObservations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../algorithms/hasActiveObservations */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/algorithms/hasActiveObservations.js");
-/* harmony import */ var _algorithms_hasSkippedObservations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../algorithms/hasSkippedObservations */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/algorithms/hasSkippedObservations.js");
-/* harmony import */ var _algorithms_deliverResizeLoopError__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../algorithms/deliverResizeLoopError */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/algorithms/deliverResizeLoopError.js");
-/* harmony import */ var _algorithms_broadcastActiveObservations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../algorithms/broadcastActiveObservations */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/algorithms/broadcastActiveObservations.js");
-/* harmony import */ var _algorithms_gatherActiveObservationsAtDepth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../algorithms/gatherActiveObservationsAtDepth */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/algorithms/gatherActiveObservationsAtDepth.js");
+/* harmony import */ var _algorithms_hasActiveObservations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../algorithms/hasActiveObservations */ "./node_modules/@juggle/resize-observer/lib/algorithms/hasActiveObservations.js");
+/* harmony import */ var _algorithms_hasSkippedObservations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../algorithms/hasSkippedObservations */ "./node_modules/@juggle/resize-observer/lib/algorithms/hasSkippedObservations.js");
+/* harmony import */ var _algorithms_deliverResizeLoopError__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../algorithms/deliverResizeLoopError */ "./node_modules/@juggle/resize-observer/lib/algorithms/deliverResizeLoopError.js");
+/* harmony import */ var _algorithms_broadcastActiveObservations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../algorithms/broadcastActiveObservations */ "./node_modules/@juggle/resize-observer/lib/algorithms/broadcastActiveObservations.js");
+/* harmony import */ var _algorithms_gatherActiveObservationsAtDepth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../algorithms/gatherActiveObservationsAtDepth */ "./node_modules/@juggle/resize-observer/lib/algorithms/gatherActiveObservationsAtDepth.js");
 
 
 
@@ -2880,10 +1663,10 @@ var process = function () {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/queueMicroTask.js":
-/*!***************************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/queueMicroTask.js ***!
-  \***************************************************************************************************************************/
+/***/ "./node_modules/@juggle/resize-observer/lib/utils/queueMicroTask.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@juggle/resize-observer/lib/utils/queueMicroTask.js ***!
+  \**************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2909,17 +1692,17 @@ var queueMicroTask = function (callback) {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/queueResizeObserver.js":
-/*!********************************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/queueResizeObserver.js ***!
-  \********************************************************************************************************************************/
+/***/ "./node_modules/@juggle/resize-observer/lib/utils/queueResizeObserver.js":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/@juggle/resize-observer/lib/utils/queueResizeObserver.js ***!
+  \*******************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "queueResizeObserver": () => (/* binding */ queueResizeObserver)
 /* harmony export */ });
-/* harmony import */ var _queueMicroTask__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./queueMicroTask */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/queueMicroTask.js");
+/* harmony import */ var _queueMicroTask__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./queueMicroTask */ "./node_modules/@juggle/resize-observer/lib/utils/queueMicroTask.js");
 
 var queueResizeObserver = function (cb) {
     (0,_queueMicroTask__WEBPACK_IMPORTED_MODULE_0__.queueMicroTask)(function ResizeObserver() {
@@ -2931,10 +1714,10 @@ var queueResizeObserver = function (cb) {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js":
-/*!****************************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js ***!
-  \****************************************************************************************************************************/
+/***/ "./node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js ***!
+  \***************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2947,10 +1730,10 @@ var resizeObservers = [];
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/scheduler.js":
-/*!**********************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/scheduler.js ***!
-  \**********************************************************************************************************************/
+/***/ "./node_modules/@juggle/resize-observer/lib/utils/scheduler.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@juggle/resize-observer/lib/utils/scheduler.js ***!
+  \*********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -2958,9 +1741,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "scheduler": () => (/* binding */ scheduler),
 /* harmony export */   "updateCount": () => (/* binding */ updateCount)
 /* harmony export */ });
-/* harmony import */ var _process__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./process */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/process.js");
-/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./global */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/global.js");
-/* harmony import */ var _queueResizeObserver__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./queueResizeObserver */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/utils/queueResizeObserver.js");
+/* harmony import */ var _process__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./process */ "./node_modules/@juggle/resize-observer/lib/utils/process.js");
+/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./global */ "./node_modules/@juggle/resize-observer/lib/utils/global.js");
+/* harmony import */ var _queueResizeObserver__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./queueResizeObserver */ "./node_modules/@juggle/resize-observer/lib/utils/queueResizeObserver.js");
 
 
 
@@ -3069,10 +1852,10 @@ var updateCount = function (n) {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@react-three+drei@8.19.4_734b800b63683de9231c2d7d9525a5ba/node_modules/@react-three/drei/core/useContextBridge.js":
-/*!**********************************************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@react-three+drei@8.19.4_734b800b63683de9231c2d7d9525a5ba/node_modules/@react-three/drei/core/useContextBridge.js ***!
-  \**********************************************************************************************************************************************/
+/***/ "./node_modules/@react-three/drei/core/useContextBridge.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@react-three/drei/core/useContextBridge.js ***!
+  \*****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -3095,10 +1878,10 @@ function useContextBridge(...contexts) {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@react-three+fiber@7.0.26_fd377fdf312df1f300847b85f25960c5/node_modules/@react-three/fiber/dist/react-three-fiber.esm.js":
-/*!*****************************************************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@react-three+fiber@7.0.26_fd377fdf312df1f300847b85f25960c5/node_modules/@react-three/fiber/dist/react-three-fiber.esm.js ***!
-  \*****************************************************************************************************************************************************/
+/***/ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js ***!
+  \***********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -3131,13 +1914,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var zustand__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! zustand */ "./node_modules/.pnpm/zustand@3.7.1_react@17.0.2/node_modules/zustand/esm/index.js");
-/* harmony import */ var react_reconciler__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-reconciler */ "./node_modules/.pnpm/react-reconciler@0.26.2_react@17.0.2/node_modules/react-reconciler/index.js");
+/* harmony import */ var zustand__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! zustand */ "./node_modules/zustand/esm/index.js");
+/* harmony import */ var react_reconciler__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-reconciler */ "./node_modules/react-reconciler/index.js");
 /* harmony import */ var react_reconciler__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_reconciler__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var scheduler__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! scheduler */ "./node_modules/.pnpm/scheduler@0.20.2/node_modules/scheduler/index.js");
-/* harmony import */ var use_asset__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! use-asset */ "./node_modules/.pnpm/use-asset@1.0.4_react@17.0.2/node_modules/use-asset/dist/index.js");
-/* harmony import */ var react_merge_refs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-merge-refs */ "./node_modules/.pnpm/react-merge-refs@1.1.0/node_modules/react-merge-refs/dist/react-merge-refs.esm.js");
-/* harmony import */ var react_use_measure__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-use-measure */ "./node_modules/.pnpm/react-use-measure@2.1.1_react-dom@17.0.2+react@17.0.2/node_modules/react-use-measure/dist/web.js");
+/* harmony import */ var scheduler__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! scheduler */ "./node_modules/scheduler/index.js");
+/* harmony import */ var use_asset__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! use-asset */ "./node_modules/use-asset/dist/index.js");
+/* harmony import */ var react_merge_refs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-merge-refs */ "./node_modules/react-merge-refs/dist/react-merge-refs.esm.js");
+/* harmony import */ var react_use_measure__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-use-measure */ "./node_modules/react-use-measure/dist/web.js");
 var __rest = (undefined && undefined.__rest) || function (s, e) {
     var t = {};
     for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
@@ -4496,10 +3279,10 @@ reconciler.injectIntoDevTools({
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/debounce@1.2.1/node_modules/debounce/index.js":
-/*!**************************************************************************!*\
-  !*** ./node_modules/.pnpm/debounce@1.2.1/node_modules/debounce/index.js ***!
-  \**************************************************************************/
+/***/ "./node_modules/debounce/index.js":
+/*!****************************************!*\
+  !*** ./node_modules/debounce/index.js ***!
+  \****************************************/
 /***/ ((module) => {
 
 
@@ -4557,10 +3340,10 @@ module.exports = debounce;
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/fast-deep-equal@3.1.3/node_modules/fast-deep-equal/index.js":
-/*!****************************************************************************************!*\
-  !*** ./node_modules/.pnpm/fast-deep-equal@3.1.3/node_modules/fast-deep-equal/index.js ***!
-  \****************************************************************************************/
+/***/ "./node_modules/fast-deep-equal/index.js":
+/*!***********************************************!*\
+  !*** ./node_modules/fast-deep-equal/index.js ***!
+  \***********************************************/
 /***/ ((module) => {
 
 
@@ -4606,10 +3389,10 @@ module.exports = function equal(a, b) {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/object-assign@4.1.1/node_modules/object-assign/index.js":
-/*!************************************************************************************!*\
-  !*** ./node_modules/.pnpm/object-assign@4.1.1/node_modules/object-assign/index.js ***!
-  \************************************************************************************/
+/***/ "./node_modules/object-assign/index.js":
+/*!*********************************************!*\
+  !*** ./node_modules/object-assign/index.js ***!
+  \*********************************************/
 /***/ ((module) => {
 
 
@@ -4682,10 +3465,10 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/react-merge-refs@1.1.0/node_modules/react-merge-refs/dist/react-merge-refs.esm.js":
-/*!**************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/react-merge-refs@1.1.0/node_modules/react-merge-refs/dist/react-merge-refs.esm.js ***!
-  \**************************************************************************************************************/
+/***/ "./node_modules/react-merge-refs/dist/react-merge-refs.esm.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/react-merge-refs/dist/react-merge-refs.esm.js ***!
+  \********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -4709,10 +3492,10 @@ function mergeRefs(refs) {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/react-reconciler@0.26.2_react@17.0.2/node_modules/react-reconciler/cjs/react-reconciler.development.js":
-/*!***********************************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/react-reconciler@0.26.2_react@17.0.2/node_modules/react-reconciler/cjs/react-reconciler.development.js ***!
-  \***********************************************************************************************************************************/
+/***/ "./node_modules/react-reconciler/cjs/react-reconciler.development.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/react-reconciler/cjs/react-reconciler.development.js ***!
+  \***************************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /* module decorator */ module = __webpack_require__.nmd(module);
@@ -4722,9 +3505,9 @@ if (true) {
         var exports = {};
         'use strict';
         var React = __webpack_require__(/*! react */ "react");
-        var _assign = __webpack_require__(/*! object-assign */ "./node_modules/.pnpm/object-assign@4.1.1/node_modules/object-assign/index.js");
-        var Scheduler = __webpack_require__(/*! scheduler */ "./node_modules/.pnpm/scheduler@0.20.2/node_modules/scheduler/index.js");
-        var tracing = __webpack_require__(/*! scheduler/tracing */ "./node_modules/.pnpm/scheduler@0.20.2/node_modules/scheduler/tracing.js");
+        var _assign = __webpack_require__(/*! object-assign */ "./node_modules/object-assign/index.js");
+        var Scheduler = __webpack_require__(/*! scheduler */ "./node_modules/scheduler/index.js");
+        var tracing = __webpack_require__(/*! scheduler/tracing */ "./node_modules/scheduler/tracing.js");
         var ReactSharedInternals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
         function warn(format) {
             {
@@ -18056,25 +16839,25 @@ if (true) {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/react-reconciler@0.26.2_react@17.0.2/node_modules/react-reconciler/index.js":
-/*!********************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/react-reconciler@0.26.2_react@17.0.2/node_modules/react-reconciler/index.js ***!
-  \********************************************************************************************************/
+/***/ "./node_modules/react-reconciler/index.js":
+/*!************************************************!*\
+  !*** ./node_modules/react-reconciler/index.js ***!
+  \************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 
 if (false) {}
 else {
-    module.exports = __webpack_require__(/*! ./cjs/react-reconciler.development.js */ "./node_modules/.pnpm/react-reconciler@0.26.2_react@17.0.2/node_modules/react-reconciler/cjs/react-reconciler.development.js");
+    module.exports = __webpack_require__(/*! ./cjs/react-reconciler.development.js */ "./node_modules/react-reconciler/cjs/react-reconciler.development.js");
 }
 
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/react-use-measure@2.1.1_react-dom@17.0.2+react@17.0.2/node_modules/react-use-measure/dist/web.js":
-/*!*****************************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/react-use-measure@2.1.1_react-dom@17.0.2+react@17.0.2/node_modules/react-use-measure/dist/web.js ***!
-  \*****************************************************************************************************************************/
+/***/ "./node_modules/react-use-measure/dist/web.js":
+/*!****************************************************!*\
+  !*** ./node_modules/react-use-measure/dist/web.js ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -18083,7 +16866,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var debounce__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! debounce */ "./node_modules/.pnpm/debounce@1.2.1/node_modules/debounce/index.js");
+/* harmony import */ var debounce__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! debounce */ "./node_modules/debounce/index.js");
 /* harmony import */ var debounce__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(debounce__WEBPACK_IMPORTED_MODULE_1__);
 
 
@@ -18220,10 +17003,10 @@ const areBoundsEqual = (a, b) => keys.every(key => a[key] === b[key]);
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/react@17.0.2/node_modules/react/cjs/react-jsx-runtime.development.js":
-/*!*************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/react@17.0.2/node_modules/react/cjs/react-jsx-runtime.development.js ***!
-  \*************************************************************************************************/
+/***/ "./node_modules/react/cjs/react-jsx-runtime.development.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/react/cjs/react-jsx-runtime.development.js ***!
+  \*****************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -18231,7 +17014,7 @@ if (true) {
     (function () {
         'use strict';
         var React = __webpack_require__(/*! react */ "react");
-        var _assign = __webpack_require__(/*! object-assign */ "./node_modules/.pnpm/object-assign@4.1.1/node_modules/object-assign/index.js");
+        var _assign = __webpack_require__(/*! object-assign */ "./node_modules/object-assign/index.js");
         var REACT_ELEMENT_TYPE = 0xeac7;
         var REACT_PORTAL_TYPE = 0xeaca;
         exports.Fragment = 0xeacb;
@@ -19093,25 +17876,25 @@ if (true) {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js":
-/*!***************************************************************************!*\
-  !*** ./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js ***!
-  \***************************************************************************/
+/***/ "./node_modules/react/jsx-runtime.js":
+/*!*******************************************!*\
+  !*** ./node_modules/react/jsx-runtime.js ***!
+  \*******************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 
 if (false) {}
 else {
-    module.exports = __webpack_require__(/*! ./cjs/react-jsx-runtime.development.js */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/cjs/react-jsx-runtime.development.js");
+    module.exports = __webpack_require__(/*! ./cjs/react-jsx-runtime.development.js */ "./node_modules/react/cjs/react-jsx-runtime.development.js");
 }
 
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/rp-prompt@1.2.0_3b340e026a00e3b1aad4597badf0d153/node_modules/rp-prompt/dist/index.js":
-/*!******************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/rp-prompt@1.2.0_3b340e026a00e3b1aad4597badf0d153/node_modules/rp-prompt/dist/index.js ***!
-  \******************************************************************************************************************/
+/***/ "./node_modules/rp-prompt/dist/index.js":
+/*!**********************************************!*\
+  !*** ./node_modules/rp-prompt/dist/index.js ***!
+  \**********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 
@@ -19241,10 +18024,10 @@ else {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/rp-recording@2.3.0_liqvid@2.1.4/node_modules/rp-recording/dist/rp-recording.js":
-/*!***********************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/rp-recording@2.3.0_liqvid@2.1.4/node_modules/rp-recording/dist/rp-recording.js ***!
-  \***********************************************************************************************************/
+/***/ "./node_modules/rp-recording/dist/rp-recording.js":
+/*!********************************************************!*\
+  !*** ./node_modules/rp-recording/dist/rp-recording.js ***!
+  \********************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 
@@ -20551,10 +19334,10 @@ else {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/scheduler@0.20.2/node_modules/scheduler/cjs/scheduler-tracing.development.js":
-/*!*********************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/scheduler@0.20.2/node_modules/scheduler/cjs/scheduler-tracing.development.js ***!
-  \*********************************************************************************************************/
+/***/ "./node_modules/scheduler/cjs/scheduler-tracing.development.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/scheduler/cjs/scheduler-tracing.development.js ***!
+  \*********************************************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -20852,10 +19635,10 @@ if (true) {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/scheduler@0.20.2/node_modules/scheduler/cjs/scheduler.development.js":
-/*!*************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/scheduler@0.20.2/node_modules/scheduler/cjs/scheduler.development.js ***!
-  \*************************************************************************************************/
+/***/ "./node_modules/scheduler/cjs/scheduler.development.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/scheduler/cjs/scheduler.development.js ***!
+  \*************************************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -21360,40 +20143,40 @@ if (true) {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/scheduler@0.20.2/node_modules/scheduler/index.js":
-/*!*****************************************************************************!*\
-  !*** ./node_modules/.pnpm/scheduler@0.20.2/node_modules/scheduler/index.js ***!
-  \*****************************************************************************/
+/***/ "./node_modules/scheduler/index.js":
+/*!*****************************************!*\
+  !*** ./node_modules/scheduler/index.js ***!
+  \*****************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 
 if (false) {}
 else {
-    module.exports = __webpack_require__(/*! ./cjs/scheduler.development.js */ "./node_modules/.pnpm/scheduler@0.20.2/node_modules/scheduler/cjs/scheduler.development.js");
+    module.exports = __webpack_require__(/*! ./cjs/scheduler.development.js */ "./node_modules/scheduler/cjs/scheduler.development.js");
 }
 
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/scheduler@0.20.2/node_modules/scheduler/tracing.js":
-/*!*******************************************************************************!*\
-  !*** ./node_modules/.pnpm/scheduler@0.20.2/node_modules/scheduler/tracing.js ***!
-  \*******************************************************************************/
+/***/ "./node_modules/scheduler/tracing.js":
+/*!*******************************************!*\
+  !*** ./node_modules/scheduler/tracing.js ***!
+  \*******************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 
 if (false) {}
 else {
-    module.exports = __webpack_require__(/*! ./cjs/scheduler-tracing.development.js */ "./node_modules/.pnpm/scheduler@0.20.2/node_modules/scheduler/cjs/scheduler-tracing.development.js");
+    module.exports = __webpack_require__(/*! ./cjs/scheduler-tracing.development.js */ "./node_modules/scheduler/cjs/scheduler-tracing.development.js");
 }
 
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/use-asset@1.0.4_react@17.0.2/node_modules/use-asset/dist/index.js":
-/*!**********************************************************************************************!*\
-  !*** ./node_modules/.pnpm/use-asset@1.0.4_react@17.0.2/node_modules/use-asset/dist/index.js ***!
-  \**********************************************************************************************/
+/***/ "./node_modules/use-asset/dist/index.js":
+/*!**********************************************!*\
+  !*** ./node_modules/use-asset/dist/index.js ***!
+  \**********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -21401,7 +20184,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "createAsset": () => (/* binding */ createAsset),
 /* harmony export */   "useAsset": () => (/* binding */ useAsset)
 /* harmony export */ });
-/* harmony import */ var fast_deep_equal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! fast-deep-equal */ "./node_modules/.pnpm/fast-deep-equal@3.1.3/node_modules/fast-deep-equal/index.js");
+/* harmony import */ var fast_deep_equal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! fast-deep-equal */ "./node_modules/fast-deep-equal/index.js");
 /* harmony import */ var fast_deep_equal__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fast_deep_equal__WEBPACK_IMPORTED_MODULE_0__);
 
 const globalCache = [];
@@ -21473,10 +20256,10 @@ useAsset.peek = (...args) => {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/zustand@3.7.1_react@17.0.2/node_modules/zustand/esm/index.js":
-/*!*****************************************************************************************!*\
-  !*** ./node_modules/.pnpm/zustand@3.7.1_react@17.0.2/node_modules/zustand/esm/index.js ***!
-  \*****************************************************************************************/
+/***/ "./node_modules/zustand/esm/index.js":
+/*!*******************************************!*\
+  !*** ./node_modules/zustand/esm/index.js ***!
+  \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -21609,7 +20392,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Arrow)
 /* harmony export */ });
 /* harmony import */ var _lib_svg_extrude__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @lib/svg-extrude */ "./lib/svg-extrude.ts");
-/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/.pnpm/@react-three+fiber@7.0.26_fd377fdf312df1f300847b85f25960c5/node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! liqvid */ "liqvid");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
@@ -21617,7 +20400,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! three */ "three");
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _markers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../markers */ "./src/markers.ts");
-/* harmony import */ var _media_url__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../media-url */ "./src/media-url.ts");
+/* harmony import */ var _env_media_url__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @env/media-url */ "./src/@development/media-url.ts");
 
 
 
@@ -21630,7 +20413,7 @@ function Arrow() {
     const { scene } = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_6__.useThree)();
     const ref = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)();
     (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
-        (0,_lib_svg_extrude__WEBPACK_IMPORTED_MODULE_0__["default"])(`${_media_url__WEBPACK_IMPORTED_MODULE_5__.MEDIA_URL}/img/arrow.svg`).then(group => {
+        (0,_lib_svg_extrude__WEBPACK_IMPORTED_MODULE_0__["default"])(`${_env_media_url__WEBPACK_IMPORTED_MODULE_5__.MEDIA_URL}/img/arrow.svg`).then(group => {
             group.rotation.set(Math.PI / 2, 0, 0);
             const box = new three__WEBPACK_IMPORTED_MODULE_3__.Box3().setFromObject(group);
             const size = new three__WEBPACK_IMPORTED_MODULE_3__.Vector3();
@@ -21662,7 +20445,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Cylinder)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var _lib_ThreeFiber__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @lib/ThreeFiber */ "./lib/ThreeFiber.tsx");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! liqvid */ "liqvid");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_2__);
@@ -21727,7 +20510,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ HelpControl)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! liqvid */ "liqvid");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
@@ -21776,7 +20559,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Parametric)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! liqvid */ "liqvid");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
@@ -21823,43 +20606,39 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Sphere)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three */ "three");
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! liqvid */ "liqvid");
-/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! liqvid */ "liqvid");
+/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! three */ "three");
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _markers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../markers */ "./src/markers.ts");
 
 
 
 
 
-const { animate, bezier, easings } = liqvid__WEBPACK_IMPORTED_MODULE_3__.Utils.animation;
+
+const { animate, bezier, easings } = liqvid__WEBPACK_IMPORTED_MODULE_1__.Utils.animation;
+const grow = animate({
+    duration: 1000,
+    easing: bezier(...easings.easeInCubic),
+    endValue: 3,
+    startTime: _markers__WEBPACK_IMPORTED_MODULE_4__.script.parseStart("3d/anim"),
+});
 function Sphere() {
-    const { script } = (0,liqvid__WEBPACK_IMPORTED_MODULE_3__.usePlayer)();
-    const ref = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)();
-    const grow = (0,react__WEBPACK_IMPORTED_MODULE_1__.useMemo)(() => animate({
-        duration: 1000,
-        easing: bezier(...easings.easeInCubic),
-        endValue: 3,
-        startTime: script.parseStart("3d/anim"),
-    }), []);
-    const last = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(0);
-    (0,liqvid__WEBPACK_IMPORTED_MODULE_3__.useTime)(t => {
-        const r = grow(t);
-        if (last.current === r)
-            return;
-        last.current = r;
+    const ref = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)();
+    (0,liqvid__WEBPACK_IMPORTED_MODULE_1__.useTime)(r => {
         if (r === 0) {
             ref.current.visible = false;
         }
         else {
-            ref.current.visible = script.markerName.startsWith("3d/");
-            ref.current.geometry = new three__WEBPACK_IMPORTED_MODULE_2__.SphereBufferGeometry(r, 64, 64);
+            ref.current.visible = _markers__WEBPACK_IMPORTED_MODULE_4__.script.markerName.startsWith("3d/");
+            ref.current.geometry = new three__WEBPACK_IMPORTED_MODULE_3__.SphereBufferGeometry(r, 64, 64);
         }
-    }, []);
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("mesh", Object.assign({ name: "sphere", position: [0, 8, 0], ref: ref, visible: false }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("sphereBufferGeometry", { args: [0, 64, 64] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("meshPhongMaterial", { color: 0x1BBB68, side: three__WEBPACK_IMPORTED_MODULE_2__.DoubleSide })] })));
+    }, grow, []);
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("mesh", Object.assign({ name: "sphere", position: [0, 8, 0], ref: ref, visible: false }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("sphereBufferGeometry", { args: [0, 64, 64] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("meshPhongMaterial", { color: 0x1BBB68, side: three__WEBPACK_IMPORTED_MODULE_3__.DoubleSide })] })));
 }
 
 
@@ -21875,7 +20654,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Elliptic)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var _lib_graphics__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @lib/graphics */ "./lib/graphics.ts");
 
 
@@ -21903,47 +20682,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Moduli)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three */ "three");
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/.pnpm/@react-three+fiber@7.0.26_fd377fdf312df1f300847b85f25960c5/node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
-/* harmony import */ var _lib_graphics__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @lib/graphics */ "./lib/graphics.ts");
-/* harmony import */ var _liqvid_react_three__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @liqvid/react-three */ "./node_modules/.pnpm/@liqvid+react-three@1.0.2_c057bb8d808f2fe73d479b0ea7a5f353/node_modules/@liqvid/react-three/dist/index.mjs");
-
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _lib_graphics__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @lib/graphics */ "./lib/graphics.ts");
+/* harmony import */ var _liqvid_react_three__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @liqvid/react-three */ "./node_modules/@liqvid/react-three/dist/index.mjs");
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
 
 
 
 
 
 function CameraControls() {
-    const $three = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_4__.useThree)();
+    const $three = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_3__.useThree)();
     const { camera, gl: { domElement } } = $three;
     domElement.$three = $three;
     camera.up.set(0, 0, 1);
-    const [controls] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)();
-    (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_4__.useFrame)(() => controls && controls.update());
-    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    }, [controls]);
-    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    const controls = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)();
+    (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_3__.useFrame)(() => { var _a; return (_a = controls.current) === null || _a === void 0 ? void 0 : _a.update(); });
+    (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
+    }, [controls.current]);
+    (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
         camera.position.set(4.3, -9.5, 6);
-        camera.lookAt(new three__WEBPACK_IMPORTED_MODULE_2__.Vector3(0, 0, 0));
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
         camera.up.set(0, 0, 1);
     }, []);
     return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("orbitControls", { ref: controls, args: [camera, domElement] }));
 }
 function Moduli(props) {
-    const moduliGeometry = (0,react__WEBPACK_IMPORTED_MODULE_1__.useMemo)(() => (0,_lib_graphics__WEBPACK_IMPORTED_MODULE_3__.marchingCubes)((x, y, z) => y ** 2 - x ** 3 - z * x - props.b, -5, 5, 32), [props.b]);
-    const section = (0,react__WEBPACK_IMPORTED_MODULE_1__.useMemo)(() => {
-        const edges = (0,_lib_graphics__WEBPACK_IMPORTED_MODULE_3__.marchingSquares)(-5, 5, -5, 5, (x, y) => y ** 2 - x ** 3 - props.a * x - props.b + props.a, props.a, 64);
-        const lineGeometry = new three__WEBPACK_IMPORTED_MODULE_2__.LineSegmentsGeometry().setPositions(edges.reduce((a, b) => a.concat(b)));
-        const lineMaterial = new three__WEBPACK_IMPORTED_MODULE_2__.LineMaterial({ color: 0xFF0070, linewidth: 6 });
+    const moduliGeometry = (0,react__WEBPACK_IMPORTED_MODULE_2__.useMemo)(() => (0,_lib_graphics__WEBPACK_IMPORTED_MODULE_1__.marchingCubes)((x, y, z) => y ** 2 - x ** 3 - z * x - props.b, -5, 5, 32), [props.b]);
+    const section = (0,react__WEBPACK_IMPORTED_MODULE_2__.useMemo)(() => {
+        const edges = (0,_lib_graphics__WEBPACK_IMPORTED_MODULE_1__.marchingSquares)(-5, 5, -5, 5, (x, y) => y ** 2 - x ** 3 - props.a * x - props.b + props.a, props.a, 64);
+        const lineGeometry = new THREE.LineSegmentsGeometry().setPositions(edges.reduce((a, b) => a.concat(b)));
+        const lineMaterial = new THREE.LineMaterial({ color: 0xFF0070, linewidth: 6 });
         lineMaterial.resolution.set(window.innerWidth, window.innerHeight);
-        const linePavement = new three__WEBPACK_IMPORTED_MODULE_2__.LineSegments2(lineGeometry, lineMaterial);
+        const linePavement = new THREE.LineSegments2(lineGeometry, lineMaterial);
         return linePavement;
     }, [props.a, props.b]);
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_liqvid_react_three__WEBPACK_IMPORTED_MODULE_5__.Canvas, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ambientLight", {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("pointLight", { position: [10, 10, 10] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(CameraControls, {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("mesh", Object.assign({ geometry: moduliGeometry }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("meshPhongMaterial", { color: 0x1BBB68, side: three__WEBPACK_IMPORTED_MODULE_2__.DoubleSide }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("primitive", { object: section })] }));
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_liqvid_react_three__WEBPACK_IMPORTED_MODULE_4__.Canvas, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ambientLight", {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("pointLight", { position: [10, 10, 10] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(CameraControls, {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("mesh", Object.assign({ geometry: moduliGeometry }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("meshPhongMaterial", { color: 0x1BBB68, side: THREE.DoubleSide }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("primitive", { object: section })] }));
 }
 
 
@@ -21957,16 +20733,24 @@ function Moduli(props) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "controls": () => (/* binding */ controls)
+/* harmony export */   "UI": () => (/* binding */ UI)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
-/* harmony import */ var rp_recording__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rp-recording */ "./node_modules/.pnpm/rp-recording@2.3.0_liqvid@2.1.4/node_modules/rp-recording/dist/rp-recording.js");
-/* harmony import */ var rp_recording__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(rp_recording__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _3d_HelpControl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../3d/HelpControl */ "./src/3d/HelpControl.tsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! liqvid */ "liqvid");
+/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var rp_recording__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rp-recording */ "./node_modules/rp-recording/dist/rp-recording.js");
+/* harmony import */ var rp_recording__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(rp_recording__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _3d_HelpControl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../3d/HelpControl */ "./src/3d/HelpControl.tsx");
+/* harmony import */ var _markers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../markers */ "./src/markers.ts");
 
 
 
-const controls = [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_recording__WEBPACK_IMPORTED_MODULE_1__.RecordingControl, {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_3d_HelpControl__WEBPACK_IMPORTED_MODULE_2__["default"], {})];
+
+
+const controls = [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_recording__WEBPACK_IMPORTED_MODULE_2__.RecordingControl, {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_3d_HelpControl__WEBPACK_IMPORTED_MODULE_3__["default"], {})];
+const UI = (props) => {
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(liqvid__WEBPACK_IMPORTED_MODULE_1__.Player, Object.assign({ controls: controls, script: _markers__WEBPACK_IMPORTED_MODULE_4__.script }, { children: props.children })));
+};
 
 
 /***/ }),
@@ -22002,8 +20786,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "TwoDPrompt": () => (/* binding */ TwoDPrompt),
 /* harmony export */   "XyJaxPrompt": () => (/* binding */ XyJaxPrompt)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
-/* harmony import */ var rp_prompt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rp-prompt */ "./node_modules/.pnpm/rp-prompt@1.2.0_3b340e026a00e3b1aad4597badf0d153/node_modules/rp-prompt/dist/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var rp_prompt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rp-prompt */ "./node_modules/rp-prompt/dist/index.js");
 /* harmony import */ var rp_prompt__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(rp_prompt__WEBPACK_IMPORTED_MODULE_1__);
 
 
@@ -22028,20 +20812,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ FiveD)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! liqvid */ "liqvid");
-/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _liqvid_katex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @liqvid/katex */ "./node_modules/.pnpm/@liqvid+katex@0.0.5_e13502fb5f3217ce43b4cd65c3c516d5/node_modules/@liqvid/katex/dist/index.mjs");
-/* harmony import */ var _lib_Input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @lib/Input */ "./lib/Input.tsx");
-/* harmony import */ var _env_prompts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @env/prompts */ "./src/@development/prompts.tsx");
-/* harmony import */ var _5d_Elliptic__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./5d/Elliptic */ "./src/5d/Elliptic.tsx");
-/* harmony import */ var _5d_Moduli__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./5d/Moduli */ "./src/5d/Moduli.tsx");
+/* harmony import */ var _liqvid_katex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @liqvid/katex */ "./node_modules/@liqvid/katex/dist/index.mjs");
+/* harmony import */ var _lib_Input__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @lib/Input */ "./lib/Input.tsx");
+/* harmony import */ var _env_prompts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @env/prompts */ "./src/@development/prompts.tsx");
+/* harmony import */ var _5d_Elliptic__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./5d/Elliptic */ "./src/5d/Elliptic.tsx");
+/* harmony import */ var _5d_Moduli__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./5d/Moduli */ "./src/5d/Moduli.tsx");
 
 
-
-const { during } = liqvid__WEBPACK_IMPORTED_MODULE_2__.Utils.authoring;
 
 
 
@@ -22056,7 +20836,7 @@ function FiveD() {
     const onChangeB = (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)((e) => {
         setB(parseFloat(e.currentTarget.value));
     }, []);
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", Object.assign({ id: "sec-5d" }, during("5d/"), { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("figure", Object.assign({ id: "elliptic", "data-affords": "click" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_5d_Elliptic__WEBPACK_IMPORTED_MODULE_6__["default"], Object.assign({}, { a, b })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ id: "fived-controls", "data-affords": "click" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("table", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("caption", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_3__.KTX, { children: "y^2 = x^3 + ax + b" }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tbody", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_3__.KTX, { children: "a" }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { min: -5, max: 5, step: "0.01", type: "range", onChange: onChangeA, value: a.toString() }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Input__WEBPACK_IMPORTED_MODULE_4__["default"], { min: -5, max: 5, step: "0.01", type: "number", onChange: onChangeA, value: a.toString() }) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_3__.KTX, { children: "b" }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Input__WEBPACK_IMPORTED_MODULE_4__["default"], { min: -5, max: 5, step: "0.01", type: "range", onChange: onChangeB, value: b.toString() }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Input__WEBPACK_IMPORTED_MODULE_4__["default"], { min: -5, max: 5, step: "0.01", type: "number", onChange: onChangeB, value: b.toString() }) })] })] })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("figure", Object.assign({ id: "moduli" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_5d_Moduli__WEBPACK_IMPORTED_MODULE_7__["default"], Object.assign({}, { a, b })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_env_prompts__WEBPACK_IMPORTED_MODULE_5__.FiveDPrompt, {})] })));
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", Object.assign({ id: "sec-5d", "data-during": "5d/" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("figure", Object.assign({ id: "elliptic", "data-affords": "click" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_5d_Elliptic__WEBPACK_IMPORTED_MODULE_5__["default"], Object.assign({}, { a, b })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ id: "fived-controls", "data-affords": "click" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("table", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("caption", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_2__.KTX, { children: "y^2 = x^3 + ax + b" }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tbody", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_2__.KTX, { children: "a" }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { min: -5, max: 5, step: "0.01", type: "range", onChange: onChangeA, value: a.toString() }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Input__WEBPACK_IMPORTED_MODULE_3__["default"], { min: -5, max: 5, step: "0.01", type: "number", onChange: onChangeA, value: a.toString() }) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_2__.KTX, { children: "b" }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Input__WEBPACK_IMPORTED_MODULE_3__["default"], { min: -5, max: 5, step: "0.01", type: "range", onChange: onChangeB, value: b.toString() }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Input__WEBPACK_IMPORTED_MODULE_3__["default"], { min: -5, max: 5, step: "0.01", type: "number", onChange: onChangeB, value: b.toString() }) })] })] })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("figure", Object.assign({ id: "moduli" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_5d_Moduli__WEBPACK_IMPORTED_MODULE_6__["default"], Object.assign({}, { a, b })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_env_prompts__WEBPACK_IMPORTED_MODULE_4__.FiveDPrompt, {})] })));
 }
 
 
@@ -22072,7 +20852,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Intro)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var _env_prompts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @env/prompts */ "./src/@development/prompts.tsx");
 /* harmony import */ var _lib_Link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @lib/Link */ "./lib/Link.tsx");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! liqvid */ "liqvid");
@@ -22086,7 +20866,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const { during, from } = liqvid__WEBPACK_IMPORTED_MODULE_3__.Utils.authoring, { onClick } = liqvid__WEBPACK_IMPORTED_MODULE_3__.Utils.mobile, { formatTime, formatTimeMs } = liqvid__WEBPACK_IMPORTED_MODULE_3__.Utils.time;
+const { from } = liqvid__WEBPACK_IMPORTED_MODULE_3__.Utils.authoring, { onClick } = liqvid__WEBPACK_IMPORTED_MODULE_3__.Utils.mobile, { formatTime, formatTimeMs } = liqvid__WEBPACK_IMPORTED_MODULE_3__.Utils.time;
 const contents = [
     ["Introduction", _markers__WEBPACK_IMPORTED_MODULE_5__.script.parseStart("intro/toc")],
     ["KaTeX", _markers__WEBPACK_IMPORTED_MODULE_5__.script.parseStart("ktx/")],
@@ -22100,7 +20880,7 @@ function Intro() {
         e.preventDefault();
         _markers__WEBPACK_IMPORTED_MODULE_5__.playback.seek(e.currentTarget.getAttribute("href").slice(3));
     }), []);
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", Object.assign({ id: "sec-intro" }, during("intro/"), { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h1", { children: "Liqvid math tutorial" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("table", Object.assign({ className: "toc" }, during("intro/toc"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: contents.map((row, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", Object.assign({ "data-affords": "click" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("th", { children: [i + 1, "."] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", Object.assign({ className: "name" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: `?t=${formatTimeMs(row[1])}` }, seek, { children: row[0] })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", Object.assign({ className: "time" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: `?t=${formatTimeMs(row[1])}` }, seek, { children: formatTime(row[1]) })) }))] }), row[0]))) }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", Object.assign({}, from("intro/main"), { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://liqvidjs.org/" }, { children: "General-purpose tutorial" })) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/explain"), { children: "explains what ractives are, how to write and record them" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/codebooth"), { children: "coding plugin" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/paint"), { children: "freehand drawing plugin" }))] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", Object.assign({}, from("intro/clone"), { children: ["Clone this tutorial: ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://github.com/ysulyma/rp-tutorial-math" }, { children: "https://github.com/ysulyma/rp-tutorial-math" }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", Object.assign({}, from("intro/links"), { children: "Links" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/js"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://javascript.info/" }, { children: "Javascript.info course" })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/ts"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://www.typescriptlang.org/" }, { children: "TypeScript documentation" })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/react"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://reactjs.org/" }, { children: "React documentation" })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/node"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://nodejs.org/en/" }, { children: "Node.js" })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({}, from("intro/epiplexis"), { children: ["Inspiration: ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://epiplexis.xyz/" }, { children: "Epiplexis" }))] }))] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_env_prompts__WEBPACK_IMPORTED_MODULE_1__.IntroPrompt, {})] })));
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", Object.assign({ id: "sec-intro", "data-during": "intro/" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h1", { children: "Liqvid math tutorial" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("table", Object.assign({ className: "toc", "data-during": "intro/toc" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: contents.map((row, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", Object.assign({ "data-affords": "click" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("th", { children: [i + 1, "."] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", Object.assign({ className: "name" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: `?t=${formatTimeMs(row[1])}` }, seek, { children: row[0] })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", Object.assign({ className: "time" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: `?t=${formatTimeMs(row[1])}` }, seek, { children: formatTime(row[1]) })) }))] }), row[0]))) }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", Object.assign({}, from("intro/main"), { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://liqvidjs.org/" }, { children: "General-purpose tutorial" })) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/explain"), { children: "explains what ractives are, how to write and record them" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/codebooth"), { children: "coding plugin" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/paint"), { children: "freehand drawing plugin" }))] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", Object.assign({}, from("intro/clone"), { children: ["Clone this tutorial: ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://github.com/ysulyma/rp-tutorial-math" }, { children: "https://github.com/ysulyma/rp-tutorial-math" }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", Object.assign({}, from("intro/links"), { children: "Links" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/js"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://javascript.info/" }, { children: "Javascript.info course" })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/ts"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://www.typescriptlang.org/" }, { children: "TypeScript documentation" })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/react"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://reactjs.org/" }, { children: "React documentation" })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/node"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://nodejs.org/en/" }, { children: "Node.js" })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({}, from("intro/epiplexis"), { children: ["Inspiration: ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://epiplexis.xyz/" }, { children: "Epiplexis" }))] }))] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_env_prompts__WEBPACK_IMPORTED_MODULE_1__.IntroPrompt, {})] })));
 }
 
 
@@ -22116,29 +20896,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ KaTeXSlide)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
-/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! liqvid */ "liqvid");
-/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _lib_Link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @lib/Link */ "./lib/Link.tsx");
-/* harmony import */ var _lib_Block__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @lib/Block */ "./lib/Block.tsx");
-/* harmony import */ var _liqvid_katex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @liqvid/katex */ "./node_modules/.pnpm/@liqvid+katex@0.0.5_e13502fb5f3217ce43b4cd65c3c516d5/node_modules/@liqvid/katex/dist/index.mjs");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _env_prompts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @env/prompts */ "./src/@development/prompts.tsx");
+/* harmony import */ var _lib_Block__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @lib/Block */ "./lib/Block.tsx");
+/* harmony import */ var _lib_Link__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @lib/Link */ "./lib/Link.tsx");
+/* harmony import */ var _liqvid_katex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @liqvid/katex */ "./node_modules/@liqvid/katex/dist/index.mjs");
+/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! liqvid */ "liqvid");
+/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_5__);
 
 
-const { from } = liqvid__WEBPACK_IMPORTED_MODULE_1__.Utils.authoring;
 
 
 
+
+const { from } = liqvid__WEBPACK_IMPORTED_MODULE_5__.Utils.authoring;
 const { raw } = String;
 function KaTeXSlide() {
     const m1 = raw `\htmlData{from-first=ktx/align-1}`;
     const m2 = raw `\htmlData{from-first=ktx/align-2}`;
     const m3 = raw `\htmlData{from-first=ktx/align-3}`;
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", Object.assign({ id: "sec-katex", "data-during": "ktx/" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_lib_Block__WEBPACK_IMPORTED_MODULE_3__.Definition, Object.assign({ blockTitle: "Derivative of a function" }, { children: ["The ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("dfn", { children: ["derivative of ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_4__.KTX, { children: "f" }), " at ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_4__.KTX, { children: "x" }), ","] }), " denoted ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_4__.KTX, { children: "f'(x)," }), " is", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_4__.KTX, Object.assign({ display: true }, from("ktx/display"), { children: raw `f'(x) := \lim_{\epsilon\to0}\frac{f(x+\epsilon)-f(x)}{\epsilon}.` }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Block__WEBPACK_IMPORTED_MODULE_3__.Example, Object.assign({ blockTitle: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, { children: ["The derivative of ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_4__.KTX, { children: "x^2" })] }) }, from("ktx/ex"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_4__.KTX, Object.assign({ display: true, reparse: true }, { children: raw `\begin{aligned}
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", Object.assign({ id: "sec-katex", "data-during": "ktx/" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_lib_Block__WEBPACK_IMPORTED_MODULE_2__.Definition, Object.assign({ blockTitle: "Derivative of a function" }, { children: ["The ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("dfn", { children: ["derivative of ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_4__.KTX, { children: "f" }), " at ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_4__.KTX, { children: "x" }), ","] }), " denoted ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_4__.KTX, { children: "f'(x)," }), " is", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_4__.KTX, Object.assign({ display: true }, from("ktx/display"), { children: raw `f'(x) := \lim_{\epsilon\to0}\frac{f(x+\epsilon)-f(x)}{\epsilon}.` }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Block__WEBPACK_IMPORTED_MODULE_2__.Example, Object.assign({ blockTitle: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, { children: ["The derivative of ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_4__.KTX, { children: "x^2" })] }) }, from("ktx/ex"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_4__.KTX, Object.assign({ display: true, reparse: true }, { children: raw `\begin{aligned}
         \lim_{\epsilon\to0}\frac{(x+\epsilon)^2-x^2}{\epsilon}
         &${m1}{= \lim_{\epsilon\to0}\frac{(x^2 + 2\epsilon x + \epsilon^2)-x^2}{\epsilon}}\\[1em]
         &${m2}{= \lim_{\epsilon\to0}\Big(2x + \epsilon\Big)}\\[1em]
         &${m3}{= 2x.}
-      \end{aligned}` })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_lib_Block__WEBPACK_IMPORTED_MODULE_3__.Example, Object.assign({}, from("ktx/macros"), { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", { children: ["Can load macros from file: ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_4__.KTX, { children: raw `\THH(R;\Z_p)` })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", Object.assign({}, from("ktx/docs"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://katex.org/" }, { children: "KaTeX documentation" })) }))] }))] })));
+      \end{aligned}` })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_lib_Block__WEBPACK_IMPORTED_MODULE_2__.Example, Object.assign({}, from("ktx/macros"), { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", { children: ["Can load macros from file: ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_4__.KTX, { children: raw `\THH(R;\Z_p)` })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", Object.assign({}, from("ktx/docs"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_3__["default"], Object.assign({ href: "https://katex.org/" }, { children: "KaTeX documentation" })) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_env_prompts__WEBPACK_IMPORTED_MODULE_1__.KaTeXPrompt, {})] })));
 }
 
 
@@ -22154,11 +20936,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ MathJaxSlide)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var _env_prompts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @env/prompts */ "./src/@development/prompts.tsx");
 /* harmony import */ var _lib_Block__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @lib/Block */ "./lib/Block.tsx");
 /* harmony import */ var _lib_Link__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @lib/Link */ "./lib/Link.tsx");
-/* harmony import */ var _liqvid_mathjax__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @liqvid/mathjax */ "../../liqvid/packages/mathjax/dist/index.mjs");
+/* harmony import */ var _liqvid_mathjax__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @liqvid/mathjax */ "./node_modules/@liqvid/mathjax/dist/index.mjs");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! liqvid */ "liqvid");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "react");
@@ -22170,24 +20952,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const { from, during } = liqvid__WEBPACK_IMPORTED_MODULE_5__.Utils.authoring;
+const { from } = liqvid__WEBPACK_IMPORTED_MODULE_5__.Utils.authoring;
 const { raw } = String;
 function MathJaxSlide() {
     const m1 = raw `\data{from-first="mjx/align-1"}`;
     const m2 = raw `\data{from-first="mjx/align-2"}`;
     const m3 = raw `\data{from-first="mjx/align-3"}`;
     const ref = (0,react__WEBPACK_IMPORTED_MODULE_6__.useRef)();
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", Object.assign({ id: "sec-mathjax", "data-during": "mjx/" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_mathjax__WEBPACK_IMPORTED_MODULE_4__.MJXText, { children: raw `
-The real numbers are denoted by \(\R n\).
-
-
-Let \(\space{X}\) be a topological space.
-
-
-\( \annotate[text,url]{O(n)}{orthogonal group}{https://en.wikipedia.org/wiki/Orthogonal_group} \)
-
-
-\( \data{first-prop="hello",second-prop="world"}{\exp} \)` }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_lib_Block__WEBPACK_IMPORTED_MODULE_2__.Definition, Object.assign({ blockTitle: "Derivative of a function" }, { children: ["The ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("dfn", { children: ["derivative of ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_mathjax__WEBPACK_IMPORTED_MODULE_4__.MJX, { children: "f" }), " at ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_mathjax__WEBPACK_IMPORTED_MODULE_4__.MJX, { children: "x" }), ","] }), " denoted ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_mathjax__WEBPACK_IMPORTED_MODULE_4__.MJX, { children: "f'(x)," }), " is", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_mathjax__WEBPACK_IMPORTED_MODULE_4__.MJX, Object.assign({ className: "goose", display: true }, from("mjx/display"), { reparse: true }, { children: raw `f'(x) := \lim_{\epsilon\to0}\frac{f(x+\epsilon)-f(x)}{\epsilon}.` }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_lib_Block__WEBPACK_IMPORTED_MODULE_2__.Example, Object.assign({ blockTitle: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, { children: ["The derivative of ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_mathjax__WEBPACK_IMPORTED_MODULE_4__.MJX, { children: "x^2" })] }) }, from("mjx/ex"), { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_mathjax__WEBPACK_IMPORTED_MODULE_4__.MJX, Object.assign({ display: true, reparse: true, ref: ref }, { children: raw `\begin{aligned}
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", Object.assign({ id: "sec-mathjax", "data-during": "mjx/" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_lib_Block__WEBPACK_IMPORTED_MODULE_2__.Definition, Object.assign({ blockTitle: "Derivative of a function" }, { children: ["The ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("dfn", { children: ["derivative of ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_mathjax__WEBPACK_IMPORTED_MODULE_4__.MJX, { children: "f" }), " at ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_mathjax__WEBPACK_IMPORTED_MODULE_4__.MJX, { children: "x" }), ","] }), " denoted ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_mathjax__WEBPACK_IMPORTED_MODULE_4__.MJX, { children: "f'(x)," }), " is", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_mathjax__WEBPACK_IMPORTED_MODULE_4__.MJX, Object.assign({ className: "goose", display: true }, from("mjx/display"), { reparse: true }, { children: raw `f'(x) := \lim_{\epsilon\to0}\frac{f(x+\epsilon)-f(x)}{\epsilon}.` }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_lib_Block__WEBPACK_IMPORTED_MODULE_2__.Example, Object.assign({ blockTitle: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, { children: ["The derivative of ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_mathjax__WEBPACK_IMPORTED_MODULE_4__.MJX, { children: "x^2" })] }) }, from("mjx/ex"), { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_mathjax__WEBPACK_IMPORTED_MODULE_4__.MJX, Object.assign({ display: true, reparse: true, ref: ref }, { children: raw `\begin{aligned}
         \lim_{\epsilon\to0}\frac{(x+\epsilon)^2-x^2}{\epsilon}
         &${m1}{= \lim_{\epsilon\to0}\frac{(x^2 + 2\epsilon x + \epsilon^2)-x^2}{\epsilon}}\\[1em]
         &${m2}{= \lim_{\epsilon\to0}\Big(2x + \epsilon\Big)}\\[1em]
@@ -22208,67 +20980,71 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Scene)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/.pnpm/@react-three+fiber@7.0.26_fd377fdf312df1f300847b85f25960c5/node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
-/* harmony import */ var _liqvid_react_three__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @liqvid/react-three */ "./node_modules/.pnpm/@liqvid+react-three@1.0.2_c057bb8d808f2fe73d479b0ea7a5f353/node_modules/@liqvid/react-three/dist/index.mjs");
-/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! liqvid */ "liqvid");
-/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _lib_Link__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @lib/Link */ "./lib/Link.tsx");
-/* harmony import */ var _env_prompts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @env/prompts */ "./src/@development/prompts.tsx");
-/* harmony import */ var _3d_Arrow__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./3d/Arrow */ "./src/3d/Arrow.tsx");
-/* harmony import */ var _3d_Cylinder__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./3d/Cylinder */ "./src/3d/Cylinder.tsx");
-/* harmony import */ var _3d_Parametric__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./3d/Parametric */ "./src/3d/Parametric.tsx");
-/* harmony import */ var _3d_Sphere__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./3d/Sphere */ "./src/3d/Sphere.tsx");
-/* harmony import */ var _markers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./markers */ "./src/markers.ts");
-
-
-
-
-
-const { during, from } = liqvid__WEBPACK_IMPORTED_MODULE_2__.Utils.authoring, { between } = liqvid__WEBPACK_IMPORTED_MODULE_2__.Utils.misc;
-
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _env_prompts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @env/prompts */ "./src/@development/prompts.tsx");
+/* harmony import */ var _lib_Link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @lib/Link */ "./lib/Link.tsx");
+/* harmony import */ var _lib_ThreeFiber__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @lib/ThreeFiber */ "./lib/ThreeFiber.tsx");
+/* harmony import */ var _liqvid_react_three__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @liqvid/react-three */ "./node_modules/@liqvid/react-three/dist/index.mjs");
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
+/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! liqvid */ "liqvid");
+/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _3d_Arrow__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./3d/Arrow */ "./src/3d/Arrow.tsx");
+/* harmony import */ var _3d_Cylinder__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./3d/Cylinder */ "./src/3d/Cylinder.tsx");
+/* harmony import */ var _3d_Parametric__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./3d/Parametric */ "./src/3d/Parametric.tsx");
+/* harmony import */ var _3d_Sphere__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./3d/Sphere */ "./src/3d/Sphere.tsx");
+/* harmony import */ var _markers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./markers */ "./src/markers.ts");
 
 
 
 
 
 
+
+
+
+
+
+
+
+const { from } = liqvid__WEBPACK_IMPORTED_MODULE_4__.Utils.authoring, { between } = liqvid__WEBPACK_IMPORTED_MODULE_4__.Utils.misc;
 function CameraControls() {
-    const $three = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_10__.useThree)();
+    const $three = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_11__.useThree)();
+    const context = (0,_lib_ThreeFiber__WEBPACK_IMPORTED_MODULE_3__.useApi)();
     const { camera, gl: { domElement } } = $three;
     domElement.$three = $three;
     camera.up.set(0, 0, 1);
-    const [controls] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)();
-    (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_10__.useFrame)(() => controls && controls.update());
-    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    }, [controls]);
-    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    const controls = (0,react__WEBPACK_IMPORTED_MODULE_5__.useRef)();
+    (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_11__.useFrame)(() => { var _a; return (_a = controls.current) === null || _a === void 0 ? void 0 : _a.update(); });
+    (0,react__WEBPACK_IMPORTED_MODULE_5__.useEffect)(() => {
+        context.controls = controls.current;
+    }, [controls.current]);
+    (0,react__WEBPACK_IMPORTED_MODULE_5__.useEffect)(() => {
         camera.position.set(4.3, -9.5, 6);
         camera.lookAt(new THREE.Vector3(0, 0, 0));
         camera.up.set(0, 0, 1);
     }, []);
     return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("orbitControls", { ref: controls, args: [camera, domElement] }));
 }
-const m = _markers__WEBPACK_IMPORTED_MODULE_9__.script.parseStart("3d/pause");
-const arrowIndex = _markers__WEBPACK_IMPORTED_MODULE_9__.script.markerNumberOf("3d/svg");
+const m = _markers__WEBPACK_IMPORTED_MODULE_10__.script.parseStart("3d/pause");
+const arrowIndex = _markers__WEBPACK_IMPORTED_MODULE_10__.script.markerNumberOf("3d/svg");
 function Scene() {
-    const helperRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)();
-    (0,liqvid__WEBPACK_IMPORTED_MODULE_2__.useMarkerUpdate)(() => {
+    const helperRef = (0,react__WEBPACK_IMPORTED_MODULE_5__.useRef)();
+    (0,liqvid__WEBPACK_IMPORTED_MODULE_4__.useMarkerUpdate)(() => {
         if (!helperRef.current)
             return;
-        helperRef.current.visible = (_markers__WEBPACK_IMPORTED_MODULE_9__.script.markerIndex < arrowIndex);
+        helperRef.current.visible = (_markers__WEBPACK_IMPORTED_MODULE_10__.script.markerIndex < arrowIndex);
     }, []);
-    const prev = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(_markers__WEBPACK_IMPORTED_MODULE_9__.playback.currentTime);
+    const prev = (0,react__WEBPACK_IMPORTED_MODULE_5__.useRef)(_markers__WEBPACK_IMPORTED_MODULE_10__.playback.currentTime);
     const EPSILON = 300;
-    (0,liqvid__WEBPACK_IMPORTED_MODULE_2__.useTime)(t => {
+    (0,liqvid__WEBPACK_IMPORTED_MODULE_4__.useTime)(t => {
         if (between(m - EPSILON, prev.current, m) && between(m, t, m + EPSILON)) {
-            _markers__WEBPACK_IMPORTED_MODULE_9__.playback.pause();
+            _markers__WEBPACK_IMPORTED_MODULE_10__.playback.pause();
         }
         prev.current = t;
     }, []);
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("figure", Object.assign({ id: "three-d" }, during("3d/"), { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("aside", Object.assign({ id: "three-explain" }, from("3d/three", "3d/hide"), { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_3__["default"], Object.assign({ href: "https://threejs.org/docs/" }, { children: "THREE.js" })), " for 3d graphics"] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", Object.assign({}, from("3d/r3f"), { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_3__["default"], Object.assign({ href: "https://docs.pmnd.rs/react-three-fiber/" }, { children: "@react-three/fiber" })), " for use with React"] }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_liqvid_react_three__WEBPACK_IMPORTED_MODULE_11__.Canvas, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ambientLight", {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("pointLight", { position: [10, 10, 10] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(CameraControls, {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("axesHelper", { args: [5], ref: helperRef }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_3d_Cylinder__WEBPACK_IMPORTED_MODULE_6__["default"], {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_3d_Sphere__WEBPACK_IMPORTED_MODULE_8__["default"], {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_3d_Parametric__WEBPACK_IMPORTED_MODULE_7__["default"], {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_3d_Arrow__WEBPACK_IMPORTED_MODULE_5__["default"], {})] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_env_prompts__WEBPACK_IMPORTED_MODULE_4__.ThreeDPrompt, {})] })));
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("figure", Object.assign({ id: "three-d", "data-during": "3d/" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("aside", Object.assign({ id: "three-explain" }, from("3d/three", "3d/hide"), { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://threejs.org/docs/" }, { children: "THREE.js" })), " for 3d graphics"] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", Object.assign({}, from("3d/r3f"), { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://docs.pmnd.rs/react-three-fiber/" }, { children: "@react-three/fiber" })), " for use with React"] }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_react_three__WEBPACK_IMPORTED_MODULE_12__.Canvas, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_lib_ThreeFiber__WEBPACK_IMPORTED_MODULE_3__.APIHelper, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ambientLight", {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("pointLight", { position: [10, 10, 10] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(CameraControls, {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("axesHelper", { args: [5], ref: helperRef }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_3d_Cylinder__WEBPACK_IMPORTED_MODULE_7__["default"], {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_3d_Sphere__WEBPACK_IMPORTED_MODULE_9__["default"], {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_3d_Parametric__WEBPACK_IMPORTED_MODULE_8__["default"], {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_3d_Arrow__WEBPACK_IMPORTED_MODULE_6__["default"], {})] }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_env_prompts__WEBPACK_IMPORTED_MODULE_1__.ThreeDPrompt, {})] })));
 }
 
 
@@ -22284,12 +21060,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ TwoD)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var _env_prompts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @env/prompts */ "./src/@development/prompts.tsx");
 /* harmony import */ var _lib_FatFingers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @lib/FatFingers */ "./lib/FatFingers.tsx");
 /* harmony import */ var _lib_GlowOrb__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @lib/GlowOrb */ "./lib/GlowOrb.tsx");
 /* harmony import */ var _lib_Input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @lib/Input */ "./lib/Input.tsx");
-/* harmony import */ var _liqvid_katex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @liqvid/katex */ "./node_modules/.pnpm/@liqvid+katex@0.0.5_e13502fb5f3217ce43b4cd65c3c516d5/node_modules/@liqvid/katex/dist/index.mjs");
+/* harmony import */ var _liqvid_katex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @liqvid/katex */ "./node_modules/@liqvid/katex/dist/index.mjs");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! liqvid */ "liqvid");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react */ "react");
@@ -22302,8 +21078,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-const { during, from } = liqvid__WEBPACK_IMPORTED_MODULE_6__.Utils.authoring, { dragHelperReact } = liqvid__WEBPACK_IMPORTED_MODULE_6__.Utils.interactivity, { constrain, range } = liqvid__WEBPACK_IMPORTED_MODULE_6__.Utils.misc, { anyHover } = liqvid__WEBPACK_IMPORTED_MODULE_6__.Utils.mobile, { screenToSVG } = liqvid__WEBPACK_IMPORTED_MODULE_6__.Utils.svg;
+const { from } = liqvid__WEBPACK_IMPORTED_MODULE_6__.Utils.authoring, { dragHelperReact } = liqvid__WEBPACK_IMPORTED_MODULE_6__.Utils.interactivity, { constrain, range } = liqvid__WEBPACK_IMPORTED_MODULE_6__.Utils.misc, { anyHover } = liqvid__WEBPACK_IMPORTED_MODULE_6__.Utils.mobile, { screenToSVG } = liqvid__WEBPACK_IMPORTED_MODULE_6__.Utils.svg;
 const { raw } = String;
 const a = -4, b = 4;
 const minX = -5, maxX = 5;
@@ -22350,7 +21125,7 @@ function TwoD() {
         if (!isNaN(val))
             setX(constrain(a, val, b));
     }, []);
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", Object.assign({ id: "sec-2d" }, during("2d/"), { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ id: "tangent-demo", ref: svgRef, viewBox: "-5.3 -5.3 10.6 10.6", "data-affords": "click" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(CartesianGrid, {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { className: "plot", d: graph(negF, a, b, 200) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { className: "tangent-line", x1: minX, y1: -(minX * slope + intercept), x2: maxX, y2: -(maxX * slope + intercept) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_FatFingers__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ className: "draggable point-A", cx: A[0], cy: -A[1], r: "0.1", fatR: "0.4" }, dragHelperReact(onMoveA, onDown, onUp))), showOrb && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_GlowOrb__WEBPACK_IMPORTED_MODULE_3__["default"], { className: "glow", cx: A[0], cy: -A[1], dur: "1s", r1: 0.1, r2: 0.3 })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ id: "explain", "data-affords": "click" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_5__.KTX, Object.assign({ display: true, id: "defn" }, { children: raw `
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", Object.assign({ id: "sec-2d", "data-during": "2d/" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ id: "tangent-demo", ref: svgRef, viewBox: "-5.3 -5.3 10.6 10.6", "data-affords": "click" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(CartesianGrid, {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { className: "plot", d: graph(negF, a, b, 200) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { className: "tangent-line", x1: minX, y1: -(minX * slope + intercept), x2: maxX, y2: -(maxX * slope + intercept) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_FatFingers__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ className: "draggable point-A", cx: A[0], cy: -A[1], r: "0.1", fatR: "0.4" }, dragHelperReact(onMoveA, onDown, onUp))), showOrb && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_GlowOrb__WEBPACK_IMPORTED_MODULE_3__["default"], { className: "glow", cx: A[0], cy: -A[1], dur: "1s", r1: 0.1, r2: 0.3 })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ id: "explain", "data-affords": "click" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_5__.KTX, Object.assign({ display: true, id: "defn" }, { children: raw `
           \begin{aligned}
             \htmlClass{plot}{y} &\htmlClass{plot}{= x^2-2}\\
             \htmlClass{tangent-line}{y} &\htmlClass{tangent-line}{= ${tangentEqn}}
@@ -22402,11 +21177,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ XyJaxSlide)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var _lib_Block__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @lib/Block */ "./lib/Block.tsx");
 /* harmony import */ var _lib_Link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @lib/Link */ "./lib/Link.tsx");
-/* harmony import */ var _liqvid_mathjax__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @liqvid/mathjax */ "../../liqvid/packages/mathjax/dist/index.mjs");
-/* harmony import */ var _liqvid_xyjax__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @liqvid/xyjax */ "../../liqvid/packages/xyjax/dist/index.js");
+/* harmony import */ var _liqvid_mathjax__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @liqvid/mathjax */ "./node_modules/@liqvid/mathjax/dist/index.mjs");
+/* harmony import */ var _liqvid_xyjax__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @liqvid/xyjax */ "./node_modules/@liqvid/xyjax/dist/index.mjs");
 /* harmony import */ var _xyjax_AnimatedArrows__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./xyjax/AnimatedArrows */ "./src/xyjax/AnimatedArrows.tsx");
 /* harmony import */ var _xyjax_Brouwer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./xyjax/Brouwer */ "./src/xyjax/Brouwer.tsx");
 /* harmony import */ var _env_prompts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @env/prompts */ "./src/@development/prompts.tsx");
@@ -22420,10 +21195,10 @@ __webpack_require__.r(__webpack_exports__);
 
 const { raw } = String;
 function XyJaxSlide() {
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", Object.assign({ id: "sec-xyjax", "data-during": "xyjx/" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Block__WEBPACK_IMPORTED_MODULE_1__.Remark, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", { children: ["commutative diagrams (", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("code", { children: "xymatrix" }), " syntax) using ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://sonoisa.github.io/xyjax-v3/xyjax-v3.html" }, { children: "XyJax" }))] }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("aside", Object.assign({ id: "xyjax-demos" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_mathjax__WEBPACK_IMPORTED_MODULE_3__.MJX, Object.assign({ "data-during": "xyjx/diagram", reparse: true }, { children: raw `${"\\"}xymatrix{
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", Object.assign({ id: "sec-xyjax", "data-during": "xyjx/" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Block__WEBPACK_IMPORTED_MODULE_1__.Remark, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", { children: ["commutative diagrams (", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("code", { children: "xymatrix" }), " syntax) using ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://sonoisa.github.io/xyjax-v3/xyjax-v3.html" }, { children: "XyJax" }))] }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("aside", Object.assign({ id: "xyjax-demos" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_mathjax__WEBPACK_IMPORTED_MODULE_3__.MJX, Object.assign({ "data-during": "xyjx/diagram" }, { children: raw `${"\\"}xymatrix{
           A \ar[r] \ar[d] & B \ar[d]\\
           C \ar[r] & D
-        }` })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_mathjax__WEBPACK_IMPORTED_MODULE_3__.MJX, Object.assign({ "data-during": "xyjx/pullback", reparse: true }, { children: raw `
+        }` })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_mathjax__WEBPACK_IMPORTED_MODULE_3__.MJX, Object.assign({ "data-during": "xyjx/pullback" }, { children: raw `
           \vcenter{${"\\"}xymatrix{
             X \times_Z Y \pullback \ar[r] \ar[d] & Y \ar[d]\\\
             X \ar[r] & Z
@@ -22433,7 +21208,7 @@ function XyJaxSlide() {
             Z \ar[d] \ar[r] & Y \ar[d]\\\
             X \ar[r] & X\cup_Z Y \pushout
           }}
-          ` })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_mathjax__WEBPACK_IMPORTED_MODULE_3__.MJX, Object.assign({ "data-during": "xyjx/color", reparse: true }, { children: raw `
+          ` })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_mathjax__WEBPACK_IMPORTED_MODULE_3__.MJX, Object.assign({ "data-during": "xyjx/color" }, { children: raw `
         ${"\\"}xymatrix{
           H_n(X,A) \ar@[color${(0,_liqvid_xyjax__WEBPACK_IMPORTED_MODULE_4__.xyEncodeColor)("AF1866")}][r]^-{\color{#AF1866} \partial} & H_{n-1}(A)
         }
@@ -22527,21 +21302,6 @@ const highlights = [
 
 /***/ }),
 
-/***/ "./src/media-url.ts":
-/*!**************************!*\
-  !*** ./src/media-url.ts ***!
-  \**************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "MEDIA_URL": () => (/* binding */ MEDIA_URL)
-/* harmony export */ });
-const MEDIA_URL = "https://d2og9lpzrymesl.cloudfront.net/r/rp-tutorial-math";
-
-
-/***/ }),
-
 /***/ "./src/xyjax/AnimatedArrows.tsx":
 /*!**************************************!*\
   !*** ./src/xyjax/AnimatedArrows.tsx ***!
@@ -22552,9 +21312,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AnimatedArrows": () => (/* binding */ AnimatedArrows)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
-/* harmony import */ var _liqvid_mathjax__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @liqvid/mathjax */ "../../liqvid/packages/mathjax/dist/index.mjs");
-/* harmony import */ var _liqvid_xyjax__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @liqvid/xyjax */ "../../liqvid/packages/xyjax/dist/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _liqvid_mathjax__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @liqvid/mathjax */ "./node_modules/@liqvid/mathjax/dist/index.mjs");
+/* harmony import */ var _liqvid_xyjax__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @liqvid/xyjax */ "./node_modules/@liqvid/xyjax/dist/index.mjs");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! liqvid */ "liqvid");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "react");
@@ -22572,11 +21332,12 @@ const fadeTail = animate({
     duration: 800,
     easing: bezier(...easings.easeOutCubic)
 });
-const fadeHead = animate({
-    startTime: _markers__WEBPACK_IMPORTED_MODULE_5__.script.parseStart("xyjx/arrows/anim") + 500,
+const headFade = {
+    delay: _markers__WEBPACK_IMPORTED_MODULE_5__.script.parseStart("xyjx/arrows/anim") + 500,
     duration: 200,
-    easing: bezier(...easings.easeOutCubic)
-});
+    easing: "ease-out",
+    fill: "both"
+};
 const { raw } = String;
 function AnimatedArrows() {
     const ref = (0,react__WEBPACK_IMPORTED_MODULE_4__.useRef)();
@@ -22585,12 +21346,12 @@ function AnimatedArrows() {
         tail: "*[data-anim] line",
         label: ".fade",
         ref,
-        headFn: fadeHead,
         tailFn: fadeTail,
-        labelFn: fadeHead
+        headFade,
+        labelFade: headFade
     });
     const line = "\"anim\":true";
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_mathjax__WEBPACK_IMPORTED_MODULE_1__.MJX, Object.assign({ reparse: true, resize: true, ref: ref, "data-during": "xyjx/arrows" }, { children: raw `
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_mathjax__WEBPACK_IMPORTED_MODULE_1__.MJX, Object.assign({ reparse: true, ref: ref, "data-during": "xyjx/arrows" }, { children: raw `
       ${"\\"}xymatrix{
         {*} \ar[d]_-0 \ar[r]^-{t_0} & \mathbb R \ar[d]^- p\\
         I \ar[r]_-{\alpha} \ar@[data${(0,_liqvid_xyjax__WEBPACK_IMPORTED_MODULE_2__.tob52)(line)}]@{..>}[ur]^-{\class{fade}{\exists!\ \widetilde\alpha}} & S^1
@@ -22611,8 +21372,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Brouwer": () => (/* binding */ Brouwer)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
-/* harmony import */ var _liqvid_mathjax__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @liqvid/mathjax */ "../../liqvid/packages/mathjax/dist/index.mjs");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _liqvid_mathjax__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @liqvid/mathjax */ "./node_modules/@liqvid/mathjax/dist/index.mjs");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! liqvid */ "liqvid");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
@@ -22761,20 +21522,236 @@ module.exports = THREE;
 
 /***/ }),
 
-/***/ "three/examples/jsm/loaders/SVGLoader":
-/*!**********************************!*\
-  !*** external "THREE.SVGLoader" ***!
-  \**********************************/
-/***/ ((module) => {
+/***/ "./node_modules/@liqvid/katex/dist/index.mjs":
+/*!***************************************************!*\
+  !*** ./node_modules/@liqvid/katex/dist/index.mjs ***!
+  \***************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-module.exports = THREE.SVGLoader;
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "KTX": () => (/* binding */ KTX),
+/* harmony export */   "KaTeXReady": () => (/* binding */ KaTeXReady),
+/* harmony export */   "RenderGroup": () => (/* binding */ RenderGroup)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime.js */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _liqvid_utils_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @liqvid/utils/react */ "./node_modules/@liqvid/utils/dist/esm/react.js");
+/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! liqvid */ "liqvid");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+
+
+
+
+
+// option of loading KaTeX asynchronously
+const KaTeXLoad = new Promise((resolve) => {
+    const script = document.querySelector("script[src*=\"katex.js\"], script[src*=\"katex.min.js\"]");
+    if (!script)
+        return;
+    if (window.hasOwnProperty("katex")) {
+        resolve(katex);
+    }
+    else {
+        script.addEventListener("load", () => resolve(katex));
+    }
+});
+// load macros from <head>
+const KaTeXMacros = new Promise((resolve) => {
+    const macros = {};
+    const scripts = Array.from(document.querySelectorAll("head > script[type='math/tex']"));
+    return Promise.all(scripts.map(script => fetch(script.src)
+        .then(res => {
+        if (res.ok)
+            return res.text();
+        throw new Error(`${res.status} ${res.statusText}: ${script.src}`);
+    })
+        .then(tex => {
+        Object.assign(macros, parseMacros(tex));
+    }))).then(() => resolve(macros));
+});
+/**
+ * Ready Promise
+ */
+const KaTeXReady = Promise.all([KaTeXLoad, KaTeXMacros]);
+/**
+ * Parse \newcommand macros in a file.
+ * Also supports \ktxnewcommand (for use in conjunction with MathJax).
+ * @param file TeX file to parse
+*/
+function parseMacros(file) {
+    const macros = {};
+    const rgx = /\\(?:ktx)?newcommand\{(.+?)\}(?:\[\d+\])?\{/g;
+    let match;
+    while (match = rgx.exec(file)) {
+        let body = "";
+        const macro = match[1];
+        let braceCount = 1;
+        for (let i = match.index + match[0].length; (braceCount > 0) && (i < file.length); ++i) {
+            const char = file[i];
+            if (char === "{") {
+                braceCount++;
+            }
+            else if (char === "}") {
+                braceCount--;
+                if (braceCount === 0)
+                    break;
+            }
+            else if (char === "\\") {
+                body += file.slice(i, i + 2);
+                ++i;
+                continue;
+            }
+            body += char;
+        }
+        macros[macro] = body;
+    }
+    return macros;
+}
+
+/** Component for KaTeX code */
+const KTX$1 = (0,react__WEBPACK_IMPORTED_MODULE_3__.forwardRef)(function KTX(props, ref) {
+    const spanRef = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)();
+    const { children, display = false, ...attrs } = props;
+    const [ready, resolve] = (0,_liqvid_utils_react__WEBPACK_IMPORTED_MODULE_1__.usePromise)();
+    // handle
+    (0,react__WEBPACK_IMPORTED_MODULE_3__.useImperativeHandle)(ref, () => ({
+        domElement: spanRef.current,
+        ready
+    }));
+    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
+        KaTeXReady.then(([katex, macros]) => {
+            katex.render(children.toString(), spanRef.current, {
+                displayMode: !!display,
+                macros,
+                strict: "ignore",
+                throwOnError: false,
+                trust: true
+            });
+            /* move katex into placeholder element */
+            const child = spanRef.current.firstElementChild;
+            // copy classes
+            for (let i = 0, len = child.classList.length; i < len; ++i) {
+                spanRef.current.classList.add(child.classList.item(i));
+            }
+            // move children
+            while (child.childNodes.length > 0) {
+                spanRef.current.appendChild(child.firstChild);
+            }
+            // delete child
+            child.remove();
+            // resolve promise
+            resolve();
+        });
+    }, [children]);
+    // Google Chrome fails without this
+    if (display) {
+        if (!attrs.style)
+            attrs.style = {};
+        attrs.style.display = "block";
+    }
+    return ((0,react_jsx_runtime_js__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { ...attrs, ref: spanRef }));
+});
+
+/** Component for KaTeX code */
+const KTX = (0,react__WEBPACK_IMPORTED_MODULE_3__.forwardRef)(function KTX(props, ref) {
+    const { obstruct = "canplay canplaythrough", reparse = false, ...attrs } = props;
+    const plain = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)();
+    const combined = (0,_liqvid_utils_react__WEBPACK_IMPORTED_MODULE_1__.combineRefs)(plain, ref);
+    const player = (0,liqvid__WEBPACK_IMPORTED_MODULE_2__.usePlayer)();
+    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
+        // obstruction
+        if (obstruct.match(/\bcanplay\b/)) {
+            player.obstruct("canplay", plain.current.ready);
+        }
+        if (obstruct.match("canplaythrough")) {
+            player.obstruct("canplaythrough", plain.current.ready);
+        }
+        // reparsing
+        if (reparse) {
+            plain.current.ready.then(() => player.reparseTree(plain.current.domElement));
+        }
+    }, []);
+    return ((0,react_jsx_runtime_js__WEBPACK_IMPORTED_MODULE_0__.jsx)(KTX$1, { ref: combined, ...attrs }));
+});
+
+/**
+ * Wait for several things to be rendered
+*/
+const RenderGroup = (0,react__WEBPACK_IMPORTED_MODULE_3__.forwardRef)(function RenderGroup(props, ref) {
+    const [ready, resolve] = (0,_liqvid_utils_react__WEBPACK_IMPORTED_MODULE_1__.usePromise)();
+    // handle
+    (0,react__WEBPACK_IMPORTED_MODULE_3__.useImperativeHandle)(ref, () => ({ ready }));
+    const elements = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)([]);
+    const promises = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)([]);
+    // reparsing
+    const player = (0,liqvid__WEBPACK_IMPORTED_MODULE_2__.usePlayer)();
+    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
+        // promises
+        Promise.all(promises.current).then(() => {
+            // reparse
+            if (props.reparse) {
+                player.reparseTree(leastCommonAncestor(elements.current));
+            }
+            // ready()
+            resolve();
+        });
+    }, []);
+    return (0,_liqvid_utils_react__WEBPACK_IMPORTED_MODULE_1__.recursiveMap)(props.children, node => {
+        if (shouldInspect(node)) {
+            const originalRef = node.ref;
+            return (0,react__WEBPACK_IMPORTED_MODULE_3__.cloneElement)(node, {
+                ref: (ref) => {
+                    if (!ref)
+                        return;
+                    elements.current.push(ref.domElement);
+                    promises.current.push(ref.ready);
+                    // pass along original ref
+                    if (typeof originalRef === "function") {
+                        originalRef(ref);
+                    }
+                    else if (originalRef && typeof originalRef === "object") {
+                        originalRef.current = ref;
+                    }
+                }
+            });
+        }
+        return node;
+    });
+});
+/**
+ * Determine whether the node is a <KTX> element
+ * @param node Element to check
+ */
+function shouldInspect(node) {
+    return (0,react__WEBPACK_IMPORTED_MODULE_3__.isValidElement)(node) && typeof node.type === "object" && (node.type === KTX || node.type === KTX$1);
+}
+/**
+ * Find least common ancestor of an array of elements
+ * @param elements Elements
+ * @returns Deepest node containing all passed elements
+ */
+function leastCommonAncestor(elements) {
+    if (elements.length === 0) {
+        throw new Error("Must pass at least one element");
+    }
+    let ancestor = elements[0];
+    let failing = elements.slice(1);
+    while (failing.length > 0) {
+        ancestor = ancestor.parentElement;
+        failing = failing.filter(node => !ancestor.contains(node));
+    }
+    return ancestor;
+}
+
+
+
 
 /***/ }),
 
-/***/ "../../liqvid/packages/mathjax/dist/index.mjs":
-/*!****************************************************!*\
-  !*** ../../liqvid/packages/mathjax/dist/index.mjs ***!
-  \****************************************************/
+/***/ "./node_modules/@liqvid/mathjax/dist/index.mjs":
+/*!*****************************************************!*\
+  !*** ./node_modules/@liqvid/mathjax/dist/index.mjs ***!
+  \*****************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -22784,8 +21761,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "MathJaxReady": () => (/* binding */ MathJaxReady),
 /* harmony export */   "RenderGroup": () => (/* binding */ RenderGroup)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime.js */ "../../liqvid/node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
-/* harmony import */ var _liqvid_utils_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @liqvid/utils/react */ "../../liqvid/packages/utils/dist/esm/react.js");
+/* harmony import */ var react_jsx_runtime_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime.js */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _liqvid_utils_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @liqvid/utils/react */ "./node_modules/@liqvid/utils/dist/esm/react.js");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! liqvid */ "liqvid");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
 
@@ -23040,246 +22017,20 @@ function leastCommonAncestor(elements) {
 
 /***/ }),
 
-/***/ "./node_modules/.pnpm/@liqvid+katex@0.0.5_e13502fb5f3217ce43b4cd65c3c516d5/node_modules/@liqvid/katex/dist/index.mjs":
-/*!***************************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@liqvid+katex@0.0.5_e13502fb5f3217ce43b4cd65c3c516d5/node_modules/@liqvid/katex/dist/index.mjs ***!
-  \***************************************************************************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "KTX": () => (/* binding */ KTX),
-/* harmony export */   "KaTeXReady": () => (/* binding */ KaTeXReady),
-/* harmony export */   "RenderGroup": () => (/* binding */ RenderGroup)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime.js */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
-/* harmony import */ var _liqvid_utils_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @liqvid/utils/react */ "./node_modules/.pnpm/@liqvid+utils@1.3.0/node_modules/@liqvid/utils/dist/esm/react.js");
-/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! liqvid */ "liqvid");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
-
-
-
-
-
-// option of loading KaTeX asynchronously
-const KaTeXLoad = new Promise((resolve) => {
-    const script = document.querySelector("script[src*=\"katex.js\"], script[src*=\"katex.min.js\"]");
-    if (!script)
-        return;
-    if (window.hasOwnProperty("katex")) {
-        resolve(katex);
-    }
-    else {
-        script.addEventListener("load", () => resolve(katex));
-    }
-});
-// load macros from <head>
-const KaTeXMacros = new Promise((resolve) => {
-    const macros = {};
-    const scripts = Array.from(document.querySelectorAll("head > script[type='math/tex']"));
-    return Promise.all(scripts.map(script => fetch(script.src)
-        .then(res => {
-        if (res.ok)
-            return res.text();
-        throw new Error(`${res.status} ${res.statusText}: ${script.src}`);
-    })
-        .then(tex => {
-        Object.assign(macros, parseMacros(tex));
-    }))).then(() => resolve(macros));
-});
-/**
- * Ready Promise
- */
-const KaTeXReady = Promise.all([KaTeXLoad, KaTeXMacros]);
-/**
- * Parse \newcommand macros in a file.
- * Also supports \ktxnewcommand (for use in conjunction with MathJax).
- * @param file TeX file to parse
-*/
-function parseMacros(file) {
-    const macros = {};
-    const rgx = /\\(?:ktx)?newcommand\{(.+?)\}(?:\[\d+\])?\{/g;
-    let match;
-    while (match = rgx.exec(file)) {
-        let body = "";
-        const macro = match[1];
-        let braceCount = 1;
-        for (let i = match.index + match[0].length; (braceCount > 0) && (i < file.length); ++i) {
-            const char = file[i];
-            if (char === "{") {
-                braceCount++;
-            }
-            else if (char === "}") {
-                braceCount--;
-                if (braceCount === 0)
-                    break;
-            }
-            else if (char === "\\") {
-                body += file.slice(i, i + 2);
-                ++i;
-                continue;
-            }
-            body += char;
-        }
-        macros[macro] = body;
-    }
-    return macros;
-}
-
-/** Component for KaTeX code */
-const KTX$1 = (0,react__WEBPACK_IMPORTED_MODULE_3__.forwardRef)(function KTX(props, ref) {
-    const spanRef = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)();
-    const { children, display = false, ...attrs } = props;
-    const [ready, resolve] = (0,_liqvid_utils_react__WEBPACK_IMPORTED_MODULE_1__.usePromise)();
-    // handle
-    (0,react__WEBPACK_IMPORTED_MODULE_3__.useImperativeHandle)(ref, () => ({
-        domElement: spanRef.current,
-        ready
-    }));
-    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
-        KaTeXReady.then(([katex, macros]) => {
-            katex.render(children.toString(), spanRef.current, {
-                displayMode: !!display,
-                macros,
-                strict: "ignore",
-                throwOnError: false,
-                trust: true
-            });
-            /* move katex into placeholder element */
-            const child = spanRef.current.firstElementChild;
-            // copy classes
-            for (let i = 0, len = child.classList.length; i < len; ++i) {
-                spanRef.current.classList.add(child.classList.item(i));
-            }
-            // move children
-            while (child.childNodes.length > 0) {
-                spanRef.current.appendChild(child.firstChild);
-            }
-            // delete child
-            child.remove();
-            // resolve promise
-            resolve();
-        });
-    }, [children]);
-    // Google Chrome fails without this
-    if (display) {
-        if (!attrs.style)
-            attrs.style = {};
-        attrs.style.display = "block";
-    }
-    return ((0,react_jsx_runtime_js__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { ...attrs, ref: spanRef }));
-});
-
-/** Component for KaTeX code */
-const KTX = (0,react__WEBPACK_IMPORTED_MODULE_3__.forwardRef)(function KTX(props, ref) {
-    const { obstruct = "canplay canplaythrough", reparse = false, ...attrs } = props;
-    const plain = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)();
-    const combined = (0,_liqvid_utils_react__WEBPACK_IMPORTED_MODULE_1__.combineRefs)(plain, ref);
-    const player = (0,liqvid__WEBPACK_IMPORTED_MODULE_2__.usePlayer)();
-    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
-        // obstruction
-        if (obstruct.match(/\bcanplay\b/)) {
-            player.obstruct("canplay", plain.current.ready);
-        }
-        if (obstruct.match("canplaythrough")) {
-            player.obstruct("canplaythrough", plain.current.ready);
-        }
-        // reparsing
-        if (reparse) {
-            plain.current.ready.then(() => player.reparseTree(plain.current.domElement));
-        }
-    }, []);
-    return ((0,react_jsx_runtime_js__WEBPACK_IMPORTED_MODULE_0__.jsx)(KTX$1, { ref: combined, ...attrs }));
-});
-
-/**
- * Wait for several things to be rendered
-*/
-const RenderGroup = (0,react__WEBPACK_IMPORTED_MODULE_3__.forwardRef)(function RenderGroup(props, ref) {
-    const [ready, resolve] = (0,_liqvid_utils_react__WEBPACK_IMPORTED_MODULE_1__.usePromise)();
-    // handle
-    (0,react__WEBPACK_IMPORTED_MODULE_3__.useImperativeHandle)(ref, () => ({ ready }));
-    const elements = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)([]);
-    const promises = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)([]);
-    // reparsing
-    const player = (0,liqvid__WEBPACK_IMPORTED_MODULE_2__.usePlayer)();
-    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
-        // promises
-        Promise.all(promises.current).then(() => {
-            // reparse
-            if (props.reparse) {
-                player.reparseTree(leastCommonAncestor(elements.current));
-            }
-            // ready()
-            resolve();
-        });
-    }, []);
-    return (0,_liqvid_utils_react__WEBPACK_IMPORTED_MODULE_1__.recursiveMap)(props.children, node => {
-        if (shouldInspect(node)) {
-            const originalRef = node.ref;
-            return (0,react__WEBPACK_IMPORTED_MODULE_3__.cloneElement)(node, {
-                ref: (ref) => {
-                    if (!ref)
-                        return;
-                    elements.current.push(ref.domElement);
-                    promises.current.push(ref.ready);
-                    // pass along original ref
-                    if (typeof originalRef === "function") {
-                        originalRef(ref);
-                    }
-                    else if (originalRef && typeof originalRef === "object") {
-                        originalRef.current = ref;
-                    }
-                }
-            });
-        }
-        return node;
-    });
-});
-/**
- * Determine whether the node is a <KTX> element
- * @param node Element to check
- */
-function shouldInspect(node) {
-    return (0,react__WEBPACK_IMPORTED_MODULE_3__.isValidElement)(node) && typeof node.type === "object" && (node.type === KTX || node.type === KTX$1);
-}
-/**
- * Find least common ancestor of an array of elements
- * @param elements Elements
- * @returns Deepest node containing all passed elements
- */
-function leastCommonAncestor(elements) {
-    if (elements.length === 0) {
-        throw new Error("Must pass at least one element");
-    }
-    let ancestor = elements[0];
-    let failing = elements.slice(1);
-    while (failing.length > 0) {
-        ancestor = ancestor.parentElement;
-        failing = failing.filter(node => !ancestor.contains(node));
-    }
-    return ancestor;
-}
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/.pnpm/@liqvid+react-three@1.0.2_c057bb8d808f2fe73d479b0ea7a5f353/node_modules/@liqvid/react-three/dist/index.mjs":
-/*!***************************************************************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@liqvid+react-three@1.0.2_c057bb8d808f2fe73d479b0ea7a5f353/node_modules/@liqvid/react-three/dist/index.mjs ***!
-  \***************************************************************************************************************************************/
+/***/ "./node_modules/@liqvid/react-three/dist/index.mjs":
+/*!*********************************************************!*\
+  !*** ./node_modules/@liqvid/react-three/dist/index.mjs ***!
+  \*********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Canvas": () => (/* binding */ Canvas)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime.js */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
-/* harmony import */ var _juggle_resize_observer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @juggle/resize-observer */ "./node_modules/.pnpm/@juggle+resize-observer@3.3.1/node_modules/@juggle/resize-observer/lib/exports/resize-observer.js");
-/* harmony import */ var _react_three_drei_core_useContextBridge_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @react-three/drei/core/useContextBridge.js */ "./node_modules/.pnpm/@react-three+drei@8.19.4_734b800b63683de9231c2d7d9525a5ba/node_modules/@react-three/drei/core/useContextBridge.js");
-/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/.pnpm/@react-three+fiber@7.0.26_fd377fdf312df1f300847b85f25960c5/node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
+/* harmony import */ var react_jsx_runtime_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime.js */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _juggle_resize_observer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @juggle/resize-observer */ "./node_modules/@juggle/resize-observer/lib/exports/resize-observer.js");
+/* harmony import */ var _react_three_drei_core_useContextBridge_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @react-three/drei/core/useContextBridge.js */ "./node_modules/@react-three/drei/core/useContextBridge.js");
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! liqvid */ "liqvid");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
 
@@ -23312,10 +22063,237 @@ function Fixes(props) {
 
 /***/ }),
 
-/***/ "../../liqvid/packages/utils/dist/esm/misc.js":
-/*!****************************************************!*\
-  !*** ../../liqvid/packages/utils/dist/esm/misc.js ***!
-  \****************************************************/
+/***/ "./node_modules/@liqvid/xyjax/dist/index.mjs":
+/*!***************************************************!*\
+  !*** ./node_modules/@liqvid/xyjax/dist/index.mjs ***!
+  \***************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "extendXY": () => (/* binding */ extendXY),
+/* harmony export */   "fromb52": () => (/* binding */ fromb52),
+/* harmony export */   "tob52": () => (/* binding */ tob52),
+/* harmony export */   "useAnimateArrows": () => (/* binding */ useAnimateArrows),
+/* harmony export */   "xyDecodeColor": () => (/* binding */ xyDecodeColor),
+/* harmony export */   "xyEncodeColor": () => (/* binding */ xyEncodeColor)
+/* harmony export */ });
+/* harmony import */ var _liqvid_utils_misc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @liqvid/utils/misc */ "./node_modules/@liqvid/utils/dist/esm/misc.js");
+/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! liqvid */ "liqvid");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+
+
+
+
+/**
+  XyJax shenanigans
+*/
+/**
+ * Animate XyJax arrows
+ */
+function useAnimateArrows(o, deps) {
+    const playback = (0,liqvid__WEBPACK_IMPORTED_MODULE_1__.usePlayback)();
+    const tail = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)();
+    const init = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)({});
+    /* fading function */
+    const fadeTail = (0,react__WEBPACK_IMPORTED_MODULE_2__.useCallback)((u) => {
+        if (!tail.current)
+            return;
+        const { x1, x2, y1, y2 } = init.current;
+        if (u === 0) {
+            tail.current.style.opacity = "0";
+        }
+        else {
+            tail.current.style.opacity = "1";
+            tail.current.setAttribute("x2", (0,_liqvid_utils_misc__WEBPACK_IMPORTED_MODULE_0__.lerp)(x1, x2, u).toString());
+            tail.current.setAttribute("y2", (0,_liqvid_utils_misc__WEBPACK_IMPORTED_MODULE_0__.lerp)(y1, y2, u).toString());
+        }
+    }, []);
+    /* initialize */
+    (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
+        o.ref.current.ready.then(() => {
+            /* tail animation */
+            tail.current = o.ref.current.domElement.querySelector(o.tail);
+            for (const key of ["x1", "y1", "x2", "y2"]) {
+                init.current[key] = parseFloat(tail.current.getAttribute(key));
+            }
+            fadeTail(o.tailFn(playback.currentTime));
+            /* head animation */
+            const headNodes = Array.from(o.ref.current.domElement.querySelectorAll(o.head));
+            for (const head of headNodes) {
+                playback.newAnimation([{ opacity: 0 }, { opacity: 1 }], o.headFade)(head);
+            }
+            /* label animation */
+            const labelNodes = Array.from(o.ref.current.domElement.querySelectorAll(o.label));
+            for (const label of labelNodes) {
+                playback.newAnimation([{ opacity: 0 }, { opacity: 1 }], o.labelFade)(label);
+            }
+        });
+    }, deps);
+    // tail animation
+    (0,liqvid__WEBPACK_IMPORTED_MODULE_1__.useTime)(fadeTail, o.tailFn, deps);
+}
+// absolutely bonkers interception
+let extended = false;
+Object.defineProperty(MathJax, "AST", {
+    get() {
+        return this.__xypic;
+    },
+    set(value) {
+        this.__xypic = value;
+        if (!extended) {
+            extendXY();
+            extended = true;
+        }
+        return this.__xypic = value;
+    }
+});
+function extendXY() {
+    const AST = MathJax.AST;
+    const xypic = MathJax.xypicGlobalContext;
+    const { modifierRepository } = xypic.repositories;
+    /* inject ourselves into xypic */
+    const prototype = AST.Modifier.Shape.Alphabets.prototype;
+    const preprocess = prototype.preprocess.bind(prototype);
+    prototype.preprocess = function (...args) {
+        if (this.alphabets.startsWith("color")) {
+            return modifierRepository.get("color").preprocess(...args);
+        }
+        else if (this.alphabets.startsWith("data")) {
+            return modifierRepository.get("data").preprocess(...args);
+        }
+        return preprocess(...args);
+    };
+    const modifyShape = prototype.modifyShape.bind(prototype);
+    prototype.modifyShape = function (...args) {
+        if (this.alphabets.startsWith("color")) {
+            const color = this.alphabets.substr("color".length);
+            return modifierRepository.get("color").modifyShape(...args, color);
+        }
+        else if (this.alphabets.startsWith("data")) {
+            const data = this.alphabets.substr("data".length);
+            return modifierRepository.get("data").modifyShape(...args, data);
+        }
+        return modifyShape(...args);
+    };
+    // color
+    modifierRepository.put("color", new class extends AST.Modifier.Shape.ChangeColor {
+        modifyShape(context, objectShape, restModifiers, color) {
+            this.colorName = xyDecodeColor(color);
+            return super.modifyShape(context, objectShape, restModifiers);
+        }
+    });
+    class ChangeDataShape {
+        data;
+        shape;
+        constructor(data, shape) {
+            this.data = data;
+            this.shape = shape;
+        }
+        draw(svg) {
+            const g = svg.createGroup();
+            Object.assign(g.drawArea.dataset, JSON.parse("{" + fromb52(this.data) + "}"));
+            this.shape.draw(g);
+        }
+        getBoundingBox() {
+            return this.shape.getBoundingBox();
+        }
+    }
+    // data
+    modifierRepository.put("data", new class extends AST.Modifier {
+        preprocess() { }
+        modifyShape(context, objectShape, restModifiers, data) {
+            objectShape = this.proceedModifyShape(context, objectShape, restModifiers);
+            return new ChangeDataShape(data, objectShape);
+        }
+    });
+}
+const MAP = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+function to_b58(B, A) {
+    let d = [], s = "", j, c, n;
+    for (let i = 0; i < B.length; ++i) {
+        j = 0, c = B[i];
+        s += c || s.length ^ i ? "" : 1;
+        while (j in d || c) {
+            n = d[j];
+            n = n ? n * 256 + c : c;
+            c = n / A.length | 0;
+            d[j] = n % A.length;
+            j++;
+        }
+    }
+    while (j--)
+        s += A[d[j]];
+    return s;
+}
+function from_b58(S, A) {
+    let d = [], b = [], j, c, n;
+    for (let i = 0; i < S.length; ++i) {
+        j = 0, c = A.indexOf(S[i]);
+        if (c < 0)
+            return undefined;
+        c || b.length ^ i ? i : b.push(0);
+        while (j in d || c) {
+            n = d[j];
+            n = n ? n * A.length + c : c;
+            c = n >> 8;
+            d[j] = n % 256;
+            j++;
+        }
+    }
+    while (j--)
+        b.push(d[j]);
+    return new Uint8Array(b);
+}
+/**
+ * Encode a hex color for XyJax
+ */
+function xyEncodeColor(color) {
+    return color.toUpperCase().replace(/[#0-9]/g, (char) => {
+        if (char === "#")
+            return "";
+        return String.fromCharCode("G".charCodeAt(0) + parseInt(char));
+    });
+}
+/**
+ * Decode a hex color for XyJax
+ */
+function xyDecodeColor(color) {
+    return "#" + color.replace(/[G-P]/g, (digit) => {
+        return (digit.charCodeAt(0) - "G".charCodeAt(0)).toString();
+    });
+}
+/**
+ * Encode an object for XyJax
+ */
+function tob52(str) {
+    const arr = [];
+    for (let i = 0; i < str.length; ++i) {
+        arr[i] = str.charCodeAt(i);
+    }
+    return to_b58(new Uint8Array(arr), MAP);
+}
+/**
+ * Decode an object for XyJax
+ */
+function fromb52(str) {
+    const arr = from_b58(str, MAP);
+    let ret = "";
+    for (let i = 0; i < arr.length; ++i) {
+        ret += String.fromCharCode(arr[i]);
+    }
+    return ret;
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@liqvid/utils/dist/esm/misc.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/@liqvid/utils/dist/esm/misc.js ***!
+  \*****************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -23373,83 +22351,10 @@ function waitFor(callback, interval = 10) {
 
 /***/ }),
 
-/***/ "../../liqvid/packages/utils/dist/esm/react.js":
-/*!*****************************************************!*\
-  !*** ../../liqvid/packages/utils/dist/esm/react.js ***!
-  \*****************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "captureRef": () => (/* binding */ captureRef),
-/* harmony export */   "combineRefs": () => (/* binding */ combineRefs),
-/* harmony export */   "recursiveMap": () => (/* binding */ recursiveMap),
-/* harmony export */   "useForceUpdate": () => (/* binding */ useForceUpdate),
-/* harmony export */   "usePromise": () => (/* binding */ usePromise)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-
-function combineRefs(...args) {
-    return (o) => {
-        for (const ref of args) {
-            if (typeof ref === "function") {
-                ref(o);
-            }
-            else if (ref === null) {
-            }
-            else if (typeof ref === "object" && ref.hasOwnProperty("current")) {
-                ref.current = o;
-            }
-        }
-    };
-}
-function useForceUpdate() {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)((c) => c + 1, 0)[1];
-}
-const captureRef = (callback, innerRef) => (ref) => {
-    if (ref !== null) {
-        callback(ref);
-    }
-    if (innerRef === null) {
-        return;
-    }
-    else if (typeof innerRef === "function") {
-        innerRef(ref);
-    }
-    else if (typeof innerRef === "object") {
-        innerRef.current = ref;
-    }
-};
-function recursiveMap(children, fn) {
-    return react__WEBPACK_IMPORTED_MODULE_0__.Children.map(children, (child) => {
-        if (!(0,react__WEBPACK_IMPORTED_MODULE_0__.isValidElement)(child)) {
-            return child;
-        }
-        if ("children" in child.props) {
-            child = (0,react__WEBPACK_IMPORTED_MODULE_0__.cloneElement)(child, {
-                children: recursiveMap(child.props.children, fn)
-            });
-        }
-        return fn(child);
-    });
-}
-function usePromise(deps = []) {
-    const resolve = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
-    const reject = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
-    const promise = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => new Promise((res, rej) => {
-        resolve.current = res;
-        reject.current = rej;
-    }), deps);
-    return [promise, resolve.current, reject.current];
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/.pnpm/@liqvid+utils@1.3.0/node_modules/@liqvid/utils/dist/esm/react.js":
-/*!*********************************************************************************************!*\
-  !*** ./node_modules/.pnpm/@liqvid+utils@1.3.0/node_modules/@liqvid/utils/dist/esm/react.js ***!
-  \*********************************************************************************************/
+/***/ "./node_modules/@liqvid/utils/dist/esm/react.js":
+/*!******************************************************!*\
+  !*** ./node_modules/@liqvid/utils/dist/esm/react.js ***!
+  \******************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -23606,25 +22511,18 @@ var __webpack_exports__ = {};
   !*** ./src/index.tsx ***!
   \***********************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/.pnpm/react@17.0.2/node_modules/react/jsx-runtime.js");
-/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! liqvid */ "liqvid");
-/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "react-dom");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _FiveD__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FiveD */ "./src/FiveD.tsx");
-/* harmony import */ var _Intro__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Intro */ "./src/Intro.tsx");
-/* harmony import */ var _KaTeX__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./KaTeX */ "./src/KaTeX.tsx");
-/* harmony import */ var _MathJax__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./MathJax */ "./src/MathJax.tsx");
-/* harmony import */ var _ThreeD__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ThreeD */ "./src/ThreeD.tsx");
-/* harmony import */ var _TwoD__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./TwoD */ "./src/TwoD.tsx");
-/* harmony import */ var _XyJax__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./XyJax */ "./src/XyJax.tsx");
-/* harmony import */ var _env_controls__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @env/controls */ "./src/@development/controls.tsx");
-/* harmony import */ var _env_media_url__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @env/media-url */ "./src/@development/media-url.ts");
-/* harmony import */ var _lib_LoadingScreen__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @lib/LoadingScreen */ "./lib/LoadingScreen.tsx");
-/* harmony import */ var _markers__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./markers */ "./src/markers.ts");
-
-
-
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "react-dom");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _FiveD__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FiveD */ "./src/FiveD.tsx");
+/* harmony import */ var _Intro__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Intro */ "./src/Intro.tsx");
+/* harmony import */ var _KaTeX__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./KaTeX */ "./src/KaTeX.tsx");
+/* harmony import */ var _MathJax__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./MathJax */ "./src/MathJax.tsx");
+/* harmony import */ var _ThreeD__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ThreeD */ "./src/ThreeD.tsx");
+/* harmony import */ var _TwoD__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./TwoD */ "./src/TwoD.tsx");
+/* harmony import */ var _XyJax__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./XyJax */ "./src/XyJax.tsx");
+/* harmony import */ var _env_controls__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @env/controls */ "./src/@development/controls.tsx");
+/* harmony import */ var _lib_LoadingScreen__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @lib/LoadingScreen */ "./lib/LoadingScreen.tsx");
 
 
 
@@ -23637,14 +22535,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Lesson() {
-    const thumbs = {
-        frequency: 1,
-        path: `${_env_media_url__WEBPACK_IMPORTED_MODULE_11__.MEDIA_URL}/thumbs/%s.png`,
-        highlights: _markers__WEBPACK_IMPORTED_MODULE_13__.highlights
-    };
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(liqvid__WEBPACK_IMPORTED_MODULE_1__.Player, Object.assign({ controls: _env_controls__WEBPACK_IMPORTED_MODULE_10__.controls, script: _markers__WEBPACK_IMPORTED_MODULE_13__.script }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_LoadingScreen__WEBPACK_IMPORTED_MODULE_12__.LoadingScreen, {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(liqvid__WEBPACK_IMPORTED_MODULE_1__.Audio, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("source", { src: `${_env_media_url__WEBPACK_IMPORTED_MODULE_11__.MEDIA_URL}/audio/audio.webm`, type: "audio/webm" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("source", { src: `${_env_media_url__WEBPACK_IMPORTED_MODULE_11__.MEDIA_URL}/audio/audio.mp4`, type: "audio/mp4" })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Intro__WEBPACK_IMPORTED_MODULE_4__["default"], {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_KaTeX__WEBPACK_IMPORTED_MODULE_5__["default"], {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_MathJax__WEBPACK_IMPORTED_MODULE_6__["default"], {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_XyJax__WEBPACK_IMPORTED_MODULE_9__["default"], {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_TwoD__WEBPACK_IMPORTED_MODULE_8__["default"], {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_ThreeD__WEBPACK_IMPORTED_MODULE_7__["default"], {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_FiveD__WEBPACK_IMPORTED_MODULE_3__["default"], {})] })));
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_env_controls__WEBPACK_IMPORTED_MODULE_9__.UI, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_LoadingScreen__WEBPACK_IMPORTED_MODULE_10__.LoadingScreen, {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Intro__WEBPACK_IMPORTED_MODULE_3__["default"], {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_KaTeX__WEBPACK_IMPORTED_MODULE_4__["default"], {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_MathJax__WEBPACK_IMPORTED_MODULE_5__["default"], {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_XyJax__WEBPACK_IMPORTED_MODULE_8__["default"], {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_TwoD__WEBPACK_IMPORTED_MODULE_7__["default"], {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_ThreeD__WEBPACK_IMPORTED_MODULE_6__["default"], {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_FiveD__WEBPACK_IMPORTED_MODULE_2__["default"], {})] }));
 }
-react_dom__WEBPACK_IMPORTED_MODULE_2__.render((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Lesson, {}), document.querySelector("main"));
+react_dom__WEBPACK_IMPORTED_MODULE_1__.render((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Lesson, {}), document.querySelector("main"));
 
 })();
 

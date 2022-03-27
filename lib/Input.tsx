@@ -1,7 +1,6 @@
 import {usePlayer, Utils} from "liqvid";
 import RangeTouch from "rangetouch";
-import * as React from "react";
-import {useCallback, useEffect, useMemo, useRef} from "react";
+import {forwardRef, useCallback, useEffect, useMemo, useRef} from "react";
 
 const {onClick} = Utils.mobile;
 const {combineRefs} = Utils.react;
@@ -13,7 +12,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 
 const NON_TEXT_TYPES = ["button", "checkbox", "file", "hidden", "image", "radio", "range", "reset", "submit"];
 
-export default React.forwardRef((props: Props, ref: React.Ref<HTMLInputElement>) => {
+export default forwardRef<HTMLInputElement, Props>((props, ref) => {
   const player = usePlayer();
   const innerRef = useRef<HTMLInputElement>();
   const combinedRef = combineRefs(ref, innerRef);

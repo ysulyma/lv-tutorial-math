@@ -4,7 +4,7 @@ import {Utils} from "liqvid";
 import {useMemo} from "react";
 import {playback, script} from "./markers";
 
-const {during, from} = Utils.authoring,
+const {from} = Utils.authoring,
   {onClick} = Utils.mobile,
   {formatTime, formatTimeMs} = Utils.time;
 
@@ -26,10 +26,10 @@ export default function Intro() {
   }), []);
 
   return (
-    <section id="sec-intro" {...during("intro/")}>
+    <section id="sec-intro" data-during="intro/">
       <h1>Liqvid math tutorial</h1>
       {/* table of contents */}
-      <table className="toc" {...during("intro/toc")}>
+      <table className="toc" data-during="intro/toc">
         <tbody>
           {contents.map((row, i) => (
             <tr key={row[0]} data-affords="click">

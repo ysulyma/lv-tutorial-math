@@ -1,4 +1,3 @@
-import {Audio, Player} from "liqvid";
 import * as ReactDOM from "react-dom";
 
 // slides
@@ -10,26 +9,13 @@ import ThreeD from "./ThreeD";
 import TwoD from "./TwoD";
 import XyJaxSlide from "./XyJax";
 
-import {controls} from "@env/controls";
-import {MEDIA_URL} from "@env/media-url";
+import {UI} from "@env/controls";
 import {LoadingScreen} from "@lib/LoadingScreen";
 
-import {highlights, script} from "./markers";
-
 function Lesson() {
-  const thumbs = {
-    frequency: 1,
-    path: `${MEDIA_URL}/thumbs/%s.png`,
-    highlights
-  };
-
   return (
-    <Player controls={controls} script={script}>
-      {<LoadingScreen/>}
-      <Audio>
-        <source src={`${MEDIA_URL}/audio/audio.webm`} type="audio/webm"/>
-        <source src={`${MEDIA_URL}/audio/audio.mp4`} type="audio/mp4"/>
-      </Audio>
+    <UI>
+      <LoadingScreen/>
       <Intro/>
       <KaTeXSlide/>
       <MathJaxSlide/>
@@ -37,8 +23,28 @@ function Lesson() {
       <TwoD/>
       <ThreeD/>
       <FiveD/>
-    </Player>
+    </UI>
   );
 }
 
-ReactDOM.render(<Lesson/>, document.querySelector("main"));
+ReactDOM.render(<Lesson />, document.querySelector("main"));
+
+/* Typescript for Three/R3F */
+import type {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+import type {Object3DNode} from "@react-three/fiber";
+import type {ParametricGeometry} from "three/examples/jsm/geometries/ParametricGeometry";
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      orbitControls: Object3DNode<OrbitControls, typeof OrbitControls>;
+      parametricGeometry: Object3DNode<ParametricGeometry, typeof ParametricGeometry>;
+    }
+  }
+
+  namespace THREE {
+    const LineMaterial: any;
+    const LineSegments2: any;
+    const LineSegmentsGeometry: any;
+  }
+}

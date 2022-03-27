@@ -4,7 +4,7 @@ import {useMarkerUpdate} from "liqvid";
 import {useEffect, useRef} from "react";
 import * as THREE from "three";
 import {script} from "../markers";
-import {MEDIA_URL} from "../media-url";
+import {MEDIA_URL} from "@env/media-url";
 
 const arrowIndex = script.markerNumberOf("3d/svg");
 

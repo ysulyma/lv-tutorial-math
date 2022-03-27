@@ -65,8 +65,6 @@ export const markers = [
 export const script = new Script(markers);
 export const playback = script.playback;
 
-// playback.seek(script.parseStart("xyjx/arrows/anim"));
-
 export const highlights = [
   {title: "KaTeX", time: script.parseStart("ktx/")},
   {title: "MathJax", time: script.parseStart("mjx/")},

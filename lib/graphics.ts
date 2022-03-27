@@ -386,8 +386,6 @@ const triTable = new Int32Array([
   -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
 ]);
 
-type Fn = (x: number, y: number, z: number) => number;
-
 /* polyfill old behavior */
 // THREE.Geometry.prototype.computeCentroids = function () {
 //   for (const face of this.faces) {

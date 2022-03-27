@@ -5,8 +5,8 @@ import {Player} from "liqvid";
 */
 export function LoadingScreen() {
   return (
-    <div className="rp-loading-screen" data-affords="click">
-      <div className="rp-loading-spinner"/>
+    <div className="lv-loading-screen" data-affords="click">
+      <div className="lv-loading-spinner"/>
     </div>
   );
 }

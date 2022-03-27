@@ -11,11 +11,12 @@ const fadeTail = animate({
   easing: bezier(...easings.easeOutCubic)
 });
 
-const fadeHead = animate({
-  startTime: script.parseStart("xyjx/arrows/anim") + 500,
+const headFade: KeyframeEffectOptions = {
+  delay: script.parseStart("xyjx/arrows/anim") + 500,
   duration: 200,
-  easing: bezier(...easings.easeOutCubic)
-});
+  easing: "ease-out",
+  fill: "both"
+};
 
 const {raw} = String;
 
@@ -27,15 +28,15 @@ export function AnimatedArrows() {
     tail: "*[data-anim] line",
     label: ".fade",
     ref,
-    headFn: fadeHead,
     tailFn: fadeTail,
-    labelFn: fadeHead
+    headFade,
+    labelFade: headFade
   });
 
   const line = "\"anim\":true";
 
   return (
-    <MJX reparse resize ref={ref} data-during="xyjx/arrows">{raw`
+    <MJX reparse ref={ref} data-during="xyjx/arrows">{raw`
       ${"\\"}xymatrix{
         {*} \ar[d]_-0 \ar[r]^-{t_0} & \mathbb R \ar[d]^- p\\
         I \ar[r]_-{\alpha} \ar@[data${tob52(line)}]@{..>}[ur]^-{\class{fade}{\exists!\ \widetilde\alpha}} & S^1

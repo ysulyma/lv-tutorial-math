@@ -4,10 +4,9 @@ import GlowOrb from "@lib/GlowOrb";
 import Input from "@lib/Input";
 import {KTX} from "@liqvid/katex";
 import {Utils} from "liqvid";
-import * as React from "react";
-import {useCallback, useEffect, useRef, useState} from "react";
+import {Fragment, useCallback, useEffect, useRef, useState} from "react";
 
-const {during, from} = Utils.authoring,
+const {from} = Utils.authoring,
       {dragHelperReact} = Utils.interactivity,
       {constrain, range} = Utils.misc,
       {anyHover} = Utils.mobile,
@@ -80,7 +79,7 @@ export default function TwoD() {
   }, []);
 
   return (
-    <section id="sec-2d" {...during("2d/")}>
+    <section id="sec-2d" data-during="2d/">
       <svg id="tangent-demo" ref={svgRef} viewBox={"-5.3 -5.3 10.6 10.6"} data-affords="click">
         <CartesianGrid/>
         <path className="plot" d={graph(negF, a, b, 200)}/>
@@ -132,21 +131,21 @@ function CartesianGrid() {
   return (
     <g>
       {range(minX, maxX + 1).map(n => n !== 0 && (
-        <React.Fragment key={`x_${n}`}>
+        <Fragment key={`x_${n}`}>
           <line className="gridline" x1={n} x2={n} y1={-maxY} y2={-minY}/>
           <line className="axis-tick" x1={n} x2={n} y1="-0.15" y2="0.15"/>
           <text className="axis-label" x={n} y={0} dx={0.15} dy={.5}>{n.toString().replace("-", "–")}</text>
-        </React.Fragment>
+        </Fragment>
       ))}
 
       <text className="axis-label" x={0} y={0} dx={0.25} dy={0.4}>0</text>
 
       {range(minY, maxY + 1).map(n => n !== 0 && (
-        <React.Fragment key={`y-${n}`}>
+        <Fragment key={`y-${n}`}>
           <line className="gridline" x1={minX} x2={maxX} y1={-n} y2={-n}/>
           <line className="axis-tick" x1={-.15} x2={.15} y1={-n} y2={-n}/>
           <text className="axis-label" x={0} y={-n} dx={0.4}>{n.toString().replace("-", "–")}</text>
-        </React.Fragment>
+        </Fragment>
       ))}
 
       <line className="major-axis" x1={minX} x2={maxX} y1="0" y2="0"/>

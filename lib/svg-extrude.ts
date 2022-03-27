@@ -1,5 +1,4 @@
-import * as THREE from "three";
-import SVGLoader from "three/examples/jsm/loaders/SVGLoader";
+import {SVGLoader} from "three/examples/jsm/loaders/SVGLoader";
 
 export default function extrudeSvg(path: string): Promise<THREE.Group> {
   return new Promise((resolve, reject) => {

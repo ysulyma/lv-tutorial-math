@@ -1,11 +1,11 @@
-import * as React from "react";
+import {forwardRef} from "react";
 
 type Props = React.SVGProps<SVGCircleElement> & {
-  fatR?: number;
+  fatR?: string;
   fatRef?: React.Ref<SVGCircleElement>;
 };
 
-export default React.forwardRef((props: Props, ref: React.Ref<SVGCircleElement>) => {
+export default forwardRef<SVGCircleElement, Props>((props, ref) => {
   const {className, fatR, fatRef, ...attrs} = props;
   return (
     <>

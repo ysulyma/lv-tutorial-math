@@ -1,11 +1,11 @@
 import {MathJaxPrompt} from "@env/prompts";
 import {Definition, Example} from "@lib/Block";
 import Link from "@lib/Link";
-import {Handle, MJX, MJXText} from "@liqvid/mathjax";
+import {Handle, MJX} from "@liqvid/mathjax";
 import {Utils} from "liqvid";
 import {useRef} from "react";
 
-const {from, during} = Utils.authoring;
+const {from} = Utils.authoring;
 const {raw} = String;
 
 export default function MathJaxSlide() {
@@ -14,26 +14,9 @@ export default function MathJaxSlide() {
   const m3 = raw`\data{from-first="mjx/align-3"}`;
 
   const ref = useRef<Handle>();
-  // useEffect(() => {
-  //   console.log(ref.current.domElement);
-  //   ref.current.ready.then(() => {
-  //     console.log(ref.current.domElement);
-  //   })
-  // })
 
   return (
     <section id="sec-mathjax" data-during="mjx/">
-      <MJXText>{raw`
-The real numbers are denoted by \(\R n\).
-
-
-Let \(\space{X}\) be a topological space.
-
-
-\( \annotate[text,url]{O(n)}{orthogonal group}{https://en.wikipedia.org/wiki/Orthogonal_group} \)
-
-
-\( \data{first-prop="hello",second-prop="world"}{\exp} \)`}</MJXText>
       <Definition blockTitle="Derivative of a function">
         The <dfn>derivative of <MJX>f</MJX> at <MJX>x</MJX>,</dfn> denoted <MJX>f'(x),</MJX> is
         <MJX className="goose" display {...from("mjx/display")} reparse>{raw`f'(x) := \lim_{\epsilon\to0}\frac{f(x+\epsilon)-f(x)}{\epsilon}.`}</MJX>

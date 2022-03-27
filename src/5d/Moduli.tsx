@@ -1,15 +1,8 @@
-import {useContext, useEffect, useMemo, useState} from "react";
-
-// THREE
-import * as THREE from "three";
-import type {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
-
-// R3F
-import {useFrame, useThree} from "@react-three/fiber";
-
-// @lib
 import {marchingCubes, marchingSquares} from "@lib/graphics";
 import {Canvas} from "@liqvid/react-three";
+import {useFrame, useThree} from "@react-three/fiber";
+import {useEffect, useMemo, useRef} from "react";
+import type {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 
 /* camera */
 function CameraControls() {
@@ -26,11 +19,11 @@ function CameraControls() {
   camera.up.set(0, 0, 1);
 
   // controls
-  const [controls] = useState<OrbitControls>();
-  useFrame(() => controls && controls.update());
+  const controls = useRef<OrbitControls>();
+  useFrame(() => controls.current?.update());
   useEffect(() => {
     // context.controls = controls;
-  }, [controls]);
+  }, [controls.current]);
 
   // point camera
   useEffect(() => {

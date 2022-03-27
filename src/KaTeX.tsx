@@ -1,13 +1,10 @@
-import {Utils} from "liqvid";
-const {from} = Utils.authoring;
-
-import Link from "@lib/Link";
-
 import {KaTeXPrompt} from "@env/prompts";
 import {Definition, Example} from "@lib/Block";
-
+import Link from "@lib/Link";
 import {KTX} from "@liqvid/katex";
+import {Utils} from "liqvid";
 
+const {from} = Utils.authoring;
 const {raw} = String;
 
 export default function KaTeXSlide() {
@@ -39,7 +36,7 @@ export default function KaTeXSlide() {
         </p>
       </Example>
 
-      {/* <KaTeXPrompt/> */}
+      <KaTeXPrompt/>
     </section>
   );
 }

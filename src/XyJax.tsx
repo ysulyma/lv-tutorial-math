@@ -27,15 +27,13 @@ export default function XyJaxSlide() {
       <aside id="xyjax-demos">
         {/*
         - Even with raw, it's not good to write \x
-
-        - Since XyJax is SVG and measures things, need resize attributes
         */}
-        <MJX data-during="xyjx/diagram" reparse>{raw`${"\\"}xymatrix{
+        <MJX data-during="xyjx/diagram">{raw`${"\\"}xymatrix{
           A \ar[r] \ar[d] & B \ar[d]\\
           C \ar[r] & D
         }`}</MJX>
 
-        <MJX data-during="xyjx/pullback" reparse>{raw`
+        <MJX data-during="xyjx/pullback">{raw`
           \vcenter{${"\\"}xymatrix{
             X \times_Z Y \pullback \ar[r] \ar[d] & Y \ar[d]\\\
             X \ar[r] & Z
@@ -47,7 +45,7 @@ export default function XyJaxSlide() {
           }}
           `}</MJX>
 
-        <MJX data-during="xyjx/color" reparse>{raw`
+        <MJX data-during="xyjx/color">{raw`
         ${"\\"}xymatrix{
           H_n(X,A) \ar@[color${xyEncodeColor("AF1866")}][r]^-{\color{#AF1866} \partial} & H_{n-1}(A)
         }

@@ -4,6 +4,15 @@ import {useEffect} from "react";
 const {anyHover} = Utils.mobile;
 const {useForceUpdate} = Utils.react;
 
+const style: React.CSSProperties = {
+  backgroundColor: "#1A69B5",
+  fontFamily: `"Roboto Slab", sans-serif`,
+  lineHeight: "36px",
+  padding: "0 .5em",
+  userSelect: "all",
+  verticalAlign: "top"
+};
+
 export default function ShowMarkerName() {
   if (!anyHover)
     return null;
@@ -12,19 +21,14 @@ export default function ShowMarkerName() {
 
   useEffect(() => {
     script.on("markerupdate", forceUpdate);
+
+    return () => {
+      script.off("markerupdate", forceUpdate);
+    };
   }, []);
 
-  const style: React.CSSProperties = {
-    backgroundColor: "#1A69B5",
-    fontFamily: `"Roboto Slab", sans-serif`,
-    lineHeight: "36px",
-    padding: "0 .5em",
-    userSelect: "all",
-    verticalAlign: "top"
-  };
-
   return (
-    <span className="rp-marker-name" key="show-marker-name" style={style}>
+    <span className="lv-marker-name" key="show-marker-name" style={style}>
       {script.markerName}
     </span>
   );

@@ -1,37 +1,25 @@
-import {useContext, useEffect, useMemo, useRef, useState} from "react";
-
-// THREE extensions
-import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
-
-// R3F
-import {useFrame, useThree} from "@react-three/fiber";
-import {Canvas} from "@liqvid/react-three";
-
-// our imports
-import {Utils, usePlayer, useMarkerUpdate, useTime} from "liqvid";
-const {during, from} = Utils.authoring,
-      {between} = Utils.misc;
-
-import {R3FContext} from "@lib/ThreeFiber";
-
-// @lib
-import Link from "@lib/Link";
-
 // resources
 import {ThreeDPrompt} from "@env/prompts";
-
-// scene pieces
+import Link from "@lib/Link";
+import {APIHelper, useApi} from "@lib/ThreeFiber";
+import {Canvas} from "@liqvid/react-three";
+import {useFrame, useThree} from "@react-three/fiber";
+import {useMarkerUpdate, useTime, Utils} from "liqvid";
+import {useEffect, useRef} from "react";
+import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import Arrow from "./3d/Arrow";
 import Cylinder from "./3d/Cylinder";
 import Parametric from "./3d/Parametric";
 import Sphere from "./3d/Sphere";
-
 import {playback, script} from "./markers";
+
+const {from} = Utils.authoring,
+  {between} = Utils.misc;
 
 /* camera */
 function CameraControls() {
   const $three = useThree();
-  // const context = useContext(R3FContext);
+  const context = useApi();
 
   const {
     camera,
@@ -43,11 +31,11 @@ function CameraControls() {
   camera.up.set(0, 0, 1);
 
   // controls
-  const [controls] = useState<OrbitControls>();
-  useFrame(() => controls && controls.update());
+  const controls = useRef<OrbitControls>();
+  useFrame(() => controls.current?.update());
   useEffect(() => {
-    // context.controls = controls;
-  }, [controls]);
+    context.controls = controls.current;
+  }, [controls.current]);
 
   // point camera
   useEffect(() => {
@@ -57,7 +45,7 @@ function CameraControls() {
   }, []);
 
   return (
-    <orbitControls ref={controls} args={[camera, domElement]}/>
+    <orbitControls ref={controls} args={[camera, domElement]} />
   );
 }
 
@@ -84,28 +72,30 @@ export default function Scene() {
   }, []);
 
   return (
-    <figure id="three-d" {...during("3d/")}>
+    <figure id="three-d" data-during="3d/">
       <aside id="three-explain" {...from("3d/three", "3d/hide")}>
         <p><Link href="https://threejs.org/docs/">THREE.js</Link> for 3d graphics</p>
 
         <p {...from("3d/r3f")}><Link href="https://docs.pmnd.rs/react-three-fiber/">@react-three/fiber</Link> for use with React</p>
       </aside>
       <Canvas>
-        <ambientLight />
-        <pointLight position={[10, 10, 10]} />
+        <APIHelper>
+          <ambientLight />
+          <pointLight position={[10, 10, 10]} />
 
-        {/* camera */}
-        <CameraControls/>
+          {/* camera */}
+          <CameraControls />
 
-        <axesHelper args={[5]} ref={helperRef}/>
+          <axesHelper args={[5]} ref={helperRef} />
 
-        {/* action */}
-        <Cylinder/>
-        <Sphere/>
-        <Parametric/>
-        <Arrow/>
+          {/* action */}
+          <Cylinder />
+          <Sphere />
+          <Parametric />
+          <Arrow />
+        </APIHelper>
       </Canvas>
-      <ThreeDPrompt/>
+      <ThreeDPrompt />
     </figure>
   );
 }

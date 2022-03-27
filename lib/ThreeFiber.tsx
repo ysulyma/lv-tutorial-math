@@ -1,14 +1,11 @@
 import {Canvas} from "@liqvid/react-three";
-// import {OrbitControls as $OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import {ThreeEvent, useThree} from "@react-three/fiber";
 import {Player} from "liqvid";
-import * as React from "react";
-import {useContext, useEffect, useMemo} from "react";
-import * as THREE from "three";
+import {createContext, useContext, useEffect, useMemo} from "react";
 
 // main export
 interface Api {
-  activeListener: null;
+  activeListener: (e: PointerEvent) => void;
   controls: any;
   dragging: boolean;
   meshes: {
@@ -19,7 +16,11 @@ interface Api {
   screenToScene(x: number, y: number, plane: THREE.Plane): THREE.Vector3;
 }
 
-export const R3FContext = React.createContext<Api>(undefined);
+export const R3FContext = createContext<Api>(undefined);
+
+export function useApi() {
+  return useContext(R3FContext);
+}
 
 export function ThreeScene(props: React.ComponentProps<typeof Canvas>) {
   const {children, ...attrs} = props;
@@ -92,14 +93,6 @@ export function APIHelper(props: React.ComponentProps<typeof Canvas>) {
       {props.children}
     </R3FContext.Provider>
   );
-}
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      // 'orbitControls': R3F.ReactThreeFiber.Object3DNode<$OrbitControls, typeof $OrbitControls>;
-    }
-  }
 }
 
 export function useDraggable(

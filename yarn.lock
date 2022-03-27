@@ -398,10 +398,10 @@
     yargs "^17.0.1"
     yargs-parser "^20.2.9"
 
-"@liqvid/katex@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@liqvid/katex/-/katex-0.0.4.tgz#00b38f97f879210f9ef309eed9c5077b188cda7c"
-  integrity sha512-MbpM83si2Z/OJTvw0t3bIoZYIxWF7O2/cDdCzRmNgVoW+5ubsuSb6aLRZQfa1Z0NYmrRnCDKR97Cak29GQ67LQ==
+"@liqvid/katex@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@liqvid/katex/-/katex-0.0.5.tgz#5cdd5f04f8bcab9f1ccb2fd9d9a795beb3a7c79e"
+  integrity sha512-uFE0ikCley2kCIWRPdb5dh9gt0cMwnIeH840oFD9vW1PcRrYNTN2vycdeWrlmwOI/d15eHWXefS+680K/MSy5w==
   dependencies:
     "@liqvid/utils" "^1.3.0"
 
@@ -415,6 +415,13 @@
   resolved "https://registry.yarnpkg.com/@liqvid/magic/-/magic-1.1.2.tgz#29c95edaf0cf8d3db4e02ed37b1d186d48c168d4"
   integrity sha512-NrX0nN6Og/zxPPCNPNlnDuvIO4SJqcUuMkATbZrhpZGs/Wg/SKR7tSllEzG4omNn7BN1Oe54wyEODB48ak+6+w==
 
+"@liqvid/mathjax@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@liqvid/mathjax/-/mathjax-0.0.2.tgz#bce446834db1e9f33e787216121aecebb2800402"
+  integrity sha512-ghY/tlT5pdENT8Hr5BywqN9Oy3kCPO6gRnj3/rKc+dAIhS4Jz/z6dN2GOWOXhtcActlskJ195pti8thM4VEgPw==
+  dependencies:
+    "@liqvid/utils" "^1.3.0"
+
 "@liqvid/playback@^1.1.4":
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/@liqvid/playback/-/playback-1.1.4.tgz#879687c2226ddb7ca81ce60ea967f615c338b9fe"
@@ -426,13 +433,13 @@
     events "^3.3.0"
     strict-event-emitter-types "^2.0.0"
 
-"@liqvid/react-three@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@liqvid/react-three/-/react-three-1.0.1.tgz#1e1ceaa5a7188af6e19150a9b6bd3021628c179a"
-  integrity sha512-GJJN+duf1ad/DeFRjq8/pV8v0N1rg/4bcDgZXJAASN3U6PVTDAwn1ThCkL1wT9vszYqAA/katO3MlePjcnwzzA==
+"@liqvid/react-three@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@liqvid/react-three/-/react-three-1.0.2.tgz#b88691322404057a18c1850cb98c5ffdbb8a6eb6"
+  integrity sha512-1d0Va0zQcEO1AZViUPPZucrKCKOwMM8QGIAMFTH4igX/AKevAz1PX0GxwvA3FfHHKczQqpZPABTCtho4n4kttA==
   dependencies:
     "@juggle/resize-observer" "^3.3.1"
-    "@react-three/drei" "^8.16.5"
+    "@react-three/drei" "^8.19.4"
     "@types/events" "^3.0.0"
     "@types/react-reconciler" "^0.26.4"
 
@@ -472,6 +479,13 @@
   integrity sha512-6EQjHjvQky+uoXY105P5UlS7XNNpUHwI81++4SvLrEhzxXBOEnnIzD0Ywnulv3+tvH0TZ8tyPTXkMW6/1SZ5jQ==
   dependencies:
     bezier-easing "^2.1.0"
+
+"@liqvid/xyjax@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@liqvid/xyjax/-/xyjax-0.0.2.tgz#6346ebf4d314193aed93e3f2713868c4ff982bc6"
+  integrity sha512-d7pCLbL/DHeiEs2AsmvE++XNjb3JUaKowTt7Wr1/hDxXP8BczqnOhevGJMb6fCL+084t+UrnOT8gXBAIH8PQNw==
+  dependencies:
+    "@liqvid/utils" "^1.3.0"
 
 "@lqv/playback@^0.0.1":
   version "0.0.1"
@@ -545,7 +559,7 @@
   resolved "https://registry.yarnpkg.com/@react-spring/types/-/types-9.4.4.tgz#97c69881788e624d7cc68d4385fdaa9b5fd20642"
   integrity sha512-KpxKt/D//q/t/6FBcde/RE36LKp8PpWu7kFEMLwpzMGl9RpcexunmYOQJWwmJWtkQjgE1YRr7DzBMryz6La1cQ==
 
-"@react-three/drei@^8.16.5":
+"@react-three/drei@^8.19.4":
   version "8.19.4"
   resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-8.19.4.tgz#52431b8a66c378b22e33212730afe3f947deb856"
   integrity sha512-n+xyHbQGAEn6mJCV6f1oYERDOvYAQyqrpYDrJghqF/hgC3fgnOMHZkMhEQ5loFpDookG9RHS/jFET0wQ+s71Ig==
@@ -618,11 +632,6 @@
   integrity sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==
   dependencies:
     "@types/node" "*"
-
-"@types/desmos@^1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@types/desmos/-/desmos-1.6.0.tgz#49fb86f87cd3a61434a04b4d9765aa78cc6e5b99"
-  integrity sha512-g+U7FVw3/iu88uzaJ/RT+coKxKiCxOWx6ue1hQTLsTPN7jidJw2RMbB+UviSImAUm0TkdkRV0nE9hLSvNX45zQ==
 
 "@types/eslint-scope@^3.7.3":
   version "3.7.3"
@@ -728,7 +737,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^17.0.0", "@types/react@^17.0.40", "@types/react@^17.0.43":
+"@types/react@*", "@types/react@^17.0.40", "@types/react@^17.0.43":
   version "17.0.43"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.43.tgz#4adc142887dd4a2601ce730bc56c3436fdb07a55"
   integrity sha512-8Q+LNpdxf057brvPu1lMtC5Vn7J119xrP1aq4qiaefNioQUYANF/CYeK4NsKorSZyUGJ66g0IM+4bbjwx45o2A==
@@ -1498,16 +1507,6 @@ depd@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.2.tgz#9bcd52e14c097763e749b274c4346ed2e560b5a9"
   integrity sha1-m81S4UwJd2PnSbJ0xDRu0uVgtak=
-
-desmos-react@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/desmos-react/-/desmos-react-1.1.0.tgz#9a9e5565040418bb178f7fcaaa35c14763409fbe"
-  integrity sha512-070O+cnkRx5mpjPBawmYZlyWK7kH6tA6SDjEEqAh4ymvEdy0s0VhmH48ITGEbBywmayRwBusce02pxlI5FGjGQ==
-  dependencies:
-    "@types/desmos" "^1.6.0"
-    "@types/react" "^17.0.0"
-    react "^17.0.0"
-    typescript "^4.3.2"
 
 destroy@~1.0.4:
   version "1.0.4"
@@ -3149,7 +3148,7 @@ react-use-measure@^2.1.1:
   dependencies:
     debounce "^1.2.1"
 
-react@^17.0.0, react@^17.0.2:
+react@^17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
   integrity sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==
@@ -3757,7 +3756,7 @@ type-is@~1.6.18:
     media-typer "0.3.0"
     mime-types "~2.1.24"
 
-typescript@^4.3.2, typescript@^4.5.4, typescript@^4.6.3:
+typescript@^4.5.4, typescript@^4.6.3:
   version "4.6.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.6.3.tgz#eefeafa6afdd31d725584c67a0eaba80f6fc6c6c"
   integrity sha512-yNIatDa5iaofVozS/uQJEl3JRWLKKGJKh6Yaiv0GLGSuhpFJe7P3SbHZ8/yjAHRQwKRoA6YZqlfjXWmVzoVSMw==
