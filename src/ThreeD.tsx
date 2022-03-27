@@ -1,26 +1,24 @@
-import * as React from "react";
-import {useContext, useEffect, useMemo, useRef} from "react";
-
-// it's better to call this in index.tsx
-import "@lib/r3f";
+import {useContext, useEffect, useMemo, useRef, useState} from "react";
 
 // THREE extensions
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 
 // R3F
-import {useFrame, useResource, useThree} from "react-three-fiber";
+import {useFrame, useThree} from "@react-three/fiber";
+import {Canvas} from "@liqvid/react-three";
 
 // our imports
-import {Utils, usePlayer, useMarkerUpdate, useTimeUpdate} from "ractive-player";
+import {Utils, usePlayer, useMarkerUpdate, useTime} from "liqvid";
 const {during, from} = Utils.authoring,
       {between} = Utils.misc;
 
+import {R3FContext} from "@lib/ThreeFiber";
+
 // @lib
 import Link from "@lib/Link";
-import {R3FContext, ThreeScene} from "@lib/ThreeFiber";
 
 // resources
-import {ThreeDScript} from "./prompts";
+import {ThreeDPrompt} from "@env/prompts";
 
 // scene pieces
 import Arrow from "./3d/Arrow";
@@ -28,10 +26,12 @@ import Cylinder from "./3d/Cylinder";
 import Parametric from "./3d/Parametric";
 import Sphere from "./3d/Sphere";
 
+import {playback, script} from "./markers";
+
 /* camera */
 function CameraControls() {
   const $three = useThree();
-  const context = useContext(R3FContext);
+  // const context = useContext(R3FContext);
 
   const {
     camera,
@@ -43,17 +43,17 @@ function CameraControls() {
   camera.up.set(0, 0, 1);
 
   // controls
-  const controls = useResource<OrbitControls>();
-  useFrame(() => controls.current.update());
+  const [controls] = useState<OrbitControls>();
+  useFrame(() => controls && controls.update());
   useEffect(() => {
-    context.controls = controls.current;
-  }, [controls.current]);
+    // context.controls = controls;
+  }, [controls]);
 
   // point camera
   useEffect(() => {
     camera.position.set(4.3, -9.5, 6);
-    // camera.lookAt(new THREE.Vector3(0, 0, 0));
-    // camera.up.set(0, 0, 1);
+    camera.lookAt(new THREE.Vector3(0, 0, 0));
+    camera.up.set(0, 0, 1);
   }, []);
 
   return (
@@ -61,11 +61,11 @@ function CameraControls() {
   );
 }
 
-export default function Scene() {
-  const {playback, script} = usePlayer();
+const m = script.parseStart("3d/pause");
+const arrowIndex = script.markerNumberOf("3d/svg");
 
+export default function Scene() {
   // axes helper
-  const arrowIndex = useMemo(() => script.markerNumberOf("3d/svg"), []);
   const helperRef = useRef<THREE.Mesh>();
   useMarkerUpdate(() => {
     if (!helperRef.current)
@@ -74,10 +74,9 @@ export default function Scene() {
   }, []);
 
   // pausing
-  const m = React.useMemo(() => script.parseStart("3d/pause"), []);
-  const prev = React.useRef(playback.currentTime);
+  const prev = useRef(playback.currentTime);
   const EPSILON = 300;
-  useTimeUpdate(t => {
+  useTime(t => {
     if (between(m - EPSILON, prev.current, m) && between(m, t, m + EPSILON)) {
       playback.pause();
     }
@@ -89,15 +88,14 @@ export default function Scene() {
       <aside id="three-explain" {...from("3d/three", "3d/hide")}>
         <p><Link href="https://threejs.org/docs/">THREE.js</Link> for 3d graphics</p>
 
-        <p {...from("3d/r3f")}><Link href="https://github.com/react-spring/react-three-fiber/">react-three-fiber</Link> for use with React</p>
+        <p {...from("3d/r3f")}><Link href="https://docs.pmnd.rs/react-three-fiber/">@react-three/fiber</Link> for use with React</p>
       </aside>
-      <ThreeScene>
-        {/* lights */}
+      <Canvas>
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
 
         {/* camera */}
-        {<CameraControls/>}
+        <CameraControls/>
 
         <axesHelper args={[5]} ref={helperRef}/>
 
@@ -106,8 +104,8 @@ export default function Scene() {
         <Sphere/>
         <Parametric/>
         <Arrow/>
-      </ThreeScene>
-      <ThreeDScript/>
+      </Canvas>
+      <ThreeDPrompt/>
     </figure>
   );
 }

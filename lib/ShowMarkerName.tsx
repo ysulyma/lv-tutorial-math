@@ -1,6 +1,6 @@
-import * as React from "react";
+import {usePlayer, Utils} from "liqvid";
+import {useEffect} from "react";
 
-import {Player, Utils, usePlayer} from "ractive-player";
 const {anyHover} = Utils.mobile;
 const {useForceUpdate} = Utils.react;
 
@@ -10,8 +10,8 @@ export default function ShowMarkerName() {
   const {script} = usePlayer();
   const forceUpdate = useForceUpdate();
 
-  React.useEffect(() => {
-    script.hub.on("markerupdate", forceUpdate);
+  useEffect(() => {
+    script.on("markerupdate", forceUpdate);
   }, []);
 
   const style: React.CSSProperties = {

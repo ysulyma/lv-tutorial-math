@@ -1,18 +1,13 @@
-import * as React from "react";
+import {intercept, R3FContext, useDraggable} from "@lib/ThreeFiber";
+import {ThreeEvent} from "@react-three/fiber";
+import {useMarkerUpdate, usePlayer, Utils} from "liqvid";
 import {useCallback, useContext, useMemo, useRef} from "react";
-
 // THREE
 import * as THREE from "three";
 import {DoubleSide, Mesh, Plane} from "three";
 
-// R3F
-import type * as R3F from "react-three-fiber";
-
-import {Utils, usePlayer, useMarkerUpdate} from "ractive-player";
 const {constrain} = Utils.misc,
       {anyHover} = Utils.mobile;
-
-import {R3FContext, useDraggable, intercept} from "@lib/ThreeFiber";
 
 const TWOPI = 2 * Math.PI;
 
@@ -52,7 +47,7 @@ export default function Cylinder() {
       fat.current.position.setZ(h);
   }, []);
 
-  const down = useCallback((e: R3F.PointerEvent) => {
+  const down = useCallback((e: ThreeEvent<PointerEvent>) => {
     const int = e.intersections.find(_ => _.object.name === "cylinder");
     if (!int)
       return;

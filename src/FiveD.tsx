@@ -2,16 +2,16 @@ import * as React from "react";
 import {useCallback, useState} from "react";
 
 // our imports
-import {Player, Utils} from "ractive-player";
+import {Utils} from "liqvid";
 const {during} = Utils.authoring;
 
-import {KTX} from "rp-katex";
+import {KTX} from "@liqvid/katex";
 
 // @lib
 import Input from "@lib/Input";
 
 // resources
-import {FiveDScript} from "./prompts";
+import {FiveDPrompt} from "@env/prompts";
 
 // scene pieces
 import Elliptic from "./5d/Elliptic";
@@ -31,11 +31,11 @@ export default function FiveD() {
 
   return (
     <section id="sec-5d" {...during("5d/")}>
-      <figure id="elliptic" onMouseUp={Player.preventCanvasClick}>
+      <figure id="elliptic" data-affords="click">
         <Elliptic {...{a,b}}/>
       </figure>
 
-      <div id="fived-controls" onMouseUp={Player.preventCanvasClick}>
+      <div id="fived-controls" data-affords="click">
         <table>
           <caption><KTX>y^2 = x^3 + ax + b</KTX></caption>
           <tbody>
@@ -72,7 +72,7 @@ export default function FiveD() {
       <figure id="moduli">
         <Moduli {...{a,b}}/>
       </figure>
-      <FiveDScript/>
+      <FiveDPrompt/>
     </section>
   );
 }

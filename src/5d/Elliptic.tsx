@@ -1,13 +1,9 @@
-import * as React from "react";
-
 import {marchingSquares} from "@lib/graphics";
 
-interface Props {
+export default function Elliptic(props: {
   a: number;
   b: number;
-}
-
-export default function Elliptic(props: Props) {
+}) {
   const edges = marchingSquares(
     -5, 5, -5, 5,
     (x, y) => y ** 2 - x ** 3 - props.a * x - props.b,

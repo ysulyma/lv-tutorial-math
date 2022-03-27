@@ -1,20 +1,11 @@
-/*
-  Do not confuse this file with the Script class in ractive-player!
-
-  This provides a teleprompt to be used when recording. For the "production" build,
-  it is commented out. You could choose to leave it in though, e.g. for accessibility.
-*/
-
-import * as React from "react";
 import {Prompt, Cue} from "rp-prompt";
 
-type P = typeof Prompt extends (props: infer T) => JSX.Element ? T : never;
+type P = Parameters<typeof Prompt>[0];
 
-// development
-/*export const IntroScript = (props: P) => (
+export const IntroPrompt = (props: P) => (
   <Prompt {...props}>
     <Cue on="intro/toc">
-      Ractive-Player is a tool for creating interactive videos out of HTML. In this video, I'm going to demonstrate how to achieve various effects that you might want when using this tool for mathematical content.
+      Liqvid is a tool for creating interactive videos out of HTML. In this video, I'm going to demonstrate how to achieve various effects that you might want when using this tool for mathematical content.
     </Cue>
     <Cue on="intro/main">
       This supplements the general-purpose tutorial; you might want to watch that first. That's a link that you can click on. That'll
@@ -51,7 +42,7 @@ type P = typeof Prompt extends (props: infer T) => JSX.Element ? T : never;
   </Prompt>
 );
 
-export const KaTeXScript = (props: P) => (
+export const KaTeXPrompt = (props: P) => (
   <Prompt {...props}>
     <Cue on="ktx/">
       So let's get started. These formulas are rendered using KaTeX; you can use inline
@@ -71,7 +62,7 @@ export const KaTeXScript = (props: P) => (
   </Prompt>
 );
 
-export const MathJaxScript = (props: P) => (
+export const MathJaxPrompt = (props: P) => (
   <Prompt {...props}>
     <Cue on="mjx/">
       You can also render your formulas using MathJax. Again you've got inline
@@ -93,7 +84,7 @@ export const MathJaxScript = (props: P) => (
   </Prompt>
 );
 
-export const XyJaxScript = (props: P) => (
+export const XyJaxPrompt = (props: P) => (
   <Prompt {...props}>
     <Cue on="xyjx/">
       So there's an amazing MathJax package called XyJax that lets you use xymatrix in MathJax. Here's
@@ -127,7 +118,7 @@ export const XyJaxScript = (props: P) => (
   </Prompt>
 );
 
-export const TwoDScript = (props: P) => (
+export const TwoDPrompt = (props: P) => (
   <Prompt {...props}>
     <Cue on="2d/">
       Here's an example of 2d graphics, using SVG. You can move the point on the parabola and it'll show the tangent line and the equation for that tangent line. You can also set the position using the textbox.
@@ -144,7 +135,7 @@ export const TwoDScript = (props: P) => (
   </Prompt>
 );
 
-export const ThreeDScript = (props: P) => (
+export const ThreeDPrompt = (props: P) => (
   <Prompt {...props}>
     <Cue on="3d/">
       Now for 3d graphics. Here we have an interactive scene, so the controls are listed down there. You can close the help dialog if you want.
@@ -175,7 +166,7 @@ export const ThreeDScript = (props: P) => (
   </Prompt>
 );
 
-export const FiveDScript = (props: P) => (
+export const FiveDPrompt = (props: P) => (
   <Prompt {...props}>
     <Cue on="5d/">
       Finally, here's an example of mixing 2d and 3d graphics. So this is supposed to be illustrating the moduli stack of elliptic curves, to first approximation. So you can adjust the values of a and b, we've really got a 4-dimensional space and then we get elliptic curves as 2-dimensional cross sections of it. This example shows how to use graph implicit equations in two or three dimensions.
@@ -183,19 +174,4 @@ export const FiveDScript = (props: P) => (
       So hopefully that's helpful for getting up and running; I look forward to seeing what you create with this tool.
     </Cue>
   </Prompt>
-);*/
-
-// production
-export const IntroScript = () => null;
-
-export const KaTeXScript = () => null;
-
-export const MathJaxScript = () => null;
-
-export const XyJaxScript = () => null;
-
-export const TwoDScript = () => null;
-
-export const ThreeDScript = () => null;
-
-export const FiveDScript = () => null;
+);

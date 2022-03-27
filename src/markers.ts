@@ -1,10 +1,6 @@
-/**
-Press W to go back one marker, E to go forward one marker.
+import {Script} from "liqvid";
 
-To record markers, enable Markers in the rp-recording dialog. Then press E to advance a marker.
-*/
-
-export default [
+export const markers = [
   ["intro/toc", "0:12.475"],
   ["intro/main", "0:08.619"],
   ["intro/explain", "0:06.572"],
@@ -17,6 +13,7 @@ export default [
   ["intro/react", "0:07.922"],
   ["intro/node", "0:12.258"],
   ["intro/epiplexis", "0:05.510"],
+
   ["ktx/", "0:05.211"],
   ["ktx/display", "0:02.478"],
   ["ktx/ex", "0:01.233"],
@@ -25,6 +22,7 @@ export default [
   ["ktx/align-3", "0:08.769"],
   ["ktx/macros", "0:19.377"],
   ["ktx/docs", "0:04.313"],
+
   ["mjx/", "0:04.922"],
   ["mjx/display", "0:02.389"],
   ["mjx/ex", "0:00.834"],
@@ -34,6 +32,7 @@ export default [
   ["mjx/extn", "0:11.211"],
   ["mjx/macros", "0:06.839"],
   ["mjx/docs", "0:19.265"],
+
   ["xyjx/", "0:07.763"],
   ["xyjx/diagram", "0:15.260"],
   ["xyjx/pullback", "0:05.948"],
@@ -44,10 +43,12 @@ export default [
   ["xyjx/pi1", "0:02.191"],
   ["xyjx/apply", "0:03.569"],
   ["xyjx/contradiction", "0:05.652"],
+
   ["2d/", "0:13.371"],
   ["2d/consider", "0:12.590"],
   ["2d/signify", "0:15.475"],
   ["2d/fat", "0:17.716"],
+
   ["3d/", "0:11.866"],
   ["3d/three", "0:08.654"],
   ["3d/r3f", "0:08.660"],
@@ -57,5 +58,19 @@ export default [
   ["3d/anim", "0:02.586"],
   ["3d/parametric", "0:05.215"],
   ["3d/svg", "0:11.541"],
+  
   ["5d/", "0:43.52"]
 ] as [string, string][];
+
+export const script = new Script(markers);
+export const playback = script.playback;
+
+// playback.seek(script.parseStart("xyjx/arrows/anim"));
+
+export const highlights = [
+  {title: "KaTeX", time: script.parseStart("ktx/")},
+  {title: "MathJax", time: script.parseStart("mjx/")},
+  {title: "XyJax", time: script.parseStart("xyjx/")},
+  {title: "2D graphics", time: script.parseStart("2d/")},
+  {title: "3D graphics", time: script.parseStart("3d/")}
+];

@@ -77,7 +77,6 @@ export function marchingSquares(
   return points;
 
 }
-
 /**
  * @author alteredq / http://alteredqualia.com/
  *
@@ -93,7 +92,7 @@ export function marchingSquares(
 // http://local.wasp.uwa.edu.au/~pbourke/geometry/polygonise/
 // who in turn got them from Cory Gene Bloyd.
 
-THREE.edgeTable = new Int32Array([
+const edgeTable = new Int32Array([
   0x0  , 0x109, 0x203, 0x30a, 0x406, 0x50f, 0x605, 0x70c,
   0x80c, 0x905, 0xa0f, 0xb06, 0xc0a, 0xd03, 0xe09, 0xf00,
   0x190, 0x99 , 0x393, 0x29a, 0x596, 0x49f, 0x795, 0x69c,
@@ -128,7 +127,7 @@ THREE.edgeTable = new Int32Array([
   0x70c, 0x605, 0x50f, 0x406, 0x30a, 0x203, 0x109, 0x0
 ]);
 
-THREE.triTable = new Int32Array([
+const triTable = new Int32Array([
   -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
   0, 8, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
   0, 1, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
@@ -387,24 +386,26 @@ THREE.triTable = new Int32Array([
   -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
 ]);
 
+type Fn = (x: number, y: number, z: number) => number;
+
 /* polyfill old behavior */
-THREE.Geometry.prototype.computeCentroids = function () {
-  for (const face of this.faces) {
-    face.centroid.set(0, 0, 0);
+// THREE.Geometry.prototype.computeCentroids = function () {
+//   for (const face of this.faces) {
+//     face.centroid.set(0, 0, 0);
 
-    face.centroid.add(this.vertices[face.a]);
-    face.centroid.add(this.vertices[face.b]);
-    face.centroid.add(this.vertices[face.c]);
-    face.centroid.divideScalar( 3 );
-  }
-}
+//     face.centroid.add(this.vertices[face.a]);
+//     face.centroid.add(this.vertices[face.b]);
+//     face.centroid.add(this.vertices[face.c]);
+//     face.centroid.divideScalar( 3 );
+//   }
+// }
 
-const oldConstructor = THREE.Face3;
-THREE.Face3 = function (...args) {
-  oldConstructor.apply(this, args);
+// const oldConstructor = THREE.Face3;
+// THREE.Face3 = function (...args) {
+//   oldConstructor.apply(this, args);
 
-  this.centroid = new THREE.Vector3();
-};
+//   this.centroid = new THREE.Vector3();
+// };
 
 /* taken from https://stemkoski.github.io/Three.js/Marching-Cubes.html */
 export function marchingCubes(fn: Fn, axisMin: number, axisMax: number, size: number) {
@@ -436,7 +437,12 @@ export function marchingCubes(fn: Fn, axisMin: number, axisMax: number, size: nu
   // Actual position along edge weighted according to function values.
   const vlist = new Array(12);
   
-  const geometry = new THREE.Geometry();
+  const vertices = [];
+  const normals = [];
+  const geometry = new THREE.BufferGeometry();
+  const a = new THREE.Vector3();
+  const b = new THREE.Vector3();
+  const c = new THREE.Vector3();
   let vertexIndex = 0;
   
   for (let z = 0; z < size - 1; z++)
@@ -479,7 +485,7 @@ export function marchingCubes(fn: Fn, axisMin: number, axisMax: number, size: nu
     if ( value7 < isolevel ) cubeindex |= 64;
     
     // bits = 12 bit number, indicates which edges are crossed by the isosurface
-    const bits = THREE.edgeTable[ cubeindex ];
+    const bits = edgeTable[ cubeindex ];
     
     // if none are crossed, proceed to next iteration
     if (bits === 0) continue;
@@ -561,27 +567,22 @@ export function marchingCubes(fn: Fn, axisMin: number, axisMax: number, size: nu
      
     // the while loop should run at most 5 times,
     //   since the 16th entry in each row is a -1.
-    while ( THREE.triTable[ cubeindex + i ] != -1 ) 
+    while ( triTable[ cubeindex + i ] != -1 ) 
     {
-      const index1 = THREE.triTable[cubeindex + i];
-      const index2 = THREE.triTable[cubeindex + i + 1];
-      const index3 = THREE.triTable[cubeindex + i + 2];
+      const index1 = triTable[cubeindex + i];
+      const index2 = triTable[cubeindex + i + 1];
+      const index3 = triTable[cubeindex + i + 2];
       
-      geometry.vertices.push( vlist[index1].clone() );
-      geometry.vertices.push( vlist[index2].clone() );
-      geometry.vertices.push( vlist[index3].clone() );
-      const face = new THREE.Face3(vertexIndex, vertexIndex+1, vertexIndex+2);
-      geometry.faces.push( face );
-
-      geometry.faceVertexUvs[ 0 ].push( [ new THREE.Vector2(0,0), new THREE.Vector2(0,1), new THREE.Vector2(1,1) ] );
+      vertices.push( ...vlist[index1].toArray() );
+      vertices.push( ...vlist[index2].toArray() );
+      vertices.push( ...vlist[index3].toArray() );
 
       vertexIndex += 3;
       i += 3;
     }
   }
-  
-  geometry.computeCentroids();
-  geometry.computeFaceNormals();
+
+  geometry.setAttribute("position", new THREE.BufferAttribute(new Float32Array(vertices), 3));
   geometry.computeVertexNormals();
 
   return geometry;

@@ -1,14 +1,12 @@
-import * as React from "react";
-import {useEffect, useMemo, useRef} from "react";
-
-import * as THREE from "three";
-import {useThree} from "react-three-fiber";
-
-import {useMarkerUpdate, usePlayer} from "ractive-player";
-
 import extrudeSvg from "@lib/svg-extrude";
-
+import {useThree} from "@react-three/fiber";
+import {useMarkerUpdate} from "liqvid";
+import {useEffect, useRef} from "react";
+import * as THREE from "three";
+import {script} from "../markers";
 import {MEDIA_URL} from "../media-url";
+
+const arrowIndex = script.markerNumberOf("3d/svg");
 
 export default function Arrow() {
   const {scene} = useThree();
@@ -37,8 +35,6 @@ export default function Arrow() {
     // });
   }, []);
 
-  const {script} = usePlayer();
-  const arrowIndex = useMemo(() => script.markerNumberOf("3d/svg"), []);
   useMarkerUpdate(() => {
     if (!ref.current)
       return;

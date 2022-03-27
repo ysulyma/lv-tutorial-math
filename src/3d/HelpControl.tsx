@@ -1,7 +1,6 @@
-import * as React from "react";
+import {useMarkerUpdate, usePlayer, Utils} from "liqvid";
 import {useMemo, useRef, useState} from "react";
 
-import {Utils, useMarkerUpdate, usePlayer} from "ractive-player";
 const {anyHover, onClick} = Utils.mobile;
 
 export default function HelpControl() {

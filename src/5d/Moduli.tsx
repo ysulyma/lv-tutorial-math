@@ -1,21 +1,20 @@
-import * as React from "react";
-import {useContext, useEffect, useMemo} from "react";
+import {useContext, useEffect, useMemo, useState} from "react";
 
 // THREE
 import * as THREE from "three";
 import type {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 
 // R3F
-import {useFrame, useResource, useThree} from "react-three-fiber";
+import {useFrame, useThree} from "@react-three/fiber";
 
 // @lib
 import {marchingCubes, marchingSquares} from "@lib/graphics";
-import {R3FContext, ThreeScene} from "@lib/ThreeFiber";
+import {Canvas} from "@liqvid/react-three";
 
 /* camera */
 function CameraControls() {
   const $three = useThree();
-  const context = useContext(R3FContext);
+  // const context = useContext(R3FContext);
 
   const {
     camera,
@@ -27,17 +26,17 @@ function CameraControls() {
   camera.up.set(0, 0, 1);
 
   // controls
-  const controls = useResource<OrbitControls>();
-  useFrame(() => controls.current.update());
+  const [controls] = useState<OrbitControls>();
+  useFrame(() => controls && controls.update());
   useEffect(() => {
-    context.controls = controls.current;
-  }, [controls.current]);
+    // context.controls = controls;
+  }, [controls]);
 
   // point camera
   useEffect(() => {
     camera.position.set(4.3, -9.5, 6);
-    // camera.lookAt(new THREE.Vector3(0, 0, 0));
-    // camera.up.set(0, 0, 1);
+    camera.lookAt(new THREE.Vector3(0, 0, 0));
+    camera.up.set(0, 0, 1);
   }, []);
 
   return (
@@ -51,10 +50,6 @@ interface Props {
 }
 
 export default function Moduli(props: Props) {
-  /*
-  The marchingCubes algorithm we use relies on THREE.Geometry, which is deprecated,
-  and removed in r125. I haven't had time to figure out how to update it.
-  */
   const moduliGeometry = useMemo(() => 
     marchingCubes((x, y, z) => y ** 2 - x ** 3 - z * x - props.b, -5, 5, 32)
   , [props.b]);
@@ -78,7 +73,7 @@ export default function Moduli(props: Props) {
   }, [props.a, props.b]);
 
   return (
-    <ThreeScene>
+    <Canvas>
       {/* lights */}
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
@@ -90,6 +85,6 @@ export default function Moduli(props: Props) {
         <meshPhongMaterial color={0x1BBB68} side={THREE.DoubleSide}/>
       </mesh>
       <primitive object={section}/>
-    </ThreeScene>
+    </Canvas>
   );
 }

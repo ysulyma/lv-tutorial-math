@@ -1,4 +1,4 @@
-import type {Playback} from "ractive-player";
+import type {Playback} from "liqvid";
 
 export default (playback: Playback) => {
   const storage = window.localStorage;
@@ -8,7 +8,7 @@ export default (playback: Playback) => {
   playback.muted = "true" === (storage.getItem("ractive muted") || "false");
 
   // save volume settings
-  playback.hub.on("volumechange", () => {
+  playback.on("volumechange", () => {
     storage.setItem("ractive muted", playback.muted.toString());
     storage.setItem("ractive volume", playback.volume.toString());
   });

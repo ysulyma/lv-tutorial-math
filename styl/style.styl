@@ -1,4 +1,4 @@
-@import "rp-prompt/style.css"
+// @import "rp-prompt/style.css"
 
 $blue = #1A69B5
 $purple = #AE81FF
@@ -13,13 +13,14 @@ $tan = #E6DB74
 @import "lib/help-control"
 @import "lib/loading-screen"
 
-.rp-thumbnail-time
+.lv-thumbnail-time
   color #222
 
 @import "beamer"
 @import "intro"
 @import "ktx"
 @import "mjx"
+@import "xyjax"
 @import "2d"
 @import "3d"
 @import "5d"
@@ -40,7 +41,7 @@ h2
   margin-top .5em
   text-align center
 
-.rp-canvas
+.lv-canvas
   background #EEE
   
 body
@@ -72,25 +73,13 @@ section
 .rp-cursor
   width 3rem
 
-/* XyJax slide */
-
-#xyjax-demos
-  font-size 2em
-  text-align center
-  position relative
-  top 1em
-
-  > *
-    left 0
-    top 0
-    position absolute
-    text-align center
-    width 100%
-
-.contradiction *
-  color red
-  fill red
-  stroke red
+/* Desmos slide */
+.calculator
+  position absolute
+  left 0
+  top 0
+  height var(--lv-canvas-height)
+  width 100%
 
 /* general styles */
 .katex

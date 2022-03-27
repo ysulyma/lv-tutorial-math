@@ -1,15 +1,10 @@
-import * as React from "react";
-import {useContext, useEffect, useMemo, useRef} from "react";
-
-import * as THREE from "three";
-import {Canvas} from "react-three-fiber";
-
-import {Player, Utils} from "ractive-player";
-const {anyHover} = Utils.mobile;
-
+import {Canvas} from "@liqvid/react-three";
 // import {OrbitControls as $OrbitControls} from "three/examples/jsm/controls/OrbitControls";
-import { extend, useThree, ReactThreeFiber } from "react-three-fiber";
-import type * as R3F from "react-three-fiber";
+import {ThreeEvent, useThree} from "@react-three/fiber";
+import {Player} from "liqvid";
+import * as React from "react";
+import {useContext, useEffect, useMemo} from "react";
+import * as THREE from "three";
 
 // main export
 interface Api {
@@ -19,7 +14,7 @@ interface Api {
   meshes: {
     [key: string]: THREE.Mesh;
   };
-  $three: R3F.SharedCanvasContext;
+  // $three: R3F.SharedCanvasContext;
   screenToNDC(x: number, y: number): THREE.Vector2;
   screenToScene(x: number, y: number, plane: THREE.Plane): THREE.Vector3;
 }
@@ -31,12 +26,10 @@ export function ThreeScene(props: React.ComponentProps<typeof Canvas>) {
   const player = useContext(Player.Context);
 
   return (
-    <Canvas touch-action="none" onMouseUp={Player.preventCanvasClick} {...attrs}>
-      <Player.Context.Provider value={player}>
-        <APIHelper>
-          {...children}
-        </APIHelper>
-      </Player.Context.Provider>
+    <Canvas {...attrs}>
+      <APIHelper>
+        {children}
+      </APIHelper>
     </Canvas>
   );
 }
@@ -62,7 +55,7 @@ export function APIHelper(props: React.ComponentProps<typeof Canvas>) {
     screenToScene(x: number, y: number, plane: THREE.Plane) {
       const rect = $three.gl.domElement.getBoundingClientRect();
       const ndc = api.screenToNDC(x, y),
-            mouse = new THREE.Vector3(ndc.x, ndc.y, 0);
+        mouse = new THREE.Vector3(ndc.x, ndc.y, 0);
 
       mouse.unproject($three.camera);
 
@@ -96,7 +89,7 @@ export function APIHelper(props: React.ComponentProps<typeof Canvas>) {
 
   return (
     <R3FContext.Provider value={api}>
-      {...props.children}
+      {props.children}
     </R3FContext.Provider>
   );
 }
@@ -111,28 +104,29 @@ declare global {
 
 export function useDraggable(
   move: (e: PointerEvent) => void,
-  down?: (e: R3F.PointerEvent) => void,
-  up?: (e: R3F.PointerEvent) => void
+  down?: (e: ThreeEvent<PointerEvent>) => void,
+  up?: (e: ThreeEvent<PointerEvent>) => void
 ) {
   const {
     gl: {domElement}
   } = useThree();
+
   const state = useContext(R3FContext);
 
   // add CSS class on hover to enable "draggable" cursor; desktop-only
   const events = useMemo(() => {
     return {
-      onPointerOver: (e: R3F.PointerEvent) => {
+      onPointerOver: (e: ThreeEvent<PointerEvent>) => {
         if (e.intersections[0].object !== e.eventObject)
           return;
         domElement.classList.add("draggable");
       },
-      onPointerOut: (e: R3F.PointerEvent) => {
+      onPointerOut: (e: ThreeEvent<PointerEvent>) => {
         /*if (e.intersections[0]?.object !== e.eventObject)
           return;*/
         domElement.classList.remove("draggable");
       },
-      onPointerDown: (e: R3F.PointerEvent) => {
+      onPointerDown: (e: ThreeEvent<PointerEvent>) => {
         if (e.intersections[0].object !== e.eventObject)
           return;
 

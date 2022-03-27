@@ -5,11 +5,8 @@ import {useMemo, useRef} from "react";
 import * as THREE from "three";
 import {DoubleSide, Mesh} from "three";
 
-import {Utils, usePlayer, useTimeUpdate} from "ractive-player";
-const {animate} = Utils.animation;
-
-import * as BezierEasing from "bezier-easing";
-import {easeInCubic} from "@lib/easings";
+import {Utils, usePlayer, useTime} from "liqvid";
+const {animate, bezier, easings} = Utils.animation;
 
 export default function Sphere() {
   const {script} = usePlayer();
@@ -18,14 +15,14 @@ export default function Sphere() {
 
   const grow = useMemo(() => animate({
     duration: 1000,
-    easing: BezierEasing(...easeInCubic),
+    easing: bezier(...easings.easeInCubic),
     endValue: 3,
     startTime: script.parseStart("3d/anim"),
   }), []);
 
   const last = useRef(0);
 
-  useTimeUpdate(t => {
+  useTime(t => {
     const r = grow(t);
     if (last.current === r)
       return;

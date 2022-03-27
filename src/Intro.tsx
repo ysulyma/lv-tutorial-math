@@ -1,43 +1,39 @@
-import * as React from "react";
-import {useMemo} from "react";
-
-import {Player, Utils, usePlayer} from "ractive-player";
-const {during, from} = Utils.authoring,
-      {onClick} = Utils.mobile,
-      {formatTime, formatTimeMs} = Utils.time;
-
+import {IntroPrompt} from "@env/prompts";
 import Link from "@lib/Link";
+import {Utils} from "liqvid";
+import {useMemo} from "react";
+import {playback, script} from "./markers";
 
-import {IntroScript} from "./prompts";
+const {during, from} = Utils.authoring,
+  {onClick} = Utils.mobile,
+  {formatTime, formatTimeMs} = Utils.time;
+
+const contents = [
+  ["Introduction", script.parseStart("intro/toc")],
+  ["KaTeX", script.parseStart("ktx/")],
+  ["MathJax", script.parseStart("mjx/")],
+  ["XyJax", script.parseStart("xyjx/")],
+  ["2D graphics", script.parseStart("2d/")],
+  ["3D graphics", script.parseStart("3d/")]
+] as [string, number][];
 
 export default function Intro() {
-  const {playback, script} = usePlayer();
-
-  const seek = useMemo(() => onClick<HTMLTableRowElement>((e) => {
+  const seek = useMemo(() => onClick<HTMLAnchorElement>((e) => {
     e.preventDefault();
-    
+
     // this is not great lol
     playback.seek(e.currentTarget.getAttribute("href").slice(3));
   }), []);
 
-  const contents = useMemo(() => [
-    ["Introduction", script.parseStart("intro/toc")],
-    ["KaTeX", script.parseStart("ktx/")],
-    ["MathJax", script.parseStart("mjx/")],
-    ["XyJax", script.parseStart("xyjx/")],
-    ["2D graphics", script.parseStart("2d/")],
-    ["3D graphics", script.parseStart("3d/")]
-  ] as const, []);
-
   return (
     <section id="sec-intro" {...during("intro/")}>
-      <h1>Ractive-Player math tutorial</h1>
+      <h1>Liqvid math tutorial</h1>
       {/* table of contents */}
       <table className="toc" {...during("intro/toc")}>
         <tbody>
           {contents.map((row, i) => (
-            <tr key={row[0]} onMouseUp={Player.preventCanvasClick}>
-              <th>{i+1}.</th>
+            <tr key={row[0]} data-affords="click">
+              <th>{i + 1}.</th>
               <td className="name">
                 <a href={`?t=${formatTimeMs(row[1])}`} {...seek}>{row[0]}</a>
               </td>
@@ -51,7 +47,7 @@ export default function Intro() {
 
       <section {...from("intro/main")}>
         <p>
-          <Link href="https://ractive-player.org/">General-purpose tutorial</Link>
+          <Link href="https://liqvidjs.org/">General-purpose tutorial</Link>
         </p>
         <ul>
           <li {...from("intro/explain")}>explains what ractives are, how to write and record them</li>
@@ -60,7 +56,7 @@ export default function Intro() {
 
           <li {...from("intro/paint")}>freehand drawing plugin</li>
         </ul>
-        
+
         <p {...from("intro/clone")}>
           Clone this tutorial: <Link href="https://github.com/ysulyma/rp-tutorial-math">https://github.com/ysulyma/rp-tutorial-math</Link>
         </p>
@@ -75,7 +71,7 @@ export default function Intro() {
         </ul>
       </section>
 
-      {<IntroScript/>}
+      <IntroPrompt />
     </section>
   );
 }

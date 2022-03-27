@@ -1,20 +1,17 @@
-import * as React from "react";
-import {useCallback, useEffect, useRef, useState} from "react";
-
-import {Player, Utils} from "ractive-player";
-const {during, from} = Utils.authoring,
-      {dragHelperReact} = Utils.interactivity,
-      {constrain, range} = Utils.misc,
-      {anyHover} = Utils.mobile;
-
+import {TwoDPrompt} from "@env/prompts";
 import FatFingers from "@lib/FatFingers";
 import GlowOrb from "@lib/GlowOrb";
 import Input from "@lib/Input";
-import {graph, screenToSVG} from "@lib/svg-utils";
+import {KTX} from "@liqvid/katex";
+import {Utils} from "liqvid";
+import * as React from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 
-import {TwoDScript} from "./prompts";
-
-import {KTX} from "rp-katex";
+const {during, from} = Utils.authoring,
+      {dragHelperReact} = Utils.interactivity,
+      {constrain, range} = Utils.misc,
+      {anyHover} = Utils.mobile,
+      {screenToSVG} = Utils.svg;
 
 const {raw} = String;
 
@@ -84,7 +81,7 @@ export default function TwoD() {
 
   return (
     <section id="sec-2d" {...during("2d/")}>
-      <svg id="tangent-demo" ref={svgRef} viewBox={"-5.3 -5.3 10.6 10.6"} onMouseUp={Player.preventCanvasClick}>
+      <svg id="tangent-demo" ref={svgRef} viewBox={"-5.3 -5.3 10.6 10.6"} data-affords="click">
         <CartesianGrid/>
         <path className="plot" d={graph(negF, a, b, 200)}/>
 
@@ -95,7 +92,7 @@ export default function TwoD() {
         {showOrb && <GlowOrb className="glow" cx={A[0]} cy={-A[1]} dur="1s" r1={0.1} r2={0.3}/>}
       </svg>
 
-      <div id="explain" onMouseUp={Player.preventCanvasClick}>
+      <div id="explain" data-affords="click">
         <KTX display id="defn">{raw`
           \begin{aligned}
             \htmlClass{plot}{y} &\htmlClass{plot}{= x^2-2}\\
@@ -123,7 +120,7 @@ export default function TwoD() {
           <li {...from("2d/fat")}>need larger hit area for mobile (<code>fat-fingers</code> in the code)</li>
         </ul>
       </div>
-      <TwoDScript/>
+      <TwoDPrompt/>
     </section>
   );
 }
@@ -193,4 +190,15 @@ function closestPoint(x0: number, y0: number) {
   }
 
   return best;
+}
+
+function graph(f: (t: number) => [number, number], a = 0, b = 1, sampling = 100) {
+  const instructions = new Array(sampling + 1)
+  .fill(null)
+  .map((_, n) => {
+    const [x, y] = f(a + (n / sampling) * (b - a));
+    return (n === 0) ? `M ${x} ${y}` : `L ${x} ${y}`;
+  });
+
+  return instructions.join(" ");
 }

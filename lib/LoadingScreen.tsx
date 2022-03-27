@@ -1,12 +1,11 @@
-import * as React from "react";
-import {Player} from "ractive-player";
+import {Player} from "liqvid";
 
 /**
-  Display a loading screen while ractive-player is not-ready.
+  Display a loading screen while Liqvid is not-ready.
 */
-export default function LoadingScreen() {
+export function LoadingScreen() {
   return (
-    <div className="rp-loading-screen" onMouseUp={Player.preventCanvasClick}>
+    <div className="rp-loading-screen" data-affords="click">
       <div className="rp-loading-spinner"/>
     </div>
   );

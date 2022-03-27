@@ -1,5 +1,3 @@
-import * as React from "react";
-
 interface Props extends React.HTMLAttributes<HTMLElement> {
   blockTitle?: React.ReactChild;
 }

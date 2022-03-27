@@ -1,20 +1,21 @@
 const TerserPlugin = require("terser-webpack-plugin");
+const path = require("path");
+
+const env = process.env.NODE_ENV || "development";
 
 module.exports = {
   entry: `${__dirname}/src/index.tsx`,
   output: {
     filename: "bundle.js",
-    path: process.cwd()
+    path: path.join(process.cwd(), "static")
   },
 
   externals: {
     "katex": "katex",
-    "ractive-player": "RactivePlayer",
-    "rp-recording": "RPRecording",
+    "liqvid": "Liqvid",
     "rangetouch": "RangeTouch",
     "react": "React",
     "react-dom": "ReactDOM",
-    "react-three-fiber": "R3F",
     "three": "THREE",
     "three/examples/jsm/controls/FlyControls": "THREE.FlyControls",
     "three/examples/jsm/controls/OrbitControls": "THREE.OrbitControls",
@@ -26,7 +27,7 @@ module.exports = {
     "three/examples/jsm/utils/GeometryUtils": "THREE.GeometryUtils"
   },
 
-  mode: process.env.NODE_ENV,
+  mode: env,
 
   module: {
     rules: [
@@ -56,6 +57,18 @@ module.exports = {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
     alias: {
       "@lib": `${__dirname}/lib`,
+      "@env": path.join(__dirname, "src", "@" + env),
+      "@src": path.join(__dirname, "src")
     }
+  },
+
+  resolveLoader: {
+    modules: [
+      path.join(__dirname, "node_modules")
+    ]
+  },
+
+  snapshot: {
+    managedPaths: []
   }
 };
