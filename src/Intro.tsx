@@ -58,7 +58,7 @@ export default function Intro() {
         </ul>
 
         <p {...from("intro/clone")}>
-          Clone this tutorial: <Link href="https://github.com/ysulyma/rp-tutorial-math">https://github.com/ysulyma/rp-tutorial-math</Link>
+          Clone this tutorial: <Link href="https://github.com/ysulyma/lv-tutorial-math">https://github.com/ysulyma/lv-tutorial-math</Link>
         </p>
 
         <h3 {...from("intro/links")}>Links</h3>

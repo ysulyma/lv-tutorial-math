@@ -1567,11 +1567,11 @@ var isHidden = function (target) {
     return !(offsetWidth || offsetHeight || target.getClientRects().length);
 };
 var isElement = function (obj) {
-    var _a, _b;
+    var _a;
     if (obj instanceof Element) {
         return true;
     }
-    var scope = (_b = (_a = obj) === null || _a === void 0 ? void 0 : _a.ownerDocument) === null || _b === void 0 ? void 0 : _b.defaultView;
+    var scope = (_a = obj === null || obj === void 0 ? void 0 : obj.ownerDocument) === null || _a === void 0 ? void 0 : _a.defaultView;
     return !!(scope && obj instanceof scope.Element);
 };
 var isReplacedElement = function (target) {
@@ -1682,7 +1682,7 @@ var queueMicroTask = function (callback) {
         var el_1 = document.createTextNode('');
         var config = { characterData: true };
         new MutationObserver(function () { return notify(); }).observe(el_1, config);
-        trigger = function () { el_1.textContent = "" + (toggle_1 ? toggle_1-- : toggle_1++); };
+        trigger = function () { el_1.textContent = "".concat(toggle_1 ? toggle_1-- : toggle_1++); };
     }
     callbacks.push(callback);
     trigger();
@@ -1907,6 +1907,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "useFrame": () => (/* binding */ useFrame),
 /* harmony export */   "useGraph": () => (/* binding */ useGraph),
 /* harmony export */   "useLoader": () => (/* binding */ useLoader),
+/* harmony export */   "useMemoizedFn": () => (/* binding */ useMemoizedFn),
 /* harmony export */   "useStore": () => (/* binding */ useStore),
 /* harmony export */   "useThree": () => (/* binding */ useThree)
 /* harmony export */ });
@@ -1914,7 +1915,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(three__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var zustand__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! zustand */ "./node_modules/zustand/esm/index.js");
+/* harmony import */ var zustand__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! zustand */ "./node_modules/@react-three/fiber/node_modules/zustand/esm/index.js");
 /* harmony import */ var react_reconciler__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-reconciler */ "./node_modules/react-reconciler/index.js");
 /* harmony import */ var react_reconciler__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_reconciler__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var scheduler__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! scheduler */ "./node_modules/scheduler/index.js");
@@ -2468,9 +2469,11 @@ function createRenderer(roots) {
         let added = false;
         if (child) {
             if (child.attachArray) {
-                const array = parentInstance[child.attachArray];
-                if (!is.arr(array))
+                let array = parentInstance[child.attachArray];
+                if (!is.arr(array)) {
                     parentInstance[child.attachArray] = [];
+                    array = parentInstance[child.attachArray];
+                }
                 array.splice(array.indexOf(beforeChild), 0, child);
             }
             else if (child.attachObject || child.attach && !is.fun(child.attach)) {
@@ -3043,6 +3046,7 @@ ErrorBoundary.getDerivedStateFromError = () => ({
 });
 const Canvas = react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function Canvas(_a, forwardedRef) {
     var { children, fallback, tabIndex, resize, id, style, className, events } = _a, props = __rest(_a, ["children", "fallback", "tabIndex", "resize", "id", "style", "className", "events"]);
+    const onPointerMissed = useMemoizedFn(props.onPointerMissed);
     const [containerRef, { width, height }] = (0,react_use_measure__WEBPACK_IMPORTED_MODULE_6__["default"])(Object.assign({ scroll: true, debounce: {
             scroll: 50,
             resize: 0
@@ -3065,9 +3069,9 @@ const Canvas = react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function Canvas(_a,
             }, children)), canvasRef.current, Object.assign(Object.assign({}, props), { size: {
                     width,
                     height
-                }, events: events || createPointerEvents }));
+                }, onPointerMissed, events: events || createPointerEvents }));
         }
-    }, [width, height, children]);
+    }, [width, height, children, onPointerMissed]);
     useIsomorphicLayoutEffect(() => {
         const container = canvasRef.current;
         return () => unmountComponentAtNode(container);
@@ -3132,6 +3136,11 @@ function loadingFn(extensions, onProgress) {
             res(data);
         }, onProgress, error => reject(`Could not load ${input}: ${error.message}`)))));
     };
+}
+function useMemoizedFn(fn) {
+    const fnRef = react__WEBPACK_IMPORTED_MODULE_1__.useRef(fn);
+    react__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect(() => void (fnRef.current = fn), [fn]);
+    return (...args) => fnRef.current == null ? void 0 : fnRef.current(...args);
 }
 function useLoader(Proto, input, extensions, onProgress) {
     const keys = Array.isArray(input) ? input : [input];
@@ -3260,8 +3269,7 @@ function dispose(obj) {
     if (obj.dispose && obj.type !== 'Scene')
         obj.dispose();
     for (const p in obj) {
-        var _dispose, _ref;
-        (_dispose = (_ref = p).dispose) == null ? void 0 : _dispose.call(_ref);
+        p.dispose == null ? void 0 : p.dispose();
         delete obj[p];
     }
 }
@@ -3274,6 +3282,131 @@ reconciler.injectIntoDevTools({
     rendererPackageName: '@react-three/fiber',
     version: '17.0.2'
 });
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@react-three/fiber/node_modules/zustand/esm/index.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@react-three/fiber/node_modules/zustand/esm/index.js ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ create)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function createStore(createState) {
+    let state;
+    const listeners = new Set();
+    const setState = (partial, replace) => {
+        const nextState = typeof partial === "function" ? partial(state) : partial;
+        if (nextState !== state) {
+            const previousState = state;
+            state = replace ? nextState : Object.assign({}, state, nextState);
+            listeners.forEach((listener) => listener(state, previousState));
+        }
+    };
+    const getState = () => state;
+    const subscribeWithSelector = (listener, selector = getState, equalityFn = Object.is) => {
+        console.warn("[DEPRECATED] Please use `subscribeWithSelector` middleware");
+        let currentSlice = selector(state);
+        function listenerToAdd() {
+            const nextSlice = selector(state);
+            if (!equalityFn(currentSlice, nextSlice)) {
+                const previousSlice = currentSlice;
+                listener(currentSlice = nextSlice, previousSlice);
+            }
+        }
+        listeners.add(listenerToAdd);
+        return () => listeners.delete(listenerToAdd);
+    };
+    const subscribe = (listener, selector, equalityFn) => {
+        if (selector || equalityFn) {
+            return subscribeWithSelector(listener, selector, equalityFn);
+        }
+        listeners.add(listener);
+        return () => listeners.delete(listener);
+    };
+    const destroy = () => listeners.clear();
+    const api = { setState, getState, subscribe, destroy };
+    state = createState(setState, getState, api);
+    return api;
+}
+const isSSR = typeof window === "undefined" || !window.navigator || /ServerSideRendering|^Deno\//.test(window.navigator.userAgent);
+const useIsomorphicLayoutEffect = isSSR ? react__WEBPACK_IMPORTED_MODULE_0__.useEffect : react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect;
+function create(createState) {
+    const api = typeof createState === "function" ? createStore(createState) : createState;
+    const useStore = (selector = api.getState, equalityFn = Object.is) => {
+        const [, forceUpdate] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)((c) => c + 1, 0);
+        const state = api.getState();
+        const stateRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(state);
+        const selectorRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(selector);
+        const equalityFnRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(equalityFn);
+        const erroredRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(false);
+        const currentSliceRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+        if (currentSliceRef.current === void 0) {
+            currentSliceRef.current = selector(state);
+        }
+        let newStateSlice;
+        let hasNewStateSlice = false;
+        if (stateRef.current !== state || selectorRef.current !== selector || equalityFnRef.current !== equalityFn || erroredRef.current) {
+            newStateSlice = selector(state);
+            hasNewStateSlice = !equalityFn(currentSliceRef.current, newStateSlice);
+        }
+        useIsomorphicLayoutEffect(() => {
+            if (hasNewStateSlice) {
+                currentSliceRef.current = newStateSlice;
+            }
+            stateRef.current = state;
+            selectorRef.current = selector;
+            equalityFnRef.current = equalityFn;
+            erroredRef.current = false;
+        });
+        const stateBeforeSubscriptionRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(state);
+        useIsomorphicLayoutEffect(() => {
+            const listener = () => {
+                try {
+                    const nextState = api.getState();
+                    const nextStateSlice = selectorRef.current(nextState);
+                    if (!equalityFnRef.current(currentSliceRef.current, nextStateSlice)) {
+                        stateRef.current = nextState;
+                        currentSliceRef.current = nextStateSlice;
+                        forceUpdate();
+                    }
+                }
+                catch (error) {
+                    erroredRef.current = true;
+                    forceUpdate();
+                }
+            };
+            const unsubscribe = api.subscribe(listener);
+            if (api.getState() !== stateBeforeSubscriptionRef.current) {
+                listener();
+            }
+            return unsubscribe;
+        }, []);
+        const sliceToReturn = hasNewStateSlice ? newStateSlice : currentSliceRef.current;
+        (0,react__WEBPACK_IMPORTED_MODULE_0__.useDebugValue)(sliceToReturn);
+        return sliceToReturn;
+    };
+    Object.assign(useStore, api);
+    useStore[Symbol.iterator] = function () {
+        console.warn("[useStore, api] = create() is deprecated and will be removed in v4");
+        const items = [useStore, api];
+        return {
+            next() {
+                const done = items.length <= 0;
+                return { value: items.shift(), done };
+            }
+        };
+    };
+    return useStore;
+}
 
 
 
@@ -17014,51 +17147,20 @@ if (true) {
     (function () {
         'use strict';
         var React = __webpack_require__(/*! react */ "react");
-        var _assign = __webpack_require__(/*! object-assign */ "./node_modules/object-assign/index.js");
-        var REACT_ELEMENT_TYPE = 0xeac7;
-        var REACT_PORTAL_TYPE = 0xeaca;
-        exports.Fragment = 0xeacb;
-        var REACT_STRICT_MODE_TYPE = 0xeacc;
-        var REACT_PROFILER_TYPE = 0xead2;
-        var REACT_PROVIDER_TYPE = 0xeacd;
-        var REACT_CONTEXT_TYPE = 0xeace;
-        var REACT_FORWARD_REF_TYPE = 0xead0;
-        var REACT_SUSPENSE_TYPE = 0xead1;
-        var REACT_SUSPENSE_LIST_TYPE = 0xead8;
-        var REACT_MEMO_TYPE = 0xead3;
-        var REACT_LAZY_TYPE = 0xead4;
-        var REACT_BLOCK_TYPE = 0xead9;
-        var REACT_SERVER_BLOCK_TYPE = 0xeada;
-        var REACT_FUNDAMENTAL_TYPE = 0xead5;
-        var REACT_SCOPE_TYPE = 0xead7;
-        var REACT_OPAQUE_ID_TYPE = 0xeae0;
-        var REACT_DEBUG_TRACING_MODE_TYPE = 0xeae1;
-        var REACT_OFFSCREEN_TYPE = 0xeae2;
-        var REACT_LEGACY_HIDDEN_TYPE = 0xeae3;
-        if (typeof Symbol === 'function' && Symbol.for) {
-            var symbolFor = Symbol.for;
-            REACT_ELEMENT_TYPE = symbolFor('react.element');
-            REACT_PORTAL_TYPE = symbolFor('react.portal');
-            exports.Fragment = symbolFor('react.fragment');
-            REACT_STRICT_MODE_TYPE = symbolFor('react.strict_mode');
-            REACT_PROFILER_TYPE = symbolFor('react.profiler');
-            REACT_PROVIDER_TYPE = symbolFor('react.provider');
-            REACT_CONTEXT_TYPE = symbolFor('react.context');
-            REACT_FORWARD_REF_TYPE = symbolFor('react.forward_ref');
-            REACT_SUSPENSE_TYPE = symbolFor('react.suspense');
-            REACT_SUSPENSE_LIST_TYPE = symbolFor('react.suspense_list');
-            REACT_MEMO_TYPE = symbolFor('react.memo');
-            REACT_LAZY_TYPE = symbolFor('react.lazy');
-            REACT_BLOCK_TYPE = symbolFor('react.block');
-            REACT_SERVER_BLOCK_TYPE = symbolFor('react.server.block');
-            REACT_FUNDAMENTAL_TYPE = symbolFor('react.fundamental');
-            REACT_SCOPE_TYPE = symbolFor('react.scope');
-            REACT_OPAQUE_ID_TYPE = symbolFor('react.opaque.id');
-            REACT_DEBUG_TRACING_MODE_TYPE = symbolFor('react.debug_trace_mode');
-            REACT_OFFSCREEN_TYPE = symbolFor('react.offscreen');
-            REACT_LEGACY_HIDDEN_TYPE = symbolFor('react.legacy_hidden');
-        }
-        var MAYBE_ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
+        var REACT_ELEMENT_TYPE = Symbol.for('react.element');
+        var REACT_PORTAL_TYPE = Symbol.for('react.portal');
+        var REACT_FRAGMENT_TYPE = Symbol.for('react.fragment');
+        var REACT_STRICT_MODE_TYPE = Symbol.for('react.strict_mode');
+        var REACT_PROFILER_TYPE = Symbol.for('react.profiler');
+        var REACT_PROVIDER_TYPE = Symbol.for('react.provider');
+        var REACT_CONTEXT_TYPE = Symbol.for('react.context');
+        var REACT_FORWARD_REF_TYPE = Symbol.for('react.forward_ref');
+        var REACT_SUSPENSE_TYPE = Symbol.for('react.suspense');
+        var REACT_SUSPENSE_LIST_TYPE = Symbol.for('react.suspense_list');
+        var REACT_MEMO_TYPE = Symbol.for('react.memo');
+        var REACT_LAZY_TYPE = Symbol.for('react.lazy');
+        var REACT_OFFSCREEN_TYPE = Symbol.for('react.offscreen');
+        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator;
         var FAUX_ITERATOR_SYMBOL = '@@iterator';
         function getIteratorFn(maybeIterable) {
             if (maybeIterable === null || typeof maybeIterable !== 'object') {
@@ -17073,10 +17175,12 @@ if (true) {
         var ReactSharedInternals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
         function error(format) {
             {
-                for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
-                    args[_key2 - 1] = arguments[_key2];
+                {
+                    for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+                        args[_key2 - 1] = arguments[_key2];
+                    }
+                    printWarning('error', format, args);
                 }
-                printWarning('error', format, args);
             }
         }
         function printWarning(level, format, args) {
@@ -17088,41 +17192,54 @@ if (true) {
                     args = args.concat([stack]);
                 }
                 var argsWithFormat = args.map(function (item) {
-                    return '' + item;
+                    return String(item);
                 });
                 argsWithFormat.unshift('Warning: ' + format);
                 Function.prototype.apply.call(console[level], console, argsWithFormat);
             }
         }
         var enableScopeAPI = false;
+        var enableCacheElement = false;
+        var enableTransitionTracing = false;
+        var enableLegacyHidden = false;
+        var enableDebugTracing = false;
+        var REACT_MODULE_REFERENCE;
+        {
+            REACT_MODULE_REFERENCE = Symbol.for('react.module.reference');
+        }
         function isValidElementType(type) {
             if (typeof type === 'string' || typeof type === 'function') {
                 return true;
             }
-            if (type === exports.Fragment || type === REACT_PROFILER_TYPE || type === REACT_DEBUG_TRACING_MODE_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || type === REACT_LEGACY_HIDDEN_TYPE || enableScopeAPI) {
+            if (type === REACT_FRAGMENT_TYPE || type === REACT_PROFILER_TYPE || enableDebugTracing || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || enableLegacyHidden || type === REACT_OFFSCREEN_TYPE || enableScopeAPI || enableCacheElement || enableTransitionTracing) {
                 return true;
             }
             if (typeof type === 'object' && type !== null) {
-                if (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_BLOCK_TYPE || type[0] === REACT_SERVER_BLOCK_TYPE) {
+                if (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE ||
+                    type.$$typeof === REACT_MODULE_REFERENCE || type.getModuleId !== undefined) {
                     return true;
                 }
             }
             return false;
         }
         function getWrappedName(outerType, innerType, wrapperName) {
+            var displayName = outerType.displayName;
+            if (displayName) {
+                return displayName;
+            }
             var functionName = innerType.displayName || innerType.name || '';
-            return outerType.displayName || (functionName !== '' ? wrapperName + "(" + functionName + ")" : wrapperName);
+            return functionName !== '' ? wrapperName + "(" + functionName + ")" : wrapperName;
         }
         function getContextName(type) {
             return type.displayName || 'Context';
         }
-        function getComponentName(type) {
+        function getComponentNameFromType(type) {
             if (type == null) {
                 return null;
             }
             {
                 if (typeof type.tag === 'number') {
-                    error('Received an unexpected object in getComponentName(). ' + 'This is likely a bug in React. Please file an issue.');
+                    error('Received an unexpected object in getComponentNameFromType(). ' + 'This is likely a bug in React. Please file an issue.');
                 }
             }
             if (typeof type === 'function') {
@@ -17132,7 +17249,7 @@ if (true) {
                 return type;
             }
             switch (type) {
-                case exports.Fragment:
+                case REACT_FRAGMENT_TYPE:
                     return 'Fragment';
                 case REACT_PORTAL_TYPE:
                     return 'Portal';
@@ -17156,16 +17273,18 @@ if (true) {
                     case REACT_FORWARD_REF_TYPE:
                         return getWrappedName(type, type.render, 'ForwardRef');
                     case REACT_MEMO_TYPE:
-                        return getComponentName(type.type);
-                    case REACT_BLOCK_TYPE:
-                        return getComponentName(type._render);
+                        var outerName = type.displayName || null;
+                        if (outerName !== null) {
+                            return outerName;
+                        }
+                        return getComponentNameFromType(type.type) || 'Memo';
                     case REACT_LAZY_TYPE:
                         {
                             var lazyComponent = type;
                             var payload = lazyComponent._payload;
                             var init = lazyComponent._init;
                             try {
-                                return getComponentName(init(payload));
+                                return getComponentNameFromType(init(payload));
                             }
                             catch (x) {
                                 return null;
@@ -17175,6 +17294,7 @@ if (true) {
             }
             return null;
         }
+        var assign = Object.assign;
         var disabledDepth = 0;
         var prevLog;
         var prevInfo;
@@ -17224,25 +17344,25 @@ if (true) {
                         writable: true
                     };
                     Object.defineProperties(console, {
-                        log: _assign({}, props, {
+                        log: assign({}, props, {
                             value: prevLog
                         }),
-                        info: _assign({}, props, {
+                        info: assign({}, props, {
                             value: prevInfo
                         }),
-                        warn: _assign({}, props, {
+                        warn: assign({}, props, {
                             value: prevWarn
                         }),
-                        error: _assign({}, props, {
+                        error: assign({}, props, {
                             value: prevError
                         }),
-                        group: _assign({}, props, {
+                        group: assign({}, props, {
                             value: prevGroup
                         }),
-                        groupCollapsed: _assign({}, props, {
+                        groupCollapsed: assign({}, props, {
                             value: prevGroupCollapsed
                         }),
-                        groupEnd: _assign({}, props, {
+                        groupEnd: assign({}, props, {
                             value: prevGroupEnd
                         })
                     });
@@ -17350,6 +17470,9 @@ if (true) {
                                     c--;
                                     if (c < 0 || sampleLines[s] !== controlLines[c]) {
                                         var _frame = '\n' + sampleLines[s].replace(' at new ', ' at ');
+                                        if (fn.displayName && _frame.includes('<anonymous>')) {
+                                            _frame = _frame.replace('<anonymous>', fn.displayName);
+                                        }
                                         {
                                             if (typeof fn === 'function') {
                                                 componentFrameCache.set(fn, _frame);
@@ -17414,8 +17537,6 @@ if (true) {
                         return describeFunctionComponentFrame(type.render);
                     case REACT_MEMO_TYPE:
                         return describeUnknownElementTypeFrameInDEV(type.type, source, ownerFn);
-                    case REACT_BLOCK_TYPE:
-                        return describeFunctionComponentFrame(type._render);
                     case REACT_LAZY_TYPE:
                         {
                             var lazyComponent = type;
@@ -17430,6 +17551,7 @@ if (true) {
             }
             return '';
         }
+        var hasOwnProperty = Object.prototype.hasOwnProperty;
         var loggedTypeFailures = {};
         var ReactDebugCurrentFrame = ReactSharedInternals.ReactDebugCurrentFrame;
         function setCurrentlyValidatingElement(element) {
@@ -17446,7 +17568,7 @@ if (true) {
         }
         function checkPropTypes(typeSpecs, values, location, componentName, element) {
             {
-                var has = Function.call.bind(Object.prototype.hasOwnProperty);
+                var has = Function.call.bind(hasOwnProperty);
                 for (var typeSpecName in typeSpecs) {
                     if (has(typeSpecs, typeSpecName)) {
                         var error$1 = void 0;
@@ -17476,8 +17598,40 @@ if (true) {
                 }
             }
         }
+        var isArrayImpl = Array.isArray;
+        function isArray(a) {
+            return isArrayImpl(a);
+        }
+        function typeName(value) {
+            {
+                var hasToStringTag = typeof Symbol === 'function' && Symbol.toStringTag;
+                var type = hasToStringTag && value[Symbol.toStringTag] || value.constructor.name || 'Object';
+                return type;
+            }
+        }
+        function willCoercionThrow(value) {
+            {
+                try {
+                    testStringCoercion(value);
+                    return false;
+                }
+                catch (e) {
+                    return true;
+                }
+            }
+        }
+        function testStringCoercion(value) {
+            return '' + value;
+        }
+        function checkKeyStringCoercion(value) {
+            {
+                if (willCoercionThrow(value)) {
+                    error('The provided key is an unsupported type %s.' + ' This value must be coerced to a string before before using it here.', typeName(value));
+                    return testStringCoercion(value);
+                }
+            }
+        }
         var ReactCurrentOwner = ReactSharedInternals.ReactCurrentOwner;
-        var hasOwnProperty = Object.prototype.hasOwnProperty;
         var RESERVED_PROPS = {
             key: true,
             ref: true,
@@ -17515,9 +17669,9 @@ if (true) {
         function warnIfStringRefCannotBeAutoConverted(config, self) {
             {
                 if (typeof config.ref === 'string' && ReactCurrentOwner.current && self && ReactCurrentOwner.current.stateNode !== self) {
-                    var componentName = getComponentName(ReactCurrentOwner.current.type);
+                    var componentName = getComponentNameFromType(ReactCurrentOwner.current.type);
                     if (!didWarnAboutStringRefs[componentName]) {
-                        error('Component "%s" contains the string ref "%s". ' + 'Support for string refs will be removed in a future major release. ' + 'This case cannot be automatically converted to an arrow function. ' + 'We ask you to manually fix this case by using useRef() or createRef() instead. ' + 'Learn more about using refs safely here: ' + 'https://reactjs.org/link/strict-mode-string-ref', getComponentName(ReactCurrentOwner.current.type), config.ref);
+                        error('Component "%s" contains the string ref "%s". ' + 'Support for string refs will be removed in a future major release. ' + 'This case cannot be automatically converted to an arrow function. ' + 'We ask you to manually fix this case by using useRef() or createRef() instead. ' + 'Learn more about using refs safely here: ' + 'https://reactjs.org/link/strict-mode-string-ref', getComponentNameFromType(ReactCurrentOwner.current.type), config.ref);
                         didWarnAboutStringRefs[componentName] = true;
                     }
                 }
@@ -17596,9 +17750,15 @@ if (true) {
                 var key = null;
                 var ref = null;
                 if (maybeKey !== undefined) {
+                    {
+                        checkKeyStringCoercion(maybeKey);
+                    }
                     key = '' + maybeKey;
                 }
                 if (hasValidKey(config)) {
+                    {
+                        checkKeyStringCoercion(config.key);
+                    }
                     key = '' + config.key;
                 }
                 if (hasValidRef(config)) {
@@ -17656,7 +17816,7 @@ if (true) {
         function getDeclarationErrorAddendum() {
             {
                 if (ReactCurrentOwner$1.current) {
-                    var name = getComponentName(ReactCurrentOwner$1.current.type);
+                    var name = getComponentNameFromType(ReactCurrentOwner$1.current.type);
                     if (name) {
                         return '\n\nCheck the render method of `' + name + '`.';
                     }
@@ -17700,7 +17860,7 @@ if (true) {
                 ownerHasKeyUseWarning[currentComponentErrorInfo] = true;
                 var childOwner = '';
                 if (element && element._owner && element._owner !== ReactCurrentOwner$1.current) {
-                    childOwner = " It was passed a child from " + getComponentName(element._owner.type) + ".";
+                    childOwner = " It was passed a child from " + getComponentNameFromType(element._owner.type) + ".";
                 }
                 setCurrentlyValidatingElement$1(element);
                 error('Each child in a list should have a unique "key" prop.' + '%s%s See https://reactjs.org/link/warning-keys for more information.', currentComponentErrorInfo, childOwner);
@@ -17712,7 +17872,7 @@ if (true) {
                 if (typeof node !== 'object') {
                     return;
                 }
-                if (Array.isArray(node)) {
+                if (isArray(node)) {
                     for (var i = 0; i < node.length; i++) {
                         var child = node[i];
                         if (isValidElement(child)) {
@@ -17759,12 +17919,12 @@ if (true) {
                     return;
                 }
                 if (propTypes) {
-                    var name = getComponentName(type);
+                    var name = getComponentNameFromType(type);
                     checkPropTypes(propTypes, element.props, 'prop', name, element);
                 }
                 else if (type.PropTypes !== undefined && !propTypesMisspellWarningShown) {
                     propTypesMisspellWarningShown = true;
-                    var _name = getComponentName(type);
+                    var _name = getComponentNameFromType(type);
                     error('Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?', _name || 'Unknown');
                 }
                 if (typeof type.getDefaultProps === 'function' && !type.getDefaultProps.isReactClassApproved) {
@@ -17810,11 +17970,11 @@ if (true) {
                     if (type === null) {
                         typeString = 'null';
                     }
-                    else if (Array.isArray(type)) {
+                    else if (isArray(type)) {
                         typeString = 'array';
                     }
                     else if (type !== undefined && type.$$typeof === REACT_ELEMENT_TYPE) {
-                        typeString = "<" + (getComponentName(type.type) || 'Unknown') + " />";
+                        typeString = "<" + (getComponentNameFromType(type.type) || 'Unknown') + " />";
                         info = ' Did you accidentally export a JSX literal instead of a component?';
                     }
                     else {
@@ -17830,7 +17990,7 @@ if (true) {
                     var children = props.children;
                     if (children !== undefined) {
                         if (isStaticChildren) {
-                            if (Array.isArray(children)) {
+                            if (isArray(children)) {
                                 for (var i = 0; i < children.length; i++) {
                                     validateChildKeys(children[i], type);
                                 }
@@ -17847,7 +18007,7 @@ if (true) {
                         }
                     }
                 }
-                if (type === exports.Fragment) {
+                if (type === REACT_FRAGMENT_TYPE) {
                     validateFragmentProps(element);
                 }
                 else {
@@ -17868,6 +18028,7 @@ if (true) {
         }
         var jsx = jsxWithValidationDynamic;
         var jsxs = jsxWithValidationStatic;
+        exports.Fragment = REACT_FRAGMENT_TYPE;
         exports.jsx = jsx;
         exports.jsxs = jsxs;
     })();
@@ -17887,139 +18048,6 @@ if (false) {}
 else {
     module.exports = __webpack_require__(/*! ./cjs/react-jsx-runtime.development.js */ "./node_modules/react/cjs/react-jsx-runtime.development.js");
 }
-
-
-/***/ }),
-
-/***/ "./node_modules/rp-prompt/dist/index.js":
-/*!**********************************************!*\
-  !*** ./node_modules/rp-prompt/dist/index.js ***!
-  \**********************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-
-!function (e, t) {  true ? module.exports = t(__webpack_require__(/*! react */ "react"), __webpack_require__(/*! liqvid */ "liqvid")) : 0; }(self, (function (e, t) { return (() => {
-    "use strict";
-    var r = { 153: (e, t, r) => { r.d(t, { Z: () => s }); var n = r(318), o = r.n(n), i = r(433), a = r.n(i)()(o()); a.push([e.id, ".rp-prompt{border-radius:2px;color:#fff;position:absolute;width:35em}.rp-prompt > :first-child,.rp-prompt > .rp-prompt-cue.active{border-radius:2px 2px 0 0}.rp-prompt > :last-child{border-radius:0 0 2px 2px}.rp-prompt > *{display:none}.rp-prompt > .active,.rp-prompt .active ~ *{display:block}.rp-prompt > :not(.active){opacity:.2}.rp-prompt-cue{background:#ffa500;font-family:monospace;font-size:.625em;padding:2px 0 2px 1em}.rp-prompt-line{padding:.1em .5em}.rp-prompt-line:nth-of-type(odd){background:#555}.rp-prompt-line:nth-of-type(even){background:#333}.rp-prompt-measure{display:block !important;padding:.1em .5em}", ""]); const s = a; }, 433: e => { e.exports = function (e) { var t = []; return t.toString = function () { return this.map((function (t) { var r = "", n = void 0 !== t[5]; return t[4] && (r += "@supports (".concat(t[4], ") {")), t[2] && (r += "@media ".concat(t[2], " {")), n && (r += "@layer".concat(t[5].length > 0 ? " ".concat(t[5]) : "", " {")), r += e(t), n && (r += "}"), t[2] && (r += "}"), t[4] && (r += "}"), r; })).join(""); }, t.i = function (e, r, n, o, i) { "string" == typeof e && (e = [[null, e, void 0]]); var a = {}; if (n)
-            for (var s = 0; s < this.length; s++) {
-                var c = this[s][0];
-                null != c && (a[c] = !0);
-            } for (var p = 0; p < e.length; p++) {
-            var l = [].concat(e[p]);
-            n && a[l[0]] || (void 0 !== i && (void 0 === l[5] || (l[1] = "@layer".concat(l[5].length > 0 ? " ".concat(l[5]) : "", " {").concat(l[1], "}")), l[5] = i), r && (l[2] ? (l[1] = "@media ".concat(l[2], " {").concat(l[1], "}"), l[2] = r) : l[2] = r), o && (l[4] ? (l[1] = "@supports (".concat(l[4], ") {").concat(l[1], "}"), l[4] = o) : l[4] = "".concat(o)), t.push(l));
-        } }, t; }; }, 318: e => { e.exports = function (e) { return e[1]; }; }, 767: e => { var t = Object.getOwnPropertySymbols, r = Object.prototype.hasOwnProperty, n = Object.prototype.propertyIsEnumerable; function o(e) { if (null == e)
-            throw new TypeError("Object.assign cannot be called with null or undefined"); return Object(e); } e.exports = function () { try {
-            if (!Object.assign)
-                return !1;
-            var e = new String("abc");
-            if (e[5] = "de", "5" === Object.getOwnPropertyNames(e)[0])
-                return !1;
-            for (var t = {}, r = 0; r < 10; r++)
-                t["_" + String.fromCharCode(r)] = r;
-            if ("0123456789" !== Object.getOwnPropertyNames(t).map((function (e) { return t[e]; })).join(""))
-                return !1;
-            var n = {};
-            return "abcdefghijklmnopqrst".split("").forEach((function (e) { n[e] = e; })), "abcdefghijklmnopqrst" === Object.keys(Object.assign({}, n)).join("");
-        }
-        catch (o) {
-            return !1;
-        } }() ? Object.assign : function (e, i) { for (var a, s, c = o(e), p = 1; p < arguments.length; p++) {
-            for (var l in a = Object(arguments[p]))
-                r.call(a, l) && (c[l] = a[l]);
-            if (t) {
-                s = t(a);
-                for (var u = 0; u < s.length; u++)
-                    n.call(a, s[u]) && (c[s[u]] = a[s[u]]);
-            }
-        } return c; }; }, 945: (e, t, r) => { r(767); var n = r(359), o = 60103; if (60107, "function" == typeof Symbol && Symbol.for) {
-            var i = Symbol.for;
-            o = i("react.element"), i("react.fragment");
-        } var a = n.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner, s = Object.prototype.hasOwnProperty, c = { key: !0, ref: !0, __self: !0, __source: !0 }; function p(e, t, r) { var n, i = {}, p = null, l = null; for (n in void 0 !== r && (p = "" + r), void 0 !== t.key && (p = "" + t.key), void 0 !== t.ref && (l = t.ref), t)
-            s.call(t, n) && !c.hasOwnProperty(n) && (i[n] = t[n]); if (e && e.defaultProps)
-            for (n in t = e.defaultProps)
-                void 0 === i[n] && (i[n] = t[n]); return { $$typeof: o, type: e, key: p, ref: l, props: i, _owner: a.current }; } t.jsx = p, t.jsxs = p; }, 637: (e, t, r) => { e.exports = r(945); }, 941: e => { var t = []; function r(e) { for (var r = -1, n = 0; n < t.length; n++)
-            if (t[n].identifier === e) {
-                r = n;
-                break;
-            } return r; } function n(e, n) { for (var i = {}, a = [], s = 0; s < e.length; s++) {
-            var c = e[s], p = n.base ? c[0] + n.base : c[0], l = i[p] || 0, u = "".concat(p, " ").concat(l);
-            i[p] = l + 1;
-            var f = r(u), d = { css: c[1], media: c[2], sourceMap: c[3], supports: c[4], layer: c[5] };
-            if (-1 !== f)
-                t[f].references++, t[f].updater(d);
-            else {
-                var h = o(d, n);
-                n.byIndex = s, t.splice(s, 0, { identifier: u, updater: h, references: 1 });
-            }
-            a.push(u);
-        } return a; } function o(e, t) { var r = t.domAPI(t); r.update(e); return function (t) { if (t) {
-            if (t.css === e.css && t.media === e.media && t.sourceMap === e.sourceMap && t.supports === e.supports && t.layer === e.layer)
-                return;
-            r.update(e = t);
-        }
-        else
-            r.remove(); }; } e.exports = function (e, o) { var i = n(e = e || [], o = o || {}); return function (e) { e = e || []; for (var a = 0; a < i.length; a++) {
-            var s = r(i[a]);
-            t[s].references--;
-        } for (var c = n(e, o), p = 0; p < i.length; p++) {
-            var l = r(i[p]);
-            0 === t[l].references && (t[l].updater(), t.splice(l, 1));
-        } i = c; }; }; }, 765: e => { var t = {}; e.exports = function (e, r) { var n = function (e) { if (void 0 === t[e]) {
-            var r = document.querySelector(e);
-            if (window.HTMLIFrameElement && r instanceof window.HTMLIFrameElement)
-                try {
-                    r = r.contentDocument.head;
-                }
-                catch (n) {
-                    r = null;
-                }
-            t[e] = r;
-        } return t[e]; }(e); if (!n)
-            throw new Error("Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid."); n.appendChild(r); }; }, 801: e => { e.exports = function (e) { var t = document.createElement("style"); return e.setAttributes(t, e.attributes), e.insert(t, e.options), t; }; }, 24: (e, t, r) => { e.exports = function (e) { var t = r.nc; t && e.setAttribute("nonce", t); }; }, 836: e => { e.exports = function (e) { var t = e.insertStyleElement(e); return { update: function (r) { !function (e, t, r) { var n = ""; r.supports && (n += "@supports (".concat(r.supports, ") {")), r.media && (n += "@media ".concat(r.media, " {")); var o = void 0 !== r.layer; o && (n += "@layer".concat(r.layer.length > 0 ? " ".concat(r.layer) : "", " {")), n += r.css, o && (n += "}"), r.media && (n += "}"), r.supports && (n += "}"); var i = r.sourceMap; i && "undefined" != typeof btoa && (n += "\n/*# sourceMappingURL=data:application/json;base64,".concat(btoa(unescape(encodeURIComponent(JSON.stringify(i)))), " */")), t.styleTagTransform(n, e, t.options); }(t, e, r); }, remove: function () { !function (e) { if (null === e.parentNode)
-                return !1; e.parentNode.removeChild(e); }(t); } }; }; }, 938: e => { e.exports = function (e, t) { if (t.styleSheet)
-            t.styleSheet.cssText = e;
-        else {
-            for (; t.firstChild;)
-                t.removeChild(t.firstChild);
-            t.appendChild(document.createTextNode(e));
-        } }; }, 995: e => { e.exports = t; }, 359: t => { t.exports = e; } }, n = {};
-    function o(e) { var t = n[e]; if (void 0 !== t)
-        return t.exports; var i = n[e] = { id: e, exports: {} }; return r[e](i, i.exports, o), i.exports; }
-    o.n = e => { var t = e && e.__esModule ? () => e.default : () => e; return o.d(t, { a: t }), t; }, o.d = (e, t) => { for (var r in t)
-        o.o(t, r) && !o.o(e, r) && Object.defineProperty(e, r, { enumerable: !0, get: t[r] }); }, o.o = (e, t) => Object.prototype.hasOwnProperty.call(e, t), o.r = e => { "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, { value: "Module" }), Object.defineProperty(e, "__esModule", { value: !0 }); };
-    var i = {};
-    return (() => { o.r(i), o.d(i, { Cue: () => n, Prompt: () => l }); var e = o(637), t = o(359); const r = "rp-prompt"; class n extends t.PureComponent {
-        constructor(e) { super(e), this.state = { lines: null }; }
-        componentDidMount() { if (!this.props.children)
-            return; this.ref.normalize(); const e = []; for (const t of Array.from(this.ref.childNodes)) {
-            if (!a(t))
-                continue;
-            const r = t.wholeText.split(" ");
-            let n = r.shift(), o = n;
-            t.replaceData(0, t.wholeText.length, o);
-            let i = this.ref.getBoundingClientRect().height;
-            for (const a of r) {
-                t.replaceData(0, t.wholeText.length, `${o} ${a}`);
-                const r = this.ref.getBoundingClientRect().height;
-                r !== i ? (i = r, e.push(n), n = a) : n += ` ${a}`, o += ` ${a}`;
-            }
-            e.push(n);
-        } this.setState({ lines: e }); }
-        render() { if (!this.props.children)
-            return " | "; const n = [`${r}-cue`], o = [`${r}-line`]; return this.props.active && (n.push("active"), o.push("active")), (0, e.jsxs)(t.Fragment, { children: [(0, e.jsx)("span", Object.assign({ className: n.join(" ") }, { children: this.props.on }), void 0), this.state.lines ? this.state.lines.map(((t, r) => (0, e.jsx)("div", Object.assign({ className: o.join(" ") }, { children: t }), r))) : (0, e.jsx)("div", Object.assign({ className: `${r}-measure`, ref: e => this.ref = e }, { children: this.props.children }), void 0)] }, void 0); }
-    } function a(e) { return e.nodeType === e.TEXT_NODE; } var s = o(995), c = function (e, t) { var r = {}; for (var n in e)
-        Object.prototype.hasOwnProperty.call(e, n) && t.indexOf(n) < 0 && (r[n] = e[n]); if (null != e && "function" == typeof Object.getOwnPropertySymbols) {
-        var o = 0;
-        for (n = Object.getOwnPropertySymbols(e); o < n.length; o++)
-            t.indexOf(n[o]) < 0 && Object.prototype.propertyIsEnumerable.call(e, n[o]) && (r[n[o]] = e[n[o]]);
-    } return r; }; const { dragHelperReact: p } = s.Utils.interactivity; function l(r) { const { script: n } = (0, s.usePlayer)(), o = (0, t.useRef)(), { children: i } = r, a = c(r, ["children"]), [l, u] = (0, t.useState)(t.Children.toArray(i).map((e => e.props.children && n.markerNumberOf(e.props.on) <= n.markerIndex)).lastIndexOf(!0)); (0, t.useEffect)((() => { o.current.style.left || Object.assign(o.current.style, { left: "0%", top: "0%" }), n.hub.on("markerupdate", (() => { u(t.Children.toArray(i).map((e => e.props.children && n.markerNumberOf(e.props.on) <= n.markerIndex)).lastIndexOf(!0)); })); })); const f = (0, t.useMemo)((() => { let e, t; return p(((r, n) => { const i = function (e) { if (void 0 !== e.offsetLeft && void 0 !== e.offsetTop)
-        return { left: e.offsetLeft, top: e.offsetTop, width: e.offsetParent.getBoundingClientRect().width, height: e.offsetParent.getBoundingClientRect().height }; const t = e.getBoundingClientRect(); let r = e; for (; r = r.parentNode;) {
-        if (!["absolute", "relative"].includes(getComputedStyle(r).position))
-            continue;
-        const e = r.getBoundingClientRect();
-        return { left: t.left - e.left, top: t.top - e.top, width: e.width, height: e.height };
-    } return { left: t.left, top: t.top, width: innerWidth, height: innerHeight }; }(o.current), a = i.left + n.x - e, s = i.top + n.y - t, c = a / i.width * 100, p = s / i.height * 100; e = n.x, t = n.y, Object.assign(o.current.style, { left: `${c}%`, top: `${p}%` }); }), ((r, n) => { e = n.x, t = n.y; })); }), []); return (0, e.jsx)("div", Object.assign({ className: "rp-prompt" }, a, f, { ref: o }, { children: t.Children.map(r.children, ((e, r) => t.cloneElement(e, { active: l === r }))) }), void 0); } var u = o(941), f = o.n(u), d = o(836), h = o.n(d), m = o(765), v = o.n(m), y = o(24), g = o.n(y), b = o(801), x = o.n(b), O = o(938), j = o.n(O), w = o(153), P = {}; P.styleTagTransform = j(), P.setAttributes = g(), P.insert = v().bind(null, "head"), P.domAPI = h(), P.insertStyleElement = x(); f()(w.Z, P); w.Z && w.Z.locals && w.Z.locals; })(), i;
-})(); }));
 
 
 /***/ }),
@@ -20256,131 +20284,6 @@ useAsset.peek = (...args) => {
 
 /***/ }),
 
-/***/ "./node_modules/zustand/esm/index.js":
-/*!*******************************************!*\
-  !*** ./node_modules/zustand/esm/index.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ create)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-function createStore(createState) {
-    let state;
-    const listeners = new Set();
-    const setState = (partial, replace) => {
-        const nextState = typeof partial === "function" ? partial(state) : partial;
-        if (nextState !== state) {
-            const previousState = state;
-            state = replace ? nextState : Object.assign({}, state, nextState);
-            listeners.forEach((listener) => listener(state, previousState));
-        }
-    };
-    const getState = () => state;
-    const subscribeWithSelector = (listener, selector = getState, equalityFn = Object.is) => {
-        console.warn("[DEPRECATED] Please use `subscribeWithSelector` middleware");
-        let currentSlice = selector(state);
-        function listenerToAdd() {
-            const nextSlice = selector(state);
-            if (!equalityFn(currentSlice, nextSlice)) {
-                const previousSlice = currentSlice;
-                listener(currentSlice = nextSlice, previousSlice);
-            }
-        }
-        listeners.add(listenerToAdd);
-        return () => listeners.delete(listenerToAdd);
-    };
-    const subscribe = (listener, selector, equalityFn) => {
-        if (selector || equalityFn) {
-            return subscribeWithSelector(listener, selector, equalityFn);
-        }
-        listeners.add(listener);
-        return () => listeners.delete(listener);
-    };
-    const destroy = () => listeners.clear();
-    const api = { setState, getState, subscribe, destroy };
-    state = createState(setState, getState, api);
-    return api;
-}
-const isSSR = typeof window === "undefined" || !window.navigator || /ServerSideRendering|^Deno\//.test(window.navigator.userAgent);
-const useIsomorphicLayoutEffect = isSSR ? react__WEBPACK_IMPORTED_MODULE_0__.useEffect : react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect;
-function create(createState) {
-    const api = typeof createState === "function" ? createStore(createState) : createState;
-    const useStore = (selector = api.getState, equalityFn = Object.is) => {
-        const [, forceUpdate] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)((c) => c + 1, 0);
-        const state = api.getState();
-        const stateRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(state);
-        const selectorRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(selector);
-        const equalityFnRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(equalityFn);
-        const erroredRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(false);
-        const currentSliceRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
-        if (currentSliceRef.current === void 0) {
-            currentSliceRef.current = selector(state);
-        }
-        let newStateSlice;
-        let hasNewStateSlice = false;
-        if (stateRef.current !== state || selectorRef.current !== selector || equalityFnRef.current !== equalityFn || erroredRef.current) {
-            newStateSlice = selector(state);
-            hasNewStateSlice = !equalityFn(currentSliceRef.current, newStateSlice);
-        }
-        useIsomorphicLayoutEffect(() => {
-            if (hasNewStateSlice) {
-                currentSliceRef.current = newStateSlice;
-            }
-            stateRef.current = state;
-            selectorRef.current = selector;
-            equalityFnRef.current = equalityFn;
-            erroredRef.current = false;
-        });
-        const stateBeforeSubscriptionRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(state);
-        useIsomorphicLayoutEffect(() => {
-            const listener = () => {
-                try {
-                    const nextState = api.getState();
-                    const nextStateSlice = selectorRef.current(nextState);
-                    if (!equalityFnRef.current(currentSliceRef.current, nextStateSlice)) {
-                        stateRef.current = nextState;
-                        currentSliceRef.current = nextStateSlice;
-                        forceUpdate();
-                    }
-                }
-                catch (error) {
-                    erroredRef.current = true;
-                    forceUpdate();
-                }
-            };
-            const unsubscribe = api.subscribe(listener);
-            if (api.getState() !== stateBeforeSubscriptionRef.current) {
-                listener();
-            }
-            return unsubscribe;
-        }, []);
-        const sliceToReturn = hasNewStateSlice ? newStateSlice : currentSliceRef.current;
-        (0,react__WEBPACK_IMPORTED_MODULE_0__.useDebugValue)(sliceToReturn);
-        return sliceToReturn;
-    };
-    Object.assign(useStore, api);
-    useStore[Symbol.iterator] = function () {
-        console.warn("[useStore, api] = create() is deprecated and will be removed in v4");
-        const items = [useStore, api];
-        return {
-            next() {
-                const done = items.length <= 0;
-                return { value: items.shift(), done };
-            }
-        };
-    };
-    return useStore;
-}
-
-
-
-/***/ }),
-
 /***/ "./src/3d/Arrow.tsx":
 /*!**************************!*\
   !*** ./src/3d/Arrow.tsx ***!
@@ -20787,17 +20690,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "XyJaxPrompt": () => (/* binding */ XyJaxPrompt)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var rp_prompt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rp-prompt */ "./node_modules/rp-prompt/dist/index.js");
-/* harmony import */ var rp_prompt__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(rp_prompt__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @liqvid/prompt */ "./node_modules/@liqvid/prompt/dist/esm/index.mjs");
 
 
-const IntroPrompt = (props) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Prompt, Object.assign({}, props, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "intro/toc" }, { children: "Liqvid is a tool for creating interactive videos out of HTML. In this video, I'm going to demonstrate how to achieve various effects that you might want when using this tool for mathematical content." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "intro/main" }, { children: "This supplements the general-purpose tutorial; you might want to watch that first. That's a link that you can click on. That'll" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "intro/explain" }, { children: "explain what this library is, the main concepts behind ractives and how to record them. In particular, if you want to" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "intro/codebooth" }, { children: ["include coding activities, or if ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, { on: "intro/paint" }), " you want to write out formulas by hand, the general purpose tutorial covers the plugins for doing that. Here we're going to focus on rendered formulas and on graphics."] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "intro/clone" }, { children: "The way to use this tutorial is to clone the repository, and then you can follow along in the source code to see how I achieved various things." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "intro/links" }, { children: "Some other helpful links: this does require a pretty solid command of frontend web development, so" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "intro/js" }, { children: "here's a Javascript course that I like. This is actually written in" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "intro/ts" }, { children: "TypeScript, which is a superset of Javascript that adds more typing. And it's built on top of" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "intro/react" }, { children: "software called React, which makes it a lot easier to do dynamic things with HTML. So here's the documentation for that." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "intro/node" }, { children: ["To transpile Typescript and React into normal Javascript, you'll need to install Node.js.", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("br", {}), "These tools are all pretty standard in web development, but not as familiar to mathematicians."] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "intro/epiplexis" }, { children: "Finally, you can see examples of this used for actual math lessons on my website." }))] })));
-const KaTeXPrompt = (props) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Prompt, Object.assign({}, props, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "ktx/" }, { children: "So let's get started. These formulas are rendered using KaTeX; you can use inline" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "ktx/display" }, { children: "or display equations. If you want to" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "ktx/ex" }, { children: "successively reveal parts of an equation, you can use ractive-player's built-in show/hiding functionality, but you'll see in the source that you kind of have to attach it by hand." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "ktx/macros" }, { children: "The library also provides a way to load macro definitions from a file; this is intended to make it easy to reuse macros across a lot of diferent videos. So here THH was a macro defined in the file symbols.tex." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "ktx/docs" }, { children: "Finally, here's the KaTeX documentation." }))] })));
-const MathJaxPrompt = (props) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Prompt, Object.assign({}, props, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "mjx/" }, { children: "You can also render your formulas using MathJax. Again you've got inline" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "mjx/display" }, { children: "or display equations, you can do equation reveals;" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "mjx/extn" }, { children: "unlike KaTeX, you do need a MathJax extension to do the equation-revealing, but that's provided in the source for this video." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "mjx/macros" }, { children: "MathJax will load macros from the same file as KaTeX, you can use them side by side." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "mjx/docs" }, { children: ["And then here's the documentation for MathJax. Note this is not the latest version of MathJax.", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("br", {}), "So, I usually use KaTeX for my formulas, because it's faster (partly because of the older version). But there are some complicated formulas that only MathJax can render, in particular, commutative diagrams."] }))] })));
-const XyJaxPrompt = (props) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Prompt, Object.assign({}, props, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "xyjx/" }, { children: "So there's an amazing MathJax package called XyJax that lets you use xymatrix in MathJax. Here's" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "xyjx/diagram" }, { children: "a basic commutative diagram. Now, doing effects with XyJax, even some things that would be easy to do in normal xymatrix, is really hard. It's much harder than the 2d / 3d animation that we'll cover next. But it can be done." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "xyjx/pullback" }, { children: "So here are some diagrams using macros for pullback and pushout decorations." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "xyjx/color" }, { children: "Here's a diagram with colored arrows." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "xyjx/arrows" }, { children: "Here's how to animate arrows in a diagram." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "xyjx/brouwer" }, { children: "And then here's a fade animation: so this is supposed to be a proof of the Brouwer fixed point theorem: S^1 can't be a retract of D^2, because if it were," })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "xyjx/pi1" }, { children: "you could apply \\pi_1" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "xyjx/apply" }, { children: "and get this diagram in the category of abelian groups, which is" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "xyjx/contradiction" }, { children: ["clearly nonsensical.", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("br", {}), "So that's how you do formulas; now let's talk about graphics."] }))] })));
-const TwoDPrompt = (props) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Prompt, Object.assign({}, props, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "2d/" }, { children: "Here's an example of 2d graphics, using SVG. You can move the point on the parabola and it'll show the tangent line and the equation for that tangent line. You can also set the position using the textbox." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "2d/consider" }, { children: "Now, one of the challenges of using this format is, most of the time clicking on the video will pause it, so how do you signify to the user which parts are interactive?" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "2d/signify" }, { children: "Here I used an orange pulse to signify that the point is movable, and I've also provided explicit instuctions. And I've got the controls on these gray panels that won't pause the video when clicked. So you want to try to establish and stick to some visual conventions." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "2d/fat" }, { children: "Another thing you have to watch out for is, on mobile, it's very hard to precisely hit the circle with your finger. So you have to make a transparent circle with a much larger radius to increase the clickable area. Any time you see \"fat-fingers\" in the code, that's what it's referring to." }))] })));
-const ThreeDPrompt = (props) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Prompt, Object.assign({}, props, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "3d/" }, { children: "Now for 3d graphics. Here we have an interactive scene, so the controls are listed down there. You can close the help dialog if you want." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "3d/three" }, { children: "This is done using an amazing Javascript library called THREE.js, and you will definitely want to bookmark the documentation for that." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "3d/r3f" }, { children: ["And here I'm also using a library called react-three-fiber, which lets you create scenes in a much more declarative way.", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("br", {}), "Anyway,"] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "3d/hide" }, { children: "here we have a cylinder. And now," })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "3d/drag" }, { children: "here's an example of a movable object. So you can try moving the orange ring. I'll pause so you can try that out." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "3d/pause" }, { children: ["And then here's an example of animating a shape: ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, { on: "3d/anim" })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "3d/parametric" }, { children: "Then here's a parametric surface, this is a trefoil knot." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "3d/svg" }, { children: "Then here's an example of combining 2d formulas with 3d graphics. You render your LaTeX formulas to SVG, and then you can import them into a 3d scene." }))] })));
-const FiveDPrompt = (props) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Prompt, Object.assign({}, props, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(rp_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "5d/" }, { children: "Finally, here's an example of mixing 2d and 3d graphics. So this is supposed to be illustrating the moduli stack of elliptic curves, to first approximation. So you can adjust the values of a and b, we've really got a 4-dimensional space and then we get elliptic curves as 2-dimensional cross sections of it. This example shows how to use graph implicit equations in two or three dimensions. So hopefully that's helpful for getting up and running; I look forward to seeing what you create with this tool." })) })));
+const IntroPrompt = (props) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Prompt, Object.assign({}, props, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "intro/toc" }, { children: "Liqvid is a tool for creating interactive videos out of HTML. In this video, I'm going to demonstrate how to achieve various effects that you might want when using this tool for mathematical content." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "intro/main" }, { children: "This supplements the general-purpose tutorial; you might want to watch that first. That's a link that you can click on. That'll" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "intro/explain" }, { children: "explain what this library is, the main concepts behind ractives and how to record them. In particular, if you want to" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "intro/codebooth" }, { children: ["include coding activities, or if ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, { on: "intro/paint" }), " you want to write out formulas by hand, the general purpose tutorial covers the plugins for doing that. Here we're going to focus on rendered formulas and on graphics."] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "intro/clone" }, { children: "The way to use this tutorial is to clone the repository, and then you can follow along in the source code to see how I achieved various things." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "intro/links" }, { children: "Some other helpful links: this does require a pretty solid command of frontend web development, so" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "intro/js" }, { children: "here's a Javascript course that I like. This is actually written in" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "intro/ts" }, { children: "TypeScript, which is a superset of Javascript that adds more typing. And it's built on top of" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "intro/react" }, { children: "software called React, which makes it a lot easier to do dynamic things with HTML. So here's the documentation for that." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "intro/node" }, { children: ["To transpile Typescript and React into normal Javascript, you'll need to install Node.js.", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("br", {}), "These tools are all pretty standard in web development, but not as familiar to mathematicians."] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "intro/epiplexis" }, { children: "Finally, you can see examples of this used for actual math lessons on my website." }))] })));
+const KaTeXPrompt = (props) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Prompt, Object.assign({}, props, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "ktx/" }, { children: "So let's get started. These formulas are rendered using KaTeX; you can use inline" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "ktx/display" }, { children: "or display equations. If you want to" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "ktx/ex" }, { children: "successively reveal parts of an equation, you can use ractive-player's built-in show/hiding functionality, but you'll see in the source that you kind of have to attach it by hand." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "ktx/macros" }, { children: "The library also provides a way to load macro definitions from a file; this is intended to make it easy to reuse macros across a lot of diferent videos. So here THH was a macro defined in the file symbols.tex." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "ktx/docs" }, { children: "Finally, here's the KaTeX documentation." }))] })));
+const MathJaxPrompt = (props) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Prompt, Object.assign({}, props, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "mjx/" }, { children: "You can also render your formulas using MathJax. Again you've got inline" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "mjx/display" }, { children: "or display equations, you can do equation reveals;" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "mjx/extn" }, { children: "unlike KaTeX, you do need a MathJax extension to do the equation-revealing, but that's provided in the source for this video." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "mjx/macros" }, { children: "MathJax will load macros from the same file as KaTeX, you can use them side by side." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "mjx/docs" }, { children: ["And then here's the documentation for MathJax. Note this is not the latest version of MathJax.", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("br", {}), "So, I usually use KaTeX for my formulas, because it's faster (partly because of the older version). But there are some complicated formulas that only MathJax can render, in particular, commutative diagrams."] }))] })));
+const XyJaxPrompt = (props) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Prompt, Object.assign({}, props, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "xyjx/" }, { children: "So there's an amazing MathJax package called XyJax that lets you use xymatrix in MathJax. Here's" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "xyjx/diagram" }, { children: "a basic commutative diagram. Now, doing effects with XyJax, even some things that would be easy to do in normal xymatrix, is really hard. It's much harder than the 2d / 3d animation that we'll cover next. But it can be done." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "xyjx/pullback" }, { children: "So here are some diagrams using macros for pullback and pushout decorations." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "xyjx/color" }, { children: "Here's a diagram with colored arrows." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "xyjx/arrows" }, { children: "Here's how to animate arrows in a diagram." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "xyjx/brouwer" }, { children: "And then here's a fade animation: so this is supposed to be a proof of the Brouwer fixed point theorem: S^1 can't be a retract of D^2, because if it were," })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "xyjx/pi1" }, { children: "you could apply \\pi_1" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "xyjx/apply" }, { children: "and get this diagram in the category of abelian groups, which is" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "xyjx/contradiction" }, { children: ["clearly nonsensical.", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("br", {}), "So that's how you do formulas; now let's talk about graphics."] }))] })));
+const TwoDPrompt = (props) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Prompt, Object.assign({}, props, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "2d/" }, { children: "Here's an example of 2d graphics, using SVG. You can move the point on the parabola and it'll show the tangent line and the equation for that tangent line. You can also set the position using the textbox." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "2d/consider" }, { children: "Now, one of the challenges of using this format is, most of the time clicking on the video will pause it, so how do you signify to the user which parts are interactive?" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "2d/signify" }, { children: "Here I used an orange pulse to signify that the point is movable, and I've also provided explicit instuctions. And I've got the controls on these gray panels that won't pause the video when clicked. So you want to try to establish and stick to some visual conventions." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "2d/fat" }, { children: "Another thing you have to watch out for is, on mobile, it's very hard to precisely hit the circle with your finger. So you have to make a transparent circle with a much larger radius to increase the clickable area. Any time you see \"fat-fingers\" in the code, that's what it's referring to." }))] })));
+const ThreeDPrompt = (props) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Prompt, Object.assign({}, props, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "3d/" }, { children: "Now for 3d graphics. Here we have an interactive scene, so the controls are listed down there. You can close the help dialog if you want." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "3d/three" }, { children: "This is done using an amazing Javascript library called THREE.js, and you will definitely want to bookmark the documentation for that." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "3d/r3f" }, { children: ["And here I'm also using a library called react-three-fiber, which lets you create scenes in a much more declarative way.", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("br", {}), "Anyway,"] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "3d/hide" }, { children: "here we have a cylinder. And now," })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "3d/drag" }, { children: "here's an example of a movable object. So you can try moving the orange ring. I'll pause so you can try that out." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "3d/pause" }, { children: ["And then here's an example of animating a shape: ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, { on: "3d/anim" })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "3d/parametric" }, { children: "Then here's a parametric surface, this is a trefoil knot." })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "3d/svg" }, { children: "Then here's an example of combining 2d formulas with 3d graphics. You render your LaTeX formulas to SVG, and then you can import them into a 3d scene." }))] })));
+const FiveDPrompt = (props) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Prompt, Object.assign({}, props, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_prompt__WEBPACK_IMPORTED_MODULE_1__.Cue, Object.assign({ on: "5d/" }, { children: "Finally, here's an example of mixing 2d and 3d graphics. So this is supposed to be illustrating the moduli stack of elliptic curves, to first approximation. So you can adjust the values of a and b, we've really got a 4-dimensional space and then we get elliptic curves as 2-dimensional cross sections of it. This example shows how to use graph implicit equations in two or three dimensions. So hopefully that's helpful for getting up and running; I look forward to seeing what you create with this tool." })) })));
 
 
 /***/ }),
@@ -20815,11 +20717,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _liqvid_katex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @liqvid/katex */ "./node_modules/@liqvid/katex/dist/index.mjs");
-/* harmony import */ var _lib_Input__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @lib/Input */ "./lib/Input.tsx");
-/* harmony import */ var _env_prompts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @env/prompts */ "./src/@development/prompts.tsx");
-/* harmony import */ var _5d_Elliptic__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./5d/Elliptic */ "./src/5d/Elliptic.tsx");
-/* harmony import */ var _5d_Moduli__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./5d/Moduli */ "./src/5d/Moduli.tsx");
+/* harmony import */ var _liqvid_katex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @liqvid/katex */ "./node_modules/@liqvid/katex/dist/esm/fancy.mjs");
+/* harmony import */ var _lib_Input__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @lib/Input */ "./lib/Input.tsx");
+/* harmony import */ var _env_prompts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @env/prompts */ "./src/@development/prompts.tsx");
+/* harmony import */ var _5d_Elliptic__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./5d/Elliptic */ "./src/5d/Elliptic.tsx");
+/* harmony import */ var _5d_Moduli__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./5d/Moduli */ "./src/5d/Moduli.tsx");
 
 
 
@@ -20836,7 +20738,7 @@ function FiveD() {
     const onChangeB = (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)((e) => {
         setB(parseFloat(e.currentTarget.value));
     }, []);
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", Object.assign({ id: "sec-5d", "data-during": "5d/" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("figure", Object.assign({ id: "elliptic", "data-affords": "click" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_5d_Elliptic__WEBPACK_IMPORTED_MODULE_5__["default"], Object.assign({}, { a, b })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ id: "fived-controls", "data-affords": "click" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("table", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("caption", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_2__.KTX, { children: "y^2 = x^3 + ax + b" }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tbody", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_2__.KTX, { children: "a" }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { min: -5, max: 5, step: "0.01", type: "range", onChange: onChangeA, value: a.toString() }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Input__WEBPACK_IMPORTED_MODULE_3__["default"], { min: -5, max: 5, step: "0.01", type: "number", onChange: onChangeA, value: a.toString() }) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_2__.KTX, { children: "b" }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Input__WEBPACK_IMPORTED_MODULE_3__["default"], { min: -5, max: 5, step: "0.01", type: "range", onChange: onChangeB, value: b.toString() }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Input__WEBPACK_IMPORTED_MODULE_3__["default"], { min: -5, max: 5, step: "0.01", type: "number", onChange: onChangeB, value: b.toString() }) })] })] })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("figure", Object.assign({ id: "moduli" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_5d_Moduli__WEBPACK_IMPORTED_MODULE_6__["default"], Object.assign({}, { a, b })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_env_prompts__WEBPACK_IMPORTED_MODULE_4__.FiveDPrompt, {})] })));
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", Object.assign({ id: "sec-5d", "data-during": "5d/" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("figure", Object.assign({ id: "elliptic", "data-affords": "click" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_5d_Elliptic__WEBPACK_IMPORTED_MODULE_4__["default"], Object.assign({}, { a, b })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ id: "fived-controls", "data-affords": "click" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("table", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("caption", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_6__.KTX, { children: "y^2 = x^3 + ax + b" }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tbody", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_6__.KTX, { children: "a" }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { min: -5, max: 5, step: "0.01", type: "range", onChange: onChangeA, value: a.toString() }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Input__WEBPACK_IMPORTED_MODULE_2__["default"], { min: -5, max: 5, step: "0.01", type: "number", onChange: onChangeA, value: a.toString() }) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_6__.KTX, { children: "b" }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Input__WEBPACK_IMPORTED_MODULE_2__["default"], { min: -5, max: 5, step: "0.01", type: "range", onChange: onChangeB, value: b.toString() }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Input__WEBPACK_IMPORTED_MODULE_2__["default"], { min: -5, max: 5, step: "0.01", type: "number", onChange: onChangeB, value: b.toString() }) })] })] })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("figure", Object.assign({ id: "moduli" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_5d_Moduli__WEBPACK_IMPORTED_MODULE_5__["default"], Object.assign({}, { a, b })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_env_prompts__WEBPACK_IMPORTED_MODULE_3__.FiveDPrompt, {})] })));
 }
 
 
@@ -20880,7 +20782,7 @@ function Intro() {
         e.preventDefault();
         _markers__WEBPACK_IMPORTED_MODULE_5__.playback.seek(e.currentTarget.getAttribute("href").slice(3));
     }), []);
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", Object.assign({ id: "sec-intro", "data-during": "intro/" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h1", { children: "Liqvid math tutorial" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("table", Object.assign({ className: "toc", "data-during": "intro/toc" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: contents.map((row, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", Object.assign({ "data-affords": "click" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("th", { children: [i + 1, "."] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", Object.assign({ className: "name" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: `?t=${formatTimeMs(row[1])}` }, seek, { children: row[0] })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", Object.assign({ className: "time" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: `?t=${formatTimeMs(row[1])}` }, seek, { children: formatTime(row[1]) })) }))] }), row[0]))) }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", Object.assign({}, from("intro/main"), { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://liqvidjs.org/" }, { children: "General-purpose tutorial" })) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/explain"), { children: "explains what ractives are, how to write and record them" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/codebooth"), { children: "coding plugin" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/paint"), { children: "freehand drawing plugin" }))] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", Object.assign({}, from("intro/clone"), { children: ["Clone this tutorial: ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://github.com/ysulyma/rp-tutorial-math" }, { children: "https://github.com/ysulyma/rp-tutorial-math" }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", Object.assign({}, from("intro/links"), { children: "Links" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/js"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://javascript.info/" }, { children: "Javascript.info course" })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/ts"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://www.typescriptlang.org/" }, { children: "TypeScript documentation" })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/react"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://reactjs.org/" }, { children: "React documentation" })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/node"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://nodejs.org/en/" }, { children: "Node.js" })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({}, from("intro/epiplexis"), { children: ["Inspiration: ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://epiplexis.xyz/" }, { children: "Epiplexis" }))] }))] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_env_prompts__WEBPACK_IMPORTED_MODULE_1__.IntroPrompt, {})] })));
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", Object.assign({ id: "sec-intro", "data-during": "intro/" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h1", { children: "Liqvid math tutorial" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("table", Object.assign({ className: "toc", "data-during": "intro/toc" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: contents.map((row, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", Object.assign({ "data-affords": "click" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("th", { children: [i + 1, "."] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", Object.assign({ className: "name" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: `?t=${formatTimeMs(row[1])}` }, seek, { children: row[0] })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", Object.assign({ className: "time" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: `?t=${formatTimeMs(row[1])}` }, seek, { children: formatTime(row[1]) })) }))] }), row[0]))) }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", Object.assign({}, from("intro/main"), { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://liqvidjs.org/" }, { children: "General-purpose tutorial" })) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/explain"), { children: "explains what ractives are, how to write and record them" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/codebooth"), { children: "coding plugin" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/paint"), { children: "freehand drawing plugin" }))] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", Object.assign({}, from("intro/clone"), { children: ["Clone this tutorial: ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://github.com/ysulyma/lv-tutorial-math" }, { children: "https://github.com/ysulyma/lv-tutorial-math" }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", Object.assign({}, from("intro/links"), { children: "Links" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/js"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://javascript.info/" }, { children: "Javascript.info course" })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/ts"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://www.typescriptlang.org/" }, { children: "TypeScript documentation" })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/react"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://reactjs.org/" }, { children: "React documentation" })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("intro/node"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://nodejs.org/en/" }, { children: "Node.js" })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({}, from("intro/epiplexis"), { children: ["Inspiration: ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ href: "https://epiplexis.xyz/" }, { children: "Epiplexis" }))] }))] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_env_prompts__WEBPACK_IMPORTED_MODULE_1__.IntroPrompt, {})] })));
 }
 
 
@@ -20900,27 +20802,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _env_prompts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @env/prompts */ "./src/@development/prompts.tsx");
 /* harmony import */ var _lib_Block__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @lib/Block */ "./lib/Block.tsx");
 /* harmony import */ var _lib_Link__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @lib/Link */ "./lib/Link.tsx");
-/* harmony import */ var _liqvid_katex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @liqvid/katex */ "./node_modules/@liqvid/katex/dist/index.mjs");
-/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! liqvid */ "liqvid");
-/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _liqvid_katex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @liqvid/katex */ "./node_modules/@liqvid/katex/dist/esm/fancy.mjs");
+/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! liqvid */ "liqvid");
+/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
 
 
 
-const { from } = liqvid__WEBPACK_IMPORTED_MODULE_5__.Utils.authoring;
+const { from } = liqvid__WEBPACK_IMPORTED_MODULE_4__.Utils.authoring;
 const { raw } = String;
 function KaTeXSlide() {
     const m1 = raw `\htmlData{from-first=ktx/align-1}`;
     const m2 = raw `\htmlData{from-first=ktx/align-2}`;
     const m3 = raw `\htmlData{from-first=ktx/align-3}`;
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", Object.assign({ id: "sec-katex", "data-during": "ktx/" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_lib_Block__WEBPACK_IMPORTED_MODULE_2__.Definition, Object.assign({ blockTitle: "Derivative of a function" }, { children: ["The ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("dfn", { children: ["derivative of ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_4__.KTX, { children: "f" }), " at ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_4__.KTX, { children: "x" }), ","] }), " denoted ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_4__.KTX, { children: "f'(x)," }), " is", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_4__.KTX, Object.assign({ display: true }, from("ktx/display"), { children: raw `f'(x) := \lim_{\epsilon\to0}\frac{f(x+\epsilon)-f(x)}{\epsilon}.` }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Block__WEBPACK_IMPORTED_MODULE_2__.Example, Object.assign({ blockTitle: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, { children: ["The derivative of ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_4__.KTX, { children: "x^2" })] }) }, from("ktx/ex"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_4__.KTX, Object.assign({ display: true, reparse: true }, { children: raw `\begin{aligned}
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", Object.assign({ id: "sec-katex", "data-during": "ktx/" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_lib_Block__WEBPACK_IMPORTED_MODULE_2__.Definition, Object.assign({ blockTitle: "Derivative of a function" }, { children: ["The ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("dfn", { children: ["derivative of ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_5__.KTX, { children: "f" }), " at ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_5__.KTX, { children: "x" }), ","] }), " denoted ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_5__.KTX, { children: "f'(x)," }), " is", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_5__.KTX, Object.assign({ display: true }, from("ktx/display"), { children: raw `f'(x) := \lim_{\epsilon\to0}\frac{f(x+\epsilon)-f(x)}{\epsilon}.` }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Block__WEBPACK_IMPORTED_MODULE_2__.Example, Object.assign({ blockTitle: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, { children: ["The derivative of ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_5__.KTX, { children: "x^2" })] }) }, from("ktx/ex"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_5__.KTX, Object.assign({ display: true, reparse: true }, { children: raw `\begin{aligned}
         \lim_{\epsilon\to0}\frac{(x+\epsilon)^2-x^2}{\epsilon}
         &${m1}{= \lim_{\epsilon\to0}\frac{(x^2 + 2\epsilon x + \epsilon^2)-x^2}{\epsilon}}\\[1em]
         &${m2}{= \lim_{\epsilon\to0}\Big(2x + \epsilon\Big)}\\[1em]
         &${m3}{= 2x.}
-      \end{aligned}` })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_lib_Block__WEBPACK_IMPORTED_MODULE_2__.Example, Object.assign({}, from("ktx/macros"), { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", { children: ["Can load macros from file: ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_4__.KTX, { children: raw `\THH(R;\Z_p)` })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", Object.assign({}, from("ktx/docs"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_3__["default"], Object.assign({ href: "https://katex.org/" }, { children: "KaTeX documentation" })) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_env_prompts__WEBPACK_IMPORTED_MODULE_1__.KaTeXPrompt, {})] })));
+      \end{aligned}` })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_lib_Block__WEBPACK_IMPORTED_MODULE_2__.Example, Object.assign({}, from("ktx/macros"), { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", { children: ["Can load macros from file: ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_5__.KTX, { children: raw `\THH(R;\Z_p)` })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", Object.assign({}, from("ktx/docs"), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Link__WEBPACK_IMPORTED_MODULE_3__["default"], Object.assign({ href: "https://katex.org/" }, { children: "KaTeX documentation" })) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_env_prompts__WEBPACK_IMPORTED_MODULE_1__.KaTeXPrompt, {})] })));
 }
 
 
@@ -20940,7 +20842,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _env_prompts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @env/prompts */ "./src/@development/prompts.tsx");
 /* harmony import */ var _lib_Block__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @lib/Block */ "./lib/Block.tsx");
 /* harmony import */ var _lib_Link__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @lib/Link */ "./lib/Link.tsx");
-/* harmony import */ var _liqvid_mathjax__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @liqvid/mathjax */ "./node_modules/@liqvid/mathjax/dist/index.mjs");
+/* harmony import */ var _liqvid_mathjax__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @liqvid/mathjax */ "./node_modules/@liqvid/mathjax/dist/esm/index.mjs");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! liqvid */ "liqvid");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "react");
@@ -21065,11 +20967,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_FatFingers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @lib/FatFingers */ "./lib/FatFingers.tsx");
 /* harmony import */ var _lib_GlowOrb__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @lib/GlowOrb */ "./lib/GlowOrb.tsx");
 /* harmony import */ var _lib_Input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @lib/Input */ "./lib/Input.tsx");
-/* harmony import */ var _liqvid_katex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @liqvid/katex */ "./node_modules/@liqvid/katex/dist/index.mjs");
-/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! liqvid */ "liqvid");
-/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _liqvid_katex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @liqvid/katex */ "./node_modules/@liqvid/katex/dist/esm/fancy.mjs");
+/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! liqvid */ "liqvid");
+/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
 
 
 
@@ -21078,7 +20980,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const { from } = liqvid__WEBPACK_IMPORTED_MODULE_6__.Utils.authoring, { dragHelperReact } = liqvid__WEBPACK_IMPORTED_MODULE_6__.Utils.interactivity, { constrain, range } = liqvid__WEBPACK_IMPORTED_MODULE_6__.Utils.misc, { anyHover } = liqvid__WEBPACK_IMPORTED_MODULE_6__.Utils.mobile, { screenToSVG } = liqvid__WEBPACK_IMPORTED_MODULE_6__.Utils.svg;
+const { from } = liqvid__WEBPACK_IMPORTED_MODULE_5__.Utils.authoring, { dragHelperReact } = liqvid__WEBPACK_IMPORTED_MODULE_5__.Utils.interactivity, { constrain, range } = liqvid__WEBPACK_IMPORTED_MODULE_5__.Utils.misc, { anyHover } = liqvid__WEBPACK_IMPORTED_MODULE_5__.Utils.mobile, { screenToSVG } = liqvid__WEBPACK_IMPORTED_MODULE_5__.Utils.svg;
 const { raw } = String;
 const a = -4, b = 4;
 const minX = -5, maxX = 5;
@@ -21086,22 +20988,22 @@ const negF = (x) => [x, 2 - x * x];
 const f = (x) => [x, x * x - 2];
 const df = (x) => 2 * x;
 function TwoD() {
-    const [x, setX] = (0,react__WEBPACK_IMPORTED_MODULE_7__.useState)(1);
-    const svgRef = (0,react__WEBPACK_IMPORTED_MODULE_7__.useRef)();
-    const [showOrb, setShowOrb] = (0,react__WEBPACK_IMPORTED_MODULE_7__.useState)(true);
-    (0,react__WEBPACK_IMPORTED_MODULE_7__.useEffect)(() => {
+    const [x, setX] = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)(1);
+    const svgRef = (0,react__WEBPACK_IMPORTED_MODULE_6__.useRef)();
+    const [showOrb, setShowOrb] = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)(true);
+    (0,react__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
         for (const target of Array.from(svgRef.current.querySelectorAll("circle"))) {
             target.addEventListener("touchstart", e => e.preventDefault(), { passive: false });
         }
     }, [svgRef.current]);
-    const onDown = (0,react__WEBPACK_IMPORTED_MODULE_7__.useCallback)((e) => {
+    const onDown = (0,react__WEBPACK_IMPORTED_MODULE_6__.useCallback)((e) => {
         setShowOrb(false);
         document.body.classList.add("dragging");
     }, []);
-    const onUp = (0,react__WEBPACK_IMPORTED_MODULE_7__.useCallback)(() => {
+    const onUp = (0,react__WEBPACK_IMPORTED_MODULE_6__.useCallback)(() => {
         document.body.classList.remove("dragging");
     }, []);
-    const onMoveA = (0,react__WEBPACK_IMPORTED_MODULE_7__.useCallback)((...[e, hit]) => {
+    const onMoveA = (0,react__WEBPACK_IMPORTED_MODULE_6__.useCallback)((...[e, hit]) => {
         const [svgX, svgY] = screenToSVG(svgRef.current, hit.x, hit.y);
         setX(constrain(a, closestPoint(svgX, -svgY), b));
     }, [svgRef]);
@@ -21120,21 +21022,21 @@ function TwoD() {
             tangentEqn += fmt(intercept);
         }
     }
-    const inputA = (0,react__WEBPACK_IMPORTED_MODULE_7__.useCallback)((e) => {
+    const inputA = (0,react__WEBPACK_IMPORTED_MODULE_6__.useCallback)((e) => {
         const val = parseFloat(e.currentTarget.value);
         if (!isNaN(val))
             setX(constrain(a, val, b));
     }, []);
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", Object.assign({ id: "sec-2d", "data-during": "2d/" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ id: "tangent-demo", ref: svgRef, viewBox: "-5.3 -5.3 10.6 10.6", "data-affords": "click" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(CartesianGrid, {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { className: "plot", d: graph(negF, a, b, 200) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { className: "tangent-line", x1: minX, y1: -(minX * slope + intercept), x2: maxX, y2: -(maxX * slope + intercept) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_FatFingers__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ className: "draggable point-A", cx: A[0], cy: -A[1], r: "0.1", fatR: "0.4" }, dragHelperReact(onMoveA, onDown, onUp))), showOrb && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_GlowOrb__WEBPACK_IMPORTED_MODULE_3__["default"], { className: "glow", cx: A[0], cy: -A[1], dur: "1s", r1: 0.1, r2: 0.3 })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ id: "explain", "data-affords": "click" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_5__.KTX, Object.assign({ display: true, id: "defn" }, { children: raw `
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("section", Object.assign({ id: "sec-2d", "data-during": "2d/" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ id: "tangent-demo", ref: svgRef, viewBox: "-5.3 -5.3 10.6 10.6", "data-affords": "click" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(CartesianGrid, {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { className: "plot", d: graph(negF, a, b, 200) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { className: "tangent-line", x1: minX, y1: -(minX * slope + intercept), x2: maxX, y2: -(maxX * slope + intercept) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_FatFingers__WEBPACK_IMPORTED_MODULE_2__["default"], Object.assign({ className: "draggable point-A", cx: A[0], cy: -A[1], r: "0.1", fatR: "0.4" }, dragHelperReact(onMoveA, onDown, onUp))), showOrb && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_GlowOrb__WEBPACK_IMPORTED_MODULE_3__["default"], { className: "glow", cx: A[0], cy: -A[1], dur: "1s", r1: 0.1, r2: 0.3 })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ id: "explain", "data-affords": "click" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_7__.KTX, Object.assign({ display: true, id: "defn" }, { children: raw `
           \begin{aligned}
             \htmlClass{plot}{y} &\htmlClass{plot}{= x^2-2}\\
             \htmlClass{tangent-line}{y} &\htmlClass{tangent-line}{= ${tangentEqn}}
           \end{aligned}
-        ` })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("table", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_5__.KTX, Object.assign({ id: "val-c" }, { children: raw `\htmlClass{pt1}{c =}` })) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Input__WEBPACK_IMPORTED_MODULE_4__["default"], { onChange: inputA, type: "text", value: fmt(x).toString() }, x) })] }) }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", { children: ["Try moving the point on the graph with your ", anyHover ? "mouse" : "finger", "."] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", Object.assign({}, from("2d/consider"), { children: "Considerations" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("2d/signify"), { children: "use consistent signifiers to indicate interactive components" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({}, from("2d/fat"), { children: ["need larger hit area for mobile (", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("code", { children: "fat-fingers" }), " in the code)"] }))] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_env_prompts__WEBPACK_IMPORTED_MODULE_1__.TwoDPrompt, {})] })));
+        ` })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("table", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_liqvid_katex__WEBPACK_IMPORTED_MODULE_7__.KTX, Object.assign({ id: "val-c" }, { children: raw `\htmlClass{pt1}{c =}` })) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_lib_Input__WEBPACK_IMPORTED_MODULE_4__["default"], { onChange: inputA, type: "text", value: fmt(x).toString() }, x) })] }) }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", { children: ["Try moving the point on the graph with your ", anyHover ? "mouse" : "finger", "."] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", Object.assign({}, from("2d/consider"), { children: "Considerations" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({}, from("2d/signify"), { children: "use consistent signifiers to indicate interactive components" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({}, from("2d/fat"), { children: ["need larger hit area for mobile (", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("code", { children: "fat-fingers" }), " in the code)"] }))] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_env_prompts__WEBPACK_IMPORTED_MODULE_1__.TwoDPrompt, {})] })));
 }
 function CartesianGrid() {
     const minY = -5, maxY = 5;
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("g", { children: [range(minX, maxX + 1).map(n => n !== 0 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react__WEBPACK_IMPORTED_MODULE_7__.Fragment, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { className: "gridline", x1: n, x2: n, y1: -maxY, y2: -minY }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { className: "axis-tick", x1: n, x2: n, y1: "-0.15", y2: "0.15" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("text", Object.assign({ className: "axis-label", x: n, y: 0, dx: 0.15, dy: .5 }, { children: n.toString().replace("-", "–") }))] }, `x_${n}`))), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("text", Object.assign({ className: "axis-label", x: 0, y: 0, dx: 0.25, dy: 0.4 }, { children: "0" })), range(minY, maxY + 1).map(n => n !== 0 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react__WEBPACK_IMPORTED_MODULE_7__.Fragment, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { className: "gridline", x1: minX, x2: maxX, y1: -n, y2: -n }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { className: "axis-tick", x1: -.15, x2: .15, y1: -n, y2: -n }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("text", Object.assign({ className: "axis-label", x: 0, y: -n, dx: 0.4 }, { children: n.toString().replace("-", "–") }))] }, `y-${n}`))), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { className: "major-axis", x1: minX, x2: maxX, y1: "0", y2: "0" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { className: "major-axis", x1: "0", x2: "0", y1: -minY, y2: -maxY })] }));
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("g", { children: [range(minX, maxX + 1).map(n => n !== 0 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react__WEBPACK_IMPORTED_MODULE_6__.Fragment, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { className: "gridline", x1: n, x2: n, y1: -maxY, y2: -minY }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { className: "axis-tick", x1: n, x2: n, y1: "-0.15", y2: "0.15" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("text", Object.assign({ className: "axis-label", x: n, y: 0, dx: 0.15, dy: .5 }, { children: n.toString().replace("-", "–") }))] }, `x_${n}`))), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("text", Object.assign({ className: "axis-label", x: 0, y: 0, dx: 0.25, dy: 0.4 }, { children: "0" })), range(minY, maxY + 1).map(n => n !== 0 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react__WEBPACK_IMPORTED_MODULE_6__.Fragment, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { className: "gridline", x1: minX, x2: maxX, y1: -n, y2: -n }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { className: "axis-tick", x1: -.15, x2: .15, y1: -n, y2: -n }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("text", Object.assign({ className: "axis-label", x: 0, y: -n, dx: 0.4 }, { children: n.toString().replace("-", "–") }))] }, `y-${n}`))), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { className: "major-axis", x1: minX, x2: maxX, y1: "0", y2: "0" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { className: "major-axis", x1: "0", x2: "0", y1: -minY, y2: -maxY })] }));
 }
 function fmt(x, l = 4) {
     return parseFloat(x.toFixed(l));
@@ -21180,7 +21082,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var _lib_Block__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @lib/Block */ "./lib/Block.tsx");
 /* harmony import */ var _lib_Link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @lib/Link */ "./lib/Link.tsx");
-/* harmony import */ var _liqvid_mathjax__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @liqvid/mathjax */ "./node_modules/@liqvid/mathjax/dist/index.mjs");
+/* harmony import */ var _liqvid_mathjax__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @liqvid/mathjax */ "./node_modules/@liqvid/mathjax/dist/esm/index.mjs");
 /* harmony import */ var _liqvid_xyjax__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @liqvid/xyjax */ "./node_modules/@liqvid/xyjax/dist/index.mjs");
 /* harmony import */ var _xyjax_AnimatedArrows__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./xyjax/AnimatedArrows */ "./src/xyjax/AnimatedArrows.tsx");
 /* harmony import */ var _xyjax_Brouwer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./xyjax/Brouwer */ "./src/xyjax/Brouwer.tsx");
@@ -21313,7 +21215,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "AnimatedArrows": () => (/* binding */ AnimatedArrows)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _liqvid_mathjax__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @liqvid/mathjax */ "./node_modules/@liqvid/mathjax/dist/index.mjs");
+/* harmony import */ var _liqvid_mathjax__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @liqvid/mathjax */ "./node_modules/@liqvid/mathjax/dist/esm/index.mjs");
 /* harmony import */ var _liqvid_xyjax__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @liqvid/xyjax */ "./node_modules/@liqvid/xyjax/dist/index.mjs");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! liqvid */ "liqvid");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_3__);
@@ -21373,7 +21275,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Brouwer": () => (/* binding */ Brouwer)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _liqvid_mathjax__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @liqvid/mathjax */ "./node_modules/@liqvid/mathjax/dist/index.mjs");
+/* harmony import */ var _liqvid_mathjax__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @liqvid/mathjax */ "./node_modules/@liqvid/mathjax/dist/esm/index.mjs");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! liqvid */ "liqvid");
 /* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(liqvid__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
@@ -21522,27 +21424,61 @@ module.exports = THREE;
 
 /***/ }),
 
-/***/ "./node_modules/@liqvid/katex/dist/index.mjs":
-/*!***************************************************!*\
-  !*** ./node_modules/@liqvid/katex/dist/index.mjs ***!
-  \***************************************************/
+/***/ "./node_modules/@liqvid/katex/dist/esm/fancy.mjs":
+/*!*******************************************************!*\
+  !*** ./node_modules/@liqvid/katex/dist/esm/fancy.mjs ***!
+  \*******************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "KTX": () => (/* binding */ KTX),
-/* harmony export */   "KaTeXReady": () => (/* binding */ KaTeXReady),
-/* harmony export */   "RenderGroup": () => (/* binding */ RenderGroup)
+/* harmony export */   "KTX": () => (/* binding */ KTX)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime.js */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _liqvid_utils_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @liqvid/utils/react */ "./node_modules/@liqvid/utils/dist/esm/react.js");
-/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! liqvid */ "liqvid");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _liqvid_utils_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @liqvid/utils/react */ "./node_modules/@liqvid/utils/dist/esm/react.mjs");
+/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! liqvid */ "liqvid");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var _plain_mjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./plain.mjs */ "./node_modules/@liqvid/katex/dist/esm/plain.mjs");
 
 
 
 
 
+/** Component for KaTeX code */
+const KTX = (0,react__WEBPACK_IMPORTED_MODULE_2__.forwardRef)(function KTX(props, ref) {
+    const { obstruct = "canplay canplaythrough", reparse = false, ...attrs } = props;
+    const plain = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)();
+    const combined = (0,_liqvid_utils_react__WEBPACK_IMPORTED_MODULE_3__.combineRefs)(plain, ref);
+    const player = (0,liqvid__WEBPACK_IMPORTED_MODULE_1__.usePlayer)();
+    (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
+        // obstruction
+        if (obstruct.match(/\bcanplay\b/)) {
+            player.obstruct("canplay", plain.current.ready);
+        }
+        if (obstruct.match("canplaythrough")) {
+            player.obstruct("canplaythrough", plain.current.ready);
+        }
+        // reparsing
+        if (reparse) {
+            plain.current.ready.then(() => player.reparseTree(plain.current.domElement));
+        }
+    }, []);
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_plain_mjs__WEBPACK_IMPORTED_MODULE_4__.KTX, { ref: combined, ...attrs }));
+});
+
+
+/***/ }),
+
+/***/ "./node_modules/@liqvid/katex/dist/esm/loading.mjs":
+/*!*********************************************************!*\
+  !*** ./node_modules/@liqvid/katex/dist/esm/loading.mjs ***!
+  \*********************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "KaTeXReady": () => (/* binding */ KaTeXReady)
+/* harmony export */ });
 // option of loading KaTeX asynchronously
 const KaTeXLoad = new Promise((resolve) => {
     const script = document.querySelector("script[src*=\"katex.js\"], script[src*=\"katex.min.js\"]");
@@ -21608,18 +21544,39 @@ function parseMacros(file) {
     return macros;
 }
 
+
+/***/ }),
+
+/***/ "./node_modules/@liqvid/katex/dist/esm/plain.mjs":
+/*!*******************************************************!*\
+  !*** ./node_modules/@liqvid/katex/dist/esm/plain.mjs ***!
+  \*******************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "KTX": () => (/* binding */ KTX)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _liqvid_utils_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @liqvid/utils/react */ "./node_modules/@liqvid/utils/dist/esm/react.mjs");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var _loading_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./loading.mjs */ "./node_modules/@liqvid/katex/dist/esm/loading.mjs");
+
+
+
+
 /** Component for KaTeX code */
-const KTX$1 = (0,react__WEBPACK_IMPORTED_MODULE_3__.forwardRef)(function KTX(props, ref) {
-    const spanRef = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)();
+const KTX = (0,react__WEBPACK_IMPORTED_MODULE_1__.forwardRef)(function KTX(props, ref) {
+    const spanRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)();
     const { children, display = false, ...attrs } = props;
-    const [ready, resolve] = (0,_liqvid_utils_react__WEBPACK_IMPORTED_MODULE_1__.usePromise)();
+    const [ready, resolve] = (0,_liqvid_utils_react__WEBPACK_IMPORTED_MODULE_2__.usePromise)();
     // handle
-    (0,react__WEBPACK_IMPORTED_MODULE_3__.useImperativeHandle)(ref, () => ({
+    (0,react__WEBPACK_IMPORTED_MODULE_1__.useImperativeHandle)(ref, () => ({
         domElement: spanRef.current,
         ready
     }));
-    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
-        KaTeXReady.then(([katex, macros]) => {
+    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+        _loading_mjs__WEBPACK_IMPORTED_MODULE_3__.KaTeXReady.then(([katex, macros]) => {
             katex.render(children.toString(), spanRef.current, {
                 displayMode: !!display,
                 macros,
@@ -21649,43 +21606,45 @@ const KTX$1 = (0,react__WEBPACK_IMPORTED_MODULE_3__.forwardRef)(function KTX(pro
             attrs.style = {};
         attrs.style.display = "block";
     }
-    return ((0,react_jsx_runtime_js__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { ...attrs, ref: spanRef }));
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { ...attrs, ref: spanRef }));
 });
 
-/** Component for KaTeX code */
-const KTX = (0,react__WEBPACK_IMPORTED_MODULE_3__.forwardRef)(function KTX(props, ref) {
-    const { obstruct = "canplay canplaythrough", reparse = false, ...attrs } = props;
-    const plain = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)();
-    const combined = (0,_liqvid_utils_react__WEBPACK_IMPORTED_MODULE_1__.combineRefs)(plain, ref);
-    const player = (0,liqvid__WEBPACK_IMPORTED_MODULE_2__.usePlayer)();
-    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
-        // obstruction
-        if (obstruct.match(/\bcanplay\b/)) {
-            player.obstruct("canplay", plain.current.ready);
-        }
-        if (obstruct.match("canplaythrough")) {
-            player.obstruct("canplaythrough", plain.current.ready);
-        }
-        // reparsing
-        if (reparse) {
-            plain.current.ready.then(() => player.reparseTree(plain.current.domElement));
-        }
-    }, []);
-    return ((0,react_jsx_runtime_js__WEBPACK_IMPORTED_MODULE_0__.jsx)(KTX$1, { ref: combined, ...attrs }));
-});
+
+/***/ }),
+
+/***/ "./node_modules/@liqvid/mathjax/dist/esm/RenderGroup.mjs":
+/*!***************************************************************!*\
+  !*** ./node_modules/@liqvid/mathjax/dist/esm/RenderGroup.mjs ***!
+  \***************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RenderGroup": () => (/* binding */ RenderGroup)
+/* harmony export */ });
+/* harmony import */ var _liqvid_utils_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @liqvid/utils/react */ "./node_modules/@liqvid/utils/dist/esm/react.mjs");
+/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! liqvid */ "liqvid");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var _fancy_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./fancy.mjs */ "./node_modules/@liqvid/mathjax/dist/esm/fancy.mjs");
+/* harmony import */ var _plain_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./plain.mjs */ "./node_modules/@liqvid/mathjax/dist/esm/plain.mjs");
+
+
+
+
 
 /**
- * Wait for several things to be rendered
-*/
-const RenderGroup = (0,react__WEBPACK_IMPORTED_MODULE_3__.forwardRef)(function RenderGroup(props, ref) {
-    const [ready, resolve] = (0,_liqvid_utils_react__WEBPACK_IMPORTED_MODULE_1__.usePromise)();
+ * Wait for a bunch of things to be rendered
+ */
+// @ts-expect-error we don't know how to type `recursiveMap` yet
+const RenderGroup = (0,react__WEBPACK_IMPORTED_MODULE_1__.forwardRef)(function RenderGroup(props, ref) {
+    const [ready, resolve] = (0,_liqvid_utils_react__WEBPACK_IMPORTED_MODULE_4__.usePromise)();
     // handle
-    (0,react__WEBPACK_IMPORTED_MODULE_3__.useImperativeHandle)(ref, () => ({ ready }));
-    const elements = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)([]);
-    const promises = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)([]);
+    (0,react__WEBPACK_IMPORTED_MODULE_1__.useImperativeHandle)(ref, () => ({ ready }));
+    const elements = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)([]);
+    const promises = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)([]);
     // reparsing
-    const player = (0,liqvid__WEBPACK_IMPORTED_MODULE_2__.usePlayer)();
-    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
+    const player = (0,liqvid__WEBPACK_IMPORTED_MODULE_0__.usePlayer)();
+    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
         // promises
         Promise.all(promises.current).then(() => {
             // reparse
@@ -21696,10 +21655,10 @@ const RenderGroup = (0,react__WEBPACK_IMPORTED_MODULE_3__.forwardRef)(function R
             resolve();
         });
     }, []);
-    return (0,_liqvid_utils_react__WEBPACK_IMPORTED_MODULE_1__.recursiveMap)(props.children, node => {
+    return (0,_liqvid_utils_react__WEBPACK_IMPORTED_MODULE_4__.recursiveMap)(props.children, node => {
         if (shouldInspect(node)) {
             const originalRef = node.ref;
-            return (0,react__WEBPACK_IMPORTED_MODULE_3__.cloneElement)(node, {
+            return (0,react__WEBPACK_IMPORTED_MODULE_1__.cloneElement)(node, {
                 ref: (ref) => {
                     if (!ref)
                         return;
@@ -21718,12 +21677,9 @@ const RenderGroup = (0,react__WEBPACK_IMPORTED_MODULE_3__.forwardRef)(function R
         return node;
     });
 });
-/**
- * Determine whether the node is a <KTX> element
- * @param node Element to check
- */
+/** Whether the element is an <MJX> */
 function shouldInspect(node) {
-    return (0,react__WEBPACK_IMPORTED_MODULE_3__.isValidElement)(node) && typeof node.type === "object" && (node.type === KTX || node.type === KTX$1);
+    return (0,react__WEBPACK_IMPORTED_MODULE_1__.isValidElement)(node) && typeof node.type === "object" && (node.type === _fancy_mjs__WEBPACK_IMPORTED_MODULE_2__.MJX || node.type === _plain_mjs__WEBPACK_IMPORTED_MODULE_3__.MJX);
 }
 /**
  * Find least common ancestor of an array of elements
@@ -21744,32 +21700,92 @@ function leastCommonAncestor(elements) {
 }
 
 
-
-
 /***/ }),
 
-/***/ "./node_modules/@liqvid/mathjax/dist/index.mjs":
-/*!*****************************************************!*\
-  !*** ./node_modules/@liqvid/mathjax/dist/index.mjs ***!
-  \*****************************************************/
+/***/ "./node_modules/@liqvid/mathjax/dist/esm/fancy.mjs":
+/*!*********************************************************!*\
+  !*** ./node_modules/@liqvid/mathjax/dist/esm/fancy.mjs ***!
+  \*********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "MJX": () => (/* binding */ MJX),
-/* harmony export */   "MJXText": () => (/* binding */ MJXText),
-/* harmony export */   "MathJaxReady": () => (/* binding */ MathJaxReady),
-/* harmony export */   "RenderGroup": () => (/* binding */ RenderGroup)
+/* harmony export */   "MJXText": () => (/* binding */ MJXText)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime.js */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _liqvid_utils_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @liqvid/utils/react */ "./node_modules/@liqvid/utils/dist/esm/react.js");
-/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! liqvid */ "liqvid");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _liqvid_utils_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @liqvid/utils/react */ "./node_modules/@liqvid/utils/dist/esm/react.mjs");
+/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! liqvid */ "liqvid");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var _plain_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./plain.mjs */ "./node_modules/@liqvid/mathjax/dist/esm/plain.mjs");
 
 
 
 
 
+/** Component for MathJax code */
+const MJX = (0,react__WEBPACK_IMPORTED_MODULE_2__.forwardRef)(function MJX(props, ref) {
+    const { obstruct = "canplay canplaythrough", reparse = false, ...attrs } = props;
+    const plain = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)();
+    const combined = (0,_liqvid_utils_react__WEBPACK_IMPORTED_MODULE_4__.combineRefs)(plain, ref);
+    const player = (0,liqvid__WEBPACK_IMPORTED_MODULE_1__.usePlayer)();
+    (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
+        // obstruction
+        const obstructions = obstruct.split(" ");
+        if (obstructions.includes("canplay")) {
+            player.obstruct("canplay", plain.current.ready);
+        }
+        if (obstructions.includes("canplaythrough")) {
+            player.obstruct("canplaythrough", plain.current.ready);
+        }
+        // reparsing
+        if (reparse) {
+            plain.current.ready.then(() => player.reparseTree(plain.current.domElement));
+        }
+    }, []);
+    return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_plain_mjs__WEBPACK_IMPORTED_MODULE_3__.MJX, { ref: combined, ...attrs });
+});
+const MJXText = (0,react__WEBPACK_IMPORTED_MODULE_2__.forwardRef)(function MJXText(props, ref) {
+    const { ...attrs } = props;
+    return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_plain_mjs__WEBPACK_IMPORTED_MODULE_3__.MJXText, { tagName: "p", ...attrs });
+});
+
+
+/***/ }),
+
+/***/ "./node_modules/@liqvid/mathjax/dist/esm/index.mjs":
+/*!*********************************************************!*\
+  !*** ./node_modules/@liqvid/mathjax/dist/esm/index.mjs ***!
+  \*********************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "MJX": () => (/* reexport safe */ _fancy_mjs__WEBPACK_IMPORTED_MODULE_1__.MJX),
+/* harmony export */   "MJXText": () => (/* reexport safe */ _fancy_mjs__WEBPACK_IMPORTED_MODULE_1__.MJXText),
+/* harmony export */   "MathJaxReady": () => (/* reexport safe */ _loading_mjs__WEBPACK_IMPORTED_MODULE_0__.MathJaxReady),
+/* harmony export */   "RenderGroup": () => (/* reexport safe */ _RenderGroup_mjs__WEBPACK_IMPORTED_MODULE_2__.RenderGroup)
+/* harmony export */ });
+/* harmony import */ var _loading_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./loading.mjs */ "./node_modules/@liqvid/mathjax/dist/esm/loading.mjs");
+/* harmony import */ var _fancy_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fancy.mjs */ "./node_modules/@liqvid/mathjax/dist/esm/fancy.mjs");
+/* harmony import */ var _RenderGroup_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RenderGroup.mjs */ "./node_modules/@liqvid/mathjax/dist/esm/RenderGroup.mjs");
+
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@liqvid/mathjax/dist/esm/loading.mjs":
+/*!***********************************************************!*\
+  !*** ./node_modules/@liqvid/mathjax/dist/esm/loading.mjs ***!
+  \***********************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "MathJaxReady": () => (/* binding */ MathJaxReady)
+/* harmony export */ });
 /**
  * Ready Promise
  */
@@ -21778,18 +21794,42 @@ const packages = MathJax._.components.package.Package.packages;
 const packageNames = Array.from(packages.keys()).filter(name => name !== "output/svg");
 const MathJaxReady = Promise.all([MathJax.loader.ready(...packageNames), MathJax.startup.promise]);
 
+
+/***/ }),
+
+/***/ "./node_modules/@liqvid/mathjax/dist/esm/plain.mjs":
+/*!*********************************************************!*\
+  !*** ./node_modules/@liqvid/mathjax/dist/esm/plain.mjs ***!
+  \*********************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "MJX": () => (/* binding */ MJX),
+/* harmony export */   "MJXText": () => (/* binding */ MJXText)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _liqvid_utils_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @liqvid/utils/react */ "./node_modules/@liqvid/utils/dist/esm/react.mjs");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var _loading_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./loading.mjs */ "./node_modules/@liqvid/mathjax/dist/esm/loading.mjs");
+
+
+
+
 /** Component for MathJax code */
-const MJX$1 = (0,react__WEBPACK_IMPORTED_MODULE_3__.forwardRef)(function MJX(props, ref) {
+const MJX = (0,react__WEBPACK_IMPORTED_MODULE_1__.forwardRef)(function MJX(props, ref) {
     const { children, display = false, resize = false, span = false, ...attrs } = props;
-    const spanRef = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)();
-    const [ready, resolve] = (0,_liqvid_utils_react__WEBPACK_IMPORTED_MODULE_1__.usePromise)();
+    const spanRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)();
+    const [ready, resolve] = (0,_liqvid_utils_react__WEBPACK_IMPORTED_MODULE_3__.usePromise)();
     /* typeset */
-    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
-        MathJaxReady.then(() => {
+    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+        _loading_mjs__WEBPACK_IMPORTED_MODULE_2__.MathJaxReady.then(() => {
             MathJax.typeset([spanRef.current]);
             // replace wrapper span with content
             if (!span) {
                 const element = spanRef.current.firstElementChild;
+                // copy id
+                element.id = spanRef.current.id;
                 // copy classes
                 for (let i = 0, len = spanRef.current.classList.length; i < len; ++i) {
                     element.classList.add(spanRef.current.classList.item(i));
@@ -21802,9 +21842,9 @@ const MJX$1 = (0,react__WEBPACK_IMPORTED_MODULE_3__.forwardRef)(function MJX(pro
             }
             resolve();
         });
-    }, [children]);
+    }, [String(children)]);
     // handle
-    (0,react__WEBPACK_IMPORTED_MODULE_3__.useImperativeHandle)(ref, () => ({
+    (0,react__WEBPACK_IMPORTED_MODULE_1__.useImperativeHandle)(ref, () => ({
         get domElement() {
             return spanRef.current;
         },
@@ -21817,8 +21857,12 @@ const MJX$1 = (0,react__WEBPACK_IMPORTED_MODULE_3__.forwardRef)(function MJX(pro
     //     attrs.style = {};
     //   attrs.style.display = "block";
     // }
-    return ((0,react_jsx_runtime_js__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { ...attrs, ref: spanRef, children: open + children + close }));
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { ...attrs, ref: spanRef, children: open + children + close }));
 });
+// function onFullScreenChange(callback: EventListener): void {
+//   for (const event of ["fullscreenchange", "webkitfullscreenchange", "mozfullscreenchange", "MSFullscreenChange"])
+//     document.addEventListener(event, callback);
+// }
 //   constructor(props: Props) {
 //     super(props);
 //     this.hub = new EventEmitter();
@@ -21906,111 +21950,193 @@ const MJX$1 = (0,react__WEBPACK_IMPORTED_MODULE_3__.forwardRef)(function MJX(pro
 /**
  * Element which will render any MathJax contained inside
  */
-const MJXText$1 = (0,react__WEBPACK_IMPORTED_MODULE_3__.forwardRef)(function MJXText(props, ref) {
-    const elt = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)();
-    const combined = (0,_liqvid_utils_react__WEBPACK_IMPORTED_MODULE_1__.combineRefs)(elt, ref);
-    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
+const MJXText = (0,react__WEBPACK_IMPORTED_MODULE_1__.forwardRef)(function MJXText(props, ref) {
+    const elt = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)();
+    const combined = (0,_liqvid_utils_react__WEBPACK_IMPORTED_MODULE_3__.combineRefs)(elt, ref);
+    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
         MathJax.startup.promise.then(() => {
             MathJax.typeset([elt.current]);
         });
     }, []);
     const { tagName = "p", children, ...attrs } = props;
-    return (0,react__WEBPACK_IMPORTED_MODULE_3__.createElement)(tagName, { ...attrs, ref: combined }, children);
+    return (0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(tagName, { ...attrs, ref: combined }, children);
 });
 
-/** Component for MathJax code */
-const MJX = (0,react__WEBPACK_IMPORTED_MODULE_3__.forwardRef)(function MJX(props, ref) {
-    const { obstruct = "canplay canplaythrough", reparse = false, ...attrs } = props;
-    const plain = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)();
-    const combined = (0,_liqvid_utils_react__WEBPACK_IMPORTED_MODULE_1__.combineRefs)(plain, ref);
-    const player = (0,liqvid__WEBPACK_IMPORTED_MODULE_2__.usePlayer)();
-    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
-        // obstruction
-        const obstructions = obstruct.split(" ");
-        if (obstructions.includes("canplay")) {
-            player.obstruct("canplay", plain.current.ready);
-        }
-        if (obstructions.includes("canplaythrough")) {
-            player.obstruct("canplaythrough", plain.current.ready);
-        }
-        // reparsing
-        if (reparse) {
-            plain.current.ready.then(() => player.reparseTree(plain.current.domElement));
-        }
-    }, []);
-    return (0,react_jsx_runtime_js__WEBPACK_IMPORTED_MODULE_0__.jsx)(MJX$1, { ref: combined, ...attrs });
-});
-const MJXText = (0,react__WEBPACK_IMPORTED_MODULE_3__.forwardRef)(function MJXText(props, ref) {
-    const { ...attrs } = props;
-    return (0,react_jsx_runtime_js__WEBPACK_IMPORTED_MODULE_0__.jsx)(MJXText$1, { tagName: "p", ...attrs });
-});
 
-/**
- * Wait for a bunch of things to be rendered
- */
-// @ts-ignore we don't know how to type `recursiveMap` yet
-const RenderGroup = (0,react__WEBPACK_IMPORTED_MODULE_3__.forwardRef)(function RenderGroup(props, ref) {
-    const [ready, resolve] = (0,_liqvid_utils_react__WEBPACK_IMPORTED_MODULE_1__.usePromise)();
-    // handle
-    (0,react__WEBPACK_IMPORTED_MODULE_3__.useImperativeHandle)(ref, () => ({ ready }));
-    const elements = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)([]);
-    const promises = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)([]);
-    // reparsing
-    const player = (0,liqvid__WEBPACK_IMPORTED_MODULE_2__.usePlayer)();
-    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
-        // promises
-        Promise.all(promises.current).then(() => {
-            // reparse
-            if (props.reparse) {
-                player.reparseTree(leastCommonAncestor(elements.current));
-            }
-            // ready()
-            resolve();
-        });
-    }, []);
-    return (0,_liqvid_utils_react__WEBPACK_IMPORTED_MODULE_1__.recursiveMap)(props.children, node => {
-        if (shouldInspect(node)) {
-            const originalRef = node.ref;
-            return (0,react__WEBPACK_IMPORTED_MODULE_3__.cloneElement)(node, {
-                ref: (ref) => {
-                    if (!ref)
-                        return;
-                    elements.current.push(ref.domElement);
-                    promises.current.push(ref.ready);
-                    // pass along original ref
-                    if (typeof originalRef === "function") {
-                        originalRef(ref);
-                    }
-                    else if (originalRef && typeof originalRef === "object") {
-                        originalRef.current = ref;
-                    }
+/***/ }),
+
+/***/ "./node_modules/@liqvid/prompt/dist/esm/Cue.mjs":
+/*!******************************************************!*\
+  !*** ./node_modules/@liqvid/prompt/dist/esm/Cue.mjs ***!
+  \******************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Cue": () => (/* binding */ Cue)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+
+
+const NS = "lv-prompt";
+/** Lines to be read at a particular marker */
+class Cue extends react__WEBPACK_IMPORTED_MODULE_1__.PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            lines: null
+        };
+    }
+    componentDidMount() {
+        if (!this.props.children)
+            return;
+        this.ref.normalize();
+        const lines = [];
+        for (const node of Array.from(this.ref.childNodes)) {
+            if (!isText(node))
+                continue;
+            const blocks = node.wholeText.split(" ");
+            let line = blocks.shift();
+            let text = line;
+            node.replaceData(0, node.wholeText.length, text);
+            let height = this.ref.getBoundingClientRect().height;
+            for (const block of blocks) {
+                node.replaceData(0, node.wholeText.length, `${text} ${block}`);
+                const newHeight = this.ref.getBoundingClientRect().height;
+                if (newHeight !== height) {
+                    height = newHeight;
+                    lines.push(line);
+                    line = block;
                 }
+                else {
+                    line += ` ${block}`;
+                }
+                text += ` ${block}`;
+            }
+            lines.push(line);
+        }
+        this.setState({ lines });
+    }
+    render() {
+        if (!this.props.children) {
+            return " | ";
+        }
+        const spanClasses = [`${NS}-cue`];
+        const divClasses = [`${NS}-line`];
+        if (this.props.active) {
+            spanClasses.push("active");
+            divClasses.push("active");
+        }
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: spanClasses.join(" "), children: this.props.on }), this.state.lines ?
+                    this.state.lines.map((line, n) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: divClasses.join(" "), children: line }, n))) :
+                    ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${NS}-measure`, ref: ref => this.ref = ref, children: this.props.children }))] }));
+    }
+}
+function isText(node) {
+    return node.nodeType === node.TEXT_NODE;
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/@liqvid/prompt/dist/esm/Prompt.mjs":
+/*!*********************************************************!*\
+  !*** ./node_modules/@liqvid/prompt/dist/esm/Prompt.mjs ***!
+  \*********************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Prompt": () => (/* binding */ Prompt)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! liqvid */ "liqvid");
+
+
+
+
+const { dragHelperReact } = liqvid__WEBPACK_IMPORTED_MODULE_2__.Utils.interactivity;
+const NS = "lv-prompt";
+/**
+ * Container for {@link Cue}s
+ */
+function Prompt(props) {
+    const { script } = (0,liqvid__WEBPACK_IMPORTED_MODULE_2__.usePlayer)();
+    const ref = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)();
+    const { children, ...attrs } = props;
+    const [activeIndex, setActiveIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(react__WEBPACK_IMPORTED_MODULE_1__.Children.toArray(children)
+        .map((cue) => cue.props.children && script.markerNumberOf(cue.props.on) <= script.markerIndex)
+        .lastIndexOf(true));
+    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+        if (!ref.current.style.left) {
+            Object.assign(ref.current.style, {
+                left: "0%",
+                top: "0%"
             });
         }
-        return node;
+        // subscribe to marker updates
+        script.on("markerupdate", () => {
+            setActiveIndex(react__WEBPACK_IMPORTED_MODULE_1__.Children.toArray(children)
+                .map((cue) => cue.props.children && script.markerNumberOf(cue.props.on) <= script.markerIndex)
+                .lastIndexOf(true));
+        });
     });
-});
-/** Whether the element is an <MJX> */
-function shouldInspect(node) {
-    return (0,react__WEBPACK_IMPORTED_MODULE_3__.isValidElement)(node) && typeof node.type === "object" && (node.type === MJX || node.type === MJX$1);
+    const dragEvents = (0,react__WEBPACK_IMPORTED_MODULE_1__.useMemo)(() => {
+        let lastX, lastY;
+        return dragHelperReact((e, hit) => {
+            const offset = offsetParent(ref.current);
+            const x = offset.left + hit.x - lastX, y = offset.top + hit.y - lastY, left = x / offset.width * 100, top = y / offset.height * 100;
+            lastX = hit.x;
+            lastY = hit.y;
+            Object.assign(ref.current.style, {
+                left: `${left}%`,
+                top: `${top}%`
+            });
+        }, (e, hit) => {
+            lastX = hit.x;
+            lastY = hit.y;
+        });
+    }, []);
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: NS, ...attrs, ...dragEvents, ref: ref, children: react__WEBPACK_IMPORTED_MODULE_1__.Children.map(props.children, (node, i) => react__WEBPACK_IMPORTED_MODULE_1__.cloneElement(node, { active: activeIndex === i })) }));
 }
-/**
- * Find least common ancestor of an array of elements
- * @param elements Elements
- * @returns Deepest node containing all passed elements
- */
-function leastCommonAncestor(elements) {
-    if (elements.length === 0) {
-        throw new Error("Must pass at least one element");
+function offsetParent(node) {
+    if (typeof node.offsetLeft !== "undefined" && typeof node.offsetTop !== "undefined") {
+        return {
+            left: node.offsetLeft,
+            top: node.offsetTop,
+            width: node.offsetParent.getBoundingClientRect().width,
+            height: node.offsetParent.getBoundingClientRect().height
+        };
     }
-    let ancestor = elements[0];
-    let failing = elements.slice(1);
-    while (failing.length > 0) {
-        ancestor = ancestor.parentElement;
-        failing = failing.filter(node => !ancestor.contains(node));
+    const rect = node.getBoundingClientRect();
+    let parent = node;
+    while (parent = parent.parentNode) {
+        if (!["absolute", "relative"].includes(getComputedStyle(parent).position))
+            continue;
+        const prect = parent.getBoundingClientRect();
+        return { left: rect.left - prect.left, top: rect.top - prect.top, width: prect.width, height: prect.height };
     }
-    return ancestor;
+    return { left: rect.left, top: rect.top, width: innerWidth, height: innerHeight };
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/@liqvid/prompt/dist/esm/index.mjs":
+/*!********************************************************!*\
+  !*** ./node_modules/@liqvid/prompt/dist/esm/index.mjs ***!
+  \********************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Cue": () => (/* reexport safe */ _Cue_mjs__WEBPACK_IMPORTED_MODULE_0__.Cue),
+/* harmony export */   "Prompt": () => (/* reexport safe */ _Prompt_mjs__WEBPACK_IMPORTED_MODULE_1__.Prompt)
+/* harmony export */ });
+/* harmony import */ var _Cue_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Cue.mjs */ "./node_modules/@liqvid/prompt/dist/esm/Cue.mjs");
+/* harmony import */ var _Prompt_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Prompt.mjs */ "./node_modules/@liqvid/prompt/dist/esm/Prompt.mjs");
 
 
 
@@ -22027,7 +22153,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Canvas": () => (/* binding */ Canvas)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime.js */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var _juggle_resize_observer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @juggle/resize-observer */ "./node_modules/@juggle/resize-observer/lib/exports/resize-observer.js");
 /* harmony import */ var _react_three_drei_core_useContextBridge_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @react-three/drei/core/useContextBridge.js */ "./node_modules/@react-three/drei/core/useContextBridge.js");
 /* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
@@ -22046,7 +22172,7 @@ const defaultAffords = "click keys(ArrowUp,ArrowDown,ArrowLeft,ArrowRight)";
  */
 function Canvas(props) {
     const ContextBridge = (0,_react_three_drei_core_useContextBridge_js__WEBPACK_IMPORTED_MODULE_4__.useContextBridge)(liqvid__WEBPACK_IMPORTED_MODULE_2__.Player.Context, liqvid__WEBPACK_IMPORTED_MODULE_2__.PlaybackContext, liqvid__WEBPACK_IMPORTED_MODULE_2__.KeymapContext);
-    return ((0,react_jsx_runtime_js__WEBPACK_IMPORTED_MODULE_0__.jsx)(_react_three_fiber__WEBPACK_IMPORTED_MODULE_5__.Canvas, { resize: { polyfill: _juggle_resize_observer__WEBPACK_IMPORTED_MODULE_1__.ResizeObserver }, ...props, children: (0,react_jsx_runtime_js__WEBPACK_IMPORTED_MODULE_0__.jsxs)(ContextBridge, { children: [(0,react_jsx_runtime_js__WEBPACK_IMPORTED_MODULE_0__.jsx)(Fixes, { ...props }), props.children] }) }));
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_react_three_fiber__WEBPACK_IMPORTED_MODULE_5__.Canvas, { resize: { polyfill: _juggle_resize_observer__WEBPACK_IMPORTED_MODULE_1__.ResizeObserver }, ...props, children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(ContextBridge, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Fixes, { ...props }), props.children] }) }));
 }
 function Fixes(props) {
     const { gl } = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_5__.useThree)();
@@ -22058,6 +22184,413 @@ function Fixes(props) {
         gl.domElement.style.touchAction = "none";
     }, []);
     return null;
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/@liqvid/utils/dist/esm/interaction.mjs":
+/*!*************************************************************!*\
+  !*** ./node_modules/@liqvid/utils/dist/esm/interaction.mjs ***!
+  \*************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "anyHover": () => (/* binding */ anyHover),
+/* harmony export */   "onClick": () => (/* binding */ onClick),
+/* harmony export */   "onDrag": () => (/* binding */ onDrag)
+/* harmony export */ });
+/**
+  Whether any available input mechanism can hover over elements. This is used as a standin for desktop/mobile.
+*/
+const anyHover = typeof window !== "undefined"
+    ? window.matchMedia?.("(any-hover: hover)")?.matches
+    : undefined;
+/**
+ * Helper for implementing drag functionality, abstracting over mouse vs touch events.
+ * @returns An event listener which should be added to both `mousedown` and `touchstart` events.
+ */
+function onDrag(
+/** Callback for dragging (pointer is moved while down). */
+move, 
+/** Callback for when dragging begins (pointer is touched). */
+down = () => { }, 
+/** Callback for when dragging ends (pointer is lifted). */
+up = () => { }) {
+    return (e) => {
+        /* click events */
+        if (e instanceof MouseEvent) {
+            if (e.button !== 0)
+                return;
+            let lastX = e.clientX, lastY = e.clientY;
+            // up
+            const upHandler = (e) => {
+                const dx = e.clientX - lastX, dy = e.clientY - lastY;
+                document.body.removeEventListener("mousemove", moveHandler);
+                window.removeEventListener("mouseup", upHandler);
+                return up(e, { x: e.clientX, y: e.clientY, dx, dy });
+            };
+            // move
+            const moveHandler = (e) => {
+                const dx = e.clientX - lastX, dy = e.clientY - lastY;
+                lastX = e.clientX;
+                lastY = e.clientY;
+                return move(e, { x: e.clientX, y: e.clientY, dx, dy });
+            };
+            document.body.addEventListener("mousemove", moveHandler, {
+                passive: false,
+            });
+            window.addEventListener("mouseup", upHandler, { passive: false });
+            return down(e, { x: lastX, y: lastY }, upHandler, moveHandler);
+        }
+        else {
+            /* touch events */
+            e.preventDefault();
+            const touches = e.changedTouches;
+            const touchId = touches[0].identifier;
+            let lastX = touches[0].clientX, lastY = touches[0].clientY;
+            // up
+            const upHandler = (e) => {
+                e.preventDefault();
+                for (const touch of Array.from(e.changedTouches)) {
+                    if (touch.identifier !== touchId)
+                        continue;
+                    const dx = touch.clientX - lastX, dy = touch.clientY - lastY;
+                    window.removeEventListener("touchend", upHandler, {
+                        capture: false,
+                        passive: false,
+                    });
+                    window.removeEventListener("touchcancel", upHandler, {
+                        capture: false,
+                        passive: false,
+                    });
+                    window.removeEventListener("touchmove", moveHandler, {
+                        capture: false,
+                        passive: false,
+                    });
+                    return up(e, { x: touch.clientX, y: touch.clientY, dx, dy });
+                }
+            };
+            // move
+            const moveHandler = (e) => {
+                e.preventDefault();
+                for (const touch of Array.from(e.changedTouches)) {
+                    if (touch.identifier !== touchId)
+                        continue;
+                    const dx = touch.clientX - lastX, dy = touch.clientY - lastY;
+                    lastX = touch.clientX;
+                    lastY = touch.clientY;
+                    return move(e, { x: touch.clientX, y: touch.clientY, dx, dy });
+                }
+            };
+            window.addEventListener("touchend", upHandler, {
+                capture: false,
+                passive: false,
+            });
+            window.addEventListener("touchcancel", upHandler, {
+                capture: false,
+                passive: false,
+            });
+            window.addEventListener("touchmove", moveHandler, {
+                capture: false,
+                passive: false,
+            });
+            return down(e, { x: lastX, y: lastY }, upHandler, moveHandler);
+        }
+    };
+}
+/**
+ * Replacement for addEventListener("click") which works better on mobile.
+ * @param node Event target.
+ * @param callback Event listener.
+ * @returns A function to remove the event listener.
+ */
+function onClick(node, callback) {
+    if (anyHover) {
+        node.addEventListener("click", callback);
+        return () => {
+            node.removeEventListener("click", callback);
+        };
+    }
+    let touchId;
+    // touchstart handler
+    const touchStart = (e) => {
+        if (typeof touchId === "number")
+            return;
+        touchId = e.changedTouches[0].identifier;
+    };
+    // touchend handler
+    const touchEnd = (e) => {
+        if (typeof touchId !== "number")
+            return;
+        for (const touch of Array.from(e.changedTouches)) {
+            if (touch.identifier !== touchId)
+                continue;
+            if (node.contains(document.elementFromPoint(touch.clientX, touch.clientY))) {
+                callback(e);
+            }
+            touchId = undefined;
+        }
+    };
+    node.addEventListener("touchstart", touchStart);
+    node.addEventListener("touchend", touchEnd);
+    return () => {
+        node.removeEventListener("touchstart", touchStart);
+        node.removeEventListener("touchend", touchEnd);
+    };
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/@liqvid/utils/dist/esm/misc.mjs":
+/*!******************************************************!*\
+  !*** ./node_modules/@liqvid/utils/dist/esm/misc.mjs ***!
+  \******************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "between": () => (/* binding */ between),
+/* harmony export */   "bind": () => (/* binding */ bind),
+/* harmony export */   "clamp": () => (/* binding */ clamp),
+/* harmony export */   "constrain": () => (/* binding */ constrain),
+/* harmony export */   "lerp": () => (/* binding */ lerp),
+/* harmony export */   "range": () => (/* binding */ range),
+/* harmony export */   "wait": () => (/* binding */ wait),
+/* harmony export */   "waitFor": () => (/* binding */ waitFor)
+/* harmony export */ });
+/** Equivalent to `(min <= val) && (val < max)`. */
+function between(min, val, max) {
+    return min <= val && val < max;
+}
+/**
+ * Bind methods on an object.
+ * @param o Object on which to bind methods
+ * @param methods Method names to bind
+ */
+// eslint-disable-next-line @typescript-eslint/ban-types
+function bind(o, methods) {
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    for (const method of methods)
+        o[method] = o[method].bind(o);
+}
+/**
+ * Linear interpolation from a to b.
+ */
+function lerp(a, b, t) {
+    return a + t * (b - a);
+}
+/**
+ * Clamps a value between a lower and upper bound. Aliased as {@link constrain}.
+ * @param min Lower bound
+ * @param val Value to clamp
+ * @param max Upper bound
+ */
+function clamp(min, val, max) {
+    return Math.min(max, Math.max(min, val));
+}
+/**
+ * Clamps a value between a lower and upper bound. Alias for {@link clamp}.
+ * @param min Lower bound
+ * @param val Value to clamp
+ * @param max Upper bound
+ */
+function constrain(min, val, max) {
+    return clamp(min, val, max);
+}
+/**
+  Returns [a, b). For backwards compatibility, returns [0, a) if passed a single argument.
+*/
+function range(a, b) {
+    if (b === void 0) {
+        return range(0, a);
+    }
+    return new Array(b - a).fill(null).map((_, i) => a + i);
+}
+/** Returns a Promise that resolves in `time` milliseconds. */
+function wait(time) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, time);
+    });
+}
+/** Returns a Promise that resolves once `callback` returns true. */
+function waitFor(callback, interval = 10) {
+    return new Promise((resolve) => {
+        const checkCondition = () => {
+            if (callback()) {
+                resolve();
+            }
+            else {
+                setTimeout(checkCondition, interval);
+            }
+        };
+        checkCondition();
+    });
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/@liqvid/utils/dist/esm/react.mjs":
+/*!*******************************************************!*\
+  !*** ./node_modules/@liqvid/utils/dist/esm/react.mjs ***!
+  \*******************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "captureRef": () => (/* binding */ captureRef),
+/* harmony export */   "combineRefs": () => (/* binding */ combineRefs),
+/* harmony export */   "createUniqueContext": () => (/* binding */ createUniqueContext),
+/* harmony export */   "onClick": () => (/* binding */ onClick),
+/* harmony export */   "onDrag": () => (/* binding */ onDrag),
+/* harmony export */   "recursiveMap": () => (/* binding */ recursiveMap),
+/* harmony export */   "useForceUpdate": () => (/* binding */ useForceUpdate),
+/* harmony export */   "usePromise": () => (/* binding */ usePromise)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var _interaction_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./interaction.mjs */ "./node_modules/@liqvid/utils/dist/esm/interaction.mjs");
+
+
+/**
+  Helper for the https://github.com/facebook/react/issues/2043 workaround. Use to intercept refs and
+  attach events.
+*/
+const captureRef = (callback, innerRef) => (ref) => {
+    if (ref !== null) {
+        callback(ref);
+    }
+    if (innerRef === null) {
+        return;
+    }
+    else if (typeof innerRef === "function") {
+        innerRef(ref);
+    }
+    else if (typeof innerRef === "object") {
+        innerRef.current = ref;
+    }
+};
+/**
+ * Create a context guaranteed to be unique. Useful in case multiple versions of package are accidentally loaded.
+ * @param name Unique key for context.
+ * @param defaultValue Initial value for context.
+ * @returns React context which is guaranteed to be stable.
+ */
+function createUniqueContext(key, defaultValue = undefined) {
+    const symbol = Symbol.for(key);
+    if (!(symbol in globalThis)) {
+        globalThis[symbol] =
+            (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)(defaultValue);
+    }
+    return globalThis[symbol];
+}
+/**
+ * Combine multiple refs into one
+ * @param args Refs to combine
+ * @returns A ref which applies all the passed refs
+ */
+function combineRefs(...args) {
+    return (o) => {
+        for (const ref of args) {
+            if (typeof ref === "function") {
+                ref(o);
+            }
+            else if (ref === null) {
+            }
+            else if (typeof ref === "object" && ref.hasOwnProperty("current")) {
+                ref.current = o;
+            }
+        }
+    };
+}
+/**
+ * Drop-in replacement for onClick handlers which works better on mobile.
+ * @param callback Event listener.
+ * @returns Props to attach to event target.
+ */
+function onClick(callback) {
+    if (_interaction_mjs__WEBPACK_IMPORTED_MODULE_1__.anyHover) {
+        return { onClick: callback };
+    }
+    else {
+        let touchId, target;
+        // touchstart handler
+        const onTouchStart = (e) => {
+            if (typeof touchId === "number")
+                return;
+            target = e.currentTarget;
+            touchId = e.changedTouches[0].identifier;
+        };
+        // touchend handler
+        const onTouchEnd = (e) => {
+            if (typeof touchId !== "number")
+                return;
+            for (const touch of Array.from(e.changedTouches)) {
+                if (touch.identifier !== touchId)
+                    continue;
+                if (target.contains(document.elementFromPoint(touch.clientX, touch.clientY))) {
+                    callback(e);
+                }
+                touchId = undefined;
+                break;
+            }
+        };
+        return { onTouchStart, onTouchEnd };
+    }
+}
+/**
+ * Helper for implementing drag functionality, abstracting over mouse vs touch events.
+ * @returns An object of event handlers which should be added to a React element with {...}
+ */
+function onDrag(move, down, up) {
+    const listener = (0,_interaction_mjs__WEBPACK_IMPORTED_MODULE_1__.onDrag)(move, down, up);
+    return {
+        "data-affords": "click",
+        onMouseDown: (e) => listener(e.nativeEvent),
+        onTouchStart: (e) => listener(e.nativeEvent),
+    };
+}
+/**
+ * Recursive version of {@link React.Children.map}
+ * @param children Children to iterate over
+ * @param fn Callback function
+ * @returns Transformed nodes
+ */
+function recursiveMap(children, fn) {
+    return react__WEBPACK_IMPORTED_MODULE_0__.Children.map(children, (child) => {
+        if (!(0,react__WEBPACK_IMPORTED_MODULE_0__.isValidElement)(child)) {
+            return child;
+        }
+        if ("children" in child.props) {
+            child = (0,react__WEBPACK_IMPORTED_MODULE_0__.cloneElement)(child, {
+                children: recursiveMap(child.props.children, fn),
+            });
+        }
+        return fn(child);
+    });
+}
+/**
+ * Get a function to force the component to update
+ * @returns A forceUpdate() function
+ */
+function useForceUpdate() {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)((c) => c + 1, 0)[1];
+}
+/**
+ * Get a promise and resolver
+ * @param deps React dependency list
+ * @returns [promise, resolve, reject]
+ */
+function usePromise(deps = []) {
+    const resolve = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+    const reject = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+    const promise = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => new Promise((res, rej) => {
+        resolve.current = res;
+        reject.current = rej;
+    }), deps);
+    return [promise, resolve.current, reject.current];
 }
 
 
@@ -22078,9 +22611,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "xyDecodeColor": () => (/* binding */ xyDecodeColor),
 /* harmony export */   "xyEncodeColor": () => (/* binding */ xyEncodeColor)
 /* harmony export */ });
-/* harmony import */ var _liqvid_utils_misc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @liqvid/utils/misc */ "./node_modules/@liqvid/utils/dist/esm/misc.js");
-/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! liqvid */ "liqvid");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var _liqvid_utils_misc__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @liqvid/utils/misc */ "./node_modules/@liqvid/utils/dist/esm/misc.mjs");
+/* harmony import */ var liqvid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! liqvid */ "liqvid");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 
 
 
@@ -22092,11 +22625,11 @@ __webpack_require__.r(__webpack_exports__);
  * Animate XyJax arrows
  */
 function useAnimateArrows(o, deps) {
-    const playback = (0,liqvid__WEBPACK_IMPORTED_MODULE_1__.usePlayback)();
-    const tail = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)();
-    const init = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)({});
+    const playback = (0,liqvid__WEBPACK_IMPORTED_MODULE_0__.usePlayback)();
+    const tail = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)();
+    const init = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)({});
     /* fading function */
-    const fadeTail = (0,react__WEBPACK_IMPORTED_MODULE_2__.useCallback)((u) => {
+    const fadeTail = (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)((u) => {
         if (!tail.current)
             return;
         const { x1, x2, y1, y2 } = init.current;
@@ -22105,12 +22638,12 @@ function useAnimateArrows(o, deps) {
         }
         else {
             tail.current.style.opacity = "1";
-            tail.current.setAttribute("x2", (0,_liqvid_utils_misc__WEBPACK_IMPORTED_MODULE_0__.lerp)(x1, x2, u).toString());
-            tail.current.setAttribute("y2", (0,_liqvid_utils_misc__WEBPACK_IMPORTED_MODULE_0__.lerp)(y1, y2, u).toString());
+            tail.current.setAttribute("x2", (0,_liqvid_utils_misc__WEBPACK_IMPORTED_MODULE_2__.lerp)(x1, x2, u).toString());
+            tail.current.setAttribute("y2", (0,_liqvid_utils_misc__WEBPACK_IMPORTED_MODULE_2__.lerp)(y1, y2, u).toString());
         }
     }, []);
     /* initialize */
-    (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
+    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
         o.ref.current.ready.then(() => {
             /* tail animation */
             tail.current = o.ref.current.domElement.querySelector(o.tail);
@@ -22131,7 +22664,7 @@ function useAnimateArrows(o, deps) {
         });
     }, deps);
     // tail animation
-    (0,liqvid__WEBPACK_IMPORTED_MODULE_1__.useTime)(fadeTail, o.tailFn, deps);
+    (0,liqvid__WEBPACK_IMPORTED_MODULE_0__.useTime)(fadeTail, o.tailFn, deps);
 }
 // absolutely bonkers interception
 let extended = false;
@@ -22286,140 +22819,6 @@ function fromb52(str) {
 }
 
 
-
-
-/***/ }),
-
-/***/ "./node_modules/@liqvid/utils/dist/esm/misc.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/@liqvid/utils/dist/esm/misc.js ***!
-  \*****************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "between": () => (/* binding */ between),
-/* harmony export */   "bind": () => (/* binding */ bind),
-/* harmony export */   "clamp": () => (/* binding */ clamp),
-/* harmony export */   "constrain": () => (/* binding */ constrain),
-/* harmony export */   "lerp": () => (/* binding */ lerp),
-/* harmony export */   "range": () => (/* binding */ range),
-/* harmony export */   "wait": () => (/* binding */ wait),
-/* harmony export */   "waitFor": () => (/* binding */ waitFor)
-/* harmony export */ });
-function between(min, val, max) {
-    return (min <= val) && (val < max);
-}
-function bind(o, methods) {
-    for (const method of methods)
-        o[method] = o[method].bind(o);
-}
-function lerp(a, b, t) {
-    return a + t * (b - a);
-}
-function clamp(min, val, max) {
-    return Math.min(max, Math.max(min, val));
-}
-function constrain(min, val, max) {
-    return clamp(min, val, max);
-}
-function range(a, b) {
-    if (b === void 0) {
-        return range(0, a);
-    }
-    return new Array(b - a).fill(null).map((_, i) => a + i);
-}
-function wait(time) {
-    return new Promise((resolve) => {
-        setTimeout(resolve, time);
-    });
-}
-function waitFor(callback, interval = 10) {
-    return new Promise((resolve) => {
-        const checkCondition = () => {
-            if (callback()) {
-                resolve();
-            }
-            else {
-                setTimeout(checkCondition, interval);
-            }
-        };
-        checkCondition();
-    });
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/@liqvid/utils/dist/esm/react.js":
-/*!******************************************************!*\
-  !*** ./node_modules/@liqvid/utils/dist/esm/react.js ***!
-  \******************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "captureRef": () => (/* binding */ captureRef),
-/* harmony export */   "combineRefs": () => (/* binding */ combineRefs),
-/* harmony export */   "recursiveMap": () => (/* binding */ recursiveMap),
-/* harmony export */   "useForceUpdate": () => (/* binding */ useForceUpdate),
-/* harmony export */   "usePromise": () => (/* binding */ usePromise)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-
-function combineRefs(...args) {
-    return (o) => {
-        for (const ref of args) {
-            if (typeof ref === "function") {
-                ref(o);
-            }
-            else if (ref === null) {
-            }
-            else if (typeof ref === "object" && ref.hasOwnProperty("current")) {
-                ref.current = o;
-            }
-        }
-    };
-}
-function useForceUpdate() {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)((c) => c + 1, 0)[1];
-}
-const captureRef = (callback, innerRef) => (ref) => {
-    if (ref !== null) {
-        callback(ref);
-    }
-    if (innerRef === null) {
-        return;
-    }
-    else if (typeof innerRef === "function") {
-        innerRef(ref);
-    }
-    else if (typeof innerRef === "object") {
-        innerRef.current = ref;
-    }
-};
-function recursiveMap(children, fn) {
-    return react__WEBPACK_IMPORTED_MODULE_0__.Children.map(children, (child) => {
-        if (!(0,react__WEBPACK_IMPORTED_MODULE_0__.isValidElement)(child)) {
-            return child;
-        }
-        if ("children" in child.props) {
-            child = (0,react__WEBPACK_IMPORTED_MODULE_0__.cloneElement)(child, {
-                children: recursiveMap(child.props.children, fn)
-            });
-        }
-        return fn(child);
-    });
-}
-function usePromise(deps = []) {
-    const resolve = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
-    const reject = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
-    const promise = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => new Promise((res, rej) => {
-        resolve.current = res;
-        reject.current = rej;
-    }), deps);
-    return [promise, resolve.current, reject.current];
-}
 
 
 /***/ })

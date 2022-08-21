@@ -1,3 +1,4 @@
+@import "https://unpkg.com/@liqvid/prompt@1.0.0/dist/style.min.css";
 .fat-fingers {
   fill: transparent !important;
 }
@@ -59,7 +60,7 @@
 .rp-help-tables kbd {
   color: #ff0;
 }
-.rp-loading-screen {
+.lv-loading-screen {
   background-color: rgba(0,0,0,0.7);
   display: none;
   height: 100%;
@@ -67,7 +68,7 @@
   width: 100%;
   z-index: 10000;
 }
-.rp-loading-spinner {
+.lv-loading-spinner {
   border: 16px solid #f3f3f3;
   border-top: 16px solid #1a69b5;
   border-radius: 50%;
@@ -76,7 +77,7 @@
   height: 20vmin;
   animation: spin 1s linear infinite;
 }
-.ractive-player.not-ready > .rp-canvas > .rp-loading-screen {
+.lv-player.not-ready > .lv-canvas > .lv-loading-screen {
   display: block;
 }
 @-moz-keyframes spin {
@@ -504,14 +505,6 @@ section {
 }
 .rp-cursor {
   width: 3rem;
-}
-/* Desmos slide */
-.calculator {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: var(--lv-canvas-height);
-  width: 100%;
 }
 /* general styles */
 .katex {

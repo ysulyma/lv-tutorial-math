@@ -1,4 +1,4 @@
-import {Prompt, Cue} from "rp-prompt";
+import {Prompt, Cue} from "@liqvid/prompt";
 
 type P = Parameters<typeof Prompt>[0];
 

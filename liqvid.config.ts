@@ -3,6 +3,8 @@ import type {LiqvidConfig} from "@liqvid/cli";
 
 const os = require("os");
 
+const port = process.env.PORT || 3000;
+
 const scripts = {
   "katex": {
     "crossorigin": "anonymous",
@@ -51,7 +53,7 @@ const config: LiqvidConfig = {
     imageFormat: "png"
   },
   thumbs: {
-    url: "http://localhost:3000/dist",
+    url: `http://localhost:${port}/dist`,
     browserHeight: 800,
     browserWidth: 1280,
     concurrency: os.cpus().length,
@@ -61,7 +63,7 @@ const config: LiqvidConfig = {
     output: "./dist/thumbs/%s.png"
   },
   serve: {
-    port: 3000,
+    port,
     scripts, styles
   }
 };
